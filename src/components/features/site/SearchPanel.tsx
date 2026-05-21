@@ -1,4 +1,4 @@
-import { ArrowRight, ExternalLink, Search, X } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Search, X } from 'lucide-react'
 
 import { Input } from '@/components/ui/input'
 import { typography } from '@/styles/typography'
@@ -13,9 +13,17 @@ const SEARCH_LINKS = [
   { label: 'Tutoriel de recherche', href: '#' },
 ] as const
 
-const EXTERNAL_SEARCH = [
-  { label: 'Bretania.bzh', href: 'https://bretania.bzh' },
-  { label: 'Mille Feuilles', href: '#' },
+const EXTERNAL_RESOURCES = [
+  {
+    label: 'Bretania.bzh',
+    description: 'Collections numériques de toute la Bretagne',
+    href: 'https://bretania.bzh',
+  },
+  {
+    label: 'Mille Feuilles',
+    description: 'Articles sur le patrimoine écrit breton',
+    href: '#',
+  },
 ] as const
 
 export function SearchPanel({ open, onClose }: SearchPanelProps) {
@@ -63,19 +71,25 @@ export function SearchPanel({ open, onClose }: SearchPanelProps) {
         </ul>
 
         <div>
-          <p className={typography.sectionLabel}>Rechercher aussi dans</p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {EXTERNAL_SEARCH.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="inline-flex h-11 items-center gap-1.5 rounded border border-border bg-muted px-4 text-sm font-medium text-secondary"
-              >
-                {item.label}
-                <ExternalLink className="h-4 w-4" />
-              </a>
+          <p className={typography.sectionLabel}>Autres ressources</p>
+          <ul className="mt-3 flex flex-col gap-3">
+            {EXTERNAL_RESOURCES.map((item) => (
+              <li key={item.label}>
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="flex flex-col gap-1 rounded-md border border-border bg-surface px-4 py-3 transition-colors hover:border-secondary/40 hover:bg-muted/50"
+                >
+                  <span className="inline-flex items-center gap-1.5 text-base font-semibold text-secondary">
+                    {item.label}
+                    <ArrowUpRight className="h-4 w-4" />
+                  </span>
+                  <span className="text-sm text-text/70">{item.description}</span>
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
 
         <p className="mt-auto text-sm text-text/50 italic">
