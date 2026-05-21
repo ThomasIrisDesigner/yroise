@@ -11,7 +11,7 @@ export function HistoiresCarousel() {
   return (
     <section className="border-t border-border pt-6">
       <div className="mb-2 flex items-center justify-between px-4">
-        <h2 className={typography.sectionLabel}>Histoires de Brest</h2>
+        <h2 className={typography.sectionLabel}>Histoires</h2>
         <Link to="/histoires" className="text-xs text-text/60 hover:text-text">
           Tout voir →
         </Link>

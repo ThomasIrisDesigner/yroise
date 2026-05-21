@@ -1,6 +1,6 @@
 /**
- * Arborescence YROISE — Refonte 2026
- * Source : brief Thomas + Yroise_Arborescence (TSX / PDF)
+ * Arborescence YROISE — Refonte 2026 (v2)
+ * Source : Yroise_Arborescence.tsx
  * Scope prototype : pages éditoriales Drupal uniquement.
  */
 
@@ -9,9 +9,7 @@ export type NavItemLevel = 'page' | 'sub'
 export interface NavTreeItem {
   label: string
   level: NavItemLevel
-  /** Slug route prototype (à compléter au fil des écrans) */
   slug?: string
-  /** Lien externe ou Gallica — hors scope visionneuse */
   external?: boolean
 }
 
@@ -19,15 +17,15 @@ export interface NavSection {
   id: string
   label: string
   note: string
-  /** navigation principale | utilitaire overlay */
   kind: 'main' | 'utility'
   items: NavTreeItem[]
 }
 
 export const MAIN_NAV_LABELS = [
-  'Histoires de Brest',
+  'Histoires',
   'Collections',
   'La carte',
+  'Jeunesse',
 ] as const
 
 export const NAV_SECTIONS: NavSection[] = [
@@ -37,16 +35,17 @@ export const NAV_SECTIONS: NavSection[] = [
     note: 'Home éditoriale',
     kind: 'main',
     items: [
-      { label: 'Hero — image forte + accroche', level: 'page', slug: '/' },
+      { label: 'Hero — image forte + accroche', level: 'page', slug: '/prototype' },
       { label: 'La trouvaille — focus éditorial', level: 'page' },
       { label: 'Histoires récentes (×3 cards)', level: 'page' },
       { label: 'Collections — carousel', level: 'page' },
       { label: 'La carte — aperçu OSM', level: 'page' },
+      { label: 'Jeunesse — bloc discret en bas', level: 'sub', slug: '/jeunesse' },
     ],
   },
   {
     id: 'histoires',
-    label: 'Histoires de Brest',
+    label: 'Histoires',
     note: 'Billets & expositions',
     kind: 'main',
     items: [
@@ -87,6 +86,17 @@ export const NAV_SECTIONS: NavSection[] = [
     ],
   },
   {
+    id: 'jeunesse',
+    label: 'Jeunesse',
+    note: 'Jeux & parcours pédagogiques',
+    kind: 'main',
+    items: [
+      { label: 'Page liste Jeunesse', level: 'page', slug: '/jeunesse' },
+      { label: 'Jeux (puzzles, coloriages...)', level: 'sub', slug: '/jeunesse/jeux' },
+      { label: 'Séquences pédagogiques', level: 'sub', slug: '/jeunesse/sequences' },
+    ],
+  },
+  {
     id: 'search',
     label: 'Recherche',
     note: 'Overlay au clic',
@@ -104,7 +114,6 @@ export const FOOTER_LINKS = [
   { label: 'Qui sommes-nous', slug: '/qui-sommes-nous' },
   { label: 'Informations pratiques', slug: '/informations-pratiques' },
   { label: 'Nous contacter', slug: '/contact' },
-  { label: 'Jeux / Parcours pédagogiques', slug: '/jeux-parcours', warning: true },
   { label: 'FAQ', slug: '/faq' },
   { label: 'Accessibilité', slug: '/accessibilite' },
   { label: 'Mentions légales · Cookies', slug: '/mentions-legales' },

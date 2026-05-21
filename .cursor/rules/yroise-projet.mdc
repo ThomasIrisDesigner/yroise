@@ -36,19 +36,20 @@ alwaysApply: true
   3. **Collections** : page liste + page détail (contenu riche sur « En mer », défaut sur les autres) — **implémenté** (`/collections`, `/collections/:slug`).
 - Couleur marque wireframe source : `#2D7D8A` (glaz) — en prototype : palette **slate** jusqu’à « DA validée + couleurs ».
 
-## Navigation (Drupal CMS)
+## Navigation (Drupal CMS) — arborescence v2
 
-**Header** : Logo YROISE · Histoires de Brest · Collections · 📍 La carte · 🔍 (overlay) · FR | BR
+**Header** : Logo YROISE · Histoires · Collections · La carte · Jeunesse · 🔍 (overlay) · FR | BR
 
 | Zone | Pages / contenus |
 |------|------------------|
-| **Accueil** | Hero · La trouvaille · Histoires récentes (×3) · Collections carousel · Aperçu carte OSM |
-| **Histoires de Brest** | Liste (Tous · Expositions) · Billet · Exposition (format long) |
-| **Collections** | Page liste + accordéon : En mer, Brest et environs, En images, Finistère & monde artistique, Breton Brezhoneg, Livres anciens, Presse ancienne, Sciences et techniques |
-| **📍 La carte** | Carte OSM Positron · épingles · mini-fiche → **Gallica** (hors scope visionneuse) |
-| **🔍 Recherche** | Overlay : champ · recherche avancée → · tutoriel → · Bretania · Mille Feuilles |
+| **Accueil** | Hero · La trouvaille · Histoires récentes (×3) · Collections carousel · Aperçu carte OSM · **Jeunesse** (bloc discret bas de page) |
+| **Histoires** | Liste (Tous · Expositions) · Billet · Exposition (format long) |
+| **Collections** | Page liste + accordéon : 8 fonds (En mer → Sciences et techniques) |
+| **La carte** | Carte OSM Positron · épingles · mini-fiche → **Gallica** (hors scope visionneuse) |
+| **Jeunesse** | Page liste · Jeux (puzzles, coloriages…) · Séquences pédagogiques |
+| **Recherche** | Overlay : champ · recherche avancée → · tutoriel → · Bretania · Mille Feuilles |
 
-**Footer** : Qui sommes-nous · Informations pratiques · Nous contacter · Jeux / Parcours pédagogiques ⚠ · FAQ · Accessibilité · Mentions légales · Cookies
+**Footer** : Qui sommes-nous · Informations pratiques · Nous contacter · FAQ · Accessibilité · Mentions légales · Cookies
 
 **Légende** : nav principale (pages dédiées) · utilitaire overlay (recherche) · sous-pages contenu · liens Gallica / externes en renvoi, pas prototypés en profondeur.
 

@@ -12,7 +12,7 @@ export function HistoiresAssociees({ billets }: HistoiresAssocieesProps) {
 
   return (
     <section className="border-t border-border pt-6">
-      <h2 className={typography.sectionLabel}>Histoires de Brest associées</h2>
+      <h2 className={typography.sectionLabel}>Histoires associées</h2>
       <ul className="mt-4 flex flex-col gap-3">
         {billets.map((billet) => (
           <li key={billet.slug}>

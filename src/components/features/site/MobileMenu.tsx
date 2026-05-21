@@ -35,7 +35,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           onClick={onClose}
           className="flex items-center border-b border-border px-5 py-4 text-sm font-bold tracking-wide text-text"
         >
-          Histoires de Brest
+          Histoires
         </Link>
 
         <div className={cn('border-b border-border', collectionsOpen && 'bg-muted')}>
@@ -81,6 +81,14 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           className="flex items-center border-b border-border px-5 py-4 text-sm font-bold tracking-wide text-text"
         >
           La carte
+        </Link>
+
+        <Link
+          to="/jeunesse"
+          onClick={onClose}
+          className="flex items-center border-b border-border px-5 py-4 text-sm font-bold tracking-wide text-text"
+        >
+          Jeunesse
         </Link>
       </nav>
 

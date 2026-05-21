@@ -1,4 +1,5 @@
 import { CartePreview } from '@/components/features/home/CartePreview'
+import { JeunesseTeaser } from '@/components/features/home/JeunesseTeaser'
 import { CollectionsCarousel } from '@/components/features/home/CollectionsCarousel'
 import { HistoiresCarousel } from '@/components/features/home/HistoiresCarousel'
 import { HomeHero } from '@/components/features/home/HomeHero'
@@ -14,6 +15,7 @@ export function Home() {
       <HistoiresCarousel />
       <CollectionsCarousel />
       <CartePreview />
+      <JeunesseTeaser />
       <SiteFooter />
     </SitePageShell>
   )
