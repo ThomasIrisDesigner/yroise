@@ -9,8 +9,8 @@ const { cardWidthPx, imageHeightPx } = mobileCarousel.histoires
 
 export function HistoiresCarousel() {
   return (
-    <section className="border-t border-border pt-6">
-      <div className="mb-3 flex items-center justify-between px-5">
+    <section className="border-t border-border pt-10 pb-8">
+      <div className="mb-4 flex items-center justify-between px-5">
         <h2 className={typography.sectionLabel}>Histoires</h2>
         <Link
           to="/histoires"

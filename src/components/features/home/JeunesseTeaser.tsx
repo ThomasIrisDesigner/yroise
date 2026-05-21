@@ -8,7 +8,7 @@ export function JeunesseTeaser() {
   return (
     <Link
       to="/jeunesse"
-      className="block border-t border-border bg-muted/60 px-5 py-4 transition-colors hover:bg-muted/80"
+      className="block border-t border-border bg-muted/60 px-5 py-5 transition-colors hover:bg-muted/80"
     >
       <div className="flex items-center justify-between gap-4">
         <div className="flex min-w-0 items-center gap-4">

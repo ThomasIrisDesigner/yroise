@@ -14,15 +14,15 @@ const MAP_PINS = [
 
 export function CartePreview() {
   return (
-    <section className="border-t border-border px-5 pt-6">
+    <section className="border-t border-border px-5 pt-10 pb-10">
       <h2 className={typography.sectionLabel}>📍 La carte</h2>
-      <p className={`mt-3 ${typography.editorialLead}`}>{HOME_CARTE.titre}</p>
-      <p className={`mt-2 ${typography.bodyMuted}`}>{HOME_CARTE.chapeau}</p>
-      <p className="mt-3 flex items-center gap-2 text-sm font-medium text-secondary">
+      <p className={`mt-4 ${typography.editorialLead}`}>{HOME_CARTE.titre}</p>
+      <p className={`mt-3 ${typography.bodyMuted}`}>{HOME_CARTE.chapeau}</p>
+      <p className="mt-4 flex items-center gap-2 text-sm font-medium text-secondary">
         <MapPin className="h-4 w-4 shrink-0" />
         {HOME_CARTE.indicateur}
       </p>
-      <div className="relative mt-4 flex h-32 w-full items-center justify-center rounded-md border border-border bg-muted/80">
+      <div className="relative mt-5 flex h-32 w-full items-center justify-center rounded-md border border-border bg-muted/80">
         <span className="text-sm italic text-text/40">Carte OSM — Brest</span>
         {MAP_PINS.map((pin, i) => (
           <span
@@ -33,7 +33,7 @@ export function CartePreview() {
           />
         ))}
       </div>
-      <div className="mt-3 flex items-center justify-between gap-3">
+      <div className="mt-4 flex items-center justify-between gap-3">
         <p className="text-sm italic text-text/50">{HOME_CARTE.note}</p>
         <Link
           to="/carte"
