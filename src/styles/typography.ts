@@ -3,6 +3,16 @@ export const typography = {
   pageTitle: 'text-2xl font-semibold tracking-tight text-text',
   pageSubtitle: 'text-sm text-text/70',
   footer: 'text-xs text-text/50',
+  sectionLabel: 'text-xs font-bold tracking-widest text-text uppercase',
+  heroQuote: 'text-sm font-semibold italic leading-snug text-surface',
+  heroAttribution: 'text-xs text-surface/70',
+  cardTitle: 'text-sm font-bold leading-snug text-text',
+  /** Cards carousels home (wireframe mobile) */
+  carouselTitle: 'text-[11px] font-medium leading-tight text-text',
+  carouselMeta: 'text-[10px] leading-tight text-text/55',
+  carouselCollectionLabel: 'text-[11px] leading-tight text-text/70',
+  cardMeta: 'text-xs text-text/60',
+  editorialLead: 'text-sm font-bold leading-snug text-text',
 } as const
 
 export const typeScale = [

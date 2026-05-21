@@ -3,9 +3,11 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 
 import { isAuthenticated } from '@/lib/auth'
 import { PrototypeLayout } from '@/components/features/PrototypeLayout'
+import { CollectionDetail } from '@/pages/CollectionDetail'
+import { CollectionsList } from '@/pages/CollectionsList'
 import { DesignSystem } from '@/pages/DesignSystem'
+import { Home } from '@/pages/Home'
 import { Login } from '@/pages/Login'
-import { Prototype } from '@/pages/Prototype'
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
   const location = useLocation()
@@ -39,7 +41,29 @@ export function App() {
         element={
           <RequireAuth>
             <PrototypeLayout>
-              <Prototype />
+              <Home />
+            </PrototypeLayout>
+          </RequireAuth>
+        }
+      />
+
+      <Route
+        path="/collections"
+        element={
+          <RequireAuth>
+            <PrototypeLayout>
+              <CollectionsList />
+            </PrototypeLayout>
+          </RequireAuth>
+        }
+      />
+
+      <Route
+        path="/collections/:slug"
+        element={
+          <RequireAuth>
+            <PrototypeLayout>
+              <CollectionDetail />
             </PrototypeLayout>
           </RequireAuth>
         }

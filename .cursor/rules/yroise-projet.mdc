@@ -1,0 +1,69 @@
+---
+description: Contexte projet YROISE — client, phase, conventions UX/UI
+alwaysApply: true
+---
+
+# YROISE — contexte projet
+
+## Client
+- **Nom** : YROISE
+- **Type** : Site grand public
+- **Affichage prototype** : Responsive (mobile + desktop), **mobile-first**
+- **Phase** : Wireframe (palette slate par défaut, pas de DA client validée)
+
+## Contexte métier
+- **Yroise** : bibliothèque numérique patrimoniale, médiathèques de Brest, programme **Gallica Marque Blanche (GMB)** de la BnF.
+- **Refonte 2026** — livraison prototype : juin 2026.
+
+## Scope prototype (Drupal CMS uniquement)
+- **Inclus** : pages éditoriales Drupal (home, rubriques, articles, pages institutionnelles…).
+- **Hors scope** : consultation de documents (visionneuse, résultats de recherche) → gérées par **Gallica**, ne pas prototyper ces parcours.
+
+## Persona principal — Marie
+- 54 ans, Brestoise, grand public local, **mobile**, curieuse de l’histoire de sa ville.
+- Pas chercheuse — elle **découvre**.
+
+## Philosophie UX
+- Site **éditorial magazine**, pas moteur de recherche.
+- La **home présente le contenu directement** : Marie ne doit pas naviguer pour trouver quelque chose d’intéressant.
+
+## Brief & maquettes
+- Brief validé (Thomas).
+- **Arborescence** — `src/data/navigation.ts`.
+- **Wireframes mobile v1** (présentation TSX) — 3 onglets :
+  1. **Home** : Hero, La trouvaille, Histoires ×3, Collections carousel, La carte, Footer — **implémenté** (`src/pages/Home.tsx`).
+  2. **Navigation** : menu plein écran, accordéon Collections, overlay recherche — **implémenté** (overlays).
+  3. **Collections** : page liste + page détail (contenu riche sur « En mer », défaut sur les autres) — **implémenté** (`/collections`, `/collections/:slug`).
+- Couleur marque wireframe source : `#2D7D8A` (glaz) — en prototype : palette **slate** jusqu’à « DA validée + couleurs ».
+
+## Navigation (Drupal CMS)
+
+**Header** : Logo YROISE · Histoires de Brest · Collections · 📍 La carte · 🔍 (overlay) · FR | BR
+
+| Zone | Pages / contenus |
+|------|------------------|
+| **Accueil** | Hero · La trouvaille · Histoires récentes (×3) · Collections carousel · Aperçu carte OSM |
+| **Histoires de Brest** | Liste (Tous · Expositions) · Billet · Exposition (format long) |
+| **Collections** | Page liste + accordéon : En mer, Brest et environs, En images, Finistère & monde artistique, Breton Brezhoneg, Livres anciens, Presse ancienne, Sciences et techniques |
+| **📍 La carte** | Carte OSM Positron · épingles · mini-fiche → **Gallica** (hors scope visionneuse) |
+| **🔍 Recherche** | Overlay : champ · recherche avancée → · tutoriel → · Bretania · Mille Feuilles |
+
+**Footer** : Qui sommes-nous · Informations pratiques · Nous contacter · Jeux / Parcours pédagogiques ⚠ · FAQ · Accessibilité · Mentions légales · Cookies
+
+**Légende** : nav principale (pages dédiées) · utilitaire overlay (recherche) · sous-pages contenu · liens Gallica / externes en renvoi, pas prototypés en profondeur.
+
+## Responsive
+- Conception **mobile-first** ; breakpoints desktop pour enrichir l’expérience.
+- `MOBILE_FIRST = true` dans `src/config/project.ts`.
+- `PROJECT_TYPE = "responsive"` : switch mobile / plein écran visible sur viewport ≥ md.
+
+## Design system (phase wireframe)
+- Primary → slate-950 | Secondary → slate-700 | Fond → slate-50 | Bordures → slate-200 | Texte → slate-800
+- Couleurs uniquement via `src/styles/theme.css`
+- Grille 8px, typo via `src/styles/typography.ts`
+
+## Livraison
+- Date indicative : juin 2026 (`DELIVERY_DATE` dans `project.ts`)
+
+## Quand la DA est validée
+Thomas dira **« DA validée + couleurs »** → mettre à jour `theme.css` et cette règle.

@@ -126,7 +126,9 @@ export function PrototypeLayout({ children }: { children: React.ReactNode }) {
                 }}
               >
                 <div className="h-[844px] w-[390px] overflow-hidden rounded-[40px] bg-surface">
-                  <div className="h-full w-full overflow-y-auto">{children}</div>
+                  <div className="scrollbar-none h-full w-full overflow-y-auto overscroll-contain">
+                    {children}
+                  </div>
                 </div>
               </div>
             </div>

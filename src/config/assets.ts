@@ -4,6 +4,6 @@ export const LOGIN_ILLUSTRATION = {
    * puis laisse cette valeur telle quelle (ou change le chemin si besoin).
    */
   src: '/illustrations/login.png',
-  alt: 'Illustration du projet',
+  alt: 'YROISE — Bibliothèque numérique patrimoniale de Brest',
 } as const
 
