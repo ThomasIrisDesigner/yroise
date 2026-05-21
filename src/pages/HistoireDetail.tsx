@@ -1,17 +1,19 @@
 import { Navigate, useParams } from 'react-router-dom'
 
+import { HistoireBilletBody } from '@/components/features/histoires/gmb/HistoireBilletBody'
 import { HistoireRebondCard } from '@/components/features/histoires/HistoireRebondCard'
 import { HistoireTypeBadge } from '@/components/features/histoires/HistoireTypeBadge'
 import { SourcesAccordion } from '@/components/features/histoires/SourcesAccordion'
-import { Breadcrumb } from '@/components/features/site/Breadcrumb'
+import { SectionBackLink } from '@/components/features/site/SectionBackLink'
 import { SitePageShell } from '@/components/features/site/SitePageShell'
-import {
-  getHistoireBySlug,
-  HISTOIRE_DETAIL_DEFAULT,
-} from '@/data/histoires'
-import { LOREM } from '@/data/placeholders'
+import { getHistoireContent } from '@/data/histoireContents'
+import { getHistoireBySlug } from '@/data/histoires'
 import { typography } from '@/styles/typography'
 
+/**
+ * Billet Histoire — modèle GMB (wireframe « Billet — composants GMB »).
+ * Ordre NatGeo : type → H1 → chapeau → auteur/date → image hero → légende → corps → sources → rebonds.
+ */
 export function HistoireDetail() {
   const { slug } = useParams<{ slug: string }>()
   const histoire = slug ? getHistoireBySlug(slug) : undefined
@@ -20,48 +22,52 @@ export function HistoireDetail() {
     return <Navigate to="/histoires" replace />
   }
 
-  const { auteur, corps, sources, rebonds } = HISTOIRE_DETAIL_DEFAULT
+  const content = getHistoireContent(histoire.slug)
 
   return (
     <SitePageShell>
-      <Breadcrumb
-        items={[
-          { label: 'Histoires', to: '/histoires' },
-          { label: histoire.titre },
-        ]}
-      />
+      <header className="px-5 pt-4">
+        <SectionBackLink to="/histoires">← Toutes les histoires</SectionBackLink>
+      </header>
 
-      <div className="h-44 w-full bg-muted" aria-hidden />
-
-      <article className="px-5 pt-5 pb-10">
+      {/* En-tête éditorial — avant l'image hero */}
+      <div className="px-5 pt-2">
         <HistoireTypeBadge type={histoire.type} />
         <h1 className={`mt-3 ${typography.pageTitle}`}>{histoire.titre}</h1>
-        <p className="mt-3 border-b border-border pb-4 text-sm italic text-text/60">
-          Par {auteur}
-        </p>
+        <p className={`mt-3 ${typography.body} italic`}>{content.chapeau}</p>
+        <div className="mt-4 border-b border-border pb-4">
+          <p className="text-sm font-semibold text-text">
+            Par {content.auteur}
+          </p>
+          <p className="mt-1 text-sm text-text/60">
+            {content.institution} · {content.datePublication}
+          </p>
+        </div>
+      </div>
 
-        <div className="mt-5 space-y-4">
-          <p className={typography.body}>{corps}</p>
-          <p className={typography.body}>{LOREM.paragraph}</p>
+      {/* Image hero pleine largeur — bandeau article */}
+      <div
+        className="flex aspect-[3/2] w-full items-center justify-center bg-muted"
+        role="img"
+        aria-label={content.heroPlaceholder}
+      >
+        <span className="text-sm italic text-text/40">{content.heroPlaceholder}</span>
+      </div>
+      <p className="border-b border-border px-5 py-3 text-sm italic leading-snug text-text/60">
+        {content.heroCaption}
+      </p>
+
+      <article className="px-5 pt-6 pb-10">
+        <HistoireBilletBody blocks={content.blocks} />
+
+        <div className="mt-10">
+          <SourcesAccordion sources={content.sources} />
         </div>
 
-        <div
-          className="my-6 flex h-32 w-full items-center justify-center rounded-md border border-border bg-muted text-sm italic text-text/40"
-          aria-hidden
-        >
-          Image inline
-        </div>
-
-        <p className={typography.body}>{LOREM.line}</p>
-
-        <div className="mt-8">
-          <SourcesAccordion sources={sources} />
-        </div>
-
-        <section className="border-t border-border pt-6">
+        <section className="mt-10 border-t border-border pt-8">
           <h2 className={typography.sectionLabel}>Nos autres histoires</h2>
           <ul className="mt-4 flex flex-col gap-4">
-            {rebonds.map((item) => (
+            {content.rebonds.map((item) => (
               <li key={item.slug}>
                 <HistoireRebondCard histoire={item} />
               </li>

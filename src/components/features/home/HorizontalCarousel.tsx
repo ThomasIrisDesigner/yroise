@@ -34,7 +34,9 @@ export function HorizontalCarousel({
       aria-label={ariaLabel}
       tabIndex={0}
       className={cn(
-        'scrollbar-none flex cursor-grab snap-x snap-mandatory overflow-x-auto overscroll-x-contain select-none px-5 pb-3 active:cursor-grabbing',
+        'scrollbar-none flex cursor-grab snap-x snap-mandatory overflow-x-auto overscroll-x-contain pb-3 active:cursor-grabbing [&_a]:cursor-pointer [&_a]:touch-manipulation',
+        /* Alignement 1re / dernière carte avec le contenu (px-5 des sections) */
+        'scroll-pl-5 scroll-pr-5 [&>*:first-child]:ml-5 [&>*:last-child]:mr-5',
         className
       )}
       style={{

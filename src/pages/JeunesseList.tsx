@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui/button'
 import { JeunesseListCard } from '@/components/features/jeunesse/JeunesseListCard'
-import { Breadcrumb } from '@/components/features/site/Breadcrumb'
 import { SitePageShell } from '@/components/features/site/SitePageShell'
 import { JEUNESSE_INTRO, JEUNESSE_LIST } from '@/data/jeunesse'
 import { typography } from '@/styles/typography'
@@ -8,7 +7,6 @@ import { typography } from '@/styles/typography'
 export function JeunesseList() {
   return (
     <SitePageShell>
-      <Breadcrumb items={[{ label: 'Jeunesse' }]} />
       <div className="px-5 pt-5 pb-10">
         <h1 className={typography.pageTitle}>Jeunesse</h1>
         <p className={`mt-2 ${typography.pageSubtitle}`}>{JEUNESSE_INTRO}</p>

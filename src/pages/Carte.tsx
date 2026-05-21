@@ -3,7 +3,6 @@ import * as React from 'react'
 import { CarteDocumentPopup } from '@/components/features/carte/CarteDocumentPopup'
 import { CartePinButton } from '@/components/features/carte/CartePinButton'
 import { MapIllustration } from '@/components/features/carte/MapIllustration'
-import { Breadcrumb } from '@/components/features/site/Breadcrumb'
 import { SitePageShell } from '@/components/features/site/SitePageShell'
 import { CARTE_INTRO, CARTE_PINS } from '@/data/carte'
 
@@ -13,8 +12,6 @@ export function Carte() {
 
   return (
     <SitePageShell fillMockup>
-      <Breadcrumb items={[{ label: 'La carte' }]} />
-
       <div className="shrink-0 border-b border-border bg-surface px-5 py-3">
         <p className="text-base italic leading-snug text-text">{CARTE_INTRO.lead}</p>
         <p className="mt-1 text-sm leading-snug text-text/60">

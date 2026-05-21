@@ -33,7 +33,11 @@ export const WIREFRAME_STEPS: WireframeStep[] = [
   {
     id: 'histoires',
     label: 'Histoires',
-    screens: ['Liste (curiosité / exposition)', 'Billet individuel + Sources'],
+    screens: [
+      'Liste (curiosité / exposition)',
+      'Billet GMB (NatGeo + composants Drupal)',
+      'Sources + rebonds',
+    ],
     status: 'done',
   },
   {

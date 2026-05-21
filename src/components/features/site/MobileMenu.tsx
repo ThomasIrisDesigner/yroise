@@ -1,8 +1,9 @@
 import { ChevronDown, ChevronRight, X } from 'lucide-react'
 import * as React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 import { COLLECTIONS } from '@/data/collections'
+import { getActiveNavSection } from '@/lib/navActive'
 import { cn } from '@/lib/utils'
 
 interface MobileMenuProps {
@@ -10,8 +11,27 @@ interface MobileMenuProps {
   onClose: () => void
 }
 
+function navItemClass(active: boolean) {
+  return cn(
+    'flex min-h-14 items-center border-b border-border px-5 py-4 text-base tracking-wide transition-colors',
+    active
+      ? 'border-l-[3px] border-l-secondary bg-muted/50 pl-[17px] font-extrabold text-secondary'
+      : 'font-bold text-text hover:text-secondary'
+  )
+}
+
 export function MobileMenu({ open, onClose }: MobileMenuProps) {
-  const [collectionsOpen, setCollectionsOpen] = React.useState(false)
+  const { pathname } = useLocation()
+  const activeSection = getActiveNavSection(pathname)
+  const [collectionsOpen, setCollectionsOpen] = React.useState(
+    activeSection === 'collections'
+  )
+
+  React.useEffect(() => {
+    if (activeSection === 'collections') {
+      setCollectionsOpen(true)
+    }
+  }, [activeSection, open])
 
   if (!open) return null
 
@@ -29,26 +49,36 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
         </button>
       </div>
 
-      <nav className="scrollbar-none flex-1 overflow-y-auto">
+      <nav className="scrollbar-none flex-1 overflow-y-auto" aria-label="Navigation principale">
         <Link
           to="/histoires"
           onClick={onClose}
-          className="flex min-h-14 items-center border-b border-border px-5 py-4 text-base font-bold tracking-wide text-text"
+          aria-current={activeSection === 'histoires' ? 'page' : undefined}
+          className={navItemClass(activeSection === 'histoires')}
         >
           Histoires
         </Link>
 
-        <div className={cn('border-b border-border', collectionsOpen && 'bg-muted')}>
+        <div
+          className={cn(
+            'border-b border-border',
+            (collectionsOpen || activeSection === 'collections') && 'bg-muted/30'
+          )}
+        >
           <button
             type="button"
             onClick={() => setCollectionsOpen((v) => !v)}
-            className="flex min-h-14 w-full items-center justify-between px-5 py-4 text-base font-bold tracking-wide text-text"
+            aria-expanded={collectionsOpen}
+            className={cn(
+              navItemClass(activeSection === 'collections'),
+              'w-full justify-between'
+            )}
           >
-            Collections
+            <span>Collections</span>
             {collectionsOpen ? (
-              <ChevronDown className="h-5 w-5 text-secondary" />
+              <ChevronDown className="h-5 w-5 shrink-0" />
             ) : (
-              <ChevronRight className="h-5 w-5 text-text/50" />
+              <ChevronRight className="h-5 w-5 shrink-0 text-text/50" />
             )}
           </button>
           {collectionsOpen ? (
@@ -56,21 +86,41 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
               <Link
                 to="/collections"
                 onClick={onClose}
-                className="flex min-h-12 items-center gap-2 border-t border-border bg-muted/80 px-5 py-3 pl-9 text-base font-semibold text-secondary"
+                aria-current={pathname === '/collections' ? 'page' : undefined}
+                className={cn(
+                  'flex min-h-12 items-center gap-2 border-t border-border px-5 py-3 pl-9 text-base',
+                  pathname === '/collections'
+                    ? 'font-bold text-secondary'
+                    : 'font-semibold text-secondary'
+                )}
               >
                 Tout voir →
               </Link>
-              {COLLECTIONS.map((col) => (
-                <Link
-                  key={col.slug}
-                  to={`/collections/${col.slug}`}
-                  onClick={onClose}
-                  className="flex min-h-12 items-center gap-2 border-t border-border bg-background px-5 py-3 pl-9 text-base text-text"
-                >
-                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-secondary" />
-                  {col.name}
-                </Link>
-              ))}
+              {COLLECTIONS.map((col) => {
+                const colActive = pathname === `/collections/${col.slug}`
+                return (
+                  <Link
+                    key={col.slug}
+                    to={`/collections/${col.slug}`}
+                    onClick={onClose}
+                    aria-current={colActive ? 'page' : undefined}
+                    className={cn(
+                      'flex min-h-12 items-center gap-2 border-t border-border px-5 py-3 pl-9 text-base',
+                      colActive
+                        ? 'bg-muted/60 font-semibold text-secondary'
+                        : 'bg-background text-text'
+                    )}
+                  >
+                    <span
+                      className={cn(
+                        'h-1.5 w-1.5 shrink-0 rounded-full',
+                        colActive ? 'bg-secondary' : 'bg-secondary/60'
+                      )}
+                    />
+                    {col.name}
+                  </Link>
+                )
+              })}
             </div>
           ) : null}
         </div>
@@ -78,7 +128,8 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
         <Link
           to="/carte"
           onClick={onClose}
-          className="flex min-h-14 items-center border-b border-border px-5 py-4 text-base font-bold tracking-wide text-text"
+          aria-current={activeSection === 'carte' ? 'page' : undefined}
+          className={navItemClass(activeSection === 'carte')}
         >
           📍 La carte
         </Link>
@@ -86,7 +137,8 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
         <Link
           to="/jeunesse"
           onClick={onClose}
-          className="flex min-h-14 items-center border-b border-border px-5 py-4 text-base font-bold tracking-wide text-text"
+          aria-current={activeSection === 'jeunesse' ? 'page' : undefined}
+          className={navItemClass(activeSection === 'jeunesse')}
         >
           Jeunesse
         </Link>

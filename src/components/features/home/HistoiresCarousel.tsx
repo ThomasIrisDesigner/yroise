@@ -24,17 +24,20 @@ export function HistoiresCarousel() {
           <Link
             key={item.slug}
             to={`/histoires/${item.slug}`}
-            className="block shrink-0 snap-start"
+            aria-label={`Lire l'histoire : ${item.titre}`}
+            className="block shrink-0 snap-start rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30"
             style={{ width: cardWidthPx }}
             draggable={false}
           >
             <div
-              className="w-full rounded border border-border bg-muted"
+              className="w-full rounded-md border border-border bg-muted"
               style={{ height: imageHeightPx }}
               aria-hidden
             />
             <p className={`mt-2 ${typography.carouselTitle}`}>{item.titre}</p>
-            <p className={`mt-1 ${typography.carouselMeta}`}>{item.accroche}</p>
+            {item.accroche ? (
+              <p className={`mt-1 ${typography.carouselMeta}`}>{item.accroche}</p>
+            ) : null}
           </Link>
         ))}
       </HorizontalCarousel>

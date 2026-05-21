@@ -3,7 +3,7 @@ import { Navigate, useParams } from 'react-router-dom'
 
 import { GenialiEmbed } from '@/components/features/jeunesse/GenialiEmbed'
 import { JeunesseTypeBadge } from '@/components/features/jeunesse/JeunesseTypeBadge'
-import { Breadcrumb } from '@/components/features/site/Breadcrumb'
+import { SectionBackLink } from '@/components/features/site/SectionBackLink'
 import { SitePageShell } from '@/components/features/site/SitePageShell'
 import { Button } from '@/components/ui/button'
 import {
@@ -25,15 +25,9 @@ export function JeunesseDetail() {
 
   return (
     <SitePageShell>
-      <Breadcrumb
-        items={[
-          { label: 'Jeunesse', to: '/jeunesse' },
-          { label: activite.titre },
-        ]}
-      />
-
-      <article className="px-5 pt-5 pb-10">
-        <JeunesseTypeBadge type={activite.type} />
+      <article className="px-5 pt-4 pb-10">
+        <SectionBackLink to="/jeunesse">← Jeunesse</SectionBackLink>
+        <JeunesseTypeBadge type={activite.type} className="mt-3" />
         <h1 className={`mt-3 ${typography.pageTitle}`}>{activite.titre}</h1>
         <p className={`mt-3 ${typography.bodyMuted}`}>{detail.intro}</p>
 

@@ -1,9 +1,9 @@
 import { ArrowRight } from 'lucide-react'
-import { Link, Navigate, useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 
 import { DocumentShowcase } from '@/components/features/collections/DocumentShowcase'
 import { HistoiresAssociees } from '@/components/features/collections/HistoiresAssociees'
-import { Breadcrumb } from '@/components/features/site/Breadcrumb'
+import { SectionBackLink } from '@/components/features/site/SectionBackLink'
 import { SitePageShell } from '@/components/features/site/SitePageShell'
 import { COLLECTIONS } from '@/data/collections'
 import {
@@ -25,12 +25,9 @@ export function CollectionDetail() {
 
   return (
     <SitePageShell>
-      <Breadcrumb
-        items={[
-          { label: 'Collections', to: '/collections' },
-          { label: collection.name },
-        ]}
-      />
+      <div className="px-5 pt-4">
+        <SectionBackLink to="/collections">← Toutes les collections</SectionBackLink>
+      </div>
 
       <section className="relative">
         <div
@@ -71,15 +68,6 @@ export function CollectionDetail() {
         </Button>
 
         <HistoiresAssociees billets={detail.histoiresAssociees} />
-
-        <p className="mt-10 flex justify-center">
-          <Link
-            to="/collections"
-            className="inline-flex h-11 items-center text-sm font-medium text-secondary"
-          >
-            ← Toutes les collections
-          </Link>
-        </p>
       </div>
     </SitePageShell>
   )

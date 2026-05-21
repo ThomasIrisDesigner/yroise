@@ -24,12 +24,13 @@ export function CollectionsCarousel() {
           <Link
             key={col.slug}
             to={`/collections/${col.slug}`}
-            className="block shrink-0 snap-start text-center"
+            aria-label={`Découvrir la collection ${col.name}`}
+            className="block shrink-0 snap-start rounded-md text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30"
             style={{ width: cardWidthPx }}
             draggable={false}
           >
             <div
-              className="w-full rounded border border-border bg-muted"
+              className="w-full rounded-md border border-border bg-muted"
               style={{ height: imageHeightPx }}
               aria-hidden
             />

@@ -21,6 +21,8 @@ export function useHorizontalSwipeScroll<T extends HTMLElement = HTMLDivElement>
 
   const onPointerDown = React.useCallback((e: React.PointerEvent<T>) => {
     const el = ref.current
+    // Ne pas intercepter les clics sur liens / boutons (cartes cliquables du carousel).
+    if ((e.target as HTMLElement).closest('a, button')) return
     // Souris : drag horizontal. Touch : scroll natif (swipe) du navigateur.
     if (!el || e.button !== 0 || e.pointerType !== 'mouse') return
 

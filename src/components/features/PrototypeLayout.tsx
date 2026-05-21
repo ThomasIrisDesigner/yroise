@@ -3,7 +3,11 @@ import { LogOut, Monitor, Smartphone } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { MOBILE_MOCKUP_H, MOBILE_MOCKUP_W } from '@/config/wireframe-mobile'
-import { PROJECT_DISPLAY_NAME, PROJECT_TYPE } from '@/config/project'
+import {
+  PROJECT_DISPLAY_NAME,
+  PROJECT_TYPE,
+  PROTOTYPE_CHROME_EXTRAS_ENABLED,
+} from '@/config/project'
 import { logout } from '@/lib/auth'
 import { cn } from '@/lib/utils'
 import { useMediaQuery } from '@/lib/useMediaQuery'
@@ -12,6 +16,16 @@ type ViewMode = 'mobile' | 'desktop'
 
 const CHROME_BAR_H = 32
 const MOBILE_PADDING = 32
+
+function computeMobileScale() {
+  if (typeof window === 'undefined') return 1
+  const scale = Math.min(
+    (window.innerHeight - CHROME_BAR_H - MOBILE_PADDING * 2) / MOBILE_MOCKUP_H,
+    (window.innerWidth - MOBILE_PADDING) / MOBILE_MOCKUP_W,
+    1
+  )
+  return Number.isFinite(scale) ? Math.max(scale, 0) : 1
+}
 
 function PrototypeChromeBar({
   allowSwitch,
@@ -34,34 +48,46 @@ function PrototypeChromeBar({
         </div>
 
         <div className="flex items-center gap-2">
-          <div className={cn('hidden items-center gap-2 md:flex', !allowSwitch && 'hidden')}>
-            <button
-              type="button"
-              aria-label="Vue mobile"
-              onClick={() => onSetMode('mobile')}
-              className={cn(
-                'inline-flex h-8 w-8 items-center justify-center rounded-md bg-surface/10 text-surface/80 transition-colors hover:bg-surface/15 hover:text-surface',
-                effectiveMode === 'mobile' && 'bg-secondary text-surface'
-              )}
-            >
-              <Smartphone className="h-4 w-4" />
-            </button>
-            <button
-              type="button"
-              aria-label="Vue plein écran"
-              onClick={() => onSetMode('desktop')}
-              className={cn(
-                'inline-flex h-8 w-8 items-center justify-center rounded-md bg-surface/10 text-surface/80 transition-colors hover:bg-surface/15 hover:text-surface',
-                effectiveMode === 'desktop' && 'bg-secondary text-surface'
-              )}
-            >
-              <Monitor className="h-4 w-4" />
-            </button>
-          </div>
+          {PROTOTYPE_CHROME_EXTRAS_ENABLED ? (
+            <>
+              <div
+                className={cn(
+                  'hidden items-center gap-2 md:flex',
+                  !allowSwitch && 'hidden'
+                )}
+              >
+                <button
+                  type="button"
+                  aria-label="Vue mobile"
+                  onClick={() => onSetMode('mobile')}
+                  className={cn(
+                    'inline-flex h-8 w-8 items-center justify-center rounded-md bg-surface/10 text-surface/80 transition-colors hover:bg-surface/15 hover:text-surface',
+                    effectiveMode === 'mobile' && 'bg-secondary text-surface'
+                  )}
+                >
+                  <Smartphone className="h-4 w-4" />
+                </button>
+                <button
+                  type="button"
+                  aria-label="Vue plein écran"
+                  onClick={() => onSetMode('desktop')}
+                  className={cn(
+                    'inline-flex h-8 w-8 items-center justify-center rounded-md bg-surface/10 text-surface/80 transition-colors hover:bg-surface/15 hover:text-surface',
+                    effectiveMode === 'desktop' && 'bg-secondary text-surface'
+                  )}
+                >
+                  <Monitor className="h-4 w-4" />
+                </button>
+              </div>
 
-          <Link to="/design-system" className="text-xs text-surface/70 hover:text-surface">
-            DS
-          </Link>
+              <Link
+                to="/design-system"
+                className="text-xs text-surface/70 hover:text-surface"
+              >
+                DS
+              </Link>
+            </>
+          ) : null}
 
           <a
             href="/login"
@@ -86,7 +112,7 @@ export function PrototypeLayout({ children }: { children: React.ReactNode }) {
   const [mode, setMode] = React.useState<ViewMode>(
     PROJECT_TYPE === 'desktop' ? 'desktop' : 'mobile'
   )
-  const [mobileScale, setMobileScale] = React.useState(1)
+  const [mobileScale, setMobileScale] = React.useState(computeMobileScale)
 
   const allowSwitch = PROJECT_TYPE === 'responsive'
   const effectiveMode: ViewMode = isDesktop
@@ -99,12 +125,7 @@ export function PrototypeLayout({ children }: { children: React.ReactNode }) {
 
   React.useEffect(() => {
     function recomputeScale() {
-      const scale = Math.min(
-        (window.innerHeight - CHROME_BAR_H - MOBILE_PADDING * 2) / MOBILE_MOCKUP_H,
-        (window.innerWidth - MOBILE_PADDING) / MOBILE_MOCKUP_W,
-        1
-      )
-      setMobileScale(Number.isFinite(scale) ? Math.max(scale, 0) : 1)
+      setMobileScale(computeMobileScale())
     }
 
     recomputeScale()
@@ -115,32 +136,31 @@ export function PrototypeLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="fixed inset-0 overflow-hidden bg-primary text-surface">
       {effectiveMode === 'mobile' ? (
-        <div className="scrollbar-none mx-auto flex h-full w-full flex-col overflow-y-auto overscroll-contain">
+        <div className="mx-auto flex h-full w-full flex-col">
           <PrototypeChromeBar
             allowSwitch={allowSwitch}
             effectiveMode={effectiveMode}
             onSetMode={setMode}
           />
 
-          <div className="flex justify-center px-4 py-8">
+          <div className="flex min-h-0 flex-1 items-center justify-center px-4 py-8">
             <div
               style={{
                 width: MOBILE_MOCKUP_W * mobileScale,
-                minHeight: MOBILE_MOCKUP_H * mobileScale,
+                height: MOBILE_MOCKUP_H * mobileScale,
               }}
               className="flex-none"
             >
               <div
-                className="origin-top"
                 style={{
                   width: MOBILE_MOCKUP_W,
-                  transformOrigin: 'top center',
+                  height: MOBILE_MOCKUP_H,
+                  transformOrigin: 'top left',
                   transform: `scale(${mobileScale})`,
                 }}
               >
                 <div
-                  className="flex w-[390px] flex-col overflow-hidden rounded-[40px] bg-surface shadow-2xl shadow-black/30"
-                  style={{ minHeight: MOBILE_MOCKUP_H }}
+                  className="scrollbar-none flex h-full w-[390px] flex-col overflow-y-auto overscroll-contain rounded-[40px] bg-surface shadow-2xl shadow-black/30"
                 >
                   {children}
                 </div>
@@ -149,13 +169,13 @@ export function PrototypeLayout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       ) : (
-        <div className="scrollbar-none flex h-full w-full flex-col overflow-y-auto overscroll-contain">
+        <div className="scrollbar-none flex h-full w-full flex-col overflow-y-auto overscroll-contain bg-background text-text">
           <PrototypeChromeBar
             allowSwitch={allowSwitch}
             effectiveMode={effectiveMode}
             onSetMode={setMode}
           />
-          <div className="min-h-full bg-background text-text">{children}</div>
+          {children}
         </div>
       )}
     </div>
