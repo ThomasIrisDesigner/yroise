@@ -15,9 +15,9 @@ export function Carte() {
     <SitePageShell fillMockup>
       <Breadcrumb items={[{ label: 'La carte' }]} />
 
-      <div className="shrink-0 border-b border-border bg-surface px-4 py-2">
-        <p className="text-xs italic text-text">{CARTE_INTRO.lead}</p>
-        <p className="mt-1 text-[11px] leading-snug text-text/60">
+      <div className="shrink-0 border-b border-border bg-surface px-5 py-3">
+        <p className="text-base italic leading-snug text-text">{CARTE_INTRO.lead}</p>
+        <p className="mt-1 text-sm leading-snug text-text/60">
           {CARTE_INTRO.sub}
           {' · '}
           <span className="font-bold text-secondary">{CARTE_INTRO.lieuxCount} lieux</span>
@@ -26,7 +26,7 @@ export function Carte() {
       </div>
 
       <div
-        className="relative min-h-0 flex-1 w-full"
+        className="relative min-h-0 w-full flex-1"
         onClick={() => setSelectedId(null)}
         role="presentation"
       >
@@ -45,15 +45,15 @@ export function Carte() {
           <CarteDocumentPopup pin={selectedPin} onClose={() => setSelectedId(null)} />
         ) : null}
         {selectedPin ? (
-          <p className="absolute bottom-2 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full bg-surface/90 px-2 py-0.5 text-[10px] italic text-text/50">
+          <p className="absolute bottom-3 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full bg-surface/90 px-3 py-1 text-sm italic text-text/60">
             {CARTE_INTRO.hintClose}
           </p>
         ) : null}
       </div>
 
       {!selectedPin ? (
-        <div className="shrink-0 border-t border-border bg-muted/50 px-4 py-2">
-          <p className="text-center text-[11px] italic text-secondary">{CARTE_INTRO.hint}</p>
+        <div className="shrink-0 border-t border-border bg-muted/50 px-5 py-3">
+          <p className="text-center text-sm italic text-secondary">{CARTE_INTRO.hint}</p>
         </div>
       ) : null}
     </SitePageShell>

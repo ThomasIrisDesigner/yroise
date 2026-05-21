@@ -3,20 +3,17 @@ export const MOBILE_MOCKUP_W = 390
 export const MOBILE_MOCKUP_H = 844
 
 /**
- * Dimensions carousels home — calées sur wireframes (viewport ref. 220px → mockup 390px).
+ * Dimensions carousels home — accordées aux contraintes ergo mobile (titres 14px lisibles,
+ * gap suffisant pour le swipe). Valeurs en px sur mockup 390px.
  */
-const WF_PHONE_W = 220
-const MOCKUP_W = MOBILE_MOCKUP_W
-const scale = MOCKUP_W / WF_PHONE_W
-
 export const mobileCarousel = {
-  gapPx: Math.round(8 * scale),
+  gapPx: 12,
   histoires: {
-    cardWidthPx: Math.round(88 * scale),
-    imageHeightPx: Math.round(60 * scale),
+    cardWidthPx: 176,
+    imageHeightPx: 112,
   },
   collections: {
-    cardWidthPx: Math.round(72 * scale),
-    imageHeightPx: Math.round(50 * scale),
+    cardWidthPx: 132,
+    imageHeightPx: 96,
   },
 } as const

@@ -12,10 +12,10 @@ export function JeunesseTypeBadge({ type, className }: JeunesseTypeBadgeProps) {
   return (
     <span
       className={cn(
-        'inline-flex rounded px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest',
+        'inline-flex items-center rounded px-2 py-1 text-xs font-bold uppercase tracking-widest',
         isJeu
           ? 'border border-border bg-muted text-secondary'
-          : 'border border-border bg-background text-text/55',
+          : 'border border-border bg-background text-text/60',
         className
       )}
     >

@@ -66,11 +66,11 @@ export function Login() {
                       placeholder=""
                     />
                     {error ? (
-                      <p className="text-xs text-danger">{error}</p>
+                      <p className="text-sm text-danger">{error}</p>
                     ) : null}
                   </div>
 
-                  <Button type="submit" variant="default" className="h-10 w-full">
+                  <Button type="submit" variant="default" className="w-full">
                     Se connecter
                   </Button>
                 </form>

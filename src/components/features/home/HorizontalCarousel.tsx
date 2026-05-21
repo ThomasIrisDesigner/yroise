@@ -10,6 +10,15 @@ interface HorizontalCarouselProps {
   'aria-label'?: string
 }
 
+/**
+ * Carousel horizontal mobile.
+ *
+ * Important ergonomie :
+ *  - `touchAction: 'pan-x pan-y'` permet à l'utilisateur de scroller la page
+ *    verticalement même quand son doigt commence sur le carousel — le navigateur
+ *    arbitre selon la direction dominante du geste.
+ *  - Le drag souris (desktop) est géré dans `useHorizontalSwipeScroll`.
+ */
 export function HorizontalCarousel({
   gapPx,
   children,
@@ -25,10 +34,14 @@ export function HorizontalCarousel({
       aria-label={ariaLabel}
       tabIndex={0}
       className={cn(
-        'scrollbar-none flex cursor-grab snap-x snap-mandatory overflow-x-auto overscroll-x-contain px-4 pb-2 touch-pan-x select-none active:cursor-grabbing',
+        'scrollbar-none flex cursor-grab snap-x snap-mandatory overflow-x-auto overscroll-x-contain select-none px-5 pb-3 active:cursor-grabbing',
         className
       )}
-      style={{ gap: gapPx, WebkitOverflowScrolling: 'touch' }}
+      style={{
+        gap: gapPx,
+        WebkitOverflowScrolling: 'touch',
+        touchAction: 'pan-x pan-y',
+      }}
       {...handlers}
     >
       {children}

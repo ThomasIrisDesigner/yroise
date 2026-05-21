@@ -17,7 +17,7 @@ export function MapIllustration() {
         <rect x="88" y="18" width="17" height="11" rx="1" fill="rgb(var(--color-border))" />
         <rect x="148" y="42" width="24" height="16" rx="1" fill="rgb(var(--color-border))" />
       </svg>
-      <p className="absolute bottom-1 right-1.5 rounded bg-surface/80 px-1 py-0.5 text-[9px] text-text/40">
+      <p className="absolute bottom-1.5 right-1.5 rounded bg-surface/85 px-1.5 py-0.5 text-xs text-text/50">
         © OpenStreetMap · uMap
       </p>
     </div>

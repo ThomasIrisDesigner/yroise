@@ -10,9 +10,12 @@ const { cardWidthPx, imageHeightPx } = mobileCarousel.histoires
 export function HistoiresCarousel() {
   return (
     <section className="border-t border-border pt-6">
-      <div className="mb-2 flex items-center justify-between px-4">
+      <div className="mb-3 flex items-center justify-between px-5">
         <h2 className={typography.sectionLabel}>Histoires</h2>
-        <Link to="/histoires" className="text-xs text-text/60 hover:text-text">
+        <Link
+          to="/histoires"
+          className="inline-flex h-9 items-center text-sm text-text/60 hover:text-text"
+        >
           Tout voir →
         </Link>
       </div>
@@ -30,8 +33,8 @@ export function HistoiresCarousel() {
               style={{ height: imageHeightPx }}
               aria-hidden
             />
-            <p className={`mt-1.5 ${typography.carouselTitle}`}>{item.titre}</p>
-            <p className={`mt-0.5 ${typography.carouselMeta}`}>{item.accroche}</p>
+            <p className={`mt-2 ${typography.carouselTitle}`}>{item.titre}</p>
+            <p className={`mt-1 ${typography.carouselMeta}`}>{item.accroche}</p>
           </Link>
         ))}
       </HorizontalCarousel>

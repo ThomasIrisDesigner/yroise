@@ -2,7 +2,6 @@ import { X } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 import type { CartePin } from '@/data/carte'
-import { typography } from '@/styles/typography'
 
 interface CarteDocumentPopupProps {
   pin: CartePin
@@ -12,46 +11,51 @@ interface CarteDocumentPopupProps {
 export function CarteDocumentPopup({ pin, onClose }: CarteDocumentPopupProps) {
   return (
     <div
-      className="absolute left-[28%] top-[20%] z-20 w-[138px] overflow-hidden rounded-md bg-surface shadow-lg"
+      className="absolute left-1/2 top-6 z-20 w-[260px] -translate-x-1/2 overflow-hidden rounded-md bg-surface shadow-xl"
       role="dialog"
       aria-label={pin.titre}
+      onClick={(e) => e.stopPropagation()}
     >
-      <div className="flex h-14 items-center justify-center bg-muted text-[10px] italic text-text/40">
+      <div className="relative flex h-24 items-center justify-center bg-muted text-sm italic text-text/40">
         Image document
+        <button
+          type="button"
+          aria-label="Fermer"
+          onClick={(e) => {
+            e.stopPropagation()
+            onClose()
+          }}
+          className="absolute right-1 top-1 inline-flex h-11 w-11 items-center justify-center rounded-full text-text/70 hover:text-text"
+        >
+          <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-surface/95 shadow">
+            <X className="h-4 w-4" />
+          </span>
+        </button>
       </div>
-      <div className="p-2">
-        <p className="text-[10px] font-bold uppercase tracking-wider text-secondary">
+      <div className="p-4">
+        <p className="text-xs font-bold uppercase tracking-widest text-secondary">
           {pin.collection}
         </p>
-        <p className={`mt-1 ${typography.cardTitle} text-xs leading-snug`}>{pin.titre}</p>
-        <div className="mt-2 flex items-center justify-between border-t border-border pt-2">
-          <a href={pin.gallicaHref} className="text-[10px] font-semibold text-secondary">
+        <p className="mt-2 text-sm font-bold leading-snug text-text">{pin.titre}</p>
+        <div className="mt-3 flex items-center justify-between border-t border-border pt-3">
+          <a
+            href={pin.gallicaHref}
+            className="inline-flex h-9 items-center text-sm font-semibold text-secondary"
+          >
             Voir le document →
           </a>
-          <button
-            type="button"
-            aria-label="Fermer"
-            onClick={(e) => {
-              e.stopPropagation()
-              onClose()
-            }}
-            className="text-text/40 hover:text-text"
-          >
-            <X className="h-3.5 w-3.5" />
-          </button>
+          {pin.histoireHref ? (
+            <Link
+              to={pin.histoireHref}
+              className="inline-flex h-9 items-center text-sm font-semibold text-text"
+            >
+              Lire →
+            </Link>
+          ) : null}
         </div>
-        {pin.histoireHref ? (
-          <Link
-            to={pin.histoireHref}
-            className="mt-2 block text-[10px] font-semibold text-text"
-            onClick={(e) => e.stopPropagation()}
-          >
-            Lire l'histoire →
-          </Link>
-        ) : null}
       </div>
       <div
-        className="absolute -bottom-1.5 left-1/2 h-0 w-0 -translate-x-1/2 border-x-[7px] border-t-[7px] border-x-transparent border-t-surface"
+        className="absolute -bottom-2 left-1/2 h-0 w-0 -translate-x-1/2 border-x-[8px] border-t-[8px] border-x-transparent border-t-surface"
         aria-hidden
       />
     </div>

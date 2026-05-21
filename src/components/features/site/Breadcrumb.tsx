@@ -16,19 +16,25 @@ export function Breadcrumb({ items, className }: BreadcrumbProps) {
   return (
     <nav
       aria-label="Fil d'Ariane"
-      className={cn('flex flex-wrap items-center gap-1 border-b border-border px-4 py-2', className)}
+      className={cn(
+        'flex min-h-11 flex-wrap items-center gap-1 border-b border-border px-5 py-2.5',
+        className
+      )}
     >
       {items.map((item, i) => (
         <span key={`${item.label}-${i}`} className="flex items-center gap-1">
-          {i > 0 ? <span className="text-xs text-border">›</span> : null}
+          {i > 0 ? <span className="text-sm text-border">›</span> : null}
           {item.to && i < items.length - 1 ? (
-            <Link to={item.to} className="text-xs text-text/60 hover:text-text">
+            <Link
+              to={item.to}
+              className="inline-flex min-h-9 items-center text-sm text-text/60 hover:text-text"
+            >
               {item.label}
             </Link>
           ) : (
             <span
               className={cn(
-                'text-xs',
+                'text-sm',
                 i === items.length - 1 ? 'font-semibold text-text' : 'text-text/60'
               )}
             >

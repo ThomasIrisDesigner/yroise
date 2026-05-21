@@ -34,25 +34,27 @@ export function CollectionDetail() {
 
       <section className="relative">
         <div
-          className="flex h-32 w-full items-center justify-center bg-muted"
+          className="flex h-40 w-full items-center justify-center bg-muted"
           aria-hidden
         >
-          <span className="text-xs italic text-text/40">Image de collection</span>
+          <span className="text-sm italic text-text/40">Image de collection</span>
         </div>
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/80 to-transparent px-4 pb-3 pt-10">
-          <h1 className="text-lg font-extrabold text-surface">{collection.name}</h1>
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/85 to-transparent px-5 pb-4 pt-12">
+          <h1 className="text-[26px] font-extrabold leading-tight tracking-tight text-surface">
+            {collection.name}
+          </h1>
           {collection.documentCount != null ? (
-            <p className="text-xs text-surface/70">{collection.documentCount} documents</p>
+            <p className="mt-1 text-sm text-surface/80">{collection.documentCount} documents</p>
           ) : null}
         </div>
       </section>
 
-      <div className="px-4 pt-4 pb-8">
-        <p className="text-sm leading-relaxed text-text">{detail.intro}</p>
+      <div className="px-5 pt-5 pb-10">
+        <p className={typography.body}>{detail.intro}</p>
 
-        <section className="mt-6">
+        <section className="mt-7">
           <h2 className={typography.sectionLabel}>Quelques documents</h2>
-          <div className="mt-3">
+          <div className="mt-4">
             <DocumentShowcase documents={detail.featuredDocuments} />
           </div>
         </section>
@@ -60,18 +62,21 @@ export function CollectionDetail() {
         <Button
           asChild
           variant="default"
-          className="mt-6 h-11 w-full rounded-md text-sm font-bold tracking-wide"
+          className="mt-6 h-12 w-full rounded-md text-base font-bold tracking-wide"
         >
           <a href="#" aria-label={`${detail.gallicaLabel} sur Gallica (externe)`}>
             {detail.gallicaLabel}
-            <ArrowRight className="h-4 w-4" />
+            <ArrowRight className="h-5 w-5" />
           </a>
         </Button>
 
         <HistoiresAssociees billets={detail.histoiresAssociees} />
 
-        <p className="mt-8 text-center">
-          <Link to="/collections" className="text-xs font-medium text-secondary">
+        <p className="mt-10 flex justify-center">
+          <Link
+            to="/collections"
+            className="inline-flex h-11 items-center text-sm font-medium text-secondary"
+          >
             ← Toutes les collections
           </Link>
         </p>

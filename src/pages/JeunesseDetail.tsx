@@ -32,12 +32,10 @@ export function JeunesseDetail() {
         ]}
       />
 
-      <article className="px-4 pt-4 pb-8">
+      <article className="px-5 pt-5 pb-10">
         <JeunesseTypeBadge type={activite.type} />
-        <h1 className="mt-2 text-lg font-extrabold leading-tight text-text">
-          {activite.titre}
-        </h1>
-        <p className="mt-2 text-sm leading-relaxed text-text/80">{detail.intro}</p>
+        <h1 className={`mt-3 ${typography.pageTitle}`}>{activite.titre}</h1>
+        <p className={`mt-3 ${typography.bodyMuted}`}>{detail.intro}</p>
 
         {isJeu ? (
           <>
@@ -45,30 +43,30 @@ export function JeunesseDetail() {
             <Button
               asChild
               variant="secondary"
-              className="mb-6 h-11 w-full rounded-md text-sm font-bold tracking-wide"
+              className="mb-6 h-12 w-full rounded-md text-base font-bold tracking-wide"
             >
               <a href="#">Jouer en plein écran</a>
             </Button>
           </>
         ) : (
-          <div className="my-6 flex h-40 items-center justify-center rounded-md border border-dashed border-border bg-muted/50 text-sm italic text-text/50">
+          <div className="my-6 flex h-44 items-center justify-center rounded-md border border-dashed border-border bg-muted/50 text-base italic text-text/50">
             Séquence pédagogique — contenu à venir
           </div>
         )}
 
-        <div className="mb-6 rounded-md border border-border bg-muted/40 p-3">
+        <div className="mb-6 rounded-md border border-border bg-muted/40 p-4">
           <p className={typography.sectionLabel}>À propos</p>
-          <dl className="mt-3 space-y-2">
-            <div className="flex gap-3 text-xs">
-              <dt className="w-24 shrink-0 text-text/60">Niveau</dt>
+          <dl className="mt-3 space-y-3">
+            <div className="flex gap-3 text-sm">
+              <dt className="w-28 shrink-0 text-text/60">Niveau</dt>
               <dd className="font-medium text-text">{detail.niveau}</dd>
             </div>
-            <div className="flex gap-3 text-xs">
-              <dt className="w-24 shrink-0 text-text/60">Durée</dt>
+            <div className="flex gap-3 text-sm">
+              <dt className="w-28 shrink-0 text-text/60">Durée</dt>
               <dd className="font-medium text-text">{detail.duree}</dd>
             </div>
-            <div className="flex gap-3 text-xs">
-              <dt className="w-24 shrink-0 text-text/60">Document source</dt>
+            <div className="flex gap-3 text-sm">
+              <dt className="w-28 shrink-0 text-text/60">Document source</dt>
               <dd className="font-medium text-text">{detail.documentSource}</dd>
             </div>
           </dl>
@@ -76,12 +74,12 @@ export function JeunesseDetail() {
 
         <a
           href={detail.documentGallicaHref}
-          className="flex items-center justify-between rounded-md border border-border bg-muted/50 px-3 py-3"
+          className="flex min-h-14 items-center justify-between gap-3 rounded-md border border-border bg-muted/50 px-4 py-3"
         >
-          <span className="text-xs leading-snug text-text">{detail.documentSource}</span>
-          <span className="ml-2 shrink-0 text-xs font-semibold text-secondary">
+          <span className="text-sm leading-snug text-text">{detail.documentSource}</span>
+          <span className="inline-flex shrink-0 items-center text-sm font-semibold text-secondary">
             Voir sur Gallica
-            <ArrowRight className="ml-0.5 inline h-3 w-3" />
+            <ArrowRight className="ml-1 inline h-4 w-4" />
           </span>
         </a>
       </article>

@@ -31,38 +31,36 @@ export function HistoireDetail() {
         ]}
       />
 
-      <div className="h-28 w-full bg-muted" aria-hidden />
+      <div className="h-44 w-full bg-muted" aria-hidden />
 
-      <article className="px-4 pt-4 pb-8">
+      <article className="px-5 pt-5 pb-10">
         <HistoireTypeBadge type={histoire.type} />
-        <h1 className="mt-2 text-lg font-extrabold leading-tight text-text">
-          {histoire.titre}
-        </h1>
-        <p className="mt-2 border-b border-border pb-3 text-xs italic text-text/60">
+        <h1 className={`mt-3 ${typography.pageTitle}`}>{histoire.titre}</h1>
+        <p className="mt-3 border-b border-border pb-4 text-sm italic text-text/60">
           Par {auteur}
         </p>
 
-        <div className="mt-4 space-y-3 text-sm leading-relaxed text-text/90">
-          <p>{corps}</p>
-          <p>{LOREM.paragraph}</p>
+        <div className="mt-5 space-y-4">
+          <p className={typography.body}>{corps}</p>
+          <p className={typography.body}>{LOREM.paragraph}</p>
         </div>
 
         <div
-          className="my-4 flex h-20 w-full items-center justify-center rounded border border-border bg-muted text-xs italic text-text/40"
+          className="my-6 flex h-32 w-full items-center justify-center rounded-md border border-border bg-muted text-sm italic text-text/40"
           aria-hidden
         >
           Image inline
         </div>
 
-        <p className="text-sm leading-relaxed text-text/90">{LOREM.line}</p>
+        <p className={typography.body}>{LOREM.line}</p>
 
-        <div className="mt-6">
+        <div className="mt-8">
           <SourcesAccordion sources={sources} />
         </div>
 
         <section className="border-t border-border pt-6">
           <h2 className={typography.sectionLabel}>Nos autres histoires</h2>
-          <ul className="mt-4 flex flex-col gap-3">
+          <ul className="mt-4 flex flex-col gap-4">
             {rebonds.map((item) => (
               <li key={item.slug}>
                 <HistoireRebondCard histoire={item} />

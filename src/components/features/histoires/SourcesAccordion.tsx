@@ -21,12 +21,12 @@ export function SourcesAccordion({ sources }: SourcesAccordionProps) {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between bg-muted px-3 py-2.5 text-left"
+        className="flex min-h-14 w-full items-center justify-between bg-muted px-4 py-3 text-left"
         aria-expanded={open}
       >
         <span className={typography.sectionLabel}>Sources</span>
         <ChevronDown
-          className={cn('h-4 w-4 text-text/50 transition-transform', open && 'rotate-180')}
+          className={cn('h-5 w-5 text-text/50 transition-transform', open && 'rotate-180')}
         />
       </button>
       {open ? (
@@ -35,14 +35,14 @@ export function SourcesAccordion({ sources }: SourcesAccordionProps) {
             <li
               key={source.label}
               className={cn(
-                'flex items-center justify-between gap-2 border-t border-border px-3 py-2.5',
+                'flex min-h-14 items-center justify-between gap-3 border-t border-border px-4 py-3',
                 i === sources.length - 1 && 'border-b-0'
               )}
             >
-              <span className="text-xs leading-snug text-text">{source.label}</span>
+              <span className="text-sm leading-snug text-text">{source.label}</span>
               <a
                 href={source.href}
-                className="shrink-0 text-xs font-semibold text-secondary"
+                className="inline-flex h-11 w-11 shrink-0 items-center justify-center text-base font-semibold text-secondary"
                 aria-label={`Voir ${source.label} sur Gallica`}
               >
                 →

@@ -10,9 +10,12 @@ const { cardWidthPx, imageHeightPx } = mobileCarousel.collections
 export function CollectionsCarousel() {
   return (
     <section className="border-t border-border pt-6">
-      <div className="mb-2 flex items-center justify-between px-4">
+      <div className="mb-3 flex items-center justify-between px-5">
         <h2 className={typography.sectionLabel}>Collections</h2>
-        <Link to="/collections" className="text-xs text-text/60 hover:text-text">
+        <Link
+          to="/collections"
+          className="inline-flex h-9 items-center text-sm text-text/60 hover:text-text"
+        >
           Tout voir →
         </Link>
       </div>
@@ -30,7 +33,7 @@ export function CollectionsCarousel() {
               style={{ height: imageHeightPx }}
               aria-hidden
             />
-            <p className={`mt-1 ${typography.carouselCollectionLabel}`}>{col.shortLabel}</p>
+            <p className={`mt-2 ${typography.carouselCollectionLabel}`}>{col.shortLabel}</p>
           </Link>
         ))}
       </HorizontalCarousel>

@@ -26,43 +26,43 @@ export function DocumentShowcase({ documents }: DocumentShowcaseProps) {
   return (
     <div className="overflow-hidden rounded-md border border-border">
       <div
-        className="flex h-32 w-full items-center justify-center bg-muted"
+        className="flex h-40 w-full items-center justify-center bg-muted"
         role="img"
         aria-label={doc.titre}
       >
-        <span className="text-xs italic text-text/40">Document pleine largeur</span>
+        <span className="text-sm italic text-text/40">Document pleine largeur</span>
       </div>
-      <div className="bg-surface p-3">
+      <div className="bg-surface p-4">
         <p className={typography.cardTitle}>{doc.titre}</p>
-        <p className="mt-1 text-xs text-text/60">{doc.fonds}</p>
+        <p className="mt-1 text-sm text-text/60">{doc.fonds}</p>
         {total > 1 ? (
-          <div className="mt-3 flex items-center justify-between">
-            <div className="flex gap-1">
+          <div className="mt-4 flex items-center justify-between">
+            <div className="flex items-center gap-1.5">
               {documents.map((_, i) => (
                 <span
                   key={i}
-                  className={`h-1 rounded-sm ${i === index ? 'w-3.5 bg-primary' : 'w-1.5 bg-border'}`}
+                  className={`h-1.5 rounded-sm ${i === index ? 'w-4 bg-primary' : 'w-1.5 bg-border'}`}
                   aria-hidden
                 />
               ))}
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1">
               <button
                 type="button"
                 aria-label="Document précédent"
                 onClick={goPrev}
-                className="text-text/40 hover:text-text"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-md text-text/60 hover:bg-muted hover:text-text"
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
-              <span className="text-xs text-text/60">
+              <span className="min-w-12 text-center text-sm text-text/60">
                 {index + 1} / {total}
               </span>
               <button
                 type="button"
                 aria-label="Document suivant"
                 onClick={goNext}
-                className="text-text hover:text-secondary"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-md text-text hover:bg-muted hover:text-secondary"
               >
                 <ChevronRight className="h-5 w-5" />
               </button>
