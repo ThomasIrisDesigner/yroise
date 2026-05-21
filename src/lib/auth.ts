@@ -1,8 +1,9 @@
-import { AUTH_PASSWORD } from '@/config/project'
+import { AUTH_ENABLED, AUTH_PASSWORD } from '@/config/project'
 
 const STORAGE_KEY = 'iris.authenticated'
 
 export function isAuthenticated() {
+  if (!AUTH_ENABLED) return true
   return localStorage.getItem(STORAGE_KEY) === 'true'
 }
 

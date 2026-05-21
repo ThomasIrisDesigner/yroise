@@ -1,6 +1,7 @@
 import type React from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 
+import { AUTH_ENABLED } from '@/config/project'
 import { isAuthenticated } from '@/lib/auth'
 import { PrototypeLayout } from '@/components/features/PrototypeLayout'
 import { CollectionDetail } from '@/pages/CollectionDetail'
@@ -30,9 +31,13 @@ export function App() {
       <Route
         path="/login"
         element={
-          <RedirectIfAuthed>
-            <Login />
-          </RedirectIfAuthed>
+          AUTH_ENABLED ? (
+            <RedirectIfAuthed>
+              <Login />
+            </RedirectIfAuthed>
+          ) : (
+            <Navigate to="/prototype" replace />
+          )
         }
       />
 
@@ -80,7 +85,9 @@ export function App() {
 
       <Route
         path="*"
-        element={<Navigate to={isAuthenticated() ? '/prototype' : '/login'} replace />}
+        element={
+          <Navigate to={isAuthenticated() ? '/prototype' : '/login'} replace />
+        }
       />
     </Routes>
   )

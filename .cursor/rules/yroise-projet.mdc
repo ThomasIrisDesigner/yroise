@@ -29,16 +29,14 @@ alwaysApply: true
 
 ## Brief & maquettes
 - Brief validé (Thomas).
-- **Arborescence** — `src/data/navigation.ts`.
-- **Wireframes mobile v1** (présentation TSX) — 3 onglets :
-  1. **Home** : Hero, La trouvaille, Histoires ×3, Collections carousel, La carte, Footer — **implémenté** (`src/pages/Home.tsx`).
-  2. **Navigation** : menu plein écran, accordéon Collections, overlay recherche — **implémenté** (overlays).
-  3. **Collections** : page liste + page détail (contenu riche sur « En mer », défaut sur les autres) — **implémenté** (`/collections`, `/collections/:slug`).
+- **Arborescence** — dernière version validée, source `src/data/navigation.ts` (Histoires, Collections, 📍 La carte, Jeunesse, recherche overlay).
+- **Wireframes mobile v1** — implémentés (home, nav, collections).
+- **Prochaine livraison** : wireframes mis à jour (Thomas) → à intégrer écran par écran.
 - Couleur marque wireframe source : `#2D7D8A` (glaz) — en prototype : palette **slate** jusqu’à « DA validée + couleurs ».
 
-## Navigation (Drupal CMS) — arborescence v2
+## Navigation (Drupal CMS)
 
-**Header** : Logo YROISE · Histoires · Collections · La carte · Jeunesse · 🔍 (overlay) · FR | BR
+**Header** : Logo YROISE · Histoires · Collections · 📍 La carte · Jeunesse · 🔍 (overlay) · FR | BR
 
 | Zone | Pages / contenus |
 |------|------------------|

@@ -80,7 +80,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           onClick={onClose}
           className="flex items-center border-b border-border px-5 py-4 text-sm font-bold tracking-wide text-text"
         >
-          La carte
+          📍 La carte
         </Link>
 
         <Link

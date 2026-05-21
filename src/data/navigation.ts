@@ -1,6 +1,6 @@
 /**
- * Arborescence YROISE — Refonte 2026 (v2)
- * Source : Yroise_Arborescence.tsx
+ * Arborescence YROISE — Refonte 2026
+ * Source : Yroise_Arborescence.tsx (dernière version Thomas)
  * Scope prototype : pages éditoriales Drupal uniquement.
  */
 
@@ -24,7 +24,7 @@ export interface NavSection {
 export const MAIN_NAV_LABELS = [
   'Histoires',
   'Collections',
-  'La carte',
+  '📍 La carte',
   'Jeunesse',
 ] as const
 
@@ -39,7 +39,7 @@ export const NAV_SECTIONS: NavSection[] = [
       { label: 'La trouvaille — focus éditorial', level: 'page' },
       { label: 'Histoires récentes (×3 cards)', level: 'page' },
       { label: 'Collections — carousel', level: 'page' },
-      { label: 'La carte — aperçu OSM', level: 'page' },
+      { label: '📍 La carte — aperçu OSM', level: 'page' },
       { label: 'Jeunesse — bloc discret en bas', level: 'sub', slug: '/jeunesse' },
     ],
   },
@@ -77,7 +77,7 @@ export const NAV_SECTIONS: NavSection[] = [
   },
   {
     id: 'carte',
-    label: 'La carte',
+    label: '📍 La carte',
     note: 'OSM Positron',
     kind: 'main',
     items: [

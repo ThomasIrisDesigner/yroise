@@ -15,7 +15,7 @@ const MAP_PINS = [
 export function CartePreview() {
   return (
     <section className="border-t border-border px-4 pt-6">
-      <h2 className={typography.sectionLabel}>La carte</h2>
+      <h2 className={typography.sectionLabel}>📍 La carte</h2>
       <p className={cn('mt-2', typography.editorialLead)}>{HOME_CARTE.titre}</p>
       <p className="mt-2 text-sm leading-relaxed text-text/80">{HOME_CARTE.chapeau}</p>
       <p className="mt-3 flex items-center gap-2 text-xs font-medium text-secondary">
