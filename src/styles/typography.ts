@@ -13,6 +13,8 @@ export const typography = {
   carouselCollectionLabel: 'text-[11px] leading-tight text-text/70',
   cardMeta: 'text-xs text-text/60',
   editorialLead: 'text-sm font-bold leading-snug text-text',
+  histoireType:
+    'text-[10px] font-bold uppercase tracking-widest text-text/55',
 } as const
 
 export const typeScale = [

@@ -4,9 +4,14 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { AUTH_ENABLED } from '@/config/project'
 import { isAuthenticated } from '@/lib/auth'
 import { PrototypeLayout } from '@/components/features/PrototypeLayout'
+import { Carte } from '@/pages/Carte'
 import { CollectionDetail } from '@/pages/CollectionDetail'
 import { CollectionsList } from '@/pages/CollectionsList'
 import { DesignSystem } from '@/pages/DesignSystem'
+import { HistoireDetail } from '@/pages/HistoireDetail'
+import { HistoiresList } from '@/pages/HistoiresList'
+import { JeunesseDetail } from '@/pages/JeunesseDetail'
+import { JeunesseList } from '@/pages/JeunesseList'
 import { Home } from '@/pages/Home'
 import { Login } from '@/pages/Login'
 
@@ -69,6 +74,61 @@ export function App() {
           <RequireAuth>
             <PrototypeLayout>
               <CollectionDetail />
+            </PrototypeLayout>
+          </RequireAuth>
+        }
+      />
+
+      <Route
+        path="/carte"
+        element={
+          <RequireAuth>
+            <PrototypeLayout>
+              <Carte />
+            </PrototypeLayout>
+          </RequireAuth>
+        }
+      />
+
+      <Route
+        path="/histoires"
+        element={
+          <RequireAuth>
+            <PrototypeLayout>
+              <HistoiresList />
+            </PrototypeLayout>
+          </RequireAuth>
+        }
+      />
+
+      <Route
+        path="/histoires/:slug"
+        element={
+          <RequireAuth>
+            <PrototypeLayout>
+              <HistoireDetail />
+            </PrototypeLayout>
+          </RequireAuth>
+        }
+      />
+
+      <Route
+        path="/jeunesse"
+        element={
+          <RequireAuth>
+            <PrototypeLayout>
+              <JeunesseList />
+            </PrototypeLayout>
+          </RequireAuth>
+        }
+      />
+
+      <Route
+        path="/jeunesse/:slug"
+        element={
+          <RequireAuth>
+            <PrototypeLayout>
+              <JeunesseDetail />
             </PrototypeLayout>
           </RequireAuth>
         }

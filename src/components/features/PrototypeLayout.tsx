@@ -2,6 +2,7 @@ import * as React from 'react'
 import { LogOut, Monitor, Smartphone } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 
+import { MOBILE_MOCKUP_H, MOBILE_MOCKUP_W } from '@/config/wireframe-mobile'
 import { PROJECT_DISPLAY_NAME, PROJECT_TYPE } from '@/config/project'
 import { logout } from '@/lib/auth'
 import { cn } from '@/lib/utils'
@@ -10,8 +11,6 @@ import { useMediaQuery } from '@/lib/useMediaQuery'
 type ViewMode = 'mobile' | 'desktop'
 
 const CHROME_BAR_H = 32
-const MOBILE_MOCKUP_W = 390
-const MOBILE_MOCKUP_H = 844
 const MOBILE_PADDING = 32
 
 function PrototypeChromeBar({
@@ -139,7 +138,10 @@ export function PrototypeLayout({ children }: { children: React.ReactNode }) {
                   transform: `scale(${mobileScale})`,
                 }}
               >
-                <div className="w-[390px] overflow-hidden rounded-[40px] bg-surface shadow-2xl shadow-black/30">
+                <div
+                  className="flex w-[390px] flex-col overflow-hidden rounded-[40px] bg-surface shadow-2xl shadow-black/30"
+                  style={{ minHeight: MOBILE_MOCKUP_H }}
+                >
                   {children}
                 </div>
               </div>

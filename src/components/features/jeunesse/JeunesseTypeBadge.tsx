@@ -1,0 +1,25 @@
+import type { JeunesseType } from '@/data/jeunesse'
+import { JEUNESSE_TYPE_LABELS } from '@/data/jeunesse'
+import { cn } from '@/lib/utils'
+
+interface JeunesseTypeBadgeProps {
+  type: JeunesseType
+  className?: string
+}
+
+export function JeunesseTypeBadge({ type, className }: JeunesseTypeBadgeProps) {
+  const isJeu = type === 'jeu'
+  return (
+    <span
+      className={cn(
+        'inline-flex rounded px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest',
+        isJeu
+          ? 'border border-border bg-muted text-secondary'
+          : 'border border-border bg-background text-text/55',
+        className
+      )}
+    >
+      {JEUNESSE_TYPE_LABELS[type]}
+    </span>
+  )
+}

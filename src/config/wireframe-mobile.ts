@@ -1,8 +1,12 @@
+/** Dimensions du mockup mobile (iPhone 14 class). */
+export const MOBILE_MOCKUP_W = 390
+export const MOBILE_MOCKUP_H = 844
+
 /**
  * Dimensions carousels home — calées sur wireframes (viewport ref. 220px → mockup 390px).
  */
 const WF_PHONE_W = 220
-const MOCKUP_W = 390
+const MOCKUP_W = MOBILE_MOCKUP_W
 const scale = MOCKUP_W / WF_PHONE_W
 
 export const mobileCarousel = {

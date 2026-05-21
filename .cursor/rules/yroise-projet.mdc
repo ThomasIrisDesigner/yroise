@@ -30,8 +30,13 @@ alwaysApply: true
 ## Brief & maquettes
 - Brief validé (Thomas).
 - **Arborescence** — dernière version validée, source `src/data/navigation.ts` (Histoires, Collections, 📍 La carte, Jeunesse, recherche overlay).
-- **Wireframes mobile v1** — implémentés (home, nav, collections).
-- **Prochaine livraison** : wireframes mis à jour (Thomas) → à intégrer écran par écran.
+- **Wireframes mobile v2** — suivi : `src/config/wireframe-status.ts`
+  1. Home — **fait**
+  2. Navigation — **fait**
+  3. Collections — **fait**
+  4. Histoires (liste + billet) — **fait**
+  5. La carte (plein écran + popup) — **fait**
+  6. Jeunesse (liste + fiche jeu) — **fait**
 - Couleur marque wireframe source : `#2D7D8A` (glaz) — en prototype : palette **slate** jusqu’à « DA validée + couleurs ».
 
 ## Navigation (Drupal CMS)

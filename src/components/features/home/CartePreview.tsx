@@ -1,4 +1,5 @@
 import { MapPin } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 import { HOME_CARTE } from '@/data/home'
 import { cn } from '@/lib/utils'
@@ -35,9 +36,9 @@ export function CartePreview() {
       </div>
       <div className="mt-2 flex items-center justify-between gap-2">
         <p className="text-xs italic text-text/50">{HOME_CARTE.note}</p>
-        <a href="/carte" className="shrink-0 text-xs font-semibold text-secondary">
+        <Link to="/carte" className="shrink-0 text-xs font-semibold text-secondary">
           {HOME_CARTE.ctaLabel} →
-        </a>
+        </Link>
       </div>
     </section>
   )
