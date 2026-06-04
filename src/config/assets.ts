@@ -1,3 +1,10 @@
+export const SITE_LOGO = {
+  src: '/brand/yroise-logo.svg',
+  alt: 'YROISE',
+  /** Largeur d’affichage dans le header (mockup mobile). */
+  widthPx: 88,
+} as const
+
 export const LOGIN_ILLUSTRATION = {
   /**
    * Mets ton image dans `public/illustrations/login.png`

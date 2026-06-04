@@ -7,7 +7,10 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { PROJECT_DISPLAY_NAME } from '@/config/project'
-import { typeScale } from '@/styles/typography'
+import {
+  TYPOGRAPHY_FONT_FAMILY,
+  typographyMockupCatalog,
+} from '@/styles/typography'
 
 type ColorVar = {
   name: string
@@ -222,21 +225,54 @@ export function DesignSystem() {
           </Section>
 
           <Section id="typographie" title="TYPOGRAPHIE">
-            <div className="grid gap-4">
-              {typeScale.map((t) => (
+            <p className="mb-6 text-sm text-text/70">
+              Styles du mockup mobile (wireframes) uniquement — police par défaut :{' '}
+              {TYPOGRAPHY_FONT_FAMILY}. Hors périmètre : barre prototype, page login,
+              présentation de cette page.
+            </p>
+            <div className="grid gap-6">
+              {typographyMockupCatalog.map((style) => (
                 <div
-                  key={t.label}
-                  className="flex items-baseline justify-between gap-6 border-b border-border pb-4"
+                  key={style.key}
+                  className="border-b border-border pb-6 last:border-b-0"
                 >
-                  <div className="min-w-0">
-                    <p className="text-xs font-semibold text-text/70">
-                      {t.label}
-                    </p>
-                    <p className={t.className}>Aa — Exemple de texte</p>
+                  <div className="flex flex-wrap items-baseline gap-2">
+                    <p className="text-xs font-semibold text-text">{style.label}</p>
+                    <span className="text-[10px] text-text/40">{style.key}</span>
                   </div>
-                  <p className="shrink-0 text-xs text-text/70">
-                    {t.sizePx}px · {t.weight}
+                  <p className={`mt-2 ${style.className}`}>
+                    Aa — Exemple de texte
                   </p>
+                  <dl className="mt-3 grid gap-1.5 text-[11px] text-text/70 sm:grid-cols-2">
+                    <div>
+                      <dt className="inline font-medium text-text/80">Police · </dt>
+                      <dd className="inline">{style.fontFamily}</dd>
+                    </div>
+                    <div>
+                      <dt className="inline font-medium text-text/80">Taille · </dt>
+                      <dd className="inline">{style.sizePx}px</dd>
+                    </div>
+                    <div>
+                      <dt className="inline font-medium text-text/80">Graisse · </dt>
+                      <dd className="inline">{style.weight}</dd>
+                    </div>
+                    <div>
+                      <dt className="inline font-medium text-text/80">Couleur · </dt>
+                      <dd className="inline">{style.color}</dd>
+                    </div>
+                    <div>
+                      <dt className="inline font-medium text-text/80">
+                        Interlignage ·{' '}
+                      </dt>
+                      <dd className="inline">{style.lineHeight}</dd>
+                    </div>
+                    <div>
+                      <dt className="inline font-medium text-text/80">
+                        Interlettrage ·{' '}
+                      </dt>
+                      <dd className="inline">{style.letterSpacing}</dd>
+                    </div>
+                  </dl>
                 </div>
               ))}
             </div>

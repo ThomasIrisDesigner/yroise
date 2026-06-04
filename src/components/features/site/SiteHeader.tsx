@@ -1,7 +1,9 @@
 import { Search } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
+import { SITE_LOGO } from '@/config/assets'
 import { cn } from '@/lib/utils'
+import { typography } from '@/styles/typography'
 
 interface SiteHeaderProps {
   onOpenSearch: () => void
@@ -13,15 +15,23 @@ export function SiteHeader({ onOpenSearch, onOpenMenu, className }: SiteHeaderPr
   return (
     <header
       className={cn(
-        'sticky top-0 z-20 flex h-14 items-center justify-between border-b border-border bg-surface px-5',
+        'sticky top-0 z-20 flex shrink-0 items-center justify-between border-b border-border bg-surface px-5 py-2',
         className
       )}
     >
       <Link
         to="/prototype"
-        className="inline-flex h-11 items-center text-base font-extrabold tracking-wider text-secondary hover:opacity-80"
+        className="flex flex-col hover:opacity-80"
       >
-        YROISE
+        <img
+          src={SITE_LOGO.src}
+          alt={SITE_LOGO.alt}
+          width={SITE_LOGO.widthPx}
+          className="h-auto w-[88px]"
+        />
+        <span className={typography.institutionalSubtitle}>
+          Bibliothèque numérique patrimoniale de Brest
+        </span>
       </Link>
       <div className="flex items-center gap-1">
         <button
