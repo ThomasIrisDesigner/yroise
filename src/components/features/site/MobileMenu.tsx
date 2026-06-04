@@ -5,6 +5,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { COLLECTIONS } from '@/data/collections'
 import { getActiveNavSection } from '@/lib/navActive'
 import { cn } from '@/lib/utils'
+import { typography } from '@/styles/typography'
 
 interface MobileMenuProps {
   open: boolean
@@ -13,10 +14,10 @@ interface MobileMenuProps {
 
 function navItemClass(active: boolean) {
   return cn(
-    'flex min-h-14 items-center border-b border-border px-5 py-4 text-base tracking-wide transition-colors',
+    'flex min-h-14 items-center border-b border-border px-5 py-4 font-outfit text-base tracking-wide transition-colors',
     active
-      ? 'border-l-[3px] border-l-secondary bg-muted/50 pl-[17px] font-extrabold text-secondary'
-      : 'font-bold text-text hover:text-secondary'
+      ? 'border-l-[3px] border-l-glaz-700 bg-surface/50 pl-[17px] font-extrabold text-glaz-700'
+      : 'font-bold text-text hover:text-glaz-700'
   )
 }
 
@@ -38,12 +39,12 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
   return (
     <div className="fixed inset-0 z-30 flex flex-col bg-surface">
       <div className="flex h-14 items-center justify-between border-b border-border px-5">
-        <span className="text-base font-extrabold tracking-wider text-secondary">YROISE</span>
+        <span className={typography.logo}>YROISE</span>
         <button
           type="button"
           aria-label="Fermer le menu"
           onClick={onClose}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-muted text-text"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-surface text-text"
         >
           <X className="h-5 w-5" />
         </button>
@@ -62,7 +63,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
         <div
           className={cn(
             'border-b border-border',
-            (collectionsOpen || activeSection === 'collections') && 'bg-muted/30'
+            (collectionsOpen || activeSection === 'collections') && 'bg-surface/30'
           )}
         >
           <button
@@ -90,8 +91,8 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                 className={cn(
                   'flex min-h-12 items-center gap-2 border-t border-border px-5 py-3 pl-9 text-base',
                   pathname === '/collections'
-                    ? 'font-bold text-secondary'
-                    : 'font-semibold text-secondary'
+                    ? 'font-bold text-glaz-700'
+                    : 'font-semibold text-glaz-700'
                 )}
               >
                 Tout voir →
@@ -107,14 +108,14 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                     className={cn(
                       'flex min-h-12 items-center gap-2 border-t border-border px-5 py-3 pl-9 text-base',
                       colActive
-                        ? 'bg-muted/60 font-semibold text-secondary'
+                        ? 'bg-surface/60 font-semibold text-glaz-700'
                         : 'bg-background text-text'
                     )}
                   >
                     <span
                       className={cn(
                         'h-1.5 w-1.5 shrink-0 rounded-full',
-                        colActive ? 'bg-secondary' : 'bg-secondary/60'
+                        colActive ? 'bg-glaz-700' : 'bg-glaz-700/60'
                       )}
                     />
                     {col.name}

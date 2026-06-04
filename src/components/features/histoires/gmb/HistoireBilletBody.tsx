@@ -13,7 +13,7 @@ interface HistoireBilletBodyProps {
 
 export function HistoireBilletBody({ blocks }: HistoireBilletBodyProps) {
   return (
-    <div className="flex flex-col gap-8">
+    <div className={typography.editorialBodyStack}>
       {blocks.map((block, i) => {
         switch (block.type) {
           case 'paragraph':

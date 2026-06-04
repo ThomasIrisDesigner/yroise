@@ -1,14 +1,14 @@
 /** Illustration carte type OSM Positron (wireframe — pas d’embed réel en phase prototype). */
 export function MapIllustration() {
   return (
-    <div className="absolute inset-0 overflow-hidden bg-muted/80">
+    <div className="absolute inset-0 overflow-hidden bg-surface/80">
       <svg
         className="absolute inset-0 h-full w-full"
         viewBox="0 0 208 200"
         preserveAspectRatio="xMidYMid slice"
         aria-hidden
       >
-        <path d="M0,160 Q50,148 100,155 Q155,163 208,150 L208,200 L0,200 Z" fill="rgb(var(--color-muted))" />
+        <path d="M0,160 Q50,148 100,155 Q155,163 208,150 L208,200 L0,200 Z" fill="rgb(var(--color-surface))" />
         <line x1="0" y1="80" x2="208" y2="70" stroke="rgb(var(--color-border))" strokeWidth="5" />
         <line x1="0" y1="110" x2="208" y2="106" stroke="rgb(var(--color-border))" strokeWidth="7" />
         <line x1="75" y1="0" x2="65" y2="200" stroke="rgb(var(--color-border))" strokeWidth="4" />

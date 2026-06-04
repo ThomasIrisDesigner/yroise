@@ -28,7 +28,7 @@ export function CartePinButton({ left, top, selected, onClick, label }: CartePin
       <span
         className={cn(
           'block h-3.5 w-3.5 rotate-45 rounded-sm border-2 border-surface shadow-sm transition-colors',
-          selected ? 'bg-primary' : 'bg-secondary'
+          selected ? 'bg-glaz-700' : 'bg-glaz-500'
         )}
         aria-hidden
       />

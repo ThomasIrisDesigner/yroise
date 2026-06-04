@@ -18,7 +18,7 @@ export function HistoiresAssociees({ billets }: HistoiresAssocieesProps) {
           <li key={billet.slug}>
             <Link
               to={`/histoires/${billet.slug}`}
-              className="flex gap-4 rounded-md border border-border bg-muted/50 p-4"
+              className="flex gap-4 rounded-md border border-border bg-surface/50 p-4"
             >
               <div className="h-16 w-16 shrink-0 rounded bg-border" aria-hidden />
               <div className="min-w-0">

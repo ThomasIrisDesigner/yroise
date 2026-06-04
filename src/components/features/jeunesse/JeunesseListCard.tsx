@@ -16,7 +16,7 @@ export function JeunesseListCard({ activite }: JeunesseListCardProps) {
       to={`/jeunesse/${activite.slug}`}
       className="block overflow-hidden rounded-md border border-border"
     >
-      <div className="flex h-24 items-center justify-center bg-muted text-sm italic text-text/50">
+      <div className="flex h-24 items-center justify-center bg-surface text-sm italic text-text/50">
         {activite.type === 'jeu' ? '🎮 ' : '📚 '}
         {mediaLabel}
       </div>

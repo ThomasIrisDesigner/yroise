@@ -14,7 +14,7 @@ export function HistoireListCard({ histoire }: HistoireListCardProps) {
       to={`/histoires/${histoire.slug}`}
       className="block overflow-hidden rounded-md border border-border"
     >
-      <div className="h-32 w-full bg-muted" aria-hidden />
+      <div className="h-32 w-full bg-surface" aria-hidden />
       <div className="bg-surface p-4">
         <HistoireTypeBadge type={histoire.type} className="mb-2" />
         <h2 className={typography.cardTitle}>{histoire.titre}</h2>

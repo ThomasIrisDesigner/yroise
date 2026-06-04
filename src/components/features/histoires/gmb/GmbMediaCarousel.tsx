@@ -31,7 +31,7 @@ export function GmbMediaCarousel({
 
   return (
     <figure>
-      <div className="relative overflow-hidden rounded-md bg-muted">
+      <div className="relative overflow-hidden rounded-md bg-surface">
         <div
           className="flex h-36 w-full items-center justify-center"
           role="img"
@@ -67,7 +67,7 @@ export function GmbMediaCarousel({
               key={i}
               className={cn(
                 'h-1 rounded-sm',
-                i === index ? 'w-4 bg-secondary' : 'w-1.5 bg-border'
+                i === index ? 'w-4 bg-sable-700' : 'w-1.5 bg-border'
               )}
             />
           ))}

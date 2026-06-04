@@ -14,7 +14,7 @@ export function JeunesseTypeBadge({ type, className }: JeunesseTypeBadgeProps) {
       className={cn(
         'inline-flex items-center rounded px-2 py-1 text-xs font-bold uppercase tracking-widest',
         isJeu
-          ? 'border border-border bg-muted text-secondary'
+          ? 'border border-border bg-surface text-aurore-700'
           : 'border border-border bg-background text-text/60',
         className
       )}

@@ -1,0 +1,6 @@
+{
+  "enabled": true,
+  "devCommand": "pnpm dev",
+  "port": 5174,
+  "url": "http://localhost:5174/prototype"
+}

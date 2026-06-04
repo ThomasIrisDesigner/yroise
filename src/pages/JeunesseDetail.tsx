@@ -36,42 +36,43 @@ export function JeunesseDetail() {
             <GenialiEmbed />
             <Button
               asChild
-              variant="secondary"
-              className="mb-6 h-12 w-full rounded-md text-base font-bold tracking-wide"
+              className="mb-6 h-12 w-full rounded-md bg-aurore-700 text-base font-bold tracking-wide text-surface hover:bg-aurore-700/90"
             >
               <a href="#">Jouer en plein écran</a>
             </Button>
           </>
         ) : (
-          <div className="my-6 flex h-44 items-center justify-center rounded-md border border-dashed border-border bg-muted/50 text-base italic text-text/50">
+          <div
+            className={`my-6 flex h-44 items-center justify-center rounded-md border border-dashed border-border bg-surface/50 ${typography.editorialCaption}`}
+          >
             Séquence pédagogique — contenu à venir
           </div>
         )}
 
-        <div className="mb-6 rounded-md border border-border bg-muted/40 p-4">
+        <div className="mb-6 rounded-md border border-border bg-surface/40 p-4">
           <p className={typography.sectionLabel}>À propos</p>
           <dl className="mt-3 space-y-3">
-            <div className="flex gap-3 text-sm">
-              <dt className="w-28 shrink-0 text-text/60">Niveau</dt>
-              <dd className="font-medium text-text">{detail.niveau}</dd>
+            <div className="flex gap-3">
+              <dt className={`w-28 shrink-0 ${typography.meta}`}>Niveau</dt>
+              <dd className={typography.titleM}>{detail.niveau}</dd>
             </div>
-            <div className="flex gap-3 text-sm">
-              <dt className="w-28 shrink-0 text-text/60">Durée</dt>
-              <dd className="font-medium text-text">{detail.duree}</dd>
+            <div className="flex gap-3">
+              <dt className={`w-28 shrink-0 ${typography.meta}`}>Durée</dt>
+              <dd className={typography.titleM}>{detail.duree}</dd>
             </div>
-            <div className="flex gap-3 text-sm">
-              <dt className="w-28 shrink-0 text-text/60">Document source</dt>
-              <dd className="font-medium text-text">{detail.documentSource}</dd>
+            <div className="flex gap-3">
+              <dt className={`w-28 shrink-0 ${typography.meta}`}>Document source</dt>
+              <dd className={typography.titleM}>{detail.documentSource}</dd>
             </div>
           </dl>
         </div>
 
         <a
           href={detail.documentGallicaHref}
-          className="flex min-h-14 items-center justify-between gap-3 rounded-md border border-border bg-muted/50 px-4 py-3"
+          className="flex min-h-14 items-center justify-between gap-3 rounded-md border border-border bg-surface/50 px-4 py-3"
         >
-          <span className="text-sm leading-snug text-text">{detail.documentSource}</span>
-          <span className="inline-flex shrink-0 items-center text-sm font-semibold text-secondary">
+          <span className={typography.meta}>{detail.documentSource}</span>
+          <span className={`inline-flex shrink-0 items-center ${typography.titleM}`}>
             Voir sur Gallica
             <ArrowRight className="ml-1 inline h-4 w-4" />
           </span>

@@ -1,17 +1,22 @@
 import { Link } from 'react-router-dom'
 
 import { FOOTER_LINKS } from '@/data/navigation'
+import { cn } from '@/lib/utils'
+import { typography } from '@/styles/typography'
 
 export function SiteFooter() {
   return (
-    <footer className="mt-8 bg-primary px-5 py-6 text-surface">
-      <p className="mb-4 text-sm font-extrabold tracking-widest">YROISE</p>
+    <footer className="mt-8 bg-ocean-900 px-5 py-6 text-on-dark">
+      <p className={`mb-4 ${typography.logo} text-on-dark`}>YROISE</p>
       <nav className="-mx-2 flex flex-col">
         {FOOTER_LINKS.map((link) => (
           <Link
             key={link.slug}
             to={link.slug}
-            className="inline-flex min-h-11 items-center px-2 text-sm text-surface/70 hover:text-surface"
+            className={cn(
+              'inline-flex min-h-11 items-center px-2 text-white/70 hover:text-white',
+              typography.uiLink
+            )}
           >
             {link.label === 'Nous contacter' ? 'Contact' : link.label}
           </Link>

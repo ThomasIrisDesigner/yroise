@@ -16,7 +16,7 @@ export function CarteDocumentPopup({ pin, onClose }: CarteDocumentPopupProps) {
       aria-label={pin.titre}
       onClick={(e) => e.stopPropagation()}
     >
-      <div className="relative flex h-24 items-center justify-center bg-muted text-sm italic text-text/40">
+      <div className="relative flex h-24 items-center justify-center bg-surface text-sm italic text-text/40">
         Image document
         <button
           type="button"
@@ -33,14 +33,14 @@ export function CarteDocumentPopup({ pin, onClose }: CarteDocumentPopupProps) {
         </button>
       </div>
       <div className="p-4">
-        <p className="text-xs font-bold uppercase tracking-widest text-secondary">
+        <p className="text-xs font-bold uppercase tracking-widest text-glaz-700">
           {pin.collection}
         </p>
         <p className="mt-2 text-sm font-bold leading-snug text-text">{pin.titre}</p>
         <div className="mt-3 flex items-center justify-between border-t border-border pt-3">
           <a
             href={pin.gallicaHref}
-            className="inline-flex h-9 items-center text-sm font-semibold text-secondary"
+            className="inline-flex h-9 items-center text-sm font-semibold text-glaz-700"
           >
             Voir le document →
           </a>

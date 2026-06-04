@@ -26,7 +26,7 @@ export function DocumentShowcase({ documents }: DocumentShowcaseProps) {
   return (
     <div className="overflow-hidden rounded-md border border-border">
       <div
-        className="flex h-40 w-full items-center justify-center bg-muted"
+        className="flex h-40 w-full items-center justify-center bg-surface"
         role="img"
         aria-label={doc.titre}
       >
@@ -41,7 +41,7 @@ export function DocumentShowcase({ documents }: DocumentShowcaseProps) {
               {documents.map((_, i) => (
                 <span
                   key={i}
-                  className={`h-1.5 rounded-sm ${i === index ? 'w-4 bg-primary' : 'w-1.5 bg-border'}`}
+                  className={`h-1.5 rounded-sm ${i === index ? 'w-4 bg-glaz-700' : 'w-1.5 bg-border'}`}
                   aria-hidden
                 />
               ))}
@@ -51,7 +51,7 @@ export function DocumentShowcase({ documents }: DocumentShowcaseProps) {
                 type="button"
                 aria-label="Document précédent"
                 onClick={goPrev}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-md text-text/60 hover:bg-muted hover:text-text"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-md text-text/60 hover:bg-surface hover:text-text"
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
@@ -62,7 +62,7 @@ export function DocumentShowcase({ documents }: DocumentShowcaseProps) {
                 type="button"
                 aria-label="Document suivant"
                 onClick={goNext}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-md text-text hover:bg-muted hover:text-secondary"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-md text-text hover:bg-surface hover:text-glaz-700"
               >
                 <ChevronRight className="h-5 w-5" />
               </button>

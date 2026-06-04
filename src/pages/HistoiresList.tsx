@@ -17,7 +17,7 @@ export function HistoiresList() {
           ))}
         </ul>
         <div className="mt-8 flex justify-center">
-          <Button variant="outline" className="border-2 border-primary">
+          <Button variant="outline" className="border-2 border-sable-700">
             Voir plus
           </Button>
         </div>

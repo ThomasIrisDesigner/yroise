@@ -10,13 +10,13 @@ export function GmbImagePair({ leftLabel, rightLabel, caption }: GmbImagePairPro
     <figure>
       <div className="flex gap-3">
         <div
-          className="flex h-28 flex-1 items-center justify-center rounded-md bg-muted"
+          className="flex h-28 flex-1 items-center justify-center rounded-md bg-surface"
           aria-hidden
         >
           <span className="text-xs italic text-text/40">{leftLabel}</span>
         </div>
         <div
-          className="flex h-28 flex-1 items-center justify-center rounded-md bg-muted"
+          className="flex h-28 flex-1 items-center justify-center rounded-md bg-surface"
           aria-hidden
         >
           <span className="text-xs italic text-text/40">{rightLabel}</span>

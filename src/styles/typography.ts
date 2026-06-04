@@ -1,324 +1,270 @@
 /**
- * Tokens typo — mobile-first (cible 360–390px).
- *
- * Règles ergonomiques :
- *  - Body : 16px minimum, line-height 1.5
- *  - Métadonnées / labels / liens utilitaires : 14px minimum
- *  - H1 page : 24–26px
- *  - H2 section : 20–22px
- *  - Légendes purement décoratives (copyright carte, etc.) peuvent descendre à 12px.
+ * Système typographique YROISE — Outfit (UI) + Source Serif 4 (éditorial).
+ * Mobile-first ; pas de tailles desktop dans cette passe.
  */
+const ui = 'font-outfit'
+const editorial = 'font-editorial'
+
+/** Tokens Outfit — display & UI */
+const titleXl = `${ui} text-[28px] font-bold leading-tight tracking-tight text-text`
+const titleL = `${ui} text-[20px] font-semibold leading-snug text-text`
+const titleM = `${ui} text-base font-semibold leading-snug text-text`
+const chapeau = `${ui} text-lg font-normal leading-[1.4] text-text`
+const label = `${ui} text-xs font-semibold uppercase tracking-[0.08em] text-text`
+const meta = `${ui} text-[13px] font-normal leading-snug text-muted`
+const editorialCaption = `${ui} text-sm font-normal leading-[1.4] text-muted`
+const uiXs = `${ui} text-[11px] font-normal leading-tight text-muted`
+/** Liens UI — couleur selon le contexte (fond clair ou sombre). */
+const uiLink = `${ui} text-[13px] font-normal leading-snug`
+
+/** Logo texte (header si pas SVG) — hors catalogue DS. */
+const logo = `${ui} text-base font-bold text-text`
+
+/** Tokens Source Serif 4 — corps d'article uniquement */
+const editorialBody = `${editorial} text-lg font-normal leading-[1.65] text-text`
+const editorialMuted = `${editorial} text-lg font-normal leading-[1.65] text-text/70`
+
 export const typography = {
-  headerLogo: 'text-base font-extrabold tracking-wider text-secondary',
-  institutionalSubtitle: 'text-[10px] leading-tight text-text/50',
-  projectKicker: 'text-sm tracking-widest text-text/70 uppercase',
-  pageTitle: 'text-[26px] font-extrabold leading-tight tracking-tight text-text',
-  pageSubtitle: 'text-base leading-[1.5] text-text/70',
-  body: 'text-base leading-[1.5] text-text',
-  bodyMuted: 'text-base leading-[1.5] text-text/80',
-  meta: 'text-sm leading-snug text-text/60',
-  footer: 'text-sm text-surface/70',
-  sectionLabel: 'text-sm font-bold tracking-widest text-text uppercase',
-  heroQuote: 'text-base font-semibold italic leading-snug text-surface',
-  heroAttribution: 'text-sm text-surface/80',
-  cardTitle: 'text-base font-bold leading-snug text-text',
-  /** Cards carousels home (mobile) — titre lisible, méta proche. */
-  carouselTitle: 'text-sm font-semibold leading-snug text-text',
-  carouselMeta: 'text-sm leading-snug text-text/60',
-  carouselCollectionLabel: 'text-sm font-medium leading-snug text-text/80',
-  cardMeta: 'text-sm text-text/60',
-  editorialLead: 'text-lg font-bold leading-snug text-text',
-  histoireType:
-    'text-xs font-bold uppercase tracking-widest text-text/55',
-  /** Échelle documentaire — réservée phase DA / pages longues. */
-  display: 'text-4xl font-semibold tracking-tight text-text',
-  h2: 'text-xl font-bold tracking-tight text-text',
+  titleXl,
+  titleL,
+  titleM,
+  chapeau,
+  label,
+  meta,
+  editorialCaption,
+  uiXs,
+  uiLink,
+  logo,
+  editorialBody,
+  editorialMuted,
+
+  /** Espace vertical entre paragraphes éditoriaux (30px). */
+  editorialBodyStack: 'flex flex-col gap-[30px]',
+
+  /** @deprecated Alias — préférer titleXl */
+  pageTitle: titleXl,
+  /** @deprecated Alias — préférer titleL */
+  h2: titleL,
+  display: titleXl,
+  /** @deprecated Alias — préférer label */
+  sectionLabel: label,
+  projectKicker: label,
+  histoireType: label,
+  /** @deprecated Alias — préférer editorialMuted */
+  pageSubtitle: editorialMuted,
+  editorialLead: titleL,
+  body: editorialBody,
+  bodyMuted: editorialMuted,
+  /** @deprecated Alias — préférer chapeau (articles) ou titleL + text-white (hero) */
+  editorialIntro: chapeau,
+  /** @deprecated Alias — préférer titleL + text-white */
+  heroQuote: titleL,
+  /** @deprecated Alias — préférer meta + text-white/60 */
+  heroAttribution: meta,
+  cardTitle: titleM,
+  carouselTitle: titleM,
+  carouselMeta: meta,
+  carouselCollectionLabel: meta,
+  cardMeta: meta,
+  institutionalSubtitle: uiXs,
+  headerLogo: logo,
+  /** @deprecated Alias — préférer uiLink */
+  footer: uiLink,
 } as const
 
-/** Police par défaut du prototype (pas de fonte custom chargée). */
-export const TYPOGRAPHY_FONT_FAMILY =
-  'Système (ui-sans-serif, sans-serif)'
+export const TYPOGRAPHY_FONT_UI = 'Outfit'
+export const TYPOGRAPHY_FONT_EDITORIAL = 'Source Serif 4'
+export const TYPOGRAPHY_FONT_FAMILY = `${TYPOGRAPHY_FONT_UI} + ${TYPOGRAPHY_FONT_EDITORIAL}`
+
+/** Note affichée sous le groupe Source Serif 4 dans le design system. */
+export const TYPOGRAPHY_EDITORIAL_SECTION_NOTE =
+  'Source Serif 4 est réservé exclusivement au corps de texte des articles. Tous les autres éléments textuels utilisent Outfit.'
 
 export type TypographyStyleSpec = {
   key: keyof typeof typography
+  token: string
+  /** Description courte — colonne Usage du design system. */
+  usage: string
   label: string
   className: string
-  /**
-   * Présent dans le mockup mobile (écrans wireframe sous PrototypeLayout).
-   * Exclut : page Design System, barre « Thomas Iris. Designer », login.
-   */
-  usedInMockup: boolean
   fontFamily: string
   sizePx: number
   weight: number | string
   color: string
   lineHeight: string
   letterSpacing: string
+  /** Note affichée sous la fiche token (design system). */
+  contextNote?: string
 }
 
-export const typographyCatalog: TypographyStyleSpec[] = [
+type CatalogSpec = Omit<TypographyStyleSpec, 'key' | 'token' | 'className'>
+
+const uiSpecs: CatalogSpec[] = [
   {
-    key: 'headerLogo',
-    label: 'Logo header (texte — remplacé par SVG)',
-    className: typography.headerLogo,
-    usedInMockup: false,
-    fontFamily: TYPOGRAPHY_FONT_FAMILY,
-    sizePx: 16,
-    weight: 800,
-    color: 'secondary (slate-700)',
-    lineHeight: 'normal (hérité)',
-    letterSpacing: '0.05em (tracking-wider)',
-  },
-  {
-    key: 'institutionalSubtitle',
-    label: 'Sous-titre institutionnel header',
-    className: typography.institutionalSubtitle,
-    usedInMockup: true,
-    fontFamily: TYPOGRAPHY_FONT_FAMILY,
-    sizePx: 10,
-    weight: 400,
-    color: 'text/50 (slate-800 à 50 %)',
-    lineHeight: '1.25 (leading-tight)',
-    letterSpacing: 'normal',
-  },
-  {
-    key: 'pageTitle',
-    label: 'Titre de page (H1)',
-    className: typography.pageTitle,
-    usedInMockup: true,
-    fontFamily: TYPOGRAPHY_FONT_FAMILY,
-    sizePx: 26,
-    weight: 800,
-    color: 'text (slate-800)',
+    usage: 'H1 des pages intérieures',
+    label: 'H1 pages',
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    sizePx: 28,
+    weight: 700,
+    color: '#18181b',
     lineHeight: '1.25 (leading-tight)',
     letterSpacing: '-0.025em (tracking-tight)',
   },
   {
-    key: 'pageSubtitle',
-    label: 'Chapô / sous-titre de page',
-    className: typography.pageSubtitle,
-    usedInMockup: true,
-    fontFamily: TYPOGRAPHY_FONT_FAMILY,
-    sizePx: 16,
-    weight: 400,
-    color: 'text/70 (slate-800 à 70 %)',
-    lineHeight: '1.5',
-    letterSpacing: 'normal',
-  },
-  {
-    key: 'sectionLabel',
-    label: 'Label de section',
-    className: typography.sectionLabel,
-    usedInMockup: true,
-    fontFamily: TYPOGRAPHY_FONT_FAMILY,
-    sizePx: 14,
-    weight: 700,
-    color: 'text (slate-800)',
-    lineHeight: '1.25 (défaut text-sm)',
-    letterSpacing: '0.1em (tracking-widest)',
-  },
-  {
-    key: 'editorialLead',
-    label: 'Accroche éditoriale',
-    className: typography.editorialLead,
-    usedInMockup: true,
-    fontFamily: TYPOGRAPHY_FONT_FAMILY,
-    sizePx: 18,
-    weight: 700,
-    color: 'text (slate-800)',
-    lineHeight: '1.375 (leading-snug)',
-    letterSpacing: 'normal',
-  },
-  {
-    key: 'body',
-    label: 'Corps de texte',
-    className: typography.body,
-    usedInMockup: true,
-    fontFamily: TYPOGRAPHY_FONT_FAMILY,
-    sizePx: 16,
-    weight: 400,
-    color: 'text (slate-800)',
-    lineHeight: '1.5',
-    letterSpacing: 'normal',
-  },
-  {
-    key: 'bodyMuted',
-    label: 'Corps atténué',
-    className: typography.bodyMuted,
-    usedInMockup: true,
-    fontFamily: TYPOGRAPHY_FONT_FAMILY,
-    sizePx: 16,
-    weight: 400,
-    color: 'text/80 (slate-800 à 80 %)',
-    lineHeight: '1.5',
-    letterSpacing: 'normal',
-  },
-  {
-    key: 'heroQuote',
-    label: 'Citation hero home',
-    className: typography.heroQuote,
-    usedInMockup: true,
-    fontFamily: TYPOGRAPHY_FONT_FAMILY,
-    sizePx: 16,
-    weight: 600,
-    color: 'surface (blanc)',
-    lineHeight: '1.375 (leading-snug)',
-    letterSpacing: 'normal',
-  },
-  {
-    key: 'heroAttribution',
-    label: 'Attribution hero home',
-    className: typography.heroAttribution,
-    usedInMockup: true,
-    fontFamily: TYPOGRAPHY_FONT_FAMILY,
-    sizePx: 14,
-    weight: 400,
-    color: 'surface/80 (blanc à 80 %)',
-    lineHeight: '1.25 (défaut text-sm)',
-    letterSpacing: 'normal',
-  },
-  {
-    key: 'cardTitle',
-    label: 'Titre de card / liste',
-    className: typography.cardTitle,
-    usedInMockup: true,
-    fontFamily: TYPOGRAPHY_FONT_FAMILY,
-    sizePx: 16,
-    weight: 700,
-    color: 'text (slate-800)',
-    lineHeight: '1.375 (leading-snug)',
-    letterSpacing: 'normal',
-  },
-  {
-    key: 'cardMeta',
-    label: 'Méta de card',
-    className: typography.cardMeta,
-    usedInMockup: true,
-    fontFamily: TYPOGRAPHY_FONT_FAMILY,
-    sizePx: 14,
-    weight: 400,
-    color: 'text/60 (slate-800 à 60 %)',
-    lineHeight: '1.25 (défaut text-sm)',
-    letterSpacing: 'normal',
-  },
-  {
-    key: 'carouselTitle',
-    label: 'Titre carousel Histoires',
-    className: typography.carouselTitle,
-    usedInMockup: true,
-    fontFamily: TYPOGRAPHY_FONT_FAMILY,
-    sizePx: 14,
-    weight: 600,
-    color: 'text (slate-800)',
-    lineHeight: '1.375 (leading-snug)',
-    letterSpacing: 'normal',
-  },
-  {
-    key: 'carouselMeta',
-    label: 'Méta carousel Histoires',
-    className: typography.carouselMeta,
-    usedInMockup: true,
-    fontFamily: TYPOGRAPHY_FONT_FAMILY,
-    sizePx: 14,
-    weight: 400,
-    color: 'text/60 (slate-800 à 60 %)',
-    lineHeight: '1.375 (leading-snug)',
-    letterSpacing: 'normal',
-  },
-  {
-    key: 'carouselCollectionLabel',
-    label: 'Label carousel Collections',
-    className: typography.carouselCollectionLabel,
-    usedInMockup: true,
-    fontFamily: TYPOGRAPHY_FONT_FAMILY,
-    sizePx: 14,
-    weight: 500,
-    color: 'text/80 (slate-800 à 80 %)',
-    lineHeight: '1.375 (leading-snug)',
-    letterSpacing: 'normal',
-  },
-  {
-    key: 'histoireType',
-    label: 'Type d’histoire (badge)',
-    className: typography.histoireType,
-    usedInMockup: false,
-    fontFamily: TYPOGRAPHY_FONT_FAMILY,
-    sizePx: 12,
-    weight: 700,
-    color: 'text/55 (slate-800 à 55 %)',
-    lineHeight: '1.25 (défaut text-xs)',
-    letterSpacing: '0.1em (tracking-widest)',
-  },
-  {
-    key: 'meta',
-    label: 'Méta générique',
-    className: typography.meta,
-    usedInMockup: false,
-    fontFamily: TYPOGRAPHY_FONT_FAMILY,
-    sizePx: 14,
-    weight: 400,
-    color: 'text/60 (slate-800 à 60 %)',
-    lineHeight: '1.375 (leading-snug)',
-    letterSpacing: 'normal',
-  },
-  {
-    key: 'footer',
-    label: 'Liens footer',
-    className: typography.footer,
-    usedInMockup: false,
-    fontFamily: TYPOGRAPHY_FONT_FAMILY,
-    sizePx: 14,
-    weight: 400,
-    color: 'surface/70 (blanc à 70 %)',
-    lineHeight: '1.25 (défaut text-sm)',
-    letterSpacing: 'normal',
-  },
-  {
-    key: 'projectKicker',
-    label: 'Kicker projet (login)',
-    className: typography.projectKicker,
-    usedInMockup: false,
-    fontFamily: TYPOGRAPHY_FONT_FAMILY,
-    sizePx: 14,
-    weight: 400,
-    color: 'text/70 (slate-800 à 70 %)',
-    lineHeight: '1.25 (défaut text-sm)',
-    letterSpacing: '0.1em (tracking-widest)',
-  },
-  {
-    key: 'h2',
-    label: 'Titre H2',
-    className: typography.h2,
-    usedInMockup: false,
-    fontFamily: TYPOGRAPHY_FONT_FAMILY,
+    usage: 'Accroches éditoriales, H2 de section',
+    label: 'Accroches éditoriales, H2',
+    fontFamily: TYPOGRAPHY_FONT_UI,
     sizePx: 20,
-    weight: 700,
-    color: 'text (slate-800)',
-    lineHeight: '1.25 (défaut text-xl)',
-    letterSpacing: '-0.025em (tracking-tight)',
+    weight: 600,
+    color: '#18181b',
+    lineHeight: '1.375 (leading-snug)',
+    letterSpacing: 'normal',
   },
   {
-    key: 'display',
-    label: 'Display',
-    className: typography.display,
-    usedInMockup: false,
-    fontFamily: TYPOGRAPHY_FONT_FAMILY,
-    sizePx: 36,
+    usage: 'Titres de cards et de listes',
+    label: 'Titres de cards et listes',
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    sizePx: 16,
     weight: 600,
-    color: 'text (slate-800)',
-    lineHeight: '1.11 (défaut text-4xl)',
-    letterSpacing: '-0.025em (tracking-tight)',
+    color: '#18181b',
+    lineHeight: '1.375 (leading-snug)',
+    letterSpacing: 'normal',
+  },
+  {
+    usage: 'Intro article, entre le H1 et le bloc auteur/date',
+    label: 'Chapeau article (sous H1)',
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    sizePx: 18,
+    weight: 400,
+    color: '#18181b',
+    lineHeight: '1.4',
+    letterSpacing: 'normal',
+    contextNote:
+      "Utilisé uniquement dans les pages article, entre le H1 et le bloc auteur/date. Pas d'italic — distingué du titre par le poids (400 vs 700) et la taille.",
+  },
+  {
+    usage: 'Labels de section, badges de type (CURIOSITÉ, JEU…)',
+    label: 'Labels de section, badges',
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    sizePx: 12,
+    weight: 600,
+    color: '#18181b',
+    lineHeight: '1.25 (défaut text-xs)',
+    letterSpacing: '0.08em',
+  },
+  {
+    usage: 'Dates, crédits, métadonnées',
+    label: 'Dates, métadonnées, métas de cards',
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    sizePx: 13,
+    weight: 400,
+    color: '#71717a',
+    lineHeight: '1.375 (leading-snug)',
+    letterSpacing: 'normal',
+  },
+  {
+    usage: 'Légendes sous les images',
+    label: 'Légendes photos, crédits',
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    sizePx: 14,
+    weight: 400,
+    color: '#71717a',
+    lineHeight: '1.4',
+    letterSpacing: 'normal',
+  },
+  {
+    usage: 'Sous-titre institutionnel dans le header',
+    label: 'Sous-titre institutionnel header',
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    sizePx: 11,
+    weight: 400,
+    color: '#71717a',
+    lineHeight: '1.25 (leading-tight)',
+    letterSpacing: 'normal',
+  },
+  {
+    usage: 'Liens navigation (footer, panneaux, ressources)',
+    label: 'Liens navigation (footer, etc.)',
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    sizePx: 13,
+    weight: 400,
+    color: 'Contextuelle',
+    lineHeight: '1.375 (leading-snug)',
+    letterSpacing: 'normal',
   },
 ]
 
-/** Styles réellement utilisés dans le mockup mobile (wireframes). */
-export const typographyMockupCatalog = typographyCatalog.filter(
-  (style) => style.usedInMockup
-)
+const editorialSpecs: CatalogSpec[] = [
+  {
+    usage: 'Corps de texte long — articles uniquement',
+    label: 'Corps de texte article',
+    fontFamily: TYPOGRAPHY_FONT_EDITORIAL,
+    sizePx: 18,
+    weight: 400,
+    color: '#18181b',
+    lineHeight: '1.65',
+    letterSpacing: 'normal',
+  },
+  {
+    usage: 'Corps atténué — notes, contexte secondaire',
+    label: 'Corps atténué',
+    fontFamily: TYPOGRAPHY_FONT_EDITORIAL,
+    sizePx: 18,
+    weight: 400,
+    color: '#18181b à 70 %',
+    lineHeight: '1.65',
+    letterSpacing: 'normal',
+  },
+]
 
-/** @deprecated Utiliser typographyCatalog — conservé pour compatibilité. */
+function buildCatalogEntry(
+  key: TypographyStyleSpec['key'],
+  token: string,
+  spec: Omit<TypographyStyleSpec, 'key' | 'token' | 'className'>
+): TypographyStyleSpec {
+  return {
+    ...spec,
+    key,
+    token,
+    className: typography[key],
+  }
+}
+
+/** OUTFIT · Display & UI — ordre du design system */
+export const typographyUiCatalog: TypographyStyleSpec[] = (
+  [
+    ['titleXl', 'title-xl', 0],
+    ['titleL', 'title-l', 1],
+    ['titleM', 'title-m', 2],
+    ['chapeau', 'chapeau', 3],
+    ['label', 'label', 4],
+    ['meta', 'meta', 5],
+    ['editorialCaption', 'editorial-caption', 6],
+    ['uiXs', 'ui-xs', 7],
+    ['uiLink', 'ui-link', 8],
+  ] as const
+).map(([key, token, i]) => buildCatalogEntry(key, token, uiSpecs[i]!))
+
+/** SOURCE SERIF 4 · Editorial — ordre du design system */
+export const typographyEditorialCatalog: TypographyStyleSpec[] = (
+  [
+    ['editorialBody', 'editorial-body', 0],
+    ['editorialMuted', 'editorial-muted', 1],
+  ] as const
+).map(([key, token, i]) => buildCatalogEntry(key, token, editorialSpecs[i]!))
+
+/** @deprecated Utiliser typographyUiCatalog + typographyEditorialCatalog */
+export const typographyCatalog = [
+  ...typographyUiCatalog,
+  ...typographyEditorialCatalog,
+]
+
+/** @deprecated Utiliser typographyUiCatalog + typographyEditorialCatalog */
+export const typographyMockupCatalog = typographyCatalog
+
+/** @deprecated Utiliser typographyCatalog */
 export const typeScale = typographyCatalog
-  .filter((s) => ['pageTitle', 'body', 'meta', 'display', 'h2'].includes(s.key))
+  .filter((s) => ['titleXl', 'editorialBody', 'meta', 'titleL'].includes(s.key))
   .map((s) => ({
     label: s.label,
     className: s.className,

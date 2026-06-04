@@ -21,7 +21,7 @@ export function SourcesAccordion({ sources }: SourcesAccordionProps) {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex min-h-14 w-full items-center justify-between bg-muted px-4 py-3 text-left"
+        className="flex min-h-14 w-full items-center justify-between bg-surface px-4 py-3 text-left"
         aria-expanded={open}
       >
         <span className={typography.sectionLabel}>Sources</span>
@@ -42,7 +42,7 @@ export function SourcesAccordion({ sources }: SourcesAccordionProps) {
               <span className="text-sm leading-snug text-text">{source.label}</span>
               <a
                 href={source.href}
-                className="inline-flex h-11 w-11 shrink-0 items-center justify-center text-base font-semibold text-secondary"
+                className="inline-flex h-11 w-11 shrink-0 items-center justify-center text-base font-semibold text-sable-700"
                 aria-label={`Voir ${source.label} sur Gallica`}
               >
                 →

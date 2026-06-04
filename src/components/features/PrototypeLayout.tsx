@@ -39,7 +39,7 @@ function PrototypeChromeBar({
   const navigate = useNavigate()
 
   return (
-    <header className="h-8 shrink-0 border-b border-surface/10 bg-primary text-surface">
+    <header className="h-8 shrink-0 border-b border-surface/10 bg-text text-surface">
       <div className="mx-auto flex h-8 w-full max-w-7xl items-center justify-between px-4">
         <div className="flex min-w-0 items-center gap-2">
           <Link to="/prototype" className="truncate text-xs text-surface/70">
@@ -62,7 +62,7 @@ function PrototypeChromeBar({
                   onClick={() => onSetMode('mobile')}
                   className={cn(
                     'inline-flex h-8 w-8 items-center justify-center rounded-md bg-surface/10 text-surface/80 transition-colors hover:bg-surface/15 hover:text-surface',
-                    effectiveMode === 'mobile' && 'bg-secondary text-surface'
+                    effectiveMode === 'mobile' && 'bg-glaz-700 text-surface'
                   )}
                 >
                   <Smartphone className="h-4 w-4" />
@@ -73,7 +73,7 @@ function PrototypeChromeBar({
                   onClick={() => onSetMode('desktop')}
                   className={cn(
                     'inline-flex h-8 w-8 items-center justify-center rounded-md bg-surface/10 text-surface/80 transition-colors hover:bg-surface/15 hover:text-surface',
-                    effectiveMode === 'desktop' && 'bg-secondary text-surface'
+                    effectiveMode === 'desktop' && 'bg-glaz-700 text-surface'
                   )}
                 >
                   <Monitor className="h-4 w-4" />
@@ -134,7 +134,7 @@ export function PrototypeLayout({ children }: { children: React.ReactNode }) {
   }, [])
 
   return (
-    <div className="fixed inset-0 overflow-hidden bg-primary text-surface">
+    <div className="fixed inset-0 overflow-hidden bg-text text-surface">
       {effectiveMode === 'mobile' ? (
         <div className="mx-auto flex h-full w-full flex-col">
           <PrototypeChromeBar

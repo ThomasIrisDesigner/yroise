@@ -8,90 +8,86 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { PROJECT_DISPLAY_NAME } from '@/config/project'
 import {
+  COLOR_TOKEN_SECTIONS,
+  type ColorTokenEntry,
+} from '@/styles/color-tokens'
+import {
+  TYPOGRAPHY_EDITORIAL_SECTION_NOTE,
   TYPOGRAPHY_FONT_FAMILY,
-  typographyMockupCatalog,
+  type TypographyStyleSpec,
+  typographyEditorialCatalog,
+  typographyUiCatalog,
 } from '@/styles/typography'
 
-type ColorVar = {
-  name: string
-  value: string
-  hex: string | null
-  category: 'Principaux' | 'Neutres' | 'États' | 'Autres'
-}
-
-function rgbTripletToHex(value: string) {
-  const parts = value
-    .trim()
-    .replaceAll(',', ' ')
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 3)
-    .map((n) => Number(n))
-
-  if (parts.length !== 3 || parts.some((n) => Number.isNaN(n))) return null
-
-  const [r, g, b] = parts.map((n) => Math.max(0, Math.min(255, Math.round(n))))
+function ColorSwatch({ name, hex }: ColorTokenEntry) {
   return (
-    '#' +
-    [r, g, b]
-      .map((n) => n.toString(16).padStart(2, '0'))
-      .join('')
-      .toUpperCase()
+    <div className="rounded-xl border border-border bg-background p-3">
+      <div
+        className="h-16 w-full rounded-md border border-border"
+        style={{ backgroundColor: hex }}
+        aria-hidden
+      />
+      <p className="mt-2 font-mono text-[11px] font-semibold leading-tight text-text">
+        {name}
+      </p>
+      <p className="font-mono text-[11px] text-muted">{hex}</p>
+    </div>
   )
 }
 
-function getCategory(name: string): ColorVar['category'] {
-  if (
-    name === '--color-primary' ||
-    name === '--color-secondary' ||
-    name === '--color-background'
-  )
-    return 'Principaux'
-  if (
-    name === '--color-muted' ||
-    name === '--color-surface' ||
-    name === '--color-border' ||
-    name === '--color-text' ||
-    name === '--color-card-border'
-  )
-    return 'Neutres'
-  if (
-    name === '--color-success' ||
-    name === '--color-danger' ||
-    name === '--color-warning'
-  )
-    return 'États'
-  return 'Autres'
+function typographyPreviewClassName(style: TypographyStyleSpec) {
+  return style.key === 'uiLink' ? `${style.className} text-text` : style.className
 }
 
-function readCssVariablesFromRoot(): Record<string, string> {
-  const out: Record<string, string> = {}
-
-  for (const sheet of Array.from(document.styleSheets)) {
-    let rules: CSSRuleList
-    try {
-      rules = sheet.cssRules
-    } catch {
-      continue
-    }
-
-    for (const rule of Array.from(rules)) {
-      if (rule.type !== CSSRule.STYLE_RULE) continue
-      const styleRule = rule as CSSStyleRule
-      if (styleRule.selectorText !== ':root') continue
-
-      const style = styleRule.style
-      for (let i = 0; i < style.length; i++) {
-        const prop = style[i]
-        if (!prop?.startsWith('--')) continue
-        const raw = style.getPropertyValue(prop).trim()
-        if (raw) out[prop] = raw
-      }
-    }
-  }
-
-  return out
+function compactLineHeight(value: string) {
+  return value.split(' ')[0] ?? value
 }
+
+function TypographyTable({ styles }: { styles: TypographyStyleSpec[] }) {
+  return (
+    <div className="overflow-x-auto rounded-lg border border-border">
+      <table className="w-full min-w-[880px] border-collapse text-left">
+        <thead>
+          <tr className="border-b border-border bg-surface/40 font-outfit text-[11px] font-semibold uppercase tracking-wide text-muted">
+            <th className="px-3 py-2.5">Token</th>
+            <th className="min-w-[200px] px-3 py-2.5">Usage</th>
+            <th className="px-3 py-2.5">Exemple</th>
+            <th className="px-3 py-2.5">Police</th>
+            <th className="px-3 py-2.5">Taille</th>
+            <th className="px-3 py-2.5">Graisse</th>
+            <th className="px-3 py-2.5">Interlignage</th>
+            <th className="px-3 py-2.5">Couleur</th>
+          </tr>
+        </thead>
+        <tbody className="font-outfit text-[11px] text-muted">
+          {styles.map((style) => (
+            <tr
+              key={style.key}
+              className="border-b border-border align-top last:border-b-0"
+            >
+              <td className="px-3 py-3 font-mono text-xs text-text">{style.token}</td>
+              <td className="max-w-[240px] px-3 py-3 leading-snug text-text">
+                {style.usage}
+              </td>
+              <td className={`max-w-[200px] px-3 py-3 ${typographyPreviewClassName(style)}`}>
+                Aa — Exemple de texte
+              </td>
+              <td className="px-3 py-3">{style.fontFamily}</td>
+              <td className="px-3 py-3">{style.sizePx}px</td>
+              <td className="px-3 py-3">{style.weight}</td>
+              <td className="px-3 py-3">{compactLineHeight(style.lineHeight)}</td>
+              <td className="px-3 py-3">{style.color}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+const chapeauContextNote = typographyUiCatalog.find(
+  (s) => s.key === 'chapeau'
+)?.contextNote
 
 function Section({
   id,
@@ -116,34 +112,6 @@ function Section({
 }
 
 export function DesignSystem() {
-  const [colors, setColors] = React.useState<ColorVar[]>([])
-
-  React.useEffect(() => {
-    const vars = readCssVariablesFromRoot()
-    const list = Object.entries(vars)
-      .filter(([k]) => k.startsWith('--color-'))
-      .map(([name, value]) => ({
-        name,
-        value,
-        hex: rgbTripletToHex(value),
-        category: getCategory(name),
-      }))
-      .sort((a, b) => a.name.localeCompare(b.name))
-
-    setColors(list)
-  }, [])
-
-  const colorGroups = React.useMemo(() => {
-    const groups: Record<string, ColorVar[]> = {
-      Principaux: [],
-      Neutres: [],
-      États: [],
-      Autres: [],
-    }
-    for (const c of colors) groups[c.category].push(c)
-    return groups
-  }, [colors])
-
   const spacing = [
     { px: 4, tw: 'p-1' },
     { px: 8, tw: 'p-2' },
@@ -187,94 +155,59 @@ export function DesignSystem() {
         <div className="grid gap-14">
           <Section id="couleurs" title="COULEURS">
             <div className="grid gap-10">
-              {(['Principaux', 'Neutres', 'États', 'Autres'] as const).map(
-                (group) =>
-                  colorGroups[group].length ? (
-                    <div key={group} className="grid gap-4">
-                      <h3 className="text-sm font-semibold text-text/80">
-                        {group}
-                      </h3>
-                      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-                        {colorGroups[group].map((c) => (
-                          <div
-                            key={c.name}
-                            className="rounded-xl border border-border bg-surface p-3"
-                          >
-                            <div
-                              className="h-20 w-full rounded-md border border-border"
-                              style={{
-                                background: `rgb(${c.value})`,
-                              }}
-                              aria-label={c.name}
-                            />
-                            <div className="mt-2">
-                              <p className="text-[11px] font-semibold text-text">
-                                {c.name}
-                              </p>
-                              <p className="text-[11px] text-text/70">
-                                {c.hex ?? c.value}
-                              </p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ) : null
-              )}
+              {COLOR_TOKEN_SECTIONS.map((section) => (
+                <div key={section.title} className="grid gap-4">
+                  <div>
+                    <h3 className="font-outfit text-xs font-semibold uppercase tracking-[0.08em] text-text">
+                      {section.title}
+                    </h3>
+                    {section.description ? (
+                      <p className="mt-1 font-outfit text-sm text-muted">
+                        {section.description}
+                      </p>
+                    ) : null}
+                  </div>
+                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+                    {section.tokens.map((token) => (
+                      <ColorSwatch key={token.name} {...token} />
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
           </Section>
 
           <Section id="typographie" title="TYPOGRAPHIE">
-            <p className="mb-6 text-sm text-text/70">
-              Styles du mockup mobile (wireframes) uniquement — police par défaut :{' '}
-              {TYPOGRAPHY_FONT_FAMILY}. Hors périmètre : barre prototype, page login,
-              présentation de cette page.
+            <p className="mb-6 font-outfit text-sm text-muted">
+              Mockup mobile (wireframes) — polices : {TYPOGRAPHY_FONT_FAMILY}. Hors
+              périmètre : barre prototype, page login, présentation de cette page.
             </p>
-            <div className="grid gap-6">
-              {typographyMockupCatalog.map((style) => (
-                <div
-                  key={style.key}
-                  className="border-b border-border pb-6 last:border-b-0"
-                >
-                  <div className="flex flex-wrap items-baseline gap-2">
-                    <p className="text-xs font-semibold text-text">{style.label}</p>
-                    <span className="text-[10px] text-text/40">{style.key}</span>
-                  </div>
-                  <p className={`mt-2 ${style.className}`}>
-                    Aa — Exemple de texte
-                  </p>
-                  <dl className="mt-3 grid gap-1.5 text-[11px] text-text/70 sm:grid-cols-2">
-                    <div>
-                      <dt className="inline font-medium text-text/80">Police · </dt>
-                      <dd className="inline">{style.fontFamily}</dd>
-                    </div>
-                    <div>
-                      <dt className="inline font-medium text-text/80">Taille · </dt>
-                      <dd className="inline">{style.sizePx}px</dd>
-                    </div>
-                    <div>
-                      <dt className="inline font-medium text-text/80">Graisse · </dt>
-                      <dd className="inline">{style.weight}</dd>
-                    </div>
-                    <div>
-                      <dt className="inline font-medium text-text/80">Couleur · </dt>
-                      <dd className="inline">{style.color}</dd>
-                    </div>
-                    <div>
-                      <dt className="inline font-medium text-text/80">
-                        Interlignage ·{' '}
-                      </dt>
-                      <dd className="inline">{style.lineHeight}</dd>
-                    </div>
-                    <div>
-                      <dt className="inline font-medium text-text/80">
-                        Interlettrage ·{' '}
-                      </dt>
-                      <dd className="inline">{style.letterSpacing}</dd>
-                    </div>
-                  </dl>
-                </div>
-              ))}
+
+            <div className="mb-12">
+              <h3 className="mb-4 font-outfit text-xs font-semibold uppercase tracking-[0.08em] text-text">
+                OUTFIT · Display &amp; UI
+              </h3>
+              <TypographyTable styles={typographyUiCatalog} />
+              <blockquote className="mt-4 border-l-2 border-border pl-4 font-outfit text-sm italic text-muted">
+                Sur fond sombre : appliquer <code className="text-text">text-white</code> ou{' '}
+                <code className="text-text">text-white/60</code> par-dessus le style existant.
+                Pas de token séparé.
+              </blockquote>
+              {chapeauContextNote ? (
+                <p className="mt-3 font-outfit text-[11px] leading-snug text-muted">
+                  <span className="font-mono text-text">chapeau</span> — {chapeauContextNote}
+                </p>
+              ) : null}
+            </div>
+
+            <div>
+              <h3 className="mb-4 font-outfit text-xs font-semibold uppercase tracking-[0.08em] text-text">
+                SOURCE SERIF 4 · Éditorial
+              </h3>
+              <TypographyTable styles={typographyEditorialCatalog} />
+              <p className="mt-4 font-outfit text-[11px] leading-snug text-muted">
+                {TYPOGRAPHY_EDITORIAL_SECTION_NOTE}
+              </p>
             </div>
           </Section>
 
@@ -286,9 +219,9 @@ export function DesignSystem() {
                   className="grid grid-cols-[64px_1fr_90px] items-center gap-4"
                 >
                   <p className="text-xs font-semibold text-text">{s.px}px</p>
-                  <div className="h-3 rounded bg-primary/20">
+                  <div className="h-3 rounded bg-text/20">
                     <div
-                      className="h-3 rounded bg-primary"
+                      className="h-3 rounded bg-text"
                       style={{ width: `${s.px}px` }}
                     />
                   </div>

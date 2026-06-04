@@ -1,3 +1,6 @@
+import { cn } from '@/lib/utils'
+import { typography } from '@/styles/typography'
+
 interface GmbVideoEmbedProps {
   title: string
   href: string
@@ -7,7 +10,7 @@ interface GmbVideoEmbedProps {
 export function GmbVideoEmbed({ title, href }: GmbVideoEmbedProps) {
   return (
     <figure>
-      <div className="relative w-full overflow-hidden rounded-md bg-primary">
+      <div className="relative w-full overflow-hidden rounded-md bg-ocean-900">
         <div className="pt-[56.25%]" aria-hidden />
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-5">
           <div
@@ -16,12 +19,12 @@ export function GmbVideoEmbed({ title, href }: GmbVideoEmbedProps) {
           >
             <span className="ml-0.5 h-0 w-0 border-y-[6px] border-l-[10px] border-y-transparent border-l-surface" />
           </div>
-          <p className="text-center text-sm italic text-surface/80">{title}</p>
+          <p className={cn('text-center', typography.meta, 'text-white/60')}>{title}</p>
         </div>
       </div>
-      <figcaption className="mt-2 text-sm leading-snug text-text/60">
-        <span className="italic">{title}</span>{' '}
-        <a href={href} className="font-semibold text-secondary not-italic">
+      <figcaption className={`mt-2 ${typography.editorialCaption}`}>
+        <span>{title}</span>{' '}
+        <a href={href} className={`${typography.titleM} not-italic`}>
           Voir sur YouTube →
         </a>
       </figcaption>

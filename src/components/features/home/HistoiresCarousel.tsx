@@ -14,7 +14,7 @@ export function HistoiresCarousel() {
         <h2 className={typography.sectionLabel}>Histoires</h2>
         <Link
           to="/histoires"
-          className="inline-flex h-9 items-center text-sm text-text/60 hover:text-text"
+          className={`inline-flex h-9 items-center hover:text-text ${typography.meta}`}
         >
           Tout voir →
         </Link>
@@ -25,12 +25,12 @@ export function HistoiresCarousel() {
             key={item.slug}
             to={`/histoires/${item.slug}`}
             aria-label={`Lire l'histoire : ${item.titre}`}
-            className="block shrink-0 snap-start rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30"
+            className="block shrink-0 snap-start rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sable-700/30"
             style={{ width: cardWidthPx }}
             draggable={false}
           >
             <div
-              className="w-full rounded-md border border-border bg-muted"
+              className="w-full rounded-md border border-border bg-surface"
               style={{ height: imageHeightPx }}
               aria-hidden
             />

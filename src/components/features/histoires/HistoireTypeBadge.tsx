@@ -1,5 +1,6 @@
 import type { HistoireType } from '@/data/histoires'
 import { HISTOIRE_TYPE_LABELS } from '@/data/histoires'
+import { typography } from '@/styles/typography'
 
 interface HistoireTypeBadgeProps {
   type: HistoireType
@@ -9,7 +10,7 @@ interface HistoireTypeBadgeProps {
 export function HistoireTypeBadge({ type, className }: HistoireTypeBadgeProps) {
   return (
     <p
-      className={`text-xs font-bold uppercase tracking-widest text-text/60 ${className ?? ''}`}
+      className={`${typography.label} text-muted ${className ?? ''}`}
     >
       {HISTOIRE_TYPE_LABELS[type]}
     </p>

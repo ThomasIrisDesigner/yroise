@@ -31,12 +31,12 @@ export function CollectionDetail() {
 
       <section className="relative">
         <div
-          className="flex h-40 w-full items-center justify-center bg-muted"
+          className="flex h-40 w-full items-center justify-center bg-surface"
           aria-hidden
         >
           <span className="text-sm italic text-text/40">Image de collection</span>
         </div>
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/85 to-transparent px-5 pb-4 pt-12">
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-text/85 to-transparent px-5 pb-4 pt-12">
           <h1 className="text-[26px] font-extrabold leading-tight tracking-tight text-surface">
             {collection.name}
           </h1>
@@ -47,7 +47,7 @@ export function CollectionDetail() {
       </section>
 
       <div className="px-5 pt-5 pb-10">
-        <p className={typography.body}>{detail.intro}</p>
+        <p className={typography.editorialBody}>{detail.intro}</p>
 
         <section className="mt-7">
           <h2 className={typography.sectionLabel}>Quelques documents</h2>

@@ -15,7 +15,7 @@ export function SectionBackLink({ to, children, className }: SectionBackLinkProp
     <Link
       to={to}
       className={cn(
-        'inline-flex min-h-9 items-center text-sm text-text/55 transition-colors hover:text-text',
+        'inline-flex min-h-9 items-center font-outfit text-[13px] text-muted transition-colors hover:text-text',
         className
       )}
     >

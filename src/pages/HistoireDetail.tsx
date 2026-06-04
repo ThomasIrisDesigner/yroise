@@ -34,12 +34,10 @@ export function HistoireDetail() {
       <div className="px-5 pt-2">
         <HistoireTypeBadge type={histoire.type} />
         <h1 className={`mt-3 ${typography.pageTitle}`}>{histoire.titre}</h1>
-        <p className={`mt-3 ${typography.body} italic`}>{content.chapeau}</p>
+        <p className={`mt-3 ${typography.chapeau}`}>{content.chapeau}</p>
         <div className="mt-4 border-b border-border pb-4">
-          <p className="text-sm font-semibold text-text">
-            Par {content.auteur}
-          </p>
-          <p className="mt-1 text-sm text-text/60">
+          <p className={`${typography.titleM}`}>Par {content.auteur}</p>
+          <p className={`mt-1 ${typography.meta}`}>
             {content.institution} · {content.datePublication}
           </p>
         </div>
@@ -47,13 +45,13 @@ export function HistoireDetail() {
 
       {/* Image hero pleine largeur — bandeau article */}
       <div
-        className="flex aspect-[3/2] w-full items-center justify-center bg-muted"
+        className="flex aspect-[3/2] w-full items-center justify-center bg-surface"
         role="img"
         aria-label={content.heroPlaceholder}
       >
-        <span className="text-sm italic text-text/40">{content.heroPlaceholder}</span>
+        <span className={typography.editorialCaption}>{content.heroPlaceholder}</span>
       </div>
-      <p className="border-b border-border px-5 py-3 text-sm italic leading-snug text-text/60">
+      <p className={`border-b border-border px-5 py-3 ${typography.editorialCaption}`}>
         {content.heroCaption}
       </p>
 

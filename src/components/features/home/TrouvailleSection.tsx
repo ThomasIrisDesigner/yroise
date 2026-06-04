@@ -9,7 +9,7 @@ export function TrouvailleSection() {
     <section className="px-5 pt-8 pb-10">
       <h2 className={typography.sectionLabel}>La trouvaille</h2>
       <div
-        className="mt-4 flex h-32 w-full items-center justify-center rounded-md border border-border bg-muted"
+        className="mt-4 flex h-32 w-full items-center justify-center rounded-md border border-border bg-surface"
         aria-hidden
       />
       <h3 className={`mt-5 ${typography.editorialLead}`}>{HOME_TROUVAILLE.titre}</h3>
