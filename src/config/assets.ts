@@ -2,7 +2,7 @@ export const SITE_LOGO = {
   src: '/brand/yroise-logo.svg',
   alt: 'YROISE',
   /** Largeur d’affichage dans le header (mockup mobile). */
-  widthPx: 88,
+  widthPx: 96,
 } as const
 
 export const LOGIN_ILLUSTRATION = {

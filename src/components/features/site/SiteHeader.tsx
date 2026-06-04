@@ -21,13 +21,13 @@ export function SiteHeader({ onOpenSearch, onOpenMenu, className }: SiteHeaderPr
     >
       <Link
         to="/prototype"
-        className="flex flex-col hover:opacity-80"
+        className="flex flex-col gap-1 hover:opacity-80"
       >
         <img
           src={SITE_LOGO.src}
           alt={SITE_LOGO.alt}
           width={SITE_LOGO.widthPx}
-          className="h-auto w-[88px]"
+          className="h-auto w-[96px]"
         />
         <span className={typography.institutionalSubtitle}>
           Bibliothèque numérique patrimoniale de Brest
