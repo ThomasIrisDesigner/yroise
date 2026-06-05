@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import { HistoireTypeBadge } from '@/components/features/histoires/HistoireTypeBadge'
+import { TypeLabel } from '@/components/ui/type-label'
 import type { HistoireBillet } from '@/data/histoires'
 import { typography } from '@/styles/typography'
 
@@ -16,7 +16,7 @@ export function HistoireRebondCard({ histoire }: HistoireRebondCardProps) {
     >
       <div className="h-16 w-20 shrink-0 rounded bg-surface" aria-hidden />
       <div className="min-w-0">
-        <HistoireTypeBadge type={histoire.type} className="mb-1" />
+        <TypeLabel type={histoire.type} className="mb-1" />
         <p className={typography.cardTitle}>{histoire.titre}</p>
       </div>
     </Link>

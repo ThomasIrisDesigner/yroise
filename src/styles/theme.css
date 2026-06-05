@@ -35,6 +35,9 @@
   --aurore-300: 255 180 235;
   --aurore-100: 250 215 235;
 
+  /* Boutons */
+  --color-button-primary-hover: 51 51 51;
+
   /* États */
   --color-danger: 220 38 38;
   --color-success: 22 163 74;
@@ -67,4 +70,13 @@ body {
   display: none;
   width: 0;
   height: 0;
+}
+
+/* Labels de type — couleur tonale selon la section parente */
+.section-histoires .type-label {
+  color: rgb(var(--sable-900));
+}
+
+.section-jeunesse .type-label {
+  color: rgb(var(--aurore-900));
 }

@@ -68,7 +68,7 @@ export function Login() {
                     ) : null}
                   </div>
 
-                  <Button type="submit" variant="default" className="w-full">
+                  <Button type="submit" variant="primary" className="w-full justify-center">
                     Se connecter
                   </Button>
                 </form>

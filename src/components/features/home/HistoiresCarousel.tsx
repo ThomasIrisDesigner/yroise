@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 
+import { Button } from '@/components/ui/button'
 import { HorizontalCarousel } from '@/components/features/home/HorizontalCarousel'
 import { mobileCarousel } from '@/config/wireframe-mobile'
 import { HISTOIRES_RECENTES } from '@/data/histoires'
@@ -12,12 +13,9 @@ export function HistoiresCarousel() {
     <section className="border-t border-border pt-10 pb-8">
       <div className="mb-4 flex items-center justify-between px-5">
         <h2 className={typography.sectionLabel}>Histoires</h2>
-        <Link
-          to="/histoires"
-          className={`inline-flex h-9 items-center hover:text-text ${typography.meta}`}
-        >
-          Tout voir →
-        </Link>
+        <Button asChild variant="ghost" size="sm">
+          <Link to="/histoires">Tout voir</Link>
+        </Button>
       </div>
       <HorizontalCarousel gapPx={mobileCarousel.gapPx} aria-label="Histoires récentes">
         {HISTOIRES_RECENTES.map((item) => (

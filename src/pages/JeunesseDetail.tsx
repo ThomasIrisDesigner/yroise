@@ -1,11 +1,10 @@
-import { ArrowRight } from 'lucide-react'
 import { Navigate, useParams } from 'react-router-dom'
 
 import { GenialiEmbed } from '@/components/features/jeunesse/GenialiEmbed'
-import { JeunesseTypeBadge } from '@/components/features/jeunesse/JeunesseTypeBadge'
 import { SectionBackLink } from '@/components/features/site/SectionBackLink'
 import { SitePageShell } from '@/components/features/site/SitePageShell'
 import { Button } from '@/components/ui/button'
+import { TypeLabel } from '@/components/ui/type-label'
 import {
   getJeunesseBySlug,
   getJeunesseDetail,
@@ -22,22 +21,26 @@ export function JeunesseDetail() {
 
   const detail = getJeunesseDetail(activite.slug)
   const isJeu = activite.type === 'jeu'
+  const mediaLabel = isJeu ? 'Jeu interactif' : 'Séquence pédagogique'
 
   return (
     <SitePageShell>
-      <article className="px-5 pt-4 pb-10">
+      <article className="section-jeunesse px-5 pt-4 pb-10">
         <SectionBackLink to="/jeunesse">← Jeunesse</SectionBackLink>
-        <JeunesseTypeBadge type={activite.type} className="mt-3" />
+
+        <div className="mt-4 flex aspect-[3/2] w-full items-center justify-center rounded-md border border-border bg-surface text-sm italic text-text/50">
+          {isJeu ? '🎮 ' : '📚 '}
+          {mediaLabel}
+        </div>
+
+        <TypeLabel type={activite.type} className="mt-3" />
         <h1 className={`mt-3 ${typography.pageTitle}`}>{activite.titre}</h1>
         <p className={`mt-3 ${typography.bodyMuted}`}>{detail.intro}</p>
 
         {isJeu ? (
           <>
             <GenialiEmbed />
-            <Button
-              asChild
-              className="mb-6 h-12 w-full rounded-md bg-aurore-700 text-base font-bold tracking-wide text-surface hover:bg-aurore-700/90"
-            >
+            <Button asChild variant="primary" className="mb-6 w-full justify-center">
               <a href="#">Jouer en plein écran</a>
             </Button>
           </>
@@ -67,16 +70,12 @@ export function JeunesseDetail() {
           </dl>
         </div>
 
-        <a
-          href={detail.documentGallicaHref}
-          className="flex min-h-14 items-center justify-between gap-3 rounded-md border border-border bg-surface/50 px-4 py-3"
-        >
+        <div className="flex min-h-14 items-center justify-between gap-3 rounded-md border border-border bg-surface/50 px-4 py-3">
           <span className={typography.meta}>{detail.documentSource}</span>
-          <span className={`inline-flex shrink-0 items-center ${typography.titleM}`}>
-            Voir sur Gallica
-            <ArrowRight className="ml-1 inline h-4 w-4" />
-          </span>
-        </a>
+          <Button asChild variant="ghost" size="sm">
+            <a href={detail.documentGallicaHref}>Voir sur Gallica</a>
+          </Button>
+        </div>
       </article>
     </SitePageShell>
   )

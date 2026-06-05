@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { typography } from '@/styles/typography'
 
@@ -22,11 +23,11 @@ export function GmbVideoEmbed({ title, href }: GmbVideoEmbedProps) {
           <p className={cn('text-center', typography.meta, 'text-white/60')}>{title}</p>
         </div>
       </div>
-      <figcaption className={`mt-2 ${typography.editorialCaption}`}>
-        <span>{title}</span>{' '}
-        <a href={href} className={`${typography.titleM} not-italic`}>
-          Voir sur YouTube →
-        </a>
+      <figcaption className={`mt-2 flex flex-wrap items-center gap-2 ${typography.editorialCaption}`}>
+        <span>{title}</span>
+        <Button asChild variant="ghost" size="sm" className="not-italic">
+          <a href={href}>Voir sur YouTube</a>
+        </Button>
       </figcaption>
     </figure>
   )

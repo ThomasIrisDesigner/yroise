@@ -9,10 +9,7 @@ export interface JeunesseActivite {
   description: string
 }
 
-export const JEUNESSE_TYPE_LABELS: Record<JeunesseType, string> = {
-  jeu: 'Jeu',
-  sequence: 'Séquence',
-}
+export { CONTENT_TYPE_LABELS as JEUNESSE_TYPE_LABELS } from '@/data/contentTypes'
 
 export const JEUNESSE_INTRO =
   'Jeux et ateliers pour découvrir le patrimoine de Brest.'

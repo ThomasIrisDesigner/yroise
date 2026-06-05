@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import { JeunesseTypeBadge } from '@/components/features/jeunesse/JeunesseTypeBadge'
+import { TypeLabel } from '@/components/ui/type-label'
 import type { JeunesseActivite } from '@/data/jeunesse'
 import { typography } from '@/styles/typography'
 
@@ -21,7 +21,7 @@ export function JeunesseListCard({ activite }: JeunesseListCardProps) {
         {mediaLabel}
       </div>
       <div className="bg-surface p-4">
-        <JeunesseTypeBadge type={activite.type} className="mb-2" />
+        <TypeLabel type={activite.type} className="mb-2" />
         <h2 className={typography.cardTitle}>{activite.titre}</h2>
         <p className="mt-1.5 text-sm leading-relaxed text-text/70">{activite.description}</p>
       </div>

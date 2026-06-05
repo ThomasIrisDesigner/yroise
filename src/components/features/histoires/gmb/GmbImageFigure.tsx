@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button'
 import { typography } from '@/styles/typography'
 
 interface GmbImageFigureProps {
@@ -28,9 +29,14 @@ export function GmbImageFigure({
         {linkLabel ? (
           <>
             {' '}
-            <a href={linkHref} className={`${typography.titleM} not-italic`}>
-              {linkLabel} →
-            </a>
+            <Button
+              asChild
+              variant="ghost"
+              size="sm"
+              className="inline-flex h-auto min-h-0 gap-2 px-0 py-0 not-italic"
+            >
+              <a href={linkHref}>{linkLabel}</a>
+            </Button>
           </>
         ) : null}
       </figcaption>

@@ -1,6 +1,7 @@
 import { ChevronDown } from 'lucide-react'
 import * as React from 'react'
 
+import { Button } from '@/components/ui/button'
 import { typography } from '@/styles/typography'
 import { cn } from '@/lib/utils'
 
@@ -40,13 +41,11 @@ export function SourcesAccordion({ sources }: SourcesAccordionProps) {
               )}
             >
               <span className="text-sm leading-snug text-text">{source.label}</span>
-              <a
-                href={source.href}
-                className="inline-flex h-11 w-11 shrink-0 items-center justify-center text-base font-semibold text-sable-700"
-                aria-label={`Voir ${source.label} sur Gallica`}
-              >
-                →
-              </a>
+              <Button asChild variant="ghost" size="sm" className="shrink-0">
+                <a href={source.href} aria-label={`Voir ${source.label} sur Gallica`}>
+                  Voir
+                </a>
+              </Button>
             </li>
           ))}
         </ul>

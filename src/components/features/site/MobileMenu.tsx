@@ -2,6 +2,7 @@ import { ChevronDown, ChevronRight, X } from 'lucide-react'
 import * as React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
+import { Button } from '@/components/ui/button'
 import { COLLECTIONS } from '@/data/collections'
 import { getActiveNavSection } from '@/lib/navActive'
 import { cn } from '@/lib/utils'
@@ -84,19 +85,13 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           </button>
           {collectionsOpen ? (
             <div>
-              <Link
-                to="/collections"
-                onClick={onClose}
-                aria-current={pathname === '/collections' ? 'page' : undefined}
-                className={cn(
-                  'flex min-h-12 items-center gap-2 border-t border-border px-5 py-3 pl-9 text-base',
-                  pathname === '/collections'
-                    ? 'font-bold text-glaz-700'
-                    : 'font-semibold text-glaz-700'
-                )}
-              >
-                Tout voir →
-              </Link>
+              <div className="flex min-h-12 items-center border-t border-border px-5 py-3 pl-9">
+                <Button asChild variant="ghost" size="sm">
+                  <Link to="/collections" onClick={onClose}>
+                    Tout voir
+                  </Link>
+                </Button>
+              </div>
               {COLLECTIONS.map((col) => {
                 const colActive = pathname === `/collections/${col.slug}`
                 return (

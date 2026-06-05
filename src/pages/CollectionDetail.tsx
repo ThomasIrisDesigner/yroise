@@ -1,4 +1,3 @@
-import { ArrowRight } from 'lucide-react'
 import { Navigate, useParams } from 'react-router-dom'
 
 import { DocumentShowcase } from '@/components/features/collections/DocumentShowcase'
@@ -56,14 +55,9 @@ export function CollectionDetail() {
           </div>
         </section>
 
-        <Button
-          asChild
-          variant="default"
-          className="mt-6 h-12 w-full rounded-md text-base font-bold tracking-wide"
-        >
+        <Button asChild variant="primary" className="mt-6 w-full justify-center">
           <a href="#" aria-label={`${detail.gallicaLabel} sur Gallica (externe)`}>
             {detail.gallicaLabel}
-            <ArrowRight className="h-5 w-5" />
           </a>
         </Button>
 

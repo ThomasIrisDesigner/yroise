@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 
+import { Button } from '@/components/ui/button'
 import { HorizontalCarousel } from '@/components/features/home/HorizontalCarousel'
 import { mobileCarousel } from '@/config/wireframe-mobile'
 import { COLLECTIONS } from '@/data/collections'
@@ -12,12 +13,9 @@ export function CollectionsCarousel() {
     <section className="border-t border-border pt-10 pb-8">
       <div className="mb-4 flex items-center justify-between px-5">
         <h2 className={typography.sectionLabel}>Collections</h2>
-        <Link
-          to="/collections"
-          className={`inline-flex h-9 items-center hover:text-text ${typography.meta}`}
-        >
-          Tout voir →
-        </Link>
+        <Button asChild variant="ghost" size="sm">
+          <Link to="/collections">Tout voir</Link>
+        </Button>
       </div>
       <HorizontalCarousel gapPx={mobileCarousel.gapPx} aria-label="Collections">
         {COLLECTIONS.map((col) => (

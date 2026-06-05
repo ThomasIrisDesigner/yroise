@@ -6,13 +6,14 @@ const ui = 'font-outfit'
 const editorial = 'font-editorial'
 
 /** Tokens Outfit — display & UI */
-const titleXl = `${ui} text-[28px] font-bold leading-tight tracking-tight text-text`
+const titleXl = `${ui} text-[28px] font-bold leading-tight tracking-[0.1px] text-text`
 const titleL = `${ui} text-[20px] font-semibold leading-snug text-text`
-const titleM = `${ui} text-base font-semibold leading-snug text-text`
-const chapeau = `${ui} text-lg font-normal leading-[1.4] text-text`
-const label = `${ui} text-xs font-semibold uppercase tracking-[0.08em] text-text`
+const titleM = `${ui} text-base font-semibold leading-[1.3] tracking-[0.1px] text-text`
+const titleMCard = `${titleM} line-clamp-3`
+const chapeau = `${ui} text-lg font-normal leading-[1.4] tracking-[0.1px] text-text`
+const label = `${ui} text-xs font-semibold uppercase tracking-[3px] text-text`
 const meta = `${ui} text-[13px] font-normal leading-snug text-muted`
-const editorialCaption = `${ui} text-sm font-normal leading-[1.4] text-muted`
+const editorialCaption = `${ui} text-sm font-normal leading-[1.4] tracking-[0.1px] text-muted`
 const uiXs = `${ui} text-[11px] font-normal leading-tight text-muted`
 /** Liens UI — couleur selon le contexte (fond clair ou sombre). */
 const uiLink = `${ui} text-[13px] font-normal leading-snug`
@@ -21,7 +22,7 @@ const uiLink = `${ui} text-[13px] font-normal leading-snug`
 const logo = `${ui} text-base font-bold text-text`
 
 /** Tokens Source Serif 4 — corps d'article uniquement */
-const editorialBody = `${editorial} text-lg font-normal leading-[1.65] text-text`
+const editorialBody = `${editorial} text-lg font-normal leading-[1.65] tracking-[0.1px] text-text`
 const editorialMuted = `${editorial} text-lg font-normal leading-[1.65] text-text/70`
 
 export const typography = {
@@ -61,8 +62,8 @@ export const typography = {
   heroQuote: titleL,
   /** @deprecated Alias — préférer meta + text-white/60 */
   heroAttribution: meta,
-  cardTitle: titleM,
-  carouselTitle: titleM,
+  cardTitle: titleMCard,
+  carouselTitle: titleMCard,
   carouselMeta: meta,
   carouselCollectionLabel: meta,
   cardMeta: meta,
@@ -108,7 +109,7 @@ const uiSpecs: CatalogSpec[] = [
     weight: 700,
     color: '#18181b',
     lineHeight: '1.25 (leading-tight)',
-    letterSpacing: '-0.025em (tracking-tight)',
+    letterSpacing: '0.1px',
   },
   {
     usage: 'Accroches éditoriales, H2 de section',
@@ -127,8 +128,10 @@ const uiSpecs: CatalogSpec[] = [
     sizePx: 16,
     weight: 600,
     color: '#18181b',
-    lineHeight: '1.375 (leading-snug)',
-    letterSpacing: 'normal',
+    lineHeight: '1.3',
+    letterSpacing: '0.1px',
+    contextNote:
+      'Sur les cards : troncature à 3 lignes (line-clamp-3). Alias cardTitle / carouselTitle.',
   },
   {
     usage: 'Intro article, entre le H1 et le bloc auteur/date',
@@ -138,19 +141,19 @@ const uiSpecs: CatalogSpec[] = [
     weight: 400,
     color: '#18181b',
     lineHeight: '1.4',
-    letterSpacing: 'normal',
+    letterSpacing: '0.1px',
     contextNote:
       "Utilisé uniquement dans les pages article, entre le H1 et le bloc auteur/date. Pas d'italic — distingué du titre par le poids (400 vs 700) et la taille.",
   },
   {
-    usage: 'Labels de section, badges de type (CURIOSITÉ, JEU…)',
-    label: 'Labels de section, badges',
+    usage: 'Labels de section (HISTOIRES, COLLECTIONS…)',
+    label: 'Labels de section',
     fontFamily: TYPOGRAPHY_FONT_UI,
     sizePx: 12,
     weight: 600,
     color: '#18181b',
     lineHeight: '1.25 (défaut text-xs)',
-    letterSpacing: '0.08em',
+    letterSpacing: '3px',
   },
   {
     usage: 'Dates, crédits, métadonnées',
@@ -170,7 +173,7 @@ const uiSpecs: CatalogSpec[] = [
     weight: 400,
     color: '#71717a',
     lineHeight: '1.4',
-    letterSpacing: 'normal',
+    letterSpacing: '0.1px',
   },
   {
     usage: 'Sous-titre institutionnel dans le header',
@@ -203,7 +206,7 @@ const editorialSpecs: CatalogSpec[] = [
     weight: 400,
     color: '#18181b',
     lineHeight: '1.65',
-    letterSpacing: 'normal',
+    letterSpacing: '0.1px',
   },
   {
     usage: 'Corps atténué — notes, contexte secondaire',

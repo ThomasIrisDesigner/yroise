@@ -11,10 +11,7 @@ export interface HistoireBillet {
   fonds?: string
 }
 
-export const HISTOIRE_TYPE_LABELS: Record<HistoireType, string> = {
-  curiosite: 'Curiosité',
-  exposition: 'Exposition',
-}
+export { CONTENT_TYPE_LABELS as HISTOIRE_TYPE_LABELS } from '@/data/contentTypes'
 
 export const HISTOIRES_LIST: HistoireBillet[] = [
   {

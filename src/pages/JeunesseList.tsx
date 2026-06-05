@@ -7,7 +7,7 @@ import { typography } from '@/styles/typography'
 export function JeunesseList() {
   return (
     <SitePageShell>
-      <div className="px-5 pt-5 pb-10">
+      <div className="section-jeunesse px-5 pt-5 pb-10">
         <h1 className={typography.pageTitle}>Jeunesse</h1>
         <p className={`mt-2 ${typography.pageSubtitle}`}>{JEUNESSE_INTRO}</p>
         <ul className="mt-6 flex flex-col gap-4">
@@ -18,9 +18,7 @@ export function JeunesseList() {
           ))}
         </ul>
         <div className="mt-8 flex justify-center">
-          <Button variant="outline" className="border-2 border-aurore-700">
-            Voir plus
-          </Button>
+          <Button variant="secondary">Voir plus</Button>
         </div>
       </div>
     </SitePageShell>

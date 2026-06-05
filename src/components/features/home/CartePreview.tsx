@@ -1,6 +1,7 @@
 import { MapPin } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
+import { Button } from '@/components/ui/button'
 import { HOME_CARTE } from '@/data/home'
 import { typography } from '@/styles/typography'
 
@@ -35,12 +36,9 @@ export function CartePreview() {
       </div>
       <div className="mt-4 flex items-center justify-between gap-3">
         <p className="text-sm italic text-text/50">{HOME_CARTE.note}</p>
-        <Link
-          to="/carte"
-          className="inline-flex h-11 shrink-0 items-center text-sm font-semibold text-glaz-700"
-        >
-          {HOME_CARTE.ctaLabel} →
-        </Link>
+        <Button asChild variant="secondary" size="sm" className="shrink-0">
+          <Link to="/carte">{HOME_CARTE.ctaLabel}</Link>
+        </Button>
       </div>
     </section>
   )

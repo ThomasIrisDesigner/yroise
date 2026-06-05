@@ -1,6 +1,8 @@
 import { X } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
+import { Button } from '@/components/ui/button'
+
 import type { CartePin } from '@/data/carte'
 
 interface CarteDocumentPopupProps {
@@ -37,20 +39,14 @@ export function CarteDocumentPopup({ pin, onClose }: CarteDocumentPopupProps) {
           {pin.collection}
         </p>
         <p className="mt-2 text-sm font-bold leading-snug text-text">{pin.titre}</p>
-        <div className="mt-3 flex items-center justify-between border-t border-border pt-3">
-          <a
-            href={pin.gallicaHref}
-            className="inline-flex h-9 items-center text-sm font-semibold text-glaz-700"
-          >
-            Voir le document →
-          </a>
+        <div className="mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-border pt-3">
+          <Button asChild variant="ghost" size="sm">
+            <a href={pin.gallicaHref}>Voir le document</a>
+          </Button>
           {pin.histoireHref ? (
-            <Link
-              to={pin.histoireHref}
-              className="inline-flex h-9 items-center text-sm font-semibold text-text"
-            >
-              Lire →
-            </Link>
+            <Button asChild variant="ghost" size="sm">
+              <Link to={pin.histoireHref}>Lire</Link>
+            </Button>
           ) : null}
         </div>
       </div>

@@ -1,5 +1,3 @@
-import { ArrowRight } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { HOME_TROUVAILLE } from '@/data/home'
 import { typography } from '@/styles/typography'
@@ -14,9 +12,8 @@ export function TrouvailleSection() {
       />
       <h3 className={`mt-5 ${typography.editorialLead}`}>{HOME_TROUVAILLE.titre}</h3>
       <p className={`mt-3 ${typography.bodyMuted}`}>{HOME_TROUVAILLE.chapeau}</p>
-      <Button variant="outline" className="mt-6 gap-1 border-2 border-primary">
+      <Button variant="secondary" className="mt-6">
         {HOME_TROUVAILLE.ctaLabel}
-        <ArrowRight className="h-4 w-4" />
       </Button>
     </section>
   )
