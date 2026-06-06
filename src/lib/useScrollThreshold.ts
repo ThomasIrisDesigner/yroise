@@ -14,8 +14,15 @@ function getScrollParent(element: HTMLElement): HTMLElement | Window {
   return window
 }
 
+function isWindow(target: HTMLElement | Window): target is Window {
+  return target === window
+}
+
 function getScrollTop(target: HTMLElement | Window) {
-  return target === window ? window.scrollY : target.scrollTop
+  if (isWindow(target)) {
+    return target.scrollY
+  }
+  return target.scrollTop
 }
 
 /** Détecte le scroll sur l’ancêtre scrollable (mockup mobile) ou la fenêtre (plein écran). */
