@@ -7,7 +7,7 @@ import { typography } from '@/styles/typography'
 /** Bloc Jeunesse — fond discret, wireframe v2 home. */
 export function JeunesseTeaser() {
   return (
-    <section className="border-t border-border bg-surface/60 px-5 py-5 transition-colors hover:bg-surface/80">
+    <section className="border-t border-border bg-surface/60 px-section py-4 transition-colors hover:bg-surface/80">
       <div className="flex items-center justify-between gap-4">
         <Link to="/jeunesse" className="flex min-w-0 flex-1 items-center gap-4">
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-aurore-700">

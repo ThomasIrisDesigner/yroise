@@ -11,7 +11,7 @@ const titleL = `${ui} text-[20px] font-semibold leading-snug text-text`
 const titleM = `${ui} text-base font-semibold leading-[1.3] tracking-[0.1px] text-text`
 const titleMCard = `${titleM} line-clamp-3`
 const chapeau = `${ui} text-lg font-normal leading-[1.4] tracking-[0.1px] text-text`
-const label = `${ui} text-xs font-semibold uppercase tracking-[3px] text-text`
+const label = `${ui} text-base font-semibold uppercase tracking-[2px] text-text`
 const meta = `${ui} text-[13px] font-normal leading-snug text-muted`
 const editorialCaption = `${ui} text-sm font-normal leading-[1.4] tracking-[0.1px] text-muted`
 const uiXs = `${ui} text-[11px] font-normal leading-tight text-muted`
@@ -107,7 +107,7 @@ const uiSpecs: CatalogSpec[] = [
     fontFamily: TYPOGRAPHY_FONT_UI,
     sizePx: 28,
     weight: 700,
-    color: '#18181b',
+    color: '#010101',
     lineHeight: '1.25 (leading-tight)',
     letterSpacing: '0.1px',
   },
@@ -117,7 +117,7 @@ const uiSpecs: CatalogSpec[] = [
     fontFamily: TYPOGRAPHY_FONT_UI,
     sizePx: 20,
     weight: 600,
-    color: '#18181b',
+    color: '#010101',
     lineHeight: '1.375 (leading-snug)',
     letterSpacing: 'normal',
   },
@@ -127,7 +127,7 @@ const uiSpecs: CatalogSpec[] = [
     fontFamily: TYPOGRAPHY_FONT_UI,
     sizePx: 16,
     weight: 600,
-    color: '#18181b',
+    color: '#010101',
     lineHeight: '1.3',
     letterSpacing: '0.1px',
     contextNote:
@@ -139,7 +139,7 @@ const uiSpecs: CatalogSpec[] = [
     fontFamily: TYPOGRAPHY_FONT_UI,
     sizePx: 18,
     weight: 400,
-    color: '#18181b',
+    color: '#010101',
     lineHeight: '1.4',
     letterSpacing: '0.1px',
     contextNote:
@@ -149,11 +149,13 @@ const uiSpecs: CatalogSpec[] = [
     usage: 'Labels de section (HISTOIRES, COLLECTIONS…)',
     label: 'Labels de section',
     fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 12,
+    sizePx: 16,
     weight: 600,
-    color: '#18181b',
-    lineHeight: '1.25 (défaut text-xs)',
-    letterSpacing: '3px',
+    color: '#010101',
+    lineHeight: '1.25',
+    letterSpacing: '2px',
+    contextNote:
+      'Titres de rubrique sur la home et les pages liste. Voir section DS « Labels de section ».',
   },
   {
     usage: 'Dates, crédits, métadonnées',
@@ -204,7 +206,7 @@ const editorialSpecs: CatalogSpec[] = [
     fontFamily: TYPOGRAPHY_FONT_EDITORIAL,
     sizePx: 18,
     weight: 400,
-    color: '#18181b',
+    color: '#010101',
     lineHeight: '1.65',
     letterSpacing: '0.1px',
   },
@@ -214,7 +216,7 @@ const editorialSpecs: CatalogSpec[] = [
     fontFamily: TYPOGRAPHY_FONT_EDITORIAL,
     sizePx: 18,
     weight: 400,
-    color: '#18181b à 70 %',
+    color: '#010101 à 70 %',
     lineHeight: '1.65',
     letterSpacing: 'normal',
   },

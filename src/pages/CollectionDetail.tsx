@@ -24,7 +24,7 @@ export function CollectionDetail() {
 
   return (
     <SitePageShell>
-      <div className="px-5 pt-4">
+      <div className="px-section pt-4">
         <SectionBackLink to="/collections">← Toutes les collections</SectionBackLink>
       </div>
 
@@ -35,7 +35,7 @@ export function CollectionDetail() {
         >
           <span className="text-sm italic text-text/40">Image de collection</span>
         </div>
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-text/85 to-transparent px-5 pb-4 pt-12">
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-text/85 to-transparent px-section pb-4 pt-12">
           <h1 className="text-[26px] font-extrabold leading-tight tracking-tight text-surface">
             {collection.name}
           </h1>
@@ -45,7 +45,7 @@ export function CollectionDetail() {
         </div>
       </section>
 
-      <div className="px-5 pt-5 pb-10">
+      <div className="px-section pt-4 pb-10">
         <p className={typography.editorialBody}>{detail.intro}</p>
 
         <section className="mt-7">

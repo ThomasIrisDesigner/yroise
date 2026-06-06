@@ -18,31 +18,37 @@ export const HISTOIRES_LIST: HistoireBillet[] = [
     slug: 'ocean-liberty-1947',
     type: 'curiosite',
     titre: "L'explosion de l'Océan Liberty, 28 juillet 1947",
+    accroche: LOREM.line,
   },
   {
     slug: 'marcel-bories-plaques',
     type: 'exposition',
     titre: 'Marcel Boriès, 1428 plaques de verre sur Brest',
+    accroche: LOREM.line,
   },
   {
     slug: 'dictionnaire-coetanlem',
     type: 'curiosite',
     titre: 'Le Dictionnaire de Coëtanlem',
+    accroche: LOREM.line,
   },
   {
     slug: 'brest-ville-fortifiee',
     type: 'curiosite',
     titre: 'Brest ville fortifiée — plans du XVIIe siècle',
+    accroche: LOREM.line,
   },
   {
     slug: 'alguiers-herbiers',
     type: 'exposition',
     titre: "Les alguiers, collections d'herbiers marins",
+    accroche: LOREM.line,
   },
   {
     slug: 'dumont-durville-1837',
     type: 'curiosite',
     titre: "L'expédition de Dumont d'Urville, 1837",
+    accroche: LOREM.line,
   },
 ]
 

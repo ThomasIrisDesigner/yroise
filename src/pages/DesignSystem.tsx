@@ -1,8 +1,16 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 
+import {
+  DsTwoColumnBlock,
+  type CompactSpecRow,
+} from '@/components/features/design-system/DsTwoColumnBlock'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
+import { CardSlider } from '@/components/ui/card-slider'
+import { CollectionHublotCard } from '@/components/ui/collection-hublot-card'
+import { HistoireCard } from '@/components/ui/histoire-card'
+import { JeunesseCard } from '@/components/ui/jeunesse-card'
 import { TypeLabel } from '@/components/ui/type-label'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -22,6 +30,19 @@ import {
   TYPE_LABEL_SECTION_COLORS,
   TYPE_LABEL_SECTORS,
 } from '@/styles/label-tokens'
+import {
+  CARD_COLLECTION_SPECS,
+  CARD_HISTOIRE_SPECS,
+  CARD_JEUNESSE_SPECS,
+  CARD_SLIDER_SPECS,
+} from '@/styles/card-tokens'
+import {
+  SECTION_LABEL_EXAMPLES,
+  SECTION_LABEL_NOTE,
+  SECTION_LABEL_SPECS,
+} from '@/styles/section-label-tokens'
+import { SECTION_PADDING_SPECS } from '@/styles/spacing-tokens'
+import { typography } from '@/styles/typography'
 import {
   TYPOGRAPHY_EDITORIAL_SECTION_NOTE,
   TYPOGRAPHY_FONT_FAMILY,
@@ -52,6 +73,12 @@ function typographyPreviewClassName(style: TypographyStyleSpec) {
 
 function compactLineHeight(value: string) {
   return value.split(' ')[0] ?? value
+}
+
+function parseArrowSpec(line: string): CompactSpecRow {
+  const sep = line.indexOf(' → ')
+  if (sep === -1) return { token: 'note', value: line }
+  return { token: line.slice(0, sep), value: line.slice(sep + 3) }
 }
 
 function TypographyTable({ styles }: { styles: TypographyStyleSpec[] }) {
@@ -105,6 +132,21 @@ const chapeauContextNote = typographyUiCatalog.find(
 const titleMContextNote = typographyUiCatalog.find(
   (s) => s.key === 'titleM'
 )?.contextNote
+
+const BUTTON_SIZE_SPEC_ROWS = BUTTON_SIZE_LINES.map(parseArrowSpec)
+const BUTTON_EXTRA_SPEC_ROWS = BUTTON_EXTRA_SPECS.map(parseArrowSpec)
+const BUTTON_VARIANT_SPEC_ROWS: CompactSpecRow[] = BUTTON_VARIANT_COLOR_SPECS.map(
+  ({ variant, spec }) => ({ token: variant, value: spec })
+)
+const BUTTON_ETATS_SPEC_ROWS: CompactSpecRow[] = [
+  { token: 'hover primary', value: 'fond #333333' },
+  { token: 'hover secondary', value: 'bordure #010101' },
+  { token: 'hover ghost', value: 'underline' },
+  ...BUTTON_EXTRA_SPEC_ROWS,
+]
+const TYPE_LABEL_COLOR_SPEC_ROWS: CompactSpecRow[] = TYPE_LABEL_SECTION_COLORS.map(
+  (row) => ({ token: row.section, value: row.spec })
+)
 
 function Section({
   id,
@@ -161,11 +203,17 @@ export function DesignSystem() {
           <a className="hover:text-text" href="#typographie">
             Typographie
           </a>
+          <a className="hover:text-text" href="#labels-section">
+            Labels de section
+          </a>
           <a className="hover:text-text" href="#boutons">
             Boutons
           </a>
           <a className="hover:text-text" href="#labels">
             Labels de type
+          </a>
+          <a className="hover:text-text" href="#cards">
+            Cards
           </a>
           <a className="hover:text-text" href="#espacement">
             Espacement
@@ -239,214 +287,230 @@ export function DesignSystem() {
             </div>
           </Section>
 
+          <Section id="labels-section" title="LABELS DE SECTION">
+            <DsTwoColumnBlock
+              preview={
+                <div className="flex flex-col gap-4">
+                  {SECTION_LABEL_EXAMPLES.map((example) => (
+                    <p key={example} className={typography.label}>
+                      {example}
+                    </p>
+                  ))}
+                </div>
+              }
+              specs={SECTION_LABEL_SPECS}
+              note={`Token label (sectionLabel). ${SECTION_LABEL_NOTE}`}
+            />
+          </Section>
+
           <Section id="boutons" title="BOUTONS">
             <div className="grid gap-10">
-              <div>
-                <h3 className="mb-4 font-outfit text-xs font-semibold uppercase tracking-[0.08em] text-text">
-                  Variants
-                </h3>
-                <div className="flex flex-wrap items-center gap-4">
-                  <Button variant="primary">Primary</Button>
-                  <Button variant="secondary">Secondary</Button>
-                  <Button variant="ghost">Ghost</Button>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="mb-4 font-outfit text-xs font-semibold uppercase tracking-[0.08em] text-text">
-                  Tailles
-                </h3>
-                <div className="flex flex-wrap items-center gap-4">
-                  <Button variant="primary" size="default">
-                    Default (44px)
-                  </Button>
-                  <Button variant="primary" size="sm">
-                    Small (36px)
-                  </Button>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="mb-4 font-outfit text-xs font-semibold uppercase tracking-[0.08em] text-text">
-                  États
-                </h3>
-                <div className="flex flex-wrap items-center gap-4">
-                  <Button variant="primary">Actif</Button>
-                  <Button variant="primary" disabled>
-                    Disabled
-                  </Button>
-                  <Button variant="secondary" disabled>
-                    Secondary disabled
-                  </Button>
-                </div>
-                <p className="mt-2 font-outfit text-[11px] text-muted">
-                  Hover : survoler les boutons pour prévisualiser (primary → #333333,
-                  secondary → bordure #010101, ghost → underline).
-                </p>
-              </div>
-
-              <div>
-                <h3 className="mb-4 font-outfit text-xs font-semibold uppercase tracking-[0.08em] text-text">
-                  Sur fond sombre
-                </h3>
-                <div className="rounded-xl bg-ocean-900 p-6">
-                  <Button variant="primary" inverted>
-                    Primary inversé
-                  </Button>
-                </div>
-                <p className="mt-2 font-outfit text-[11px] text-muted">
-                  Prop <code className="text-text">inverted</code> — fond #FFFFFF · texte
-                  #010101 · triangle glaz-700 (#2D7D8A). Usage : footer, hero.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="mb-4 font-outfit text-xs font-semibold uppercase tracking-[0.08em] text-text">
-                  Spécifications
-                </h3>
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div className="rounded-lg border border-border p-4">
-                    <p className="mb-3 font-outfit text-[11px] font-semibold uppercase tracking-wide text-muted">
-                      Style commun
-                    </p>
-                    <dl className="grid gap-1.5 font-outfit text-[11px]">
-                      {BUTTON_COMMON_SPECS.map((row) => (
-                        <div key={row.token} className="grid grid-cols-[1fr_auto] gap-3">
-                          <dt className="font-mono text-text">{row.token}</dt>
-                          <dd className="text-muted">{row.value}</dd>
-                        </div>
-                      ))}
-                    </dl>
+              <DsTwoColumnBlock
+                title="Style commun"
+                preview={<Button variant="primary">Primary</Button>}
+                specs={BUTTON_COMMON_SPECS}
+              />
+              <DsTwoColumnBlock
+                title="Variants"
+                preview={
+                  <div className="flex flex-wrap items-center gap-4">
+                    <Button variant="primary">Primary</Button>
+                    <Button variant="secondary">Secondary</Button>
+                    <Button variant="ghost">Ghost</Button>
                   </div>
-
-                  <div className="rounded-lg border border-border p-4">
-                    <p className="mb-3 font-outfit text-[11px] font-semibold uppercase tracking-wide text-muted">
-                      Tailles
-                    </p>
-                    <ul className="space-y-2 font-mono text-[11px] leading-snug text-text">
-                      {BUTTON_SIZE_LINES.map((line) => (
-                        <li key={line}>{line}</li>
-                      ))}
-                    </ul>
+                }
+                specs={BUTTON_VARIANT_SPEC_ROWS}
+              />
+              <DsTwoColumnBlock
+                title="Tailles"
+                preview={
+                  <div className="flex flex-wrap items-center gap-4">
+                    <Button variant="primary" size="default">
+                      Default (44px)
+                    </Button>
+                    <Button variant="primary" size="sm">
+                      Small (36px)
+                    </Button>
                   </div>
-                </div>
-
-                <div className="mt-4 flex flex-col gap-2">
-                  {BUTTON_VARIANT_COLOR_SPECS.map(({ variant, spec }) => (
-                    <p
-                      key={variant}
-                      className="font-outfit text-[11px] leading-snug text-muted"
-                    >
-                      <span className="font-mono font-semibold text-text">{variant}</span>
-                      {' → '}
-                      {spec}
-                    </p>
-                  ))}
-                  {BUTTON_EXTRA_SPECS.map((line) => (
-                    <p
-                      key={line}
-                      className="font-outfit text-[11px] leading-snug text-muted"
-                    >
-                      {line}
-                    </p>
-                  ))}
-                </div>
-              </div>
+                }
+                specs={BUTTON_SIZE_SPEC_ROWS}
+              />
+              <DsTwoColumnBlock
+                title="États"
+                preview={
+                  <div className="flex flex-wrap items-center gap-4">
+                    <Button variant="primary">Actif</Button>
+                    <Button variant="primary" disabled>
+                      Disabled
+                    </Button>
+                    <Button variant="secondary" disabled>
+                      Secondary disabled
+                    </Button>
+                  </div>
+                }
+                specs={BUTTON_ETATS_SPEC_ROWS}
+                note="Survoler les boutons actifs pour prévisualiser les hovers."
+              />
+              <DsTwoColumnBlock
+                title="Sur fond sombre"
+                preview={
+                  <div className="-m-4 rounded-lg bg-ocean-900 p-6">
+                    <Button variant="primary" inverted>
+                      Primary inversé
+                    </Button>
+                  </div>
+                }
+                specs={[
+                  {
+                    token: 'inverted',
+                    value: 'fond #FFFFFF · texte #010101 · triangle #2D7D8A',
+                  },
+                  { token: 'usage', value: 'footer, hero' },
+                ]}
+                previewClassName="border-0 bg-transparent p-0"
+              />
             </div>
           </Section>
 
           <Section id="labels" title="LABELS DE TYPE">
             <div className="grid gap-10">
-              <div>
-                <h3 className="mb-4 font-outfit text-xs font-semibold uppercase tracking-[0.08em] text-text">
-                  Fond blanc
-                </h3>
-                <div className="grid gap-4 rounded-lg border border-border bg-background p-4 sm:grid-cols-2">
-                  {TYPE_LABEL_SECTORS.map((sector) => (
-                    <div key={sector.id}>
-                      <p className="mb-2 font-outfit text-[11px] font-semibold uppercase tracking-wide text-muted">
-                        {sector.title}
-                      </p>
-                      <div className="flex flex-wrap gap-x-5 gap-y-2">
-                        {sector.types.map((type) => (
-                          <TypeLabel key={type} type={type} />
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <p className="mt-2 font-outfit text-[11px] text-muted">
-                  Couleur par défaut : #71717a (text-muted). Labels sectoriels — pas de
-                  type sur Collections ni La carte.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="mb-4 font-outfit text-xs font-semibold uppercase tracking-[0.08em] text-text">
-                  Fonds colorés de section
-                </h3>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  {TYPE_LABEL_SECTORS.map((sector) => (
-                    <div
-                      key={sector.id}
-                      className={`rounded-lg border border-border p-4 ${sector.surfaceClass} ${sector.sectionClass}`}
-                    >
-                      <p className="mb-3 font-outfit text-[11px] font-semibold uppercase tracking-wide text-text/70">
-                        {sector.title}
-                      </p>
-                      <div className="flex flex-wrap gap-x-5 gap-y-2">
-                        {sector.types.map((type) => (
-                          <TypeLabel key={type} type={type} />
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <h3 className="mb-4 font-outfit text-xs font-semibold uppercase tracking-[0.08em] text-text">
-                  Spécifications
-                </h3>
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div className="rounded-lg border border-border p-4">
-                    <p className="mb-3 font-outfit text-[11px] font-semibold uppercase tracking-wide text-muted">
-                      Style de base
-                    </p>
-                    <dl className="grid gap-1.5 font-outfit text-[11px]">
-                      {TYPE_LABEL_BASE_SPECS.map((row) => (
-                        <div key={row.token} className="grid grid-cols-[1fr_auto] gap-3">
-                          <dt className="font-mono text-text">{row.token}</dt>
-                          <dd className="text-muted">{row.value}</dd>
+              <DsTwoColumnBlock
+                title="Fond blanc"
+                preview={
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    {TYPE_LABEL_SECTORS.map((sector) => (
+                      <div key={sector.id}>
+                        <p className="mb-2 font-outfit text-[11px] font-semibold uppercase tracking-wide text-muted">
+                          {sector.title}
+                        </p>
+                        <div className="flex flex-wrap gap-x-5 gap-y-2">
+                          {sector.types.map((type) => (
+                            <TypeLabel key={type} type={type} />
+                          ))}
                         </div>
-                      ))}
-                    </dl>
+                      </div>
+                    ))}
                   </div>
-                  <div className="rounded-lg border border-border p-4">
-                    <p className="mb-3 font-outfit text-[11px] font-semibold uppercase tracking-wide text-muted">
-                      Couleur par section
-                    </p>
-                    <ul className="space-y-2 font-outfit text-[11px] leading-snug text-muted">
-                      {TYPE_LABEL_SECTION_COLORS.map((row) => (
-                        <li key={row.section}>
-                          <span className="font-mono text-text">{row.section}</span>
-                          {' → '}
-                          {row.spec}
-                        </li>
-                      ))}
-                    </ul>
-                    <p className="mt-3 font-outfit text-[11px] leading-snug text-muted">
-                      Classe parente :{' '}
-                      <code className="text-text">section-histoires</code>,{' '}
-                      <code className="text-text">section-jeunesse</code>.
-                    </p>
+                }
+                specs={TYPE_LABEL_BASE_SPECS}
+                note="Couleur par défaut #71717a. Pas de type sur Collections ni La carte."
+              />
+              <DsTwoColumnBlock
+                title="Fonds colorés de section"
+                preview={
+                  <div className="grid gap-4">
+                    {TYPE_LABEL_SECTORS.map((sector) => (
+                      <div
+                        key={sector.id}
+                        className={`rounded-lg border border-border p-4 ${sector.surfaceClass} ${sector.sectionClass}`}
+                      >
+                        <p className="mb-3 font-outfit text-[11px] font-semibold uppercase tracking-wide text-text/70">
+                          {sector.title}
+                        </p>
+                        <div className="flex flex-wrap gap-x-5 gap-y-2">
+                          {sector.types.map((type) => (
+                            <TypeLabel key={type} type={type} />
+                          ))}
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                </div>
-              </div>
+                }
+                specs={TYPE_LABEL_COLOR_SPEC_ROWS}
+                note="Classes parentes : section-histoires, section-jeunesse."
+              />
+            </div>
+          </Section>
+
+          <Section id="cards" title="CARDS">
+            <div className="grid gap-10">
+              <DsTwoColumnBlock
+                title="Card Histoires"
+                preview={
+                  <div className="section-histoires">
+                    <HistoireCard
+                      to="/histoires/ocean-liberty-1947"
+                      titre="L'explosion de l'Océan Liberty, 28 juillet 1947"
+                      type="curiosite"
+                      extrait="Sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore."
+                    />
+                  </div>
+                }
+                specs={CARD_HISTOIRE_SPECS}
+                previewClassName="flex justify-center"
+              />
+              <DsTwoColumnBlock
+                title="Card Collections — hublot"
+                preview={
+                  <div className="flex justify-center">
+                    <CollectionHublotCard to="/collections/en-mer" titre="En mer" />
+                  </div>
+                }
+                specs={CARD_COLLECTION_SPECS}
+              />
+              <DsTwoColumnBlock
+                title="Card Jeu / Séquence"
+                preview={
+                  <div className="section-jeunesse">
+                    <JeunesseCard
+                      to="/jeunesse/puzzle-rade-brest"
+                      titre="Le puzzle de la rade de Brest"
+                      type="jeu"
+                      meta="6–10 ans · 5 min"
+                    />
+                  </div>
+                }
+                specs={CARD_JEUNESSE_SPECS}
+                previewClassName="flex justify-center"
+              />
+              <DsTwoColumnBlock
+                title="Slider"
+                preview={
+                  <div className="card-slider-viewport section-histoires -mx-4 overflow-hidden bg-surface/30 py-4">
+                    <CardSlider aria-label="Démo slider cards">
+                      <HistoireCard
+                        to="#"
+                        titre="Exemple histoire slider"
+                        type="exposition"
+                        extrait="Aperçu du peek — card suivante visible à droite."
+                        sliderItem
+                      />
+                      <HistoireCard
+                        to="#"
+                        titre="Deuxième card"
+                        type="curiosite"
+                        extrait="Scroll horizontal · snap · gap 12px."
+                        sliderItem
+                      />
+                      <CollectionHublotCard to="#" titre="En mer" />
+                      <CollectionHublotCard to="#" titre="Brest" />
+                    </CardSlider>
+                  </div>
+                }
+                specs={CARD_SLIDER_SPECS}
+                previewClassName="overflow-hidden border-0 bg-transparent p-0"
+              />
             </div>
           </Section>
 
           <Section id="espacement" title="ESPACEMENT">
+            <p className="mb-8 font-outfit text-sm text-muted">
+              Grille 8px — utiliser les multiples Tailwind (p-2, p-4, p-6…). Gouttière
+              horizontale des sections : <code className="text-text">px-section</code> (16px).
+            </p>
+            <div className="mb-10">
+              <DsTwoColumnBlock
+                title="Gouttière section"
+                preview={
+                  <div className="border-l-4 border-glaz-700 pl-section">
+                    <p className="font-outfit text-sm text-text">
+                      Contenu aligné à 16px du bord
+                    </p>
+                  </div>
+                }
+                specs={SECTION_PADDING_SPECS}
+              />
+            </div>
             <div className="grid gap-3">
               {spacing.map((s) => (
                 <div

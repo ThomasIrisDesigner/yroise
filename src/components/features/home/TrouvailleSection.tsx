@@ -4,7 +4,7 @@ import { typography } from '@/styles/typography'
 
 export function TrouvailleSection() {
   return (
-    <section className="px-5 pt-8 pb-10">
+    <section className="px-section pt-8 pb-10">
       <h2 className={typography.sectionLabel}>La trouvaille</h2>
       <div
         className="mt-4 flex h-32 w-full items-center justify-center rounded-md border border-border bg-surface"

@@ -45,6 +45,12 @@
 
   --font-ui: "Outfit", ui-sans-serif, system-ui, sans-serif;
   --font-editorial: "Source Serif 4", ui-serif, Georgia, serif;
+
+  /* Largeur de référence slider cards — 100vw sur device réel, 390px en mockup / DS */
+  --card-slider-viewport: 100vw;
+
+  /* Gouttière horizontale des sections éditoriales (multiple de 8) */
+  --space-section-x: 16px;
 }
 
 html,
@@ -79,4 +85,48 @@ body {
 
 .section-jeunesse .type-label {
   color: rgb(var(--aurore-900));
+}
+
+/* Header site — sticky 72px → 56px au scroll */
+.site-header {
+  transition: min-height 0.25s ease;
+}
+
+.site-header-tagline {
+  transition:
+    max-height 0.25s ease,
+    opacity 0.2s ease;
+}
+
+/* Card éditoriale — image full bleed (Histoires, Jeu/Séquence) */
+.card-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  flex-shrink: 0;
+  object-fit: cover;
+  background: rgb(var(--color-surface));
+}
+
+/* Slider horizontal — aligné sur la gouttière section, débordement peek à droite */
+.slider {
+  padding-left: var(--space-section-x);
+  scroll-padding-left: var(--space-section-x);
+}
+
+.slider .card:last-child,
+.slider .collection-item:last-child {
+  margin-right: var(--space-section-x);
+}
+
+/* Mockup mobile (390px) et démo DS — évite calc(100vw) sur viewport desktop */
+.card-slider-viewport {
+  --card-slider-viewport: 390px;
+}
+
+.card-slider-item {
+  width: calc(var(--card-slider-viewport) - 5rem);
+  flex-shrink: 0;
+  align-self: flex-start;
+  scroll-snap-align: start;
 }

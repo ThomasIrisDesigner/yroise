@@ -35,8 +35,8 @@ export function HorizontalCarousel({
       tabIndex={0}
       className={cn(
         'scrollbar-none flex cursor-grab snap-x snap-mandatory overflow-x-auto overscroll-x-contain pb-3 active:cursor-grabbing [&_a]:cursor-pointer [&_a]:touch-manipulation',
-        /* Alignement 1re / dernière carte avec le contenu (px-5 des sections) */
-        'scroll-pl-5 scroll-pr-5 [&>*:first-child]:ml-5 [&>*:last-child]:mr-5',
+        /* Alignement 1re / dernière carte avec la gouttière section (16px) */
+        'scroll-pl-section scroll-pr-section [&>*:first-child]:ml-section [&>*:last-child]:mr-section',
         className
       )}
       style={{

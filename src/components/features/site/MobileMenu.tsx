@@ -15,7 +15,7 @@ interface MobileMenuProps {
 
 function navItemClass(active: boolean) {
   return cn(
-    'flex min-h-14 items-center border-b border-border px-5 py-4 font-outfit text-base tracking-wide transition-colors',
+    'flex min-h-14 items-center border-b border-border px-section py-4 font-outfit text-base tracking-wide transition-colors',
     active
       ? 'border-l-[3px] border-l-glaz-700 bg-surface/50 pl-[17px] font-extrabold text-glaz-700'
       : 'font-bold text-text hover:text-glaz-700'
@@ -39,7 +39,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
 
   return (
     <div className="fixed inset-0 z-30 flex flex-col bg-surface">
-      <div className="flex h-14 items-center justify-between border-b border-border px-5">
+      <div className="flex h-14 items-center justify-between border-b border-border px-section">
         <span className={typography.logo}>YROISE</span>
         <button
           type="button"
@@ -85,7 +85,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           </button>
           {collectionsOpen ? (
             <div>
-              <div className="flex min-h-12 items-center border-t border-border px-5 py-3 pl-9">
+              <div className="flex min-h-12 items-center border-t border-border px-section py-3 pl-9">
                 <Button asChild variant="ghost" size="sm">
                   <Link to="/collections" onClick={onClose}>
                     Tout voir
@@ -101,7 +101,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                     onClick={onClose}
                     aria-current={colActive ? 'page' : undefined}
                     className={cn(
-                      'flex min-h-12 items-center gap-2 border-t border-border px-5 py-3 pl-9 text-base',
+                      'flex min-h-12 items-center gap-2 border-t border-border px-section py-3 pl-9 text-base',
                       colActive
                         ? 'bg-surface/60 font-semibold text-glaz-700'
                         : 'bg-background text-text'
@@ -140,7 +140,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
         </Link>
       </nav>
 
-      <div className="flex items-center gap-2 border-t border-border px-5 py-4">
+      <div className="flex items-center gap-2 border-t border-border px-section py-4">
         <span className="inline-flex h-9 items-center rounded bg-primary px-3 text-sm font-bold text-surface">
           FR
         </span>

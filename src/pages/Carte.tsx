@@ -13,7 +13,7 @@ export function Carte() {
 
   return (
     <SitePageShell fillMockup>
-      <div className="shrink-0 border-b border-border bg-surface px-5 py-3">
+      <div className="shrink-0 border-b border-border bg-surface px-section py-3">
         <p className={typography.titleL}>{CARTE_INTRO.lead}</p>
         <p className={`mt-1 ${typography.meta}`}>
           {CARTE_INTRO.sub}
@@ -52,7 +52,7 @@ export function Carte() {
       </div>
 
       {!selectedPin ? (
-        <div className="shrink-0 border-t border-border bg-surface/50 px-5 py-3">
+        <div className="shrink-0 border-t border-border bg-surface/50 px-section py-3">
           <p className={`text-center ${typography.editorialCaption}`}>{CARTE_INTRO.hint}</p>
         </div>
       ) : null}

@@ -1,41 +1,30 @@
 import { Link } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
-import { HorizontalCarousel } from '@/components/features/home/HorizontalCarousel'
-import { mobileCarousel } from '@/config/wireframe-mobile'
+import { CardSlider } from '@/components/ui/card-slider'
+import { CollectionHublotCard } from '@/components/ui/collection-hublot-card'
 import { COLLECTIONS } from '@/data/collections'
 import { typography } from '@/styles/typography'
-
-const { cardWidthPx, imageHeightPx } = mobileCarousel.collections
 
 export function CollectionsCarousel() {
   return (
     <section className="border-t border-border pt-10 pb-8">
-      <div className="mb-4 flex items-center justify-between px-5">
+      <div className="mb-4 flex items-center justify-between px-section">
         <h2 className={typography.sectionLabel}>Collections</h2>
         <Button asChild variant="ghost" size="sm">
           <Link to="/collections">Tout voir</Link>
         </Button>
       </div>
-      <HorizontalCarousel gapPx={mobileCarousel.gapPx} aria-label="Collections">
+      <CardSlider aria-label="Collections">
         {COLLECTIONS.map((col) => (
-          <Link
+          <CollectionHublotCard
             key={col.slug}
             to={`/collections/${col.slug}`}
-            aria-label={`Découvrir la collection ${col.name}`}
-            className="block shrink-0 snap-start rounded-md text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-glaz-700/30"
-            style={{ width: cardWidthPx }}
-            draggable={false}
-          >
-            <div
-              className="w-full rounded-md border border-border bg-surface"
-              style={{ height: imageHeightPx }}
-              aria-hidden
-            />
-            <p className={`mt-2 ${typography.carouselCollectionLabel}`}>{col.shortLabel}</p>
-          </Link>
+            titre={col.shortLabel}
+            imageAlt={col.name}
+          />
         ))}
-      </HorizontalCarousel>
+      </CardSlider>
     </section>
   )
 }

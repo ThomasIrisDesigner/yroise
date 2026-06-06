@@ -27,7 +27,7 @@ export function HistoireDetail() {
   return (
     <SitePageShell>
       <div className="section-histoires">
-        <header className="px-5 pt-4">
+        <header className="px-section pt-4">
           <SectionBackLink to="/histoires">← Toutes les histoires</SectionBackLink>
         </header>
 
@@ -38,11 +38,11 @@ export function HistoireDetail() {
         >
           <span className={typography.editorialCaption}>{content.heroPlaceholder}</span>
         </div>
-        <p className={`border-b border-border px-5 py-3 ${typography.editorialCaption}`}>
+        <p className={`border-b border-border px-section py-3 ${typography.editorialCaption}`}>
           {content.heroCaption}
         </p>
 
-        <div className="px-5 pt-4">
+        <div className="px-section pt-4">
           <TypeLabel type={histoire.type} />
           <h1 className={`mt-3 ${typography.pageTitle}`}>{histoire.titre}</h1>
           <p className={`mt-3 ${typography.chapeau}`}>{content.chapeau}</p>
@@ -54,7 +54,7 @@ export function HistoireDetail() {
           </div>
         </div>
 
-        <article className="px-5 pt-6 pb-10">
+        <article className="px-section pt-6 pb-10">
           <HistoireBilletBody blocks={content.blocks} />
 
           <div className="mt-10">

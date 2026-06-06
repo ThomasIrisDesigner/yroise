@@ -7,7 +7,7 @@ import { typography } from '@/styles/typography'
 export function CollectionsList() {
   return (
     <SitePageShell>
-      <div className="px-5 pt-5 pb-10">
+      <div className="px-section pt-4 pb-10">
         <h1 className={typography.pageTitle}>Collections</h1>
         <p className={`mt-2 ${typography.pageSubtitle}`}>{LOREM.line}</p>
         <ul className="mt-6 flex flex-col gap-6">

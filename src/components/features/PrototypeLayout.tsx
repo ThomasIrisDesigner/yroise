@@ -160,7 +160,7 @@ export function PrototypeLayout({ children }: { children: React.ReactNode }) {
                 }}
               >
                 <div
-                  className="scrollbar-none flex h-full w-[390px] flex-col overflow-y-auto overscroll-contain rounded-[40px] bg-surface shadow-2xl shadow-black/30"
+                  className="card-slider-viewport scrollbar-none flex h-full w-[390px] flex-col overflow-y-auto overscroll-contain rounded-[40px] bg-surface shadow-2xl shadow-black/30"
                 >
                   {children}
                 </div>

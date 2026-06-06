@@ -13,7 +13,7 @@ export function GmbVideoEmbed({ title, href }: GmbVideoEmbedProps) {
     <figure>
       <div className="relative w-full overflow-hidden rounded-md bg-ocean-900">
         <div className="pt-[56.25%]" aria-hidden />
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-5">
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-section">
           <div
             className="flex h-7 w-11 items-center justify-center rounded-md bg-danger"
             aria-hidden

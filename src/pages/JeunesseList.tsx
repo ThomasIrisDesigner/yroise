@@ -7,7 +7,7 @@ import { typography } from '@/styles/typography'
 export function JeunesseList() {
   return (
     <SitePageShell>
-      <div className="section-jeunesse px-5 pt-5 pb-10">
+      <div className="section-jeunesse px-section pt-4 pb-10">
         <h1 className={typography.pageTitle}>Jeunesse</h1>
         <p className={`mt-2 ${typography.pageSubtitle}`}>{JEUNESSE_INTRO}</p>
         <ul className="mt-6 flex flex-col gap-4">

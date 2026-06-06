@@ -7,9 +7,9 @@ import { typography } from '@/styles/typography'
 export function HistoiresList() {
   return (
     <SitePageShell>
-      <div className="section-histoires px-5 pt-5 pb-10">
+      <div className="section-histoires px-section pt-4 pb-10">
         <h1 className={typography.pageTitle}>Histoires</h1>
-        <ul className="mt-6 flex flex-col gap-5">
+        <ul className="mt-6 flex flex-col gap-4">
           {HISTOIRES_LIST.map((histoire) => (
             <li key={histoire.slug}>
               <HistoireListCard histoire={histoire} />

@@ -25,7 +25,7 @@ export function JeunesseDetail() {
 
   return (
     <SitePageShell>
-      <article className="section-jeunesse px-5 pt-4 pb-10">
+      <article className="section-jeunesse px-section pt-4 pb-10">
         <SectionBackLink to="/jeunesse">← Jeunesse</SectionBackLink>
 
         <div className="mt-4 flex aspect-[3/2] w-full items-center justify-center rounded-md border border-border bg-surface text-sm italic text-text/50">

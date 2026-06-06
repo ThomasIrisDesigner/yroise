@@ -10,6 +10,9 @@ export default {
         outfit: ['var(--font-ui)'],
         editorial: ['var(--font-editorial)'],
       },
+      spacing: {
+        section: 'var(--space-section-x)',
+      },
       colors: {
         text: rgb('color-text'),
         'text-muted': rgb('color-text-muted'),

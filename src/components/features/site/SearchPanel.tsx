@@ -31,7 +31,7 @@ export function SearchPanel({ open, onClose }: SearchPanelProps) {
 
   return (
     <div className="fixed inset-0 z-30 flex flex-col bg-surface">
-      <div className="flex h-14 items-center justify-between border-b border-border px-5">
+      <div className="flex h-14 items-center justify-between border-b border-border px-section">
         <span className={typography.logo}>YROISE</span>
         <button
           type="button"
@@ -43,7 +43,7 @@ export function SearchPanel({ open, onClose }: SearchPanelProps) {
         </button>
       </div>
 
-      <div className="scrollbar-none flex flex-1 flex-col gap-5 overflow-y-auto px-5 py-5">
+      <div className="scrollbar-none flex flex-1 flex-col gap-4 overflow-y-auto px-section py-4">
         <h2 className={typography.titleL}>Rechercher</h2>
 
         <div className="flex h-12 items-center gap-2 rounded-md border-2 border-glaz-700 px-4">

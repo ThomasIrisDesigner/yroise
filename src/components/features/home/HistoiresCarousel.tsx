@@ -1,44 +1,32 @@
 import { Link } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
-import { HorizontalCarousel } from '@/components/features/home/HorizontalCarousel'
-import { mobileCarousel } from '@/config/wireframe-mobile'
+import { CardSlider } from '@/components/ui/card-slider'
+import { HistoireCard } from '@/components/ui/histoire-card'
 import { HISTOIRES_RECENTES } from '@/data/histoires'
 import { typography } from '@/styles/typography'
 
-const { cardWidthPx, imageHeightPx } = mobileCarousel.histoires
-
 export function HistoiresCarousel() {
   return (
-    <section className="border-t border-border pt-10 pb-8">
-      <div className="mb-4 flex items-center justify-between px-5">
+    <section className="section-histoires border-t border-border pt-10 pb-8">
+      <div className="mb-4 flex items-center justify-between px-section">
         <h2 className={typography.sectionLabel}>Histoires</h2>
         <Button asChild variant="ghost" size="sm">
           <Link to="/histoires">Tout voir</Link>
         </Button>
       </div>
-      <HorizontalCarousel gapPx={mobileCarousel.gapPx} aria-label="Histoires récentes">
+      <CardSlider aria-label="Histoires récentes">
         {HISTOIRES_RECENTES.map((item) => (
-          <Link
+          <HistoireCard
             key={item.slug}
             to={`/histoires/${item.slug}`}
-            aria-label={`Lire l'histoire : ${item.titre}`}
-            className="block shrink-0 snap-start rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sable-700/30"
-            style={{ width: cardWidthPx }}
-            draggable={false}
-          >
-            <div
-              className="w-full rounded-md border border-border bg-surface"
-              style={{ height: imageHeightPx }}
-              aria-hidden
-            />
-            <p className={`mt-2 ${typography.carouselTitle}`}>{item.titre}</p>
-            {item.accroche ? (
-              <p className={`mt-1 ${typography.carouselMeta}`}>{item.accroche}</p>
-            ) : null}
-          </Link>
+            titre={item.titre}
+            type={item.type}
+            extrait={item.accroche}
+            sliderItem
+          />
         ))}
-      </HorizontalCarousel>
+      </CardSlider>
     </section>
   )
 }

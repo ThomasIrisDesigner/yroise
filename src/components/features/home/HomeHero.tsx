@@ -12,7 +12,7 @@ export function HomeHero() {
       >
         <span className={typography.editorialCaption}>{HOME_HERO.imageAlt}</span>
       </div>
-      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-text/85 to-transparent px-5 pb-5 pt-14">
+      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-text/85 to-transparent px-section pb-4 pt-14">
         <p className={cn(typography.titleL, 'font-normal italic text-white')}>
           &ldquo;{HOME_HERO.quote}&rdquo;
         </p>
