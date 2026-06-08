@@ -21,6 +21,7 @@ export function CollectionsCarousel() {
             key={col.slug}
             to={`/collections/${col.slug}`}
             titre={col.shortLabel}
+            imageSrc="/images/voilier-brest.png"
             imageAlt={col.name}
           />
         ))}

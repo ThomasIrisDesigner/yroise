@@ -13,6 +13,8 @@ export function HistoireListCard({ histoire }: HistoireListCardProps) {
       titre={histoire.titre}
       type={histoire.type}
       extrait={histoire.accroche ?? LOREM.line}
+      imageSrc="/images/voilier-brest.png"
+      imageAlt=""
       className="w-full"
     />
   )

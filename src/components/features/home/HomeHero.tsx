@@ -5,13 +5,12 @@ import { typography } from '@/styles/typography'
 export function HomeHero() {
   return (
     <section className="relative">
-      <div
-        className="flex h-48 w-full items-center justify-center bg-surface"
-        role="img"
-        aria-label={HOME_HERO.imageAlt}
-      >
-        <span className={typography.editorialCaption}>{HOME_HERO.imageAlt}</span>
-      </div>
+      <img
+        src="/images/voilier-brest.png"
+        alt={HOME_HERO.imageAlt}
+        className="block h-48 w-full object-cover"
+        draggable={false}
+      />
       <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-text/85 to-transparent px-section pb-4 pt-14">
         <p className={cn(typography.titleL, 'font-normal italic text-white')}>
           &ldquo;{HOME_HERO.quote}&rdquo;

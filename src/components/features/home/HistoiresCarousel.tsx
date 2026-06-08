@@ -23,6 +23,8 @@ export function HistoiresCarousel() {
             titre={item.titre}
             type={item.type}
             extrait={item.accroche}
+            imageSrc="/images/voilier-brest.png"
+            imageAlt=""
             sliderItem
           />
         ))}
