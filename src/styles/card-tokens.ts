@@ -17,10 +17,10 @@ export const CARD_HISTOIRE_SPECS = [
   { token: 'border / radius', value: 'aucun' },
   { token: '.card-image', value: 'width 100% · aspect-ratio 16/9 · object-fit cover · display block · full bleed' },
   { token: 'card-body', value: 'padding 12px 14px 14px · flex column · flex 1' },
-  { token: 'card-title', value: 'Outfit 700 · 15px · lh 1.3 · ls 0.1px · line-clamp 2' },
+  { token: 'card-title', value: 'Outfit 600 · 22px (1.375rem) · lh 1.75rem · ls 0.1px · line-clamp 2' },
   { token: 'card-title color', value: '#010101 · hover #2D7D8A · transition 0.15s' },
   { token: 'card-title margin', value: 'margin-bottom 8px' },
-  { token: 'card-excerpt', value: 'Outfit 400 · 13px · lh 1.55 · #71717a · line-clamp 4' },
+  { token: 'card-excerpt', value: 'Outfit 400 · 16px (1rem) · lh 1.5rem · #71717a · line-clamp 4' },
   { token: 'a11y', value: '.card-title a::before { inset: 0 } sur .card relative' },
 ] as const
 

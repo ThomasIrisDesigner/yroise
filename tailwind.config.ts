@@ -13,6 +13,9 @@ export default {
       spacing: {
         section: 'var(--space-section-x)',
       },
+      letterSpacing: {
+        button: 'var(--button-letter-spacing)',
+      },
       colors: {
         text: rgb('color-text'),
         'text-muted': rgb('color-text-muted'),

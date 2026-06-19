@@ -8,7 +8,9 @@ export const BUTTON_SIZES = ['default', 'sm'] as const
 
 export const BUTTON_COMMON_SPECS: ButtonSpecRow[] = [
   { token: 'font-family', value: 'Outfit' },
-  { token: 'font-weight', value: '600' },
+  { token: 'font-size', value: '14px (--button-font-size)' },
+  { token: 'font-weight', value: '500 (--button-font-weight)' },
+  { token: 'letter-spacing', value: '0.03em (--button-letter-spacing)' },
   { token: 'border-radius', value: '999px (pill)' },
   { token: 'transition', value: 'all 0.15s ease' },
   { token: 'gap default', value: '12px' },
@@ -16,8 +18,8 @@ export const BUTTON_COMMON_SPECS: ButtonSpecRow[] = [
 ]
 
 export const BUTTON_SIZE_LINES = [
-  'default → height 44px · pl 24px · pr 20px · fs 13px · △ 10px',
-  'sm → height 36px · pl 18px · pr 14px · fs 12px · △ 8px',
+  'default → height 44px · pl 24px · pr 20px · fs 14px · △ 10px',
+  'sm → height 36px · pl 18px · pr 14px · fs 14px · △ 8px',
 ] as const
 
 export const BUTTON_VARIANT_COLOR_SPECS = [

@@ -62,7 +62,7 @@ export function HistoireCard({
         </h3>
         {extrait ? <p className={cardExcerptClass}>{extrait}</p> : null}
         <div className="mt-auto pt-4">
-          <span className="inline-flex items-center gap-2 rounded-full border border-text px-4 py-2 font-outfit text-[13px] font-normal text-text">
+          <span className="inline-flex items-center gap-2 rounded-full border border-text px-4 py-2 font-outfit text-[length:var(--button-font-size)] font-normal tracking-button text-text">
             Lire
             <TriangleYroise size={8} color="rgb(var(--color-text))" />
           </span>

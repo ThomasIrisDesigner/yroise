@@ -10,9 +10,11 @@ const titleXl = `${ui} text-[28px] font-bold leading-tight tracking-[0.1px] text
 const titleL = `${ui} text-[20px] font-semibold leading-snug text-text`
 const titleM = `${ui} text-base font-semibold leading-[1.3] tracking-[0.1px] text-text`
 const titleMCard = `${titleM} line-clamp-3`
+const cardTitleEditorial = `${ui} text-[1.375rem] font-semibold leading-7 tracking-[0.1px]`
 const chapeau = `${ui} text-lg font-normal leading-[1.4] tracking-[0.1px] text-text`
 const label = `${ui} text-base font-semibold uppercase tracking-[2px] text-text`
 const meta = `${ui} text-[13px] font-normal leading-snug text-muted`
+const cardExcerpt = `${ui} text-base font-normal leading-6 text-muted`
 const editorialCaption = `${ui} text-sm font-normal leading-[1.4] tracking-[0.1px] text-muted`
 const uiXs = `${ui} text-[11px] font-normal leading-tight text-muted`
 /** Liens UI — couleur selon le contexte (fond clair ou sombre). */
@@ -29,9 +31,11 @@ export const typography = {
   titleXl,
   titleL,
   titleM,
+  cardTitleEditorial,
   chapeau,
   label,
   meta,
+  cardExcerpt,
   editorialCaption,
   uiXs,
   uiLink,
@@ -63,7 +67,7 @@ export const typography = {
   /** @deprecated Alias — préférer meta + text-white/60 */
   heroAttribution: meta,
   cardTitle: titleMCard,
-  carouselTitle: titleMCard,
+  carouselTitle: cardTitleEditorial,
   carouselMeta: meta,
   carouselCollectionLabel: meta,
   cardMeta: meta,
@@ -131,7 +135,19 @@ const uiSpecs: CatalogSpec[] = [
     lineHeight: '1.3',
     letterSpacing: '0.1px',
     contextNote:
-      'Sur les cards : troncature à 3 lignes (line-clamp-3). Alias cardTitle / carouselTitle.',
+      'Listes et cards compactes. Troncature à 3 lignes (line-clamp-3). Alias cardTitle.',
+  },
+  {
+    usage: 'Titres des cards Histoires et Jeunesse (carousel home)',
+    label: 'Titre card éditoriale',
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    sizePx: 22,
+    weight: 600,
+    color: '#010101',
+    lineHeight: '1.75rem (leading-7)',
+    letterSpacing: '0.1px',
+    contextNote:
+      'Troncature à 2 lignes (line-clamp-2) dans le carousel. Alias carouselTitle.',
   },
   {
     usage: 'Intro article, entre le H1 et le bloc auteur/date',
@@ -166,6 +182,17 @@ const uiSpecs: CatalogSpec[] = [
     color: '#71717a',
     lineHeight: '1.375 (leading-snug)',
     letterSpacing: 'normal',
+  },
+  {
+    usage: 'Texte sous le titre des cards Histoires',
+    label: 'Extrait card Histoires',
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    sizePx: 16,
+    weight: 400,
+    color: '#71717a',
+    lineHeight: '1.5rem (leading-6)',
+    letterSpacing: 'normal',
+    contextNote: 'Troncature à 4 lignes (line-clamp-4) sur les cards du carousel.',
   },
   {
     usage: 'Légendes sous les images',
@@ -241,12 +268,14 @@ export const typographyUiCatalog: TypographyStyleSpec[] = (
     ['titleXl', 'title-xl', 0],
     ['titleL', 'title-l', 1],
     ['titleM', 'title-m', 2],
-    ['chapeau', 'chapeau', 3],
-    ['label', 'label', 4],
-    ['meta', 'meta', 5],
-    ['editorialCaption', 'editorial-caption', 6],
-    ['uiXs', 'ui-xs', 7],
-    ['uiLink', 'ui-link', 8],
+    ['cardTitleEditorial', 'card-title-editorial', 3],
+    ['chapeau', 'chapeau', 4],
+    ['label', 'label', 5],
+    ['meta', 'meta', 6],
+    ['cardExcerpt', 'card-excerpt', 7],
+    ['editorialCaption', 'editorial-caption', 8],
+    ['uiXs', 'ui-xs', 9],
+    ['uiLink', 'ui-link', 10],
   ] as const
 ).map(([key, token, i]) => buildCatalogEntry(key, token, uiSpecs[i]!))
 

@@ -7,9 +7,11 @@ export const HOME_HERO = {
 } as const
 
 export const HOME_TROUVAILLE = {
-  titre: LOREM.short,
+  titre: 'Le "Magellan" au clair de lune',
   chapeau: LOREM.paragraph,
   ctaLabel: 'Découvrir',
+  imageSrc: "/images/Le_'Magellan'_au_clair_de_[...]_btv1b101065215.jpg",
+  imageAlt: "Le Magellan au clair de lune — Brest",
 } as const
 
 export const HOME_CARTE = {

@@ -17,7 +17,7 @@ function triangleColor(
 }
 
 const buttonVariants = cva(
-  'inline-flex items-center whitespace-nowrap font-outfit font-semibold transition-all duration-150 ease-in-out rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-glaz-700/30 disabled:cursor-not-allowed disabled:opacity-[0.45]',
+  'inline-flex items-center whitespace-nowrap font-outfit text-[length:var(--button-font-size)] font-medium tracking-button transition-all duration-150 ease-in-out rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-glaz-700/30 disabled:cursor-not-allowed disabled:opacity-[0.45]',
   {
     variants: {
       variant: {
@@ -28,8 +28,8 @@ const buttonVariants = cva(
         ghost: 'bg-transparent text-text hover:underline',
       },
       size: {
-        default: 'h-11 gap-3 pl-6 pr-5 text-[13px]',
-        sm: 'h-9 gap-2.5 pl-[18px] pr-3.5 text-xs',
+        default: 'h-11 gap-3 pl-6 pr-5',
+        sm: 'h-9 gap-2.5 pl-[18px] pr-3.5',
       },
       inverted: {
         true: '',

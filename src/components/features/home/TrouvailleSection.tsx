@@ -17,10 +17,9 @@ export function TrouvailleSection() {
 
       {/* Photo pleine largeur */}
       <img
-        src="/images/voilier-brest.png"
-        alt=""
-        aria-hidden
-        className="mt-6 block h-64 w-full object-cover"
+        src={HOME_TROUVAILLE.imageSrc}
+        alt={HOME_TROUVAILLE.imageAlt}
+        className="mt-6 block aspect-[4/3] w-full object-cover"
         draggable={false}
       />
 

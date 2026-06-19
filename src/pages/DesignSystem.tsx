@@ -307,8 +307,15 @@ export function DesignSystem() {
             <div className="grid gap-10">
               <DsTwoColumnBlock
                 title="Style commun"
-                preview={<Button variant="primary">Primary</Button>}
+                preview={
+                  <div className="flex flex-wrap items-center gap-4">
+                    <Button variant="primary">Primary</Button>
+                    <Button variant="secondary">Secondary</Button>
+                    <Button variant="ghost">Ghost</Button>
+                  </div>
+                }
                 specs={BUTTON_COMMON_SPECS}
+                note="Typo libellé via --button-font-size, --button-font-weight et --button-letter-spacing — tous les variants."
               />
               <DsTwoColumnBlock
                 title="Variants"

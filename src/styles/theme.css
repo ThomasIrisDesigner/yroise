@@ -38,6 +38,9 @@
 
   /* Boutons */
   --color-button-primary-hover: 51 51 51;
+  --button-font-size: 14px;
+  --button-font-weight: 500;
+  --button-letter-spacing: 0.03em;
 
   /* États */
   --color-danger: 220 38 38;

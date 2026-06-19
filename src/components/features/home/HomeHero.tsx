@@ -11,6 +11,7 @@ export function HomeHero() {
         className="block h-48 w-full object-cover"
         draggable={false}
       />
+      <div className="h-1 w-full shrink-0 bg-text" aria-hidden />
     </section>
   )
 }
