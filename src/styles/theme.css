@@ -99,20 +99,18 @@ body {
   transition: width 0.25s ease;
 }
 
-/* Touch target 44px — padding vertical seulement pour ne pas gonfler le gap horizontal */
+/* Touch target 44px sur boutons 40×40 */
 .site-header-icon-btn {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: -10px 0;
-  padding: 10px 0;
 }
 
 .site-header-icon-btn::before {
   content: '';
   position: absolute;
-  inset: -10px;
+  inset: -2px;
 }
 
 .site-header-tagline {

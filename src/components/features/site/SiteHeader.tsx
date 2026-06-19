@@ -13,20 +13,20 @@ interface SiteHeaderProps {
 
 function HeaderSearchIcon() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden className="block">
+    <svg viewBox="0 0 40 40" aria-hidden className="block h-full w-full">
       <circle
-        cx="11.5"
-        cy="11.5"
-        r="4.5"
+        cx="19"
+        cy="19.5"
+        r="7"
         fill="none"
         stroke="currentColor"
-        strokeWidth="1.5"
+        strokeWidth="2.5"
       />
       <path
-        d="M15 15l2.5 2.5"
+        d="M25 24l5 5"
         fill="none"
         stroke="currentColor"
-        strokeWidth="1.5"
+        strokeWidth="2.5"
         strokeLinecap="round"
       />
     </svg>
@@ -35,10 +35,34 @@ function HeaderSearchIcon() {
 
 function HeaderMenuIcon() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden className="block">
-      <rect x="6" y="7" width="12" height="2" rx="1" fill="currentColor" />
-      <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
-      <rect x="6" y="15" width="12" height="2" rx="1" fill="currentColor" />
+    <svg viewBox="0 0 40 40" aria-hidden className="block h-full w-full">
+      <line
+        x1="12"
+        y1="14"
+        x2="29"
+        y2="14"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+      <line
+        x1="12"
+        y1="20"
+        x2="29"
+        y2="20"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+      <line
+        x1="12"
+        y1="26"
+        x2="29"
+        y2="26"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
     </svg>
   )
 }
@@ -57,11 +81,9 @@ function HeaderNavIconButton({
       type="button"
       aria-label={label}
       onClick={onClick}
-      className="site-header-icon-btn justify-center text-glaz-700 transition-opacity hover:opacity-80"
+      className="site-header-icon-btn box-border h-10 w-10 shrink-0 rounded-full border-[2.5px] border-text text-glaz-700 transition-opacity hover:opacity-80"
     >
-      <span className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-text">
-        {children}
-      </span>
+      {children}
     </button>
   )
 }
@@ -79,38 +101,45 @@ export function SiteHeader({ onOpenSearch, onOpenMenu, className }: SiteHeaderPr
         className
       )}
     >
-      <div className="w-full">
-        <div className="flex items-center justify-between">
-          <Link to="/prototype" className="shrink-0 hover:opacity-80">
+      <div className="flex w-full items-center justify-between gap-4">
+        {scrolled ? (
+          <Link
+            to="/prototype"
+            className="flex h-10 shrink-0 items-center hover:opacity-80"
+          >
             <img
               src={SITE_LOGO.src}
               alt={SITE_LOGO.alt}
-              width={scrolled ? SITE_LOGO.widthCollapsedPx : SITE_LOGO.widthExpandedPx}
-              className={cn(
-                'site-header-logo',
-                scrolled ? 'w-24' : 'w-[120px]'
-              )}
+              width={SITE_LOGO.widthCollapsedPx}
+              className="site-header-logo block w-24"
               draggable={false}
             />
           </Link>
+        ) : (
+          <div className="flex min-w-0 flex-col gap-1.5">
+            <Link to="/prototype" className="shrink-0 hover:opacity-80">
+              <img
+                src={SITE_LOGO.src}
+                alt={SITE_LOGO.alt}
+                width={SITE_LOGO.widthExpandedPx}
+                className="site-header-logo block w-[120px]"
+                draggable={false}
+              />
+            </Link>
 
-          <div className="flex shrink-0 items-center gap-4">
-            <HeaderNavIconButton label="Ouvrir la recherche" onClick={onOpenSearch}>
-              <HeaderSearchIcon />
-            </HeaderNavIconButton>
-            <HeaderNavIconButton label="Ouvrir le menu" onClick={onOpenMenu}>
-              <HeaderMenuIcon />
-            </HeaderNavIconButton>
+            <div className="site-header-tagline max-h-3.5 overflow-hidden font-outfit text-[11px] font-normal leading-none text-muted opacity-100">
+              Bibliothèque numérique patrimoniale de Brest
+            </div>
           </div>
-        </div>
+        )}
 
-        <div
-          className={cn(
-            'site-header-tagline mt-[5px] overflow-hidden font-outfit text-[11px] font-normal leading-none text-muted',
-            scrolled ? 'max-h-0 opacity-0' : 'max-h-3.5 opacity-100'
-          )}
-        >
-          Bibliothèque numérique patrimoniale de Brest
+        <div className="flex shrink-0 items-center gap-4">
+          <HeaderNavIconButton label="Ouvrir la recherche" onClick={onOpenSearch}>
+            <HeaderSearchIcon />
+          </HeaderNavIconButton>
+          <HeaderNavIconButton label="Ouvrir le menu" onClick={onOpenMenu}>
+            <HeaderMenuIcon />
+          </HeaderNavIconButton>
         </div>
       </div>
     </header>
