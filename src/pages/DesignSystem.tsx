@@ -431,7 +431,6 @@ export function DesignSystem() {
                     <HistoireCard
                       to="/histoires/ocean-liberty-1947"
                       titre="L'explosion de l'Océan Liberty, 28 juillet 1947"
-                      type="curiosite"
                       extrait="Sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore."
                     />
                   </div>
@@ -471,14 +470,12 @@ export function DesignSystem() {
                       <HistoireCard
                         to="#"
                         titre="Exemple histoire slider"
-                        type="exposition"
                         extrait="Aperçu du peek — card suivante visible à droite."
                         sliderItem
                       />
                       <HistoireCard
                         to="#"
                         titre="Deuxième card"
-                        type="curiosite"
                         extrait="Scroll horizontal · snap · gap 12px."
                         sliderItem
                       />

@@ -1,23 +1,35 @@
+import { Link } from 'react-router-dom'
+
 import { Button } from '@/components/ui/button'
 import { HOME_TROUVAILLE } from '@/data/home'
 import { typography } from '@/styles/typography'
 
 export function TrouvailleSection() {
   return (
-    <section className="px-section pt-8 pb-10">
-      <h2 className={typography.sectionLabel}>La trouvaille</h2>
+    <section className="bg-sable-200 px-section pt-8 pb-10">
+      {/* Label centré */}
+      <p className={`${typography.sectionLabel} text-center`}>La trouvaille</p>
+
+      {/* Titre centré */}
+      <h2 className={`mt-2 text-center ${typography.editorialLead}`}>
+        {HOME_TROUVAILLE.titre}
+      </h2>
+
+      {/* Photo pleine largeur */}
       <img
         src="/images/voilier-brest.png"
         alt=""
         aria-hidden
-        className="mt-4 h-32 w-full rounded-md object-cover"
+        className="mt-6 block h-64 w-full object-cover"
         draggable={false}
       />
-      <h3 className={`mt-5 ${typography.editorialLead}`}>{HOME_TROUVAILLE.titre}</h3>
-      <p className={`mt-3 ${typography.bodyMuted}`}>{HOME_TROUVAILLE.chapeau}</p>
-      <Button variant="secondary" className="mt-6">
-        {HOME_TROUVAILLE.ctaLabel}
-      </Button>
+
+      {/* CTA centré */}
+      <div className="mt-8 flex justify-center">
+        <Button asChild variant="primary">
+          <Link to="#">{HOME_TROUVAILLE.ctaLabel}</Link>
+        </Button>
+      </div>
     </section>
   )
 }

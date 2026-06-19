@@ -21,7 +21,6 @@ export const CARD_HISTOIRE_SPECS = [
   { token: 'card-title color', value: '#010101 · hover #2D7D8A · transition 0.15s' },
   { token: 'card-title margin', value: 'margin-bottom 8px' },
   { token: 'card-excerpt', value: 'Outfit 400 · 13px · lh 1.55 · #71717a · line-clamp 4' },
-  { token: 'card-label', value: 'Outfit 700 · 10px · ls 3px · uppercase · mt-auto · pt 10px' },
   { token: 'a11y', value: '.card-title a::before { inset: 0 } sur .card relative' },
 ] as const
 

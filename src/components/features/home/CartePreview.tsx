@@ -1,42 +1,36 @@
-import { MapPin } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
 import { HOME_CARTE } from '@/data/home'
 import { typography } from '@/styles/typography'
 
-const MAP_PINS = [
-  { left: '28%', top: '38%' },
-  { left: '58%', top: '52%' },
-  { left: '42%', top: '22%' },
-  { left: '75%', top: '62%' },
-  { left: '55%', top: '78%' },
-] as const
-
 export function CartePreview() {
   return (
-    <section className="border-t border-border px-section pt-10 pb-10">
-      <h2 className={typography.sectionLabel}>📍 La carte</h2>
-      <p className={`mt-4 ${typography.editorialLead}`}>{HOME_CARTE.titre}</p>
-      <p className={`mt-3 ${typography.bodyMuted}`}>{HOME_CARTE.chapeau}</p>
-      <p className="mt-4 flex items-center gap-2 text-sm font-medium text-glaz-700">
-        <MapPin className="h-4 w-4 shrink-0" />
-        {HOME_CARTE.indicateur}
+    <section className="bg-sable-200 px-section pt-10 pb-10">
+      {/* Label centré */}
+      <p className={`${typography.sectionLabel} text-center`}>La carte interactive</p>
+
+      {/* Photo pleine largeur */}
+      <img
+        src="/images/voilier-brest.png"
+        alt="Aperçu de la carte interactive de Brest"
+        className="mt-6 block h-48 w-full object-cover"
+        draggable={false}
+      />
+
+      {/* Titre centré */}
+      <h2 className={`mt-6 text-center ${typography.editorialLead}`}>
+        {HOME_CARTE.titre}
+      </h2>
+
+      {/* Chapeau centré */}
+      <p className="mt-3 text-center font-outfit text-[14px] font-normal leading-[1.55] text-text">
+        {HOME_CARTE.chapeau}
       </p>
-      <div className="relative mt-5 flex h-32 w-full items-center justify-center rounded-md border border-border bg-surface/80">
-        <span className="text-sm italic text-text/40">Carte OSM — Brest</span>
-        {MAP_PINS.map((pin, i) => (
-          <span
-            key={i}
-            className="absolute h-2.5 w-2.5 rotate-45 rounded-sm bg-glaz-700 ring-2 ring-surface"
-            style={{ left: pin.left, top: pin.top }}
-            aria-hidden
-          />
-        ))}
-      </div>
-      <div className="mt-4 flex items-center justify-between gap-3">
-        <p className="text-sm italic text-text/50">{HOME_CARTE.note}</p>
-        <Button asChild variant="secondary" size="sm" className="shrink-0">
+
+      {/* CTA centré */}
+      <div className="mt-8 flex justify-center">
+        <Button asChild variant="primary">
           <Link to="/carte">{HOME_CARTE.ctaLabel}</Link>
         </Button>
       </div>

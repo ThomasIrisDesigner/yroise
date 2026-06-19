@@ -36,6 +36,7 @@ export default {
           900: rgb('sable-900'),
           700: rgb('sable-700'),
           300: rgb('sable-300'),
+          200: rgb('sable-200'),
           100: rgb('sable-100'),
         },
         ocean: {

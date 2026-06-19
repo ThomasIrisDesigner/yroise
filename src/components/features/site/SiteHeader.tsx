@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { Search } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 import { SITE_LOGO } from '@/config/assets'
@@ -10,6 +9,61 @@ interface SiteHeaderProps {
   onOpenSearch: () => void
   onOpenMenu: () => void
   className?: string
+}
+
+function HeaderSearchIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden className="block">
+      <circle
+        cx="11.5"
+        cy="11.5"
+        r="4.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
+      <path
+        d="M15 15l2.5 2.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  )
+}
+
+function HeaderMenuIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden className="block">
+      <rect x="6" y="7" width="12" height="2" rx="1" fill="currentColor" />
+      <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
+      <rect x="6" y="15" width="12" height="2" rx="1" fill="currentColor" />
+    </svg>
+  )
+}
+
+function HeaderNavIconButton({
+  label,
+  onClick,
+  children,
+}: {
+  label: string
+  onClick: () => void
+  children: React.ReactNode
+}) {
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      onClick={onClick}
+      className="site-header-icon-btn justify-center text-glaz-700 transition-opacity hover:opacity-80"
+    >
+      <span className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-text">
+        {children}
+      </span>
+    </button>
+  )
 }
 
 export function SiteHeader({ onOpenSearch, onOpenMenu, className }: SiteHeaderProps) {
@@ -40,25 +94,13 @@ export function SiteHeader({ onOpenSearch, onOpenMenu, className }: SiteHeaderPr
             />
           </Link>
 
-          <div className="flex shrink-0 items-center gap-[18px]">
-            <button
-              type="button"
-              aria-label="Ouvrir la recherche"
-              onClick={onOpenSearch}
-              className="site-header-icon-btn justify-center text-text transition-colors hover:text-glaz-700"
-            >
-              <Search className="h-5 w-5" strokeWidth={2} />
-            </button>
-            <button
-              type="button"
-              aria-label="Ouvrir le menu"
-              onClick={onOpenMenu}
-              className="site-header-icon-btn flex-col justify-center gap-1.5 text-text"
-            >
-              <span className="h-0.5 w-5 rounded-full bg-current" />
-              <span className="h-0.5 w-5 rounded-full bg-current" />
-              <span className="h-0.5 w-5 rounded-full bg-current" />
-            </button>
+          <div className="flex shrink-0 items-center gap-4">
+            <HeaderNavIconButton label="Ouvrir la recherche" onClick={onOpenSearch}>
+              <HeaderSearchIcon />
+            </HeaderNavIconButton>
+            <HeaderNavIconButton label="Ouvrir le menu" onClick={onOpenMenu}>
+              <HeaderMenuIcon />
+            </HeaderNavIconButton>
           </div>
         </div>
 

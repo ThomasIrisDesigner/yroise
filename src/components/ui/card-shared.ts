@@ -8,13 +8,13 @@ export const cardBodyClass =
   'card-body flex flex-1 flex-col px-3.5 pt-3 pb-3.5'
 
 export const cardTitleClass =
-  'card-title mb-2 font-outfit text-[15px] font-bold leading-[1.3] tracking-[0.1px]'
+  'card-title mb-2 font-outfit text-[22px] font-semibold leading-[1.3] tracking-[0.1px]'
 
 export const cardTitleLinkClass =
   'text-text transition-colors duration-150 hover:text-glaz-700 before:absolute before:inset-0 before:content-[""]'
 
 export const cardExcerptClass =
-  'card-excerpt font-outfit text-[13px] font-normal leading-[1.55] text-muted line-clamp-4'
+  'card-excerpt font-outfit text-[14px] font-normal leading-[1.55] text-muted line-clamp-4'
 
 export const cardMetaClass =
   'card-meta mb-1 font-outfit text-xs font-normal text-muted'

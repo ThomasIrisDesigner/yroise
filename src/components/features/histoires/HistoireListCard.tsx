@@ -11,7 +11,6 @@ export function HistoireListCard({ histoire }: HistoireListCardProps) {
     <HistoireCard
       to={`/histoires/${histoire.slug}`}
       titre={histoire.titre}
-      type={histoire.type}
       extrait={histoire.accroche ?? LOREM.line}
       imageSrc="/images/voilier-brest.png"
       imageAlt=""

@@ -6,7 +6,7 @@ import { typography } from '@/styles/typography'
 
 export function SiteFooter() {
   return (
-    <footer className="mt-8 bg-ocean-900 px-section py-6 text-on-dark">
+    <footer className="bg-ocean-900 px-section py-6 text-on-dark">
       <p className={`mb-4 ${typography.logo} text-on-dark`}>YROISE</p>
       <nav className="-mx-2 flex flex-col">
         {FOOTER_LINKS.map((link) => (

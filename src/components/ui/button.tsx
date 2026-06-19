@@ -2,23 +2,8 @@ import * as React from 'react'
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
 
+import { TriangleYroise } from '@/components/ui/triangle-yroise'
 import { cn } from '@/lib/utils'
-
-function TriangleYroise({ color, size = 10 }: { color: string; size?: number }) {
-  const w = (size * Math.sqrt(3)) / 2
-  const h = size
-  return (
-    <svg
-      width={w}
-      height={h}
-      viewBox={`0 0 ${w} ${h}`}
-      aria-hidden
-      className="shrink-0"
-    >
-      <polygon points={`0,0 0,${h} ${w},${h / 2}`} fill={color} />
-    </svg>
-  )
-}
 
 function triangleColor(
   variant: 'primary' | 'secondary' | 'ghost',
