@@ -123,6 +123,16 @@ export function PrototypeLayout({ children }: { children: React.ReactNode }) {
         : 'mobile'
     : 'desktop'
 
+  const isMobileViewport = !isDesktop
+
+  const chromeBar = (
+    <PrototypeChromeBar
+      allowSwitch={allowSwitch}
+      effectiveMode={effectiveMode}
+      onSetMode={setMode}
+    />
+  )
+
   React.useEffect(() => {
     function recomputeScale() {
       setMobileScale(computeMobileScale())
@@ -137,11 +147,7 @@ export function PrototypeLayout({ children }: { children: React.ReactNode }) {
     <div className="fixed inset-0 overflow-hidden bg-text text-surface">
       {effectiveMode === 'mobile' ? (
         <div className="mx-auto flex h-full w-full flex-col">
-          <PrototypeChromeBar
-            allowSwitch={allowSwitch}
-            effectiveMode={effectiveMode}
-            onSetMode={setMode}
-          />
+          {chromeBar}
 
           <div className="flex min-h-0 flex-1 items-center justify-center px-4 py-8 text-on-dark">
             <div
@@ -170,12 +176,17 @@ export function PrototypeLayout({ children }: { children: React.ReactNode }) {
         </div>
       ) : (
         <div className="flex h-full w-full flex-col overflow-hidden bg-background text-text">
-          <PrototypeChromeBar
-            allowSwitch={allowSwitch}
-            effectiveMode={effectiveMode}
-            onSetMode={setMode}
-          />
-          <div className="flex min-h-0 flex-1 flex-col overflow-hidden">{children}</div>
+          {isMobileViewport ? (
+            <div className="site-outer-scroll scrollbar-none min-h-0 flex-1 overflow-y-auto overscroll-contain">
+              {chromeBar}
+              {children}
+            </div>
+          ) : (
+            <>
+              {chromeBar}
+              <div className="flex min-h-0 flex-1 flex-col overflow-hidden">{children}</div>
+            </>
+          )}
         </div>
       )}
     </div>

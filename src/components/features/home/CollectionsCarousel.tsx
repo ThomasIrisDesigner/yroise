@@ -68,8 +68,8 @@ export function CollectionsCarousel() {
           <NavArrow direction="left" active={current > 0} />
         </button>
 
-        {/* Hublot */}
-        <div className="hublot-frame relative h-[180px] w-[180px] overflow-hidden rounded-full border-[9px] border-text bg-surface">
+        {/* Hublot — 198×198 total, ouverture intérieure 180×180 (bordure 9px) */}
+        <div className="hublot-frame relative size-[198px] shrink-0 overflow-hidden rounded-full border-[9px] border-text bg-surface">
           {COLLECTIONS.map((col, i) =>
             col.hublotImageSrc ? (
               <img

@@ -164,13 +164,35 @@ body {
   scroll-snap-align: start;
 }
 
-/* Scroll principal — header hors flux ; mockup et plein écran mobile */
+/* Scroll principal — header hors flux ; mockup et desktop plein écran */
 .site-scroll-main {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
   overscroll-behavior-y: contain;
   -webkit-overflow-scrolling: touch;
+}
+
+/* Mobile réel — barre Thomas Iris dans le flux ; header site sticky en haut */
+.site-outer-scroll {
+  -webkit-overflow-scrolling: touch;
+}
+
+.site-outer-scroll .site-page-shell {
+  flex: none;
+  min-height: auto;
+}
+
+.site-outer-scroll .site-scroll-main {
+  overflow: visible;
+  flex: none;
+  min-height: auto;
+}
+
+.site-outer-scroll .site-top-chrome {
+  position: sticky;
+  top: 0;
+  z-index: 50;
 }
 
 /* Mockup mobile — hauteur contrainte dans le device frame */
