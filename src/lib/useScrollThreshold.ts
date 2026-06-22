@@ -24,15 +24,25 @@ function readScrollOffset(target: HTMLElement | Window): number {
 /** Détecte le scroll sur l’ancêtre scrollable (mockup mobile) ou la fenêtre (plein écran). */
 export function useScrollThreshold(
   threshold = 10,
-  elementRef: React.RefObject<HTMLElement | null>
+  elementRef: React.RefObject<HTMLElement | null>,
+  scrollContainerRef?: React.RefObject<HTMLElement | null>
 ) {
   const [scrolled, setScrolled] = React.useState(false)
 
   React.useEffect(() => {
     const element = elementRef.current
-    if (!element) return
+    const scrollContainer = scrollContainerRef?.current
 
-    const target = getScrollParent(element)
+    const target =
+      scrollContainer &&
+      (() => {
+        const { overflowY } = getComputedStyle(scrollContainer)
+        return overflowY === 'auto' || overflowY === 'scroll' || overflowY === 'overlay'
+      })()
+        ? scrollContainer
+        : element
+          ? getScrollParent(element)
+          : window
 
     const onScroll = () => {
       setScrolled(readScrollOffset(target) > threshold)
@@ -41,7 +51,7 @@ export function useScrollThreshold(
     onScroll()
     target.addEventListener('scroll', onScroll, { passive: true })
     return () => target.removeEventListener('scroll', onScroll)
-  }, [threshold, elementRef])
+  }, [threshold, elementRef, scrollContainerRef])
 
   return scrolled
 }

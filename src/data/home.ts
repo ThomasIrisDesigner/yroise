@@ -15,9 +15,10 @@ export const HOME_TROUVAILLE = {
 } as const
 
 export const HOME_CARTE = {
-  titre: 'Retrouvez votre quartier dans les archives.',
-  chapeau: LOREM.line,
-  indicateur: '3 nouveaux documents géolocalisés ce mois-ci',
-  note: 'Vous reconnaissez un lieu ? Écrivez-nous.',
-  ctaLabel: 'Explorer',
+  titre: 'Promenez-vous dans les histoires de Brest',
+  chapeau:
+    "Découvrez Brest pendant les guerres, les lieux d'hier et d'aujourd'hui, des personnages éponymes…",
+  imageSrc: '/images/carte-osm-preview.jpg',
+  imageAlt: 'Aperçu carte interactive — Brest hier et aujourd’hui',
+  ctaLabel: 'Explorer la carte',
 } as const

@@ -6,33 +6,26 @@ import { typography } from '@/styles/typography'
 
 export function CartePreview() {
   return (
-    <section className="bg-sable-200 px-section pt-10 pb-10">
-      {/* Label centré */}
-      <p className={`${typography.sectionLabel} text-center`}>La carte interactive</p>
+    <section className="bg-background px-section py-10">
+      <div className="bg-sable-200 px-section py-10">
+        <p className={`${typography.sectionLabel} text-center`}>La carte interactive</p>
 
-      {/* Photo pleine largeur */}
-      <img
-        src="/images/voilier-brest.png"
-        alt="Aperçu de la carte interactive de Brest"
-        className="mt-6 block h-48 w-full object-cover"
-        draggable={false}
-      />
+        <img
+          src={HOME_CARTE.imageSrc}
+          alt={HOME_CARTE.imageAlt}
+          className="mt-6 block h-[194px] w-full object-cover"
+          draggable={false}
+        />
 
-      {/* Titre centré */}
-      <h2 className={`mt-6 text-center ${typography.editorialLead}`}>
-        {HOME_CARTE.titre}
-      </h2>
+        <h2 className={`mt-7 text-center ${typography.titleL}`}>{HOME_CARTE.titre}</h2>
 
-      {/* Chapeau centré */}
-      <p className="mt-3 text-center font-outfit text-[14px] font-normal leading-[1.55] text-text">
-        {HOME_CARTE.chapeau}
-      </p>
+        <p className={`mt-3 text-center ${typography.cardExcerpt}`}>{HOME_CARTE.chapeau}</p>
 
-      {/* CTA centré */}
-      <div className="mt-8 flex justify-center">
-        <Button asChild variant="primary">
-          <Link to="/carte">{HOME_CARTE.ctaLabel}</Link>
-        </Button>
+        <div className="mt-8 flex justify-center">
+          <Button asChild variant="primary">
+            <Link to="/carte">{HOME_CARTE.ctaLabel}</Link>
+          </Button>
+        </div>
       </div>
     </section>
   )

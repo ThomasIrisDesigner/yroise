@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils'
 interface SiteHeaderProps {
   onOpenSearch: () => void
   onOpenMenu: () => void
+  scrollContainerRef?: React.RefObject<HTMLElement | null>
   className?: string
 }
 
@@ -88,15 +89,20 @@ function HeaderNavIconButton({
   )
 }
 
-export function SiteHeader({ onOpenSearch, onOpenMenu, className }: SiteHeaderProps) {
+export function SiteHeader({
+  onOpenSearch,
+  onOpenMenu,
+  scrollContainerRef,
+  className,
+}: SiteHeaderProps) {
   const headerRef = React.useRef<HTMLElement>(null)
-  const scrolled = useScrollThreshold(10, headerRef)
+  const scrolled = useScrollThreshold(10, headerRef, scrollContainerRef)
 
   return (
     <header
       ref={headerRef}
       className={cn(
-        'site-header sticky top-0 z-50 box-border flex shrink-0 items-center border-b border-border bg-background px-section',
+        'site-header box-border flex shrink-0 items-center border-b border-border bg-background px-section',
         scrolled ? 'h-14' : 'h-[72px]',
         className
       )}

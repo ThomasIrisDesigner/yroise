@@ -6,7 +6,7 @@ import { typography } from '@/styles/typography'
 
 export function TrouvailleSection() {
   return (
-    <section className="bg-sable-200 px-section pt-8 pb-10">
+    <section className="bg-sable-200 px-section pt-10 pb-10">
       {/* Label centré */}
       <p className={`${typography.sectionLabel} text-center`}>La trouvaille</p>
 
@@ -19,7 +19,7 @@ export function TrouvailleSection() {
       <img
         src={HOME_TROUVAILLE.imageSrc}
         alt={HOME_TROUVAILLE.imageAlt}
-        className="mt-6 block aspect-[4/3] w-full object-cover"
+        className="mt-4 block aspect-[4/3] w-full object-cover"
         draggable={false}
       />
 

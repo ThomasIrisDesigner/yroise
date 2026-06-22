@@ -2,24 +2,26 @@
 import { typography } from '@/styles/typography'
 
 export const editorialCardClass =
-  'card relative flex shrink-0 flex-col overflow-hidden bg-background transition-shadow duration-150 hover:shadow-[0_3px_12px_rgb(0_0_0/0.07)]'
+  'card relative flex shrink-0 flex-col overflow-hidden bg-background'
 
 export const editorialCardSliderClass = 'card-slider-item'
 
 export const cardBodyClass =
-  'card-body flex flex-1 flex-col px-3.5 pt-3 pb-3.5'
+  'card-body flex flex-1 flex-col pt-4 pb-4'
 
 export const cardTitleClass = `card-title mb-2 ${typography.cardTitleEditorial}`
 
 export const cardTitleLinkClass =
   'text-text transition-colors duration-150 hover:text-glaz-700 before:absolute before:inset-0 before:content-[""]'
 
-export const cardExcerptClass = `card-excerpt ${typography.cardExcerpt} line-clamp-4`
+export const cardExcerptClass = `card-excerpt ${typography.cardExcerpt} line-clamp-2`
 
 export const cardMetaClass =
   'card-meta mb-1 font-outfit text-xs font-normal text-muted'
 
 export const cardLabelWrapClass = 'card-label mt-auto pt-2.5'
+
+export const cardCtaWrapClass = 'card-cta-wrap mt-auto pt-6'
 
 export const cardImageClass = 'card-image'
 

@@ -10,11 +10,11 @@ const titleXl = `${ui} text-[28px] font-bold leading-tight tracking-[0.1px] text
 const titleL = `${ui} text-[20px] font-semibold leading-snug text-text`
 const titleM = `${ui} text-base font-semibold leading-[1.3] tracking-[0.1px] text-text`
 const titleMCard = `${titleM} line-clamp-3`
-const cardTitleEditorial = `${ui} text-[1.375rem] font-semibold leading-7 tracking-[0.1px]`
+const cardTitleEditorial = `${ui} text-[1.375rem] font-semibold leading-7 tracking-[0.1px] text-text`
 const chapeau = `${ui} text-lg font-normal leading-[1.4] tracking-[0.1px] text-text`
 const label = `${ui} text-base font-semibold uppercase tracking-[2px] text-text`
 const meta = `${ui} text-[13px] font-normal leading-snug text-muted`
-const cardExcerpt = `${ui} text-base font-normal leading-6 text-muted`
+const cardExcerpt = `${ui} text-base font-normal leading-6 tracking-[0.1px] text-text`
 const editorialCaption = `${ui} text-sm font-normal leading-[1.4] tracking-[0.1px] text-muted`
 const uiXs = `${ui} text-[11px] font-normal leading-tight text-muted`
 /** Liens UI — couleur selon le contexte (fond clair ou sombre). */
@@ -189,10 +189,10 @@ const uiSpecs: CatalogSpec[] = [
     fontFamily: TYPOGRAPHY_FONT_UI,
     sizePx: 16,
     weight: 400,
-    color: '#71717a',
+    color: '#010101',
     lineHeight: '1.5rem (leading-6)',
-    letterSpacing: 'normal',
-    contextNote: 'Troncature à 4 lignes (line-clamp-4) sur les cards du carousel.',
+    letterSpacing: '0.1px',
+    contextNote: 'Troncature à 2 lignes (line-clamp-2) sur les cards du carousel.',
   },
   {
     usage: 'Légendes sous les images',

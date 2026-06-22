@@ -7,7 +7,7 @@ export const MOBILE_MOCKUP_H = 844
  * gap suffisant pour le swipe). Valeurs en px sur mockup 390px.
  */
 export const mobileCarousel = {
-  gapPx: 12,
+  gapPx: 24,
   histoires: {
     cardWidthPx: 176,
     imageHeightPx: 112,

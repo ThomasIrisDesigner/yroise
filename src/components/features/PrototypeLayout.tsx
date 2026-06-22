@@ -143,7 +143,7 @@ export function PrototypeLayout({ children }: { children: React.ReactNode }) {
             onSetMode={setMode}
           />
 
-          <div className="flex min-h-0 flex-1 items-center justify-center px-4 py-8">
+          <div className="flex min-h-0 flex-1 items-center justify-center px-4 py-8 text-on-dark">
             <div
               style={{
                 width: MOBILE_MOCKUP_W * mobileScale,
@@ -160,7 +160,7 @@ export function PrototypeLayout({ children }: { children: React.ReactNode }) {
                 }}
               >
                 <div
-                  className="card-slider-viewport scrollbar-none flex h-full w-[390px] flex-col overflow-y-auto overscroll-contain rounded-[40px] bg-surface shadow-2xl shadow-black/30"
+                  className="mockup-scroll-root card-slider-viewport scrollbar-none flex h-full w-[390px] flex-col overflow-hidden overscroll-contain rounded-[40px] bg-surface shadow-2xl shadow-black/30"
                 >
                   {children}
                 </div>

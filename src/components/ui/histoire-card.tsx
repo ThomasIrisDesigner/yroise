@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 
 import {
   cardBodyClass,
+  cardCtaWrapClass,
   cardExcerptClass,
   cardImageClass,
   cardTitleClass,
@@ -9,7 +10,7 @@ import {
   editorialCardClass,
   editorialCardSliderClass,
 } from '@/components/ui/card-shared'
-import { TriangleYroise } from '@/components/ui/triangle-yroise'
+import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 export interface HistoireCardProps {
@@ -61,11 +62,16 @@ export function HistoireCard({
           </Link>
         </h3>
         {extrait ? <p className={cardExcerptClass}>{extrait}</p> : null}
-        <div className="mt-auto pt-4">
-          <span className="inline-flex items-center gap-2 rounded-full border border-text px-4 py-2 font-outfit text-[length:var(--button-font-size)] font-normal tracking-button text-text">
+        <div className={cardCtaWrapClass}>
+          <Button
+            variant="secondary"
+            size="sm"
+            className="pointer-events-none"
+            tabIndex={-1}
+            aria-hidden
+          >
             Lire
-            <TriangleYroise size={8} color="rgb(var(--color-text))" />
-          </span>
+          </Button>
         </div>
       </div>
     </article>

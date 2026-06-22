@@ -338,6 +338,9 @@ export function DesignSystem() {
                     <Button variant="primary" size="sm">
                       Small (36px)
                     </Button>
+                    <Button variant="secondary" size="sm">
+                      Secondary sm
+                    </Button>
                   </div>
                 }
                 specs={BUTTON_SIZE_SPEC_ROWS}
@@ -437,7 +440,7 @@ export function DesignSystem() {
                   <div className="section-histoires">
                     <HistoireCard
                       to="/histoires/ocean-liberty-1947"
-                      titre="L'explosion de l'Océan Liberty, 28 juillet 1947"
+                      titre="L'explosion de l'Océan Liberty le 28 juillet 1947"
                       extrait="Sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore."
                     />
                   </div>
@@ -483,7 +486,7 @@ export function DesignSystem() {
                       <HistoireCard
                         to="#"
                         titre="Deuxième card"
-                        extrait="Scroll horizontal · snap · gap 12px."
+                        extrait="Scroll horizontal · snap · gap 24px."
                         sliderItem
                       />
                       <CollectionHublotCard to="#" titre="En mer" />

@@ -4,6 +4,8 @@ export interface Collection {
   shortLabel: string
   accroche: string
   documentCount?: number
+  /** Illustration du hublot (home, cards collections). */
+  hublotImageSrc?: string
 }
 
 export const COLLECTIONS: Collection[] = [
@@ -13,6 +15,7 @@ export const COLLECTIONS: Collection[] = [
     shortLabel: 'En mer',
     accroche: 'Navigation, marines et vie portuaire',
     documentCount: 234,
+    hublotImageSrc: '/images/Collection_En-mer_Hubot.jpg',
   },
   {
     slug: 'brest-et-environs',
@@ -20,6 +23,7 @@ export const COLLECTIONS: Collection[] = [
     shortLabel: 'Brest',
     accroche: 'La ville et son territoire, de l’Ancien Régime à nos jours',
     documentCount: 412,
+    hublotImageSrc: '/images/Collection_Brest-et-ses-environs_Hublot.jpg',
   },
   {
     slug: 'en-images',
@@ -27,6 +31,7 @@ export const COLLECTIONS: Collection[] = [
     shortLabel: 'En images',
     accroche: 'Photographies, dessins et cartes du Finistère',
     documentCount: 189,
+    hublotImageSrc: '/images/Collection_En-Images_Hublot.jpg',
   },
   {
     slug: 'finistere-monde-artistique',

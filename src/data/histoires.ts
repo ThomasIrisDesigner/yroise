@@ -17,20 +17,23 @@ export const HISTOIRES_LIST: HistoireBillet[] = [
   {
     slug: 'ocean-liberty-1947',
     type: 'curiosite',
-    titre: "L'explosion de l'Océan Liberty, 28 juillet 1947",
-    accroche: LOREM.line,
+    titre: "L'explosion de l'Océan Liberty le 28 juillet 1947",
+    accroche:
+      "Un navire américain explose en rade de Brest, causant l'une des pires catastrophes maritimes de l'après-guerre. L'histoire oubliée d'un drame qui a marqué la ville en pleine reconstruction.",
   },
   {
     slug: 'marcel-bories-plaques',
     type: 'exposition',
     titre: 'Marcel Boriès, 1428 plaques de verre sur Brest',
-    accroche: LOREM.line,
+    accroche:
+      'Du port aux faubourgs, le photographe Marcel Boriès a fixé sur verre la Brest d’avant-guerre. Une exposition reconstitue le regard d’un témoin de la ville disparue.',
   },
   {
     slug: 'dictionnaire-coetanlem',
     type: 'curiosite',
     titre: 'Le Dictionnaire de Coëtanlem',
-    accroche: LOREM.line,
+    accroche:
+      'Publié en 1835, ce dictionnaire breton-français reste une référence pour comprendre la langue et la culture bretonnes au XIXe siècle.',
   },
   {
     slug: 'brest-ville-fortifiee',
@@ -52,10 +55,7 @@ export const HISTOIRES_LIST: HistoireBillet[] = [
   },
 ]
 
-export const HISTOIRES_RECENTES = HISTOIRES_LIST.slice(0, 3).map((item) => ({
-  ...item,
-  accroche: LOREM.line,
-}))
+export const HISTOIRES_RECENTES = HISTOIRES_LIST.slice(0, 3)
 
 export const HISTOIRES_COLLECTION_EN_MER: HistoireBillet[] = [
   {

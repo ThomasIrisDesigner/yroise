@@ -45,7 +45,9 @@ export function HistoireDetail() {
         <div className="px-section pt-4">
           <TypeLabel type={histoire.type} />
           <h1 className={`mt-3 ${typography.pageTitle}`}>{histoire.titre}</h1>
-          <p className={`mt-3 ${typography.chapeau}`}>{content.chapeau}</p>
+          <p className={`mt-3 ${typography.chapeau}`}>
+            {histoire.accroche ?? content.chapeau}
+          </p>
           <div className="mt-4 border-b border-border pb-4">
             <p className={typography.titleM}>Par {content.auteur}</p>
             <p className={`mt-1 ${typography.meta}`}>

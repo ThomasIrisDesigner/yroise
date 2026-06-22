@@ -35,7 +35,7 @@ export function CollectionsCarousel() {
   const collection = COLLECTIONS[current]!
 
   return (
-    <section className="bg-glaz-100 pt-10 pb-8">
+    <section className="bg-glaz-100 pt-10 pb-10">
       {/* En-tête centré */}
       <div className="flex flex-col items-center gap-0 px-section">
         <h2 className={typography.sectionLabel}>Collections</h2>
@@ -45,7 +45,7 @@ export function CollectionsCarousel() {
       </div>
 
       {/* Hublot + navigation */}
-      <div className="mt-8 flex items-center justify-center gap-8 px-section">
+      <div className="mt-4 flex items-center justify-center gap-8 px-section">
         <button
           onClick={prev}
           aria-label="Collection précédente"
@@ -56,18 +56,27 @@ export function CollectionsCarousel() {
         </button>
 
         {/* Hublot */}
-        <div className="relative h-[180px] w-[180px] overflow-hidden rounded-full border-[9px] border-text bg-surface">
-          {COLLECTIONS.map((col, i) => (
-            <img
-              key={col.slug}
-              src="/images/voilier-brest.png"
-              alt={col.name}
-              className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500"
-              style={{ opacity: i === current ? 1 : 0 }}
-              aria-hidden={i !== current}
-              draggable={false}
-            />
-          ))}
+        <div className="hublot-frame relative h-[180px] w-[180px] overflow-hidden rounded-full border-[9px] border-text bg-surface">
+          {COLLECTIONS.map((col, i) =>
+            col.hublotImageSrc ? (
+              <img
+                key={col.slug}
+                src={col.hublotImageSrc}
+                alt={col.name}
+                className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500"
+                style={{ opacity: i === current ? 1 : 0 }}
+                aria-hidden={i !== current}
+                draggable={false}
+              />
+            ) : (
+              <div
+                key={col.slug}
+                className="absolute inset-0 bg-surface transition-opacity duration-500"
+                style={{ opacity: i === current ? 1 : 0 }}
+                aria-hidden={i !== current}
+              />
+            )
+          )}
         </div>
 
         <button
@@ -80,7 +89,7 @@ export function CollectionsCarousel() {
       </div>
 
       {/* Label collection — transition via opacity */}
-      <div className="mt-6 px-section text-center">
+      <div className="mt-4 px-section text-center">
         <p className="font-outfit text-[22px] font-semibold text-text">{collection.name}</p>
       </div>
 
