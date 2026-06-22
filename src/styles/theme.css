@@ -94,11 +94,11 @@ body {
   color: rgb(var(--aurore-900));
 }
 
-/* Header site — sticky 72px → 56px au scroll */
+/* Header site — chrome fixe, scroll dans .site-scroll-main (72px → 56px au scroll) */
 .site-top-chrome {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 50;
+  flex-shrink: 0;
 }
 
 .site-header {
@@ -164,7 +164,16 @@ body {
   scroll-snap-align: start;
 }
 
-/* Mockup mobile — chrome fixe, scroll interne (évite sticky cassé par transform: scale) */
+/* Scroll principal — header hors flux ; mockup et plein écran mobile */
+.site-scroll-main {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Mockup mobile — hauteur contrainte dans le device frame */
 .mockup-scroll-root .site-page-shell {
   height: 100%;
   min-height: 0;
@@ -172,14 +181,6 @@ body {
 
 .mockup-scroll-root .site-top-chrome {
   position: relative;
-}
-
-.mockup-scroll-root .site-scroll-main {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  overscroll-behavior-y: contain;
-  -webkit-overflow-scrolling: touch;
 }
 
 /* Hublot carousel — calque d’ombre interne au-dessus de l’image */

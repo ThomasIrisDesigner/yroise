@@ -4,21 +4,17 @@ import { MobileMenu } from '@/components/features/site/MobileMenu'
 import { SearchPanel } from '@/components/features/site/SearchPanel'
 import { SiteHeader } from '@/components/features/site/SiteHeader'
 import { FriseHaut } from '@/components/ui/frise-haut'
-import { cn } from '@/lib/utils'
 
 interface SitePageShellProps {
   children: React.ReactNode
   showFooter?: boolean
   footer?: React.ReactNode
-  /** Remplit la hauteur disponible (pages courtes type carte). */
-  fillMockup?: boolean
 }
 
 export function SitePageShell({
   children,
   showFooter = false,
   footer,
-  fillMockup = false,
 }: SitePageShellProps) {
   const [menuOpen, setMenuOpen] = React.useState(false)
   const [searchOpen, setSearchOpen] = React.useState(false)
@@ -32,12 +28,7 @@ export function SitePageShell({
   }, [menuOpen, searchOpen])
 
   return (
-    <div
-      className={cn(
-        'site-page-shell flex min-h-full flex-col bg-surface text-text',
-        fillMockup && 'flex-1'
-      )}
-    >
+    <div className="site-page-shell flex min-h-0 flex-1 flex-col bg-surface text-text">
       <div className="site-top-chrome shrink-0">
         <SiteHeader
           scrollContainerRef={scrollMainRef}
@@ -55,10 +46,7 @@ export function SitePageShell({
         </div>
       </div>
 
-      <div
-        ref={scrollMainRef}
-        className={cn('site-scroll-main', fillMockup && 'flex min-h-0 flex-1 flex-col')}
-      >
+      <div ref={scrollMainRef} className="site-scroll-main flex min-h-0 flex-1 flex-col">
         {children}
         {showFooter && footer}
       </div>

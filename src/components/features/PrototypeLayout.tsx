@@ -169,13 +169,13 @@ export function PrototypeLayout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       ) : (
-        <div className="scrollbar-none flex h-full w-full flex-col overflow-y-auto overscroll-contain bg-background text-text">
+        <div className="flex h-full w-full flex-col overflow-hidden bg-background text-text">
           <PrototypeChromeBar
             allowSwitch={allowSwitch}
             effectiveMode={effectiveMode}
             onSetMode={setMode}
           />
-          {children}
+          <div className="flex min-h-0 flex-1 flex-col overflow-hidden">{children}</div>
         </div>
       )}
     </div>

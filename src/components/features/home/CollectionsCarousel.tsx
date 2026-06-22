@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
 import { COLLECTIONS } from '@/data/collections'
+import { useSwipeNavigation } from '@/lib/useSwipeNavigation'
 import { typography } from '@/styles/typography'
 
 function NavArrow({ direction, active }: { direction: 'left' | 'right'; active: boolean }) {
@@ -28,8 +29,12 @@ export function CollectionsCarousel() {
   const [current, setCurrent] = useState(0)
   const total = COLLECTIONS.length
 
-  const prev = () => setCurrent((c) => (c - 1 + total) % total)
-  const next = () => setCurrent((c) => (c + 1) % total)
+  const prev = useCallback(
+    () => setCurrent((c) => (c - 1 + total) % total),
+    [total]
+  )
+  const next = useCallback(() => setCurrent((c) => (c + 1) % total), [total])
+  const swipeHandlers = useSwipeNavigation(prev, next)
 
   const counter = `${String(current + 1).padStart(2, '0')} – ${String(total).padStart(2, '0')}`
   const collection = COLLECTIONS[current]!
@@ -44,8 +49,16 @@ export function CollectionsCarousel() {
         </p>
       </div>
 
-      {/* Hublot + navigation */}
-      <div className="mt-4 flex items-center justify-center gap-8 px-section">
+      {/* Hublot + navigation — swipe horizontal sur la zone (hors boutons) */}
+      <div
+        className="mt-4 flex touch-pan-y items-center justify-center gap-8 px-section"
+        onPointerDown={(e) => {
+          if ((e.target as HTMLElement).closest('button')) return
+          swipeHandlers.onPointerDown(e)
+        }}
+        onPointerUp={swipeHandlers.onPointerUp}
+        onPointerCancel={swipeHandlers.onPointerCancel}
+      >
         <button
           onClick={prev}
           aria-label="Collection précédente"

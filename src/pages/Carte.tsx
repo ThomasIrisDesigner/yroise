@@ -12,7 +12,7 @@ export function Carte() {
   const selectedPin = CARTE_PINS.find((p) => p.id === selectedId)
 
   return (
-    <SitePageShell fillMockup>
+    <SitePageShell>
       <div className="shrink-0 border-b border-border bg-surface px-section py-3">
         <p className={typography.titleL}>{CARTE_INTRO.lead}</p>
         <p className={`mt-1 ${typography.meta}`}>
