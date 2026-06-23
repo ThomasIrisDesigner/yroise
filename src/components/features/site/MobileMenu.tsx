@@ -1,26 +1,22 @@
-import { ChevronDown, ChevronRight, X } from 'lucide-react'
 import * as React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
-import { Button } from '@/components/ui/button'
 import { COLLECTIONS } from '@/data/collections'
 import { getActiveNavSection } from '@/lib/navActive'
 import { cn } from '@/lib/utils'
-import { typography } from '@/styles/typography'
 
 interface MobileMenuProps {
   open: boolean
   onClose: () => void
 }
 
-function navItemClass(active: boolean) {
-  return cn(
-    'flex min-h-14 items-center border-b border-border px-section py-4 font-outfit text-base tracking-wide transition-colors',
-    active
-      ? 'border-l-[3px] border-l-glaz-700 bg-surface/50 pl-[17px] font-extrabold text-glaz-700'
-      : 'font-bold text-text hover:text-glaz-700'
-  )
-}
+/** Figma menu — titres principaux : 22px / 3px, sous-entrées : 20px / 1px */
+const menuMainClass =
+  'font-outfit text-[1.375rem] font-bold leading-normal tracking-[0.1875rem] text-on-dark uppercase'
+const menuSubBoldClass =
+  'font-outfit text-[1.25rem] font-bold leading-normal tracking-[0.0625rem] text-on-dark'
+const menuSubClass =
+  'font-outfit text-[1.25rem] font-medium leading-normal tracking-[0.0625rem] text-on-dark'
 
 export function MobileMenu({ open, onClose }: MobileMenuProps) {
   const { pathname } = useLocation()
@@ -38,115 +34,122 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
   if (!open) return null
 
   return (
-    <div className="fixed inset-0 z-30 flex flex-col bg-surface">
-      <div className="flex h-14 items-center justify-between border-b border-border px-section">
-        <span className={typography.logo}>YROISE</span>
-        <button
-          type="button"
-          aria-label="Fermer le menu"
-          onClick={onClose}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-surface text-text"
-        >
-          <X className="h-5 w-5" />
-        </button>
-      </div>
-
-      <nav className="scrollbar-none flex-1 overflow-y-auto" aria-label="Navigation principale">
-        <Link
-          to="/histoires"
-          onClick={onClose}
-          aria-current={activeSection === 'histoires' ? 'page' : undefined}
-          className={navItemClass(activeSection === 'histoires')}
-        >
-          Histoires
-        </Link>
-
-        <div
-          className={cn(
-            'border-b border-border',
-            (collectionsOpen || activeSection === 'collections') && 'bg-surface/30'
-          )}
-        >
+    <div
+      className="fixed inset-0 z-[60] flex flex-col justify-between bg-text text-on-dark"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu principal"
+    >
+      <div className="min-h-0 w-full flex-1 overflow-y-auto">
+        {/* NAV — 72px, padding 16px, bouton fermer 40px */}
+        <div className="flex h-[4.5rem] items-center justify-end px-section">
           <button
             type="button"
-            onClick={() => setCollectionsOpen((v) => !v)}
-            aria-expanded={collectionsOpen}
-            className={cn(
-              navItemClass(activeSection === 'collections'),
-              'w-full justify-between'
-            )}
+            aria-label="Fermer le menu"
+            onClick={onClose}
+            className="flex size-10 shrink-0 items-center justify-center rounded-full border-2 border-on-dark"
           >
-            <span>Collections</span>
-            {collectionsOpen ? (
-              <ChevronDown className="h-5 w-5 shrink-0" />
-            ) : (
-              <ChevronRight className="h-5 w-5 shrink-0 text-text/50" />
-            )}
+            <img
+              src="/images/Icon_fermer.svg"
+              alt=""
+              aria-hidden
+              className="size-6"
+              draggable={false}
+            />
           </button>
-          {collectionsOpen ? (
-            <div>
-              <div className="flex min-h-12 items-center border-t border-border px-section py-3 pl-9">
-                <Button asChild variant="ghost" size="sm">
-                  <Link to="/collections" onClick={onClose}>
-                    Tout voir
-                  </Link>
-                </Button>
-              </div>
-              {COLLECTIONS.map((col) => {
-                const colActive = pathname === `/collections/${col.slug}`
-                return (
+        </div>
+
+        {/* MENU — padding 24px, gap 32px entre rubriques */}
+        <nav className="flex flex-col gap-8 px-6" aria-label="Navigation principale">
+          <Link
+            to="/histoires"
+            onClick={onClose}
+            aria-current={activeSection === 'histoires' ? 'page' : undefined}
+            className={menuMainClass}
+          >
+            Histoires
+          </Link>
+
+          <div className="w-full">
+            <button
+              type="button"
+              onClick={() => setCollectionsOpen((v) => !v)}
+              aria-expanded={collectionsOpen}
+              className={cn(menuMainClass, 'flex w-full items-center justify-between gap-4')}
+            >
+              <span>Collections</span>
+              <img
+                src="/images/Icon_chevron.svg"
+                alt=""
+                aria-hidden
+                className={cn(
+                  'size-6 shrink-0 transition-transform duration-200',
+                  collectionsOpen ? '-rotate-90' : 'rotate-90'
+                )}
+                draggable={false}
+              />
+            </button>
+
+            {collectionsOpen ? (
+              <div className="flex flex-col gap-4 px-2 pt-6">
+                <Link
+                  to="/collections"
+                  onClick={onClose}
+                  className={menuSubBoldClass}
+                >
+                  Tout voir
+                </Link>
+                {COLLECTIONS.map((col) => (
                   <Link
                     key={col.slug}
                     to={`/collections/${col.slug}`}
                     onClick={onClose}
-                    aria-current={colActive ? 'page' : undefined}
-                    className={cn(
-                      'flex min-h-12 items-center gap-2 border-t border-border px-section py-3 pl-9 text-base',
-                      colActive
-                        ? 'bg-surface/60 font-semibold text-glaz-700'
-                        : 'bg-background text-text'
-                    )}
+                    aria-current={pathname === `/collections/${col.slug}` ? 'page' : undefined}
+                    className={menuSubClass}
                   >
-                    <span
-                      className={cn(
-                        'h-1.5 w-1.5 shrink-0 rounded-full',
-                        colActive ? 'bg-glaz-700' : 'bg-glaz-700/60'
-                      )}
-                    />
                     {col.name}
                   </Link>
-                )
-              })}
-            </div>
-          ) : null}
-        </div>
+                ))}
+              </div>
+            ) : null}
+          </div>
 
-        <Link
-          to="/carte"
-          onClick={onClose}
-          aria-current={activeSection === 'carte' ? 'page' : undefined}
-          className={navItemClass(activeSection === 'carte')}
+          <Link
+            to="/carte"
+            onClick={onClose}
+            aria-current={activeSection === 'carte' ? 'page' : undefined}
+            className={menuMainClass}
+          >
+            Carte interactive
+          </Link>
+
+          <Link
+            to="/jeunesse"
+            onClick={onClose}
+            aria-current={activeSection === 'jeunesse' ? 'page' : undefined}
+            className={menuMainClass}
+          >
+            Jeunesse
+          </Link>
+        </nav>
+      </div>
+
+      {/* Langues — padding 24px, pb 32px, gap 24px */}
+      <div className="flex items-center justify-center gap-6 px-6 pb-8">
+        <button
+          type="button"
+          aria-pressed
+          className="flex size-10 items-center justify-center rounded-full border-[3px] border-on-dark bg-on-dark font-outfit text-[1.25rem] font-medium tracking-[0.0625rem] text-text"
         >
-          📍 La carte
-        </Link>
-
-        <Link
-          to="/jeunesse"
-          onClick={onClose}
-          aria-current={activeSection === 'jeunesse' ? 'page' : undefined}
-          className={navItemClass(activeSection === 'jeunesse')}
-        >
-          Jeunesse
-        </Link>
-      </nav>
-
-      <div className="flex items-center gap-2 border-t border-border px-section py-4">
-        <span className="inline-flex h-9 items-center rounded bg-primary px-3 text-sm font-bold text-surface">
           FR
-        </span>
-        <span className="inline-flex h-9 items-center rounded border border-border px-3 text-sm font-bold text-text/50">
+        </button>
+        <button
+          type="button"
+          aria-pressed={false}
+          className="flex size-10 items-center justify-center rounded-full border-[3px] border-on-dark font-outfit text-[1.25rem] font-medium tracking-[0.0625rem] text-on-dark"
+        >
           BR
-        </span>
+        </button>
       </div>
     </div>
   )

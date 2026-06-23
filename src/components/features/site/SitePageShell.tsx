@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import { MobileMenu } from '@/components/features/site/MobileMenu'
 import { SearchPanel } from '@/components/features/site/SearchPanel'
@@ -19,6 +20,28 @@ export function SitePageShell({
   const [menuOpen, setMenuOpen] = React.useState(false)
   const [searchOpen, setSearchOpen] = React.useState(false)
   const scrollMainRef = React.useRef<HTMLDivElement>(null)
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const scrollPageToTop = React.useCallback(() => {
+    scrollMainRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
+    document
+      .querySelector<HTMLElement>('.site-outer-scroll')
+      ?.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
+
+  const goHome = React.useCallback(() => {
+    setMenuOpen(false)
+    setSearchOpen(false)
+
+    if (location.pathname === '/prototype') {
+      scrollPageToTop()
+      return
+    }
+
+    navigate('/prototype')
+    window.setTimeout(scrollPageToTop, 0)
+  }, [location.pathname, navigate, scrollPageToTop])
 
   React.useEffect(() => {
     document.body.style.overflow = menuOpen || searchOpen ? 'hidden' : ''
@@ -32,6 +55,9 @@ export function SitePageShell({
       <div className="site-top-chrome shrink-0">
         <SiteHeader
           scrollContainerRef={scrollMainRef}
+          searchOpen={searchOpen}
+          menuOpen={menuOpen}
+          onGoHome={goHome}
           onOpenSearch={() => {
             setMenuOpen(false)
             setSearchOpen(true)
