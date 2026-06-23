@@ -49,57 +49,25 @@ function HeaderLogoLink({
 
 function HeaderSearchIcon() {
   return (
-    <svg viewBox="0 0 40 40" aria-hidden className="block h-full w-full">
-      <circle
-        cx="19"
-        cy="19.5"
-        r="7"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.5"
-      />
-      <path
-        d="M25 24l5 5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-      />
-    </svg>
+    <img
+      src="/images/Icon_recherche.svg"
+      alt=""
+      aria-hidden
+      className="h-5 w-[21px]"
+      draggable={false}
+    />
   )
 }
 
 function HeaderMenuIcon() {
   return (
-    <svg viewBox="0 0 40 40" aria-hidden className="block h-full w-full">
-      <line
-        x1="12"
-        y1="14"
-        x2="29"
-        y2="14"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-      />
-      <line
-        x1="12"
-        y1="20"
-        x2="29"
-        y2="20"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-      />
-      <line
-        x1="12"
-        y1="26"
-        x2="29"
-        y2="26"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-      />
-    </svg>
+    <img
+      src="/images/Icon_menu.svg"
+      alt=""
+      aria-hidden
+      className="h-[18px] w-6"
+      draggable={false}
+    />
   )
 }
 
@@ -174,7 +142,7 @@ export function SiteHeader({
           </div>
         )}
 
-        <div className="flex shrink-0 items-center gap-4">
+        <div className="flex shrink-0 items-center gap-2">
           <HeaderNavIconButton
             label="Ouvrir la recherche"
             onClick={onOpenSearch}
