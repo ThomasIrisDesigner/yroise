@@ -12,11 +12,11 @@ interface MobileMenuProps {
 
 /** Figma menu — titres principaux : 22px / 3px, sous-entrées : 20px / 1px */
 const menuMainClass =
-  'font-outfit text-[1.375rem] font-bold leading-normal tracking-[0.1875rem] text-on-dark uppercase'
-const menuSubBoldClass =
-  'font-outfit text-[1.25rem] font-bold leading-normal tracking-[0.0625rem] text-on-dark'
+  'font-outfit text-[1.1875rem] font-bold leading-normal tracking-[0.1875rem] text-on-dark uppercase'
+const menuSubLeadClass =
+  'font-outfit text-[1.125rem] font-medium leading-normal tracking-[0.0625rem] text-on-dark'
 const menuSubClass =
-  'font-outfit text-[1.25rem] font-medium leading-normal tracking-[0.0625rem] text-on-dark'
+  'font-outfit text-[1.125rem] font-normal leading-normal tracking-[0.0625rem] text-on-dark'
 
 export function MobileMenu({ open, onClose }: MobileMenuProps) {
   const { pathname } = useLocation()
@@ -35,32 +35,33 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
 
   return (
     <div
-      className="fixed inset-0 z-[60] flex flex-col justify-between bg-text text-on-dark"
+      className="fixed inset-0 z-[60] overflow-y-auto overscroll-y-contain bg-text text-on-dark scrollbar-none [-webkit-overflow-scrolling:touch]"
       role="dialog"
       aria-modal="true"
       aria-label="Menu principal"
     >
-      <div className="min-h-0 w-full flex-1 overflow-y-auto">
-        {/* NAV — 72px, padding 16px, bouton fermer 40px */}
-        <div className="flex h-[4.5rem] items-center justify-end px-section">
-          <button
-            type="button"
-            aria-label="Fermer le menu"
-            onClick={onClose}
-            className="flex size-10 shrink-0 items-center justify-center rounded-full border-2 border-on-dark"
-          >
-            <img
-              src="/images/Icon_fermer.svg"
-              alt=""
-              aria-hidden
-              className="size-6"
-              draggable={false}
-            />
-          </button>
-        </div>
+      <div className="flex min-h-dvh flex-col">
+        <div className="flex-1">
+          {/* NAV — 72px, padding 16px, bouton fermer 40px */}
+          <div className="flex h-[4.5rem] items-center justify-end px-section">
+            <button
+              type="button"
+              aria-label="Fermer le menu"
+              onClick={onClose}
+              className="flex size-10 shrink-0 items-center justify-center rounded-full border-2 border-on-dark"
+            >
+              <img
+                src="/images/Icon_fermer.svg"
+                alt=""
+                aria-hidden
+                className="size-6"
+                draggable={false}
+              />
+            </button>
+          </div>
 
-        {/* MENU — padding 24px, gap 32px entre rubriques */}
-        <nav className="flex flex-col gap-8 px-6" aria-label="Navigation principale">
+          {/* MENU — padding 24px, gap 32px entre rubriques */}
+          <nav className="flex flex-col gap-8 px-6" aria-label="Navigation principale">
           <Link
             to="/histoires"
             onClick={onClose}
@@ -95,7 +96,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                 <Link
                   to="/collections"
                   onClick={onClose}
-                  className={menuSubBoldClass}
+                  className={menuSubLeadClass}
                 >
                   Tout voir
                 </Link>
@@ -131,25 +132,28 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           >
             Jeunesse
           </Link>
-        </nav>
-      </div>
+          </nav>
+        </div>
 
-      {/* Langues — padding 24px, pb 32px, gap 24px */}
-      <div className="flex items-center justify-center gap-6 px-6 pb-8">
-        <button
-          type="button"
-          aria-pressed
-          className="flex size-10 items-center justify-center rounded-full border-[3px] border-on-dark bg-on-dark font-outfit text-[1.25rem] font-medium tracking-[0.0625rem] text-text"
-        >
-          FR
-        </button>
-        <button
-          type="button"
-          aria-pressed={false}
-          className="flex size-10 items-center justify-center rounded-full border-[3px] border-on-dark font-outfit text-[1.25rem] font-medium tracking-[0.0625rem] text-on-dark"
-        >
-          BR
-        </button>
+        {/* Langues — en bas si contenu court, poussé si contenu long */}
+        <footer className="mt-auto shrink-0 bg-text px-6 pt-4 pb-[max(2rem,env(safe-area-inset-bottom))]">
+          <div className="flex items-center justify-center gap-6">
+            <button
+              type="button"
+              aria-pressed
+              className="flex size-10 items-center justify-center rounded-full border-[3px] border-on-dark bg-on-dark font-outfit text-[1.25rem] font-medium tracking-[0.0625rem] text-text"
+            >
+              FR
+            </button>
+            <button
+              type="button"
+              aria-pressed={false}
+              className="flex size-10 items-center justify-center rounded-full border-[3px] border-on-dark font-outfit text-[1.25rem] font-medium tracking-[0.0625rem] text-on-dark"
+            >
+              BR
+            </button>
+          </div>
+        </footer>
       </div>
     </div>
   )
