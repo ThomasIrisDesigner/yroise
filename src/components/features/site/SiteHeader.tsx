@@ -53,7 +53,7 @@ function HeaderSearchIcon() {
       src="/images/Icon_recherche.svg"
       alt=""
       aria-hidden
-      className="h-5 w-[21px]"
+      className="h-6 w-6"
       draggable={false}
     />
   )
@@ -65,7 +65,7 @@ function HeaderMenuIcon() {
       src="/images/Icon_menu.svg"
       alt=""
       aria-hidden
-      className="h-[18px] w-6"
+      className="h-6 w-6"
       draggable={false}
     />
   )
