@@ -1,16 +1,22 @@
 import { COLLECTIONS } from '@/data/collections'
-import { LOREM } from '@/data/placeholders'
+import { HISTOIRES_LIST_INTRO } from '@/data/histoires'
 import { CollectionListCard } from '@/components/features/collections/CollectionListCard'
+import { SectionListHeader } from '@/components/features/site/SectionListHeader'
 import { SitePageShell } from '@/components/features/site/SitePageShell'
-import { typography } from '@/styles/typography'
 
 export function CollectionsList() {
   return (
     <SitePageShell>
-      <div className="px-section pt-4 pb-10">
-        <h1 className={typography.pageTitle}>Collections</h1>
-        <p className={`mt-2 ${typography.pageSubtitle}`}>{LOREM.line}</p>
-        <ul className="mt-6 flex flex-col gap-6">
+      <div className="flex flex-col bg-background pb-8">
+        <SectionListHeader
+          tone="collections"
+          breadcrumbTo="/prototype"
+          breadcrumbLabel="Accueil"
+          title="Collections"
+          chapeau={HISTOIRES_LIST_INTRO.chapeau}
+        />
+
+        <ul className="flex flex-col gap-6 px-section py-10">
           {COLLECTIONS.map((col) => (
             <li key={col.slug}>
               <CollectionListCard collection={col} />

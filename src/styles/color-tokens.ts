@@ -55,10 +55,10 @@ export const COLOR_TOKEN_SECTIONS: ColorTokenSection[] = [
   {
     title: 'Aurore · Jeunesse',
     tokens: [
-      { name: '--aurore-900', hex: '#641E46' },
-      { name: '--aurore-700', hex: '#FF64C8' },
-      { name: '--aurore-300', hex: '#FFB4EB' },
-      { name: '--aurore-100', hex: '#FAD7EB' },
+      { name: '--aurore-900', hex: '#802828' },
+      { name: '--aurore-700', hex: '#FF6050' },
+      { name: '--aurore-300', hex: '#F0A5B4' },
+      { name: '--aurore-100', hex: '#FAD7D7' },
     ],
   },
   {

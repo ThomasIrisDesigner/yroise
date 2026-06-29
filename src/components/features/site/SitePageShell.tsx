@@ -5,23 +5,37 @@ import { MobileMenu } from '@/components/features/site/MobileMenu'
 import { SearchPanel } from '@/components/features/site/SearchPanel'
 import { SiteHeader } from '@/components/features/site/SiteHeader'
 import { FriseHaut } from '@/components/ui/frise-haut'
+import type { SiteHeaderTone } from '@/config/site-header'
+import {
+  SITE_HEADER_TONE_CLASSES,
+  resolveSiteFrisePlacement,
+  resolveSiteHeaderTone,
+} from '@/config/site-header'
 
 interface SitePageShellProps {
   children: React.ReactNode
   showFooter?: boolean
   footer?: React.ReactNode
+  /** Surcharge le ton header ; par défaut déduit de la route */
+  headerTone?: SiteHeaderTone
 }
 
 export function SitePageShell({
   children,
   showFooter = false,
   footer,
+  headerTone,
 }: SitePageShellProps) {
   const [menuOpen, setMenuOpen] = React.useState(false)
   const [searchOpen, setSearchOpen] = React.useState(false)
   const scrollMainRef = React.useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
   const location = useLocation()
+  const resolvedHeaderTone =
+    headerTone ?? resolveSiteHeaderTone(location.pathname)
+  const headerToneClasses = SITE_HEADER_TONE_CLASSES[resolvedHeaderTone]
+  const frisePlacement = resolveSiteFrisePlacement(location.pathname)
+  const showChromeFrise = frisePlacement === 'chrome'
 
   const scrollPageToTop = React.useCallback(() => {
     scrollMainRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
@@ -57,6 +71,7 @@ export function SitePageShell({
           scrollContainerRef={scrollMainRef}
           searchOpen={searchOpen}
           menuOpen={menuOpen}
+          tone={resolvedHeaderTone}
           onGoHome={goHome}
           onOpenSearch={() => {
             setMenuOpen(false)
@@ -67,9 +82,14 @@ export function SitePageShell({
             setMenuOpen(true)
           }}
         />
-        <div className="relative z-10 -mb-2">
-          <FriseHaut className="block w-full" />
-        </div>
+        {showChromeFrise ? (
+          <div className="relative z-10 -mb-2">
+            <FriseHaut
+              fill={headerToneClasses.friseFill}
+              className="block w-full"
+            />
+          </div>
+        ) : null}
       </div>
 
       <div ref={scrollMainRef} className="site-scroll-main flex min-h-0 flex-1 flex-col">

@@ -31,10 +31,10 @@
   --ocean-100: 215 235 250;
 
   /* Aurore · Jeunesse */
-  --aurore-900: 100 30 70;
-  --aurore-700: 255 100 200;
-  --aurore-300: 255 180 235;
-  --aurore-100: 250 215 235;
+  --aurore-900: 128 40 40;
+  --aurore-700: 255 96 80;
+  --aurore-300: 240 165 180;
+  --aurore-100: 250 215 215;
 
   /* Boutons */
   --color-button-primary-hover: 51 51 51;
@@ -139,6 +139,11 @@ body {
   flex-shrink: 0;
   object-fit: cover;
   background: rgb(var(--color-surface));
+}
+
+.card-image--list {
+  aspect-ratio: auto;
+  height: 174px;
 }
 
 /* Slider horizontal — aligné sur la gouttière section, débordement peek à droite */

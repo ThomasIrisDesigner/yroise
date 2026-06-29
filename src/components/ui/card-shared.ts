@@ -25,6 +25,14 @@ export const cardCtaWrapClass = 'card-cta-wrap mt-auto pt-6'
 
 export const cardImageClass = 'card-image'
 
+export const cardImageListClass = 'card-image card-image--list'
+
+export const cardBodyListClass = 'card-body flex flex-1 flex-col gap-2 py-4'
+
+export const cardExcerptListClass = `card-excerpt font-outfit text-sm font-normal leading-[1.55] text-text line-clamp-4`
+
+export const cardCtaListWrapClass = 'card-cta-wrap pt-2'
+
 export const collectionCardClass =
   'card-collection collection-item relative flex w-[140px] shrink-0 snap-start flex-col items-center'
 

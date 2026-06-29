@@ -10,6 +10,14 @@ import {
 import { cn } from '@/lib/utils'
 import { typography } from '@/styles/typography'
 
+function FooterDotSeparator() {
+  return (
+    <div className="flex w-full items-center justify-center" aria-hidden>
+      <span className="size-[5px] rounded-full bg-glaz-500" />
+    </div>
+  )
+}
+
 export function SiteFooter() {
   return (
     <footer className="text-on-dark">
@@ -42,6 +50,8 @@ export function SiteFooter() {
           ))}
         </div>
 
+        <FooterDotSeparator />
+
         <div className="flex flex-col items-center gap-4 px-4">
           <p className={cn(typography.meta, 'w-full text-center text-on-dark')}>
             Nous suivre
@@ -68,7 +78,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="h-px w-full bg-on-dark/40" aria-hidden />
+        <FooterDotSeparator />
 
         <div className="flex flex-col items-center gap-4">
           <p className={cn(typography.meta, 'w-full text-center text-on-dark')}>

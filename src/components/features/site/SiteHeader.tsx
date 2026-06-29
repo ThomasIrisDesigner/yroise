@@ -2,6 +2,8 @@ import * as React from 'react'
 import { Link } from 'react-router-dom'
 
 import { SITE_LOGO } from '@/config/assets'
+import type { SiteHeaderTone } from '@/config/site-header'
+import { SITE_HEADER_TONE_CLASSES } from '@/config/site-header'
 import { useScrollThreshold } from '@/lib/useScrollThreshold'
 import { cn } from '@/lib/utils'
 
@@ -12,6 +14,7 @@ interface SiteHeaderProps {
   searchOpen?: boolean
   menuOpen?: boolean
   scrollContainerRef?: React.RefObject<HTMLElement | null>
+  tone?: SiteHeaderTone
   className?: string
 }
 
@@ -105,16 +108,20 @@ export function SiteHeader({
   searchOpen = false,
   menuOpen = false,
   scrollContainerRef,
+  tone = 'default',
   className,
 }: SiteHeaderProps) {
   const headerRef = React.useRef<HTMLElement>(null)
   const scrolled = useScrollThreshold(10, headerRef, scrollContainerRef)
+  const toneClasses = SITE_HEADER_TONE_CLASSES[tone]
 
   return (
     <header
       ref={headerRef}
       className={cn(
-        'site-header box-border flex shrink-0 items-center border-b border-border bg-background px-section',
+        'site-header box-border flex shrink-0 items-center border-b px-section',
+        tone !== 'default' ? 'border-transparent' : 'border-border',
+        toneClasses.header,
         scrolled ? 'h-14' : 'h-[72px]',
         className
       )}

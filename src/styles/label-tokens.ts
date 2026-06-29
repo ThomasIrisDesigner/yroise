@@ -25,9 +25,9 @@ export const TYPE_LABEL_SECTORS: TypeLabelSector[] = [
     title: 'Jeunesse',
     types: ['jeu', 'sequence'],
     surfaceClass: 'bg-aurore-100',
-    surfaceHex: '#FAD7EB',
+    surfaceHex: '#FAD7D7',
     sectionClass: 'section-jeunesse',
-    textHex: '#641E46',
+    textHex: '#802828',
   },
 ]
 
@@ -52,6 +52,6 @@ export const TYPE_LABEL_SECTION_COLORS = [
   },
   {
     section: 'jeunesse',
-    spec: 'fond #FAD7EB · texte #641E46 · JEU · SÉQUENCE',
+    spec: 'fond #FAD7D7 · texte #802828 · JEU · SÉQUENCE',
   },
 ] as const

@@ -30,6 +30,15 @@ export const CARD_HISTOIRE_SPECS = [
   { token: 'a11y', value: '.card-title a::before { inset: 0 } sur .card relative' },
 ] as const
 
+export const CARD_HISTOIRE_LIST_SPECS = [
+  { token: 'container', value: 'max-width 310px · centré · bg #fff' },
+  { token: '.card-image--list', value: 'height 174px · object-fit cover' },
+  { token: 'card-body', value: 'padding 16px 0 · gap 8px' },
+  { token: 'card-excerpt (liste)', value: 'Outfit 400 · 14px · lh 1.55 · line-clamp 4' },
+  { token: 'card-excerpt (1er billet)', value: 'Outfit 400 · 16px · card-excerpt · line-clamp 4' },
+  { token: 'card-cta spacing', value: '8px entre extrait et bouton (pt-2)' },
+] as const
+
 export const CARD_COLLECTION_SPECS = [
   { token: 'container', value: 'flex column · align center · width 140px · flex-shrink 0' },
   { token: 'hublot', value: '120×120px · radius 50% · overflow hidden · object-fit cover' },

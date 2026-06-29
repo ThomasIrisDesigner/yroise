@@ -9,9 +9,15 @@ export interface HistoireBillet {
   accroche?: string
   auteur?: string
   fonds?: string
+  imageSrc?: string
 }
 
 export { CONTENT_TYPE_LABELS as HISTOIRE_TYPE_LABELS } from '@/data/contentTypes'
+
+export const HISTOIRES_LIST_INTRO = {
+  chapeau:
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.',
+} as const
 
 export const HISTOIRES_LIST: HistoireBillet[] = [
   {
@@ -20,6 +26,7 @@ export const HISTOIRES_LIST: HistoireBillet[] = [
     titre: "L'explosion de l'Océan Liberty le 28 juillet 1947",
     accroche:
       "Un navire américain explose en rade de Brest, causant l'une des pires catastrophes maritimes de l'après-guerre. L'histoire oubliée d'un drame qui a marqué la ville en pleine reconstruction.",
+    imageSrc: '/images/voilier-brest.png',
   },
   {
     slug: 'marcel-bories-plaques',

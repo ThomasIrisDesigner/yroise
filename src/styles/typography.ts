@@ -195,14 +195,16 @@ const uiSpecs: CatalogSpec[] = [
     contextNote: 'Troncature à 2 lignes (line-clamp-2) sur les cards du carousel.',
   },
   {
-    usage: 'Légendes sous les images',
-    label: 'Légendes photos, crédits',
+    usage: "Légendes sous les images, fil d'Ariane des pages liste",
+    label: "Légendes photos, crédits · fil d'Ariane",
     fontFamily: TYPOGRAPHY_FONT_UI,
     sizePx: 14,
     weight: 400,
     color: '#71717a',
     lineHeight: '1.4',
     letterSpacing: '0.1px',
+    contextNote:
+      'Couleur par défaut text-muted. Sur en-tête de page liste (fond sable), appliquer text-sable-900 — voir SectionListHeader.',
   },
   {
     usage: 'Sous-titre institutionnel dans le header',
