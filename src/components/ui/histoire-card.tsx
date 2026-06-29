@@ -49,7 +49,7 @@ export function HistoireCard({
       className={cn(
         editorialCardClass,
         sliderItem && editorialCardSliderClass,
-        isList && 'mx-auto w-full max-w-[310px]',
+        isList && 'mx-auto w-full max-w-[310px] pt-4',
         className
       )}
     >

@@ -125,8 +125,6 @@ export function PrototypeLayout({ children }: { children: React.ReactNode }) {
         : 'mobile'
     : 'desktop'
 
-  const isMobileViewport = !isDesktop
-
   const chromeBar = (
     <PrototypeChromeBar
       allowSwitch={allowSwitch}
@@ -182,17 +180,8 @@ export function PrototypeLayout({ children }: { children: React.ReactNode }) {
         </div>
       ) : (
         <div className="flex h-full w-full flex-col overflow-hidden bg-background text-text">
-          {isMobileViewport ? (
-            <div className="site-outer-scroll scrollbar-none min-h-0 flex-1 overflow-y-auto overscroll-contain">
-              {chromeBar}
-              {children}
-            </div>
-          ) : (
-            <>
-              {chromeBar}
-              <div className="flex min-h-0 flex-1 flex-col overflow-hidden">{children}</div>
-            </>
-          )}
+          {chromeBar}
+          <div className="flex min-h-0 flex-1 flex-col overflow-hidden">{children}</div>
         </div>
       )}
     </div>

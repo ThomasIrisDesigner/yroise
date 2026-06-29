@@ -29,7 +29,7 @@ export const BUTTON_VARIANT_COLOR_SPECS = [
   },
   {
     variant: 'secondary',
-    spec: 'transparent · #010101 texte · #D9D9D9→#010101 border',
+    spec: 'transparent · #010101 texte · rgba(1,1,1,0.2)→#010101 border',
   },
   {
     variant: 'ghost',

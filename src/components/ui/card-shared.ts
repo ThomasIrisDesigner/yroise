@@ -2,7 +2,7 @@
 import { typography } from '@/styles/typography'
 
 export const editorialCardClass =
-  'card relative flex shrink-0 flex-col overflow-hidden bg-background'
+  'card group relative flex shrink-0 flex-col overflow-hidden bg-background'
 
 export const editorialCardSliderClass = 'card-slider-item'
 

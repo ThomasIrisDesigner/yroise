@@ -10,7 +10,7 @@ const titleXl = `${ui} text-[28px] font-bold leading-tight tracking-[0.1px] text
 const titleL = `${ui} text-[20px] font-semibold leading-snug text-text`
 const titleM = `${ui} text-base font-semibold leading-[1.3] tracking-[0.1px] text-text`
 const titleMCard = `${titleM} line-clamp-3`
-const cardTitleEditorial = `${ui} text-[1.375rem] font-semibold leading-7 tracking-[0.1px] text-text`
+const cardTitleEditorial = `${ui} text-[1.375rem] font-semibold leading-[1.875rem] tracking-[0.1px] text-text`
 const chapeau = `${ui} text-lg font-normal leading-[1.4] tracking-[0.1px] text-text`
 const label = `${ui} text-base font-semibold uppercase tracking-[2px] text-text`
 const meta = `${ui} text-[13px] font-normal leading-snug text-muted`
@@ -144,7 +144,7 @@ const uiSpecs: CatalogSpec[] = [
     sizePx: 22,
     weight: 600,
     color: '#010101',
-    lineHeight: '1.75rem (leading-7)',
+    lineHeight: '1.875rem (leading-[1.875rem])',
     letterSpacing: '0.1px',
     contextNote:
       'Troncature à 2 lignes (line-clamp-2) dans le carousel. Alias carouselTitle.',
@@ -204,7 +204,7 @@ const uiSpecs: CatalogSpec[] = [
     lineHeight: '1.4',
     letterSpacing: '0.1px',
     contextNote:
-      'Couleur par défaut text-muted. Sur en-tête de page liste (fond sable), appliquer text-sable-900 — voir SectionListHeader.',
+      'Couleur par défaut text-muted. Sur en-tête de page liste (fond tonal), appliquer la couleur rubrique — voir SectionListHeader.',
   },
   {
     usage: 'Sous-titre institutionnel dans le header',

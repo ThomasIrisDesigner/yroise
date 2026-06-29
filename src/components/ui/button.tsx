@@ -24,7 +24,7 @@ const buttonVariants = cva(
         primary:
           'bg-text text-on-dark hover:bg-[rgb(var(--color-button-primary-hover))]',
         secondary:
-          'border-[1.5px] border-solid border-border bg-transparent text-text hover:border-text',
+          'border-[1.5px] border-solid border-list-separator/20 bg-transparent text-text hover:border-text group-hover:border-text',
         ghost: 'bg-transparent text-text hover:underline',
       },
       size: {

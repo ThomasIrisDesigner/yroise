@@ -13,7 +13,8 @@ export const COLLECTIONS: Collection[] = [
     slug: 'en-mer',
     name: 'En mer',
     shortLabel: 'En mer',
-    accroche: 'Navigation, marines et vie portuaire',
+    accroche:
+      "Revivez le quotidien d'une frégate-école. Embarquez pour l'Irlande, l'Inde ou d'autres destinations.",
     documentCount: 234,
     hublotImageSrc: '/images/Collection_En-mer_Hubot.jpg',
   },
@@ -21,7 +22,7 @@ export const COLLECTIONS: Collection[] = [
     slug: 'brest-et-environs',
     name: 'Brest et ses environs',
     shortLabel: 'Brest',
-    accroche: 'La ville et son territoire, de l’Ancien Régime à nos jours',
+    accroche: 'Un aperçu de Brest à travers les siècles.',
     documentCount: 412,
     hublotImageSrc: '/images/Collection_Brest-et-ses-environs_Hublot.jpg',
   },
@@ -29,7 +30,8 @@ export const COLLECTIONS: Collection[] = [
     slug: 'en-images',
     name: 'En images',
     shortLabel: 'En images',
-    accroche: 'Photographies, dessins et cartes du Finistère',
+    accroche:
+      'Cartes postales, plaques de verre, cartes : la pointe bretonne se dévoile en images.',
     documentCount: 189,
     hublotImageSrc: '/images/Collection_En-Images_Hublot.jpg',
   },

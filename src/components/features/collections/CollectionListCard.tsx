@@ -1,34 +1,48 @@
 import { Link } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
+import { cardTitleLinkClass } from '@/components/ui/card-shared'
 import type { Collection } from '@/data/collections'
-import { LOREM } from '@/data/placeholders'
-import { typography } from '@/styles/typography'
 
 interface CollectionListCardProps {
   collection: Collection
 }
 
+/** Card collection page liste — hublot centré, titre, accroche, CTA Explorer. */
 export function CollectionListCard({ collection }: CollectionListCardProps) {
+  const to = `/collections/${collection.slug}`
+
   return (
-    <article className="overflow-hidden rounded-md border border-border">
-      <Link to={`/collections/${collection.slug}`} className="block">
-        <div
-          className="flex h-36 w-full items-center justify-center bg-surface"
-          aria-hidden
-        >
-          <span className="text-sm italic text-text/40">{collection.name}</span>
-        </div>
-        <div className="bg-surface p-4">
-          <h2 className={typography.cardTitle}>{collection.name}</h2>
-          <p className="mt-2 text-sm leading-relaxed text-text/70">{LOREM.line}</p>
-        </div>
-      </Link>
-      <div className="flex justify-end bg-surface px-4 pb-4">
-        <Button asChild variant="ghost" size="sm">
-          <Link to={`/collections/${collection.slug}`}>Découvrir</Link>
-        </Button>
+    <article className="group relative flex flex-col items-center gap-6 pb-1">
+      <div className="hublot-frame relative size-[224px] shrink-0 overflow-hidden rounded-full border-[9px] border-text bg-surface">
+        <img
+          src={collection.hublotImageSrc ?? '/images/voilier-brest.png'}
+          alt=""
+          className="block h-full w-full object-cover"
+          draggable={false}
+        />
       </div>
+
+      <div className="flex w-full max-w-[305px] flex-col items-center gap-2 text-center">
+        <h2 className="font-outfit text-[1.375rem] font-semibold leading-[1.3] text-text">
+          <Link to={to} className={cardTitleLinkClass}>
+            {collection.name}
+          </Link>
+        </h2>
+        <p className="font-outfit text-sm font-normal leading-[1.55] text-text">
+          {collection.accroche}
+        </p>
+      </div>
+
+      <Button
+        variant="secondary"
+        size="sm"
+        className="pointer-events-none"
+        tabIndex={-1}
+        aria-hidden
+      >
+        Explorer
+      </Button>
     </article>
   )
 }

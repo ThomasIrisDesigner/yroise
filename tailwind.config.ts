@@ -21,6 +21,7 @@ export default {
         'text-muted': rgb('color-text-muted'),
         surface: rgb('color-surface'),
         border: rgb('color-border'),
+        'list-separator': rgb('color-list-separator'),
         background: rgb('color-background'),
         'on-dark': rgb('color-text-on-dark'),
         muted: rgb('color-text-muted'),

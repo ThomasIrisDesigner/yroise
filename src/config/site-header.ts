@@ -1,10 +1,7 @@
 import type { FriseHautFill } from '@/components/ui/frise-haut'
 
-/** Fond du header site — une tonalité par rubrique éditoriale */
+/** Fond du header site — réservé pour évolutions DA par rubrique */
 export type SiteHeaderTone = 'default' | 'histoires' | 'collections'
-
-/** Où afficher la frise dentelée sous le header site */
-export type SiteFrisePlacement = 'chrome' | 'section-header'
 
 export const SITE_HEADER_TONE_CLASSES: Record<
   SiteHeaderTone,
@@ -24,20 +21,7 @@ export const SITE_HEADER_TONE_CLASSES: Record<
   },
 }
 
-export function resolveSiteHeaderTone(pathname: string): SiteHeaderTone {
-  if (pathname === '/histoires' || pathname.startsWith('/histoires/')) {
-    return 'histoires'
-  }
-  if (pathname === '/collections' || pathname.startsWith('/collections/')) {
-    return 'collections'
-  }
+/** Header blanc + frise noire sur toutes les pages éditoriales (comportement home). */
+export function resolveSiteHeaderTone(_pathname: string): SiteHeaderTone {
   return 'default'
-}
-
-/** Liste rubrique → frise sous l'en-tête de section ; détail → sous le header site */
-export function resolveSiteFrisePlacement(pathname: string): SiteFrisePlacement {
-  if (pathname === '/histoires' || pathname === '/collections') {
-    return 'section-header'
-  }
-  return 'chrome'
 }

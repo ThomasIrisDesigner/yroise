@@ -7,6 +7,7 @@
   --color-text-muted: 113 114 122;
   --color-surface: 246 246 246;
   --color-border: 217 217 217;
+  --color-list-separator: 1 1 1;
   --color-background: 255 255 255;
   --color-text-on-dark: 255 255 255;
 
@@ -94,11 +95,27 @@ body {
   color: rgb(var(--aurore-900));
 }
 
-/* Header site — chrome fixe, scroll dans .site-scroll-main (72px → 56px au scroll) */
+/* Header site — défile avec le contenu ; barre compacte épinglée au scroll vers le haut */
 .site-top-chrome {
   position: relative;
   z-index: 50;
   flex-shrink: 0;
+}
+
+.site-top-chrome--pinned {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  transform: translateY(-100%);
+  transition: transform 0.25s ease;
+  pointer-events: none;
+}
+
+.site-top-chrome--pinned-visible {
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .site-header {
@@ -169,7 +186,7 @@ body {
   scroll-snap-align: start;
 }
 
-/* Scroll principal — header hors flux ; mockup et desktop plein écran */
+/* Scroll principal — header dans le flux, scroll dans .site-scroll-main */
 .site-scroll-main {
   flex: 1;
   min-height: 0;
@@ -178,36 +195,10 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-/* Mobile réel — barre Thomas Iris dans le flux ; header site sticky en haut */
-.site-outer-scroll {
-  -webkit-overflow-scrolling: touch;
-}
-
-.site-outer-scroll .site-page-shell {
-  flex: none;
-  min-height: auto;
-}
-
-.site-outer-scroll .site-scroll-main {
-  overflow: visible;
-  flex: none;
-  min-height: auto;
-}
-
-.site-outer-scroll .site-top-chrome {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-}
-
 /* Mockup mobile — hauteur contrainte dans le device frame */
 .mockup-scroll-root .site-page-shell {
   height: 100%;
   min-height: 0;
-}
-
-.mockup-scroll-root .site-top-chrome {
-  position: relative;
 }
 
 /* Hublot carousel — calque d’ombre interne au-dessus de l’image */

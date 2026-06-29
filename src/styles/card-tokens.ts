@@ -17,7 +17,7 @@ export const CARD_HISTOIRE_SPECS = [
   { token: 'border / radius', value: 'aucun' },
   { token: '.card-image', value: 'width 100% · aspect-ratio 16/9 · object-fit cover · display block · full bleed' },
   { token: 'card-body', value: 'padding 16px 0 · flex column · flex 1' },
-  { token: 'card-title', value: 'Outfit 600 · 22px (1.375rem) · lh 1.75rem · ls 0.1px · line-clamp 2' },
+  { token: 'card-title', value: 'Outfit 600 · 22px (1.375rem) · lh 1.875rem · ls 0.1px · line-clamp 2' },
   { token: 'card-title color', value: '#010101 · hover #2D7D8A · transition 0.15s' },
   { token: 'card-title margin', value: 'margin-bottom 8px' },
   { token: 'card-excerpt', value: 'Outfit 400 · 16px (1rem) · lh 1.5rem · ls 0.1px · #010101 · line-clamp 2' },
@@ -25,7 +25,7 @@ export const CARD_HISTOIRE_SPECS = [
   {
     token: 'card-cta',
     value:
-      'Button secondary sm · h 36px · pl 18px · pr 14px · gap 10px · border 1.5px #D9D9D9 · △ 8px · décoratif (card entière cliquable)',
+      'Button secondary sm · h 36px · pl 18px · pr 14px · gap 10px · border 1.5px rgba(1,1,1,0.2) · △ 8px · décoratif (card entière cliquable)',
   },
   { token: 'a11y', value: '.card-title a::before { inset: 0 } sur .card relative' },
 ] as const
