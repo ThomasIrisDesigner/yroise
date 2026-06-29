@@ -1,27 +1,110 @@
 import { Link } from 'react-router-dom'
 
-import { FOOTER_LINKS } from '@/data/navigation'
+import {
+  FOOTER_ANNEX_LINKS,
+  FOOTER_INTRO,
+  FOOTER_PARTNER_LOGOS,
+  FOOTER_SOCIAL_LINKS,
+  FOOTER_STATS,
+} from '@/data/footer'
 import { cn } from '@/lib/utils'
 import { typography } from '@/styles/typography'
 
 export function SiteFooter() {
   return (
-    <footer className="bg-ocean-900 px-section py-6 text-on-dark">
-      <p className={`mb-4 ${typography.logo} text-on-dark`}>YROISE</p>
-      <nav className="-mx-2 flex flex-col">
-        {FOOTER_LINKS.map((link) => (
-          <Link
-            key={link.slug}
-            to={link.slug}
-            className={cn(
-              'inline-flex min-h-11 items-center px-2 text-white/70 hover:text-white',
-              typography.uiLink
-            )}
+    <footer className="text-on-dark">
+      <div className="flex flex-col gap-8 bg-ocean-900 px-section py-10">
+        <div className="flex flex-col items-center gap-4">
+          <img
+            src="/images/logo_yroise-blanc.svg"
+            alt="YROISE"
+            width={120}
+            height={24}
+            className="block h-6 w-[120px]"
+            draggable={false}
+          />
+          <p className="text-center font-outfit text-sm font-normal leading-[1.55] text-on-dark">
+            {FOOTER_INTRO}
+          </p>
+        </div>
+
+        <div className="flex gap-4 px-4">
+          {FOOTER_STATS.map((stat) => (
+            <div
+              key={stat.label}
+              className="flex min-w-0 flex-1 flex-col items-center gap-1 text-center"
+            >
+              <p className="font-outfit text-xl font-bold leading-normal text-on-dark">
+                {stat.value}
+              </p>
+              <p className={cn(typography.meta, 'text-on-dark')}>{stat.label}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex flex-col items-center gap-4 px-4">
+          <p className={cn(typography.meta, 'w-full text-center text-on-dark')}>
+            Nous suivre
+          </p>
+          <div className="flex items-center gap-8">
+            {FOOTER_SOCIAL_LINKS.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label={social.label}
+                className="inline-flex size-6 items-center justify-center"
+              >
+                <img
+                  src={social.iconSrc}
+                  alt=""
+                  aria-hidden
+                  className="size-6"
+                  draggable={false}
+                />
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div className="h-px w-full bg-on-dark/40" aria-hidden />
+
+        <div className="flex flex-col items-center gap-4">
+          <p className={cn(typography.meta, 'w-full text-center text-on-dark')}>
+            Pages annexes
+          </p>
+          <nav
+            className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2"
+            aria-label="Pages annexes"
           >
-            {link.label === 'Nous contacter' ? 'Contact' : link.label}
-          </Link>
+            {FOOTER_ANNEX_LINKS.map((link) => (
+              <Link
+                key={link.slug}
+                to={link.slug}
+                className={cn(
+                  typography.uiLink,
+                  'text-on-dark/70 transition-colors hover:text-on-dark'
+                )}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-center gap-8 bg-background px-6 py-10">
+        {FOOTER_PARTNER_LOGOS.map((partner) => (
+          <img
+            key={partner.label}
+            src={partner.src}
+            alt={partner.label}
+            className={cn('block shrink-0', partner.className)}
+            draggable={false}
+          />
         ))}
-      </nav>
+      </div>
     </footer>
   )
 }
