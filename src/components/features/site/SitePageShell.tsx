@@ -51,7 +51,7 @@ export function SitePageShell({
   }, [menuOpen, searchOpen])
 
   return (
-    <div className="site-page-shell flex min-h-0 flex-1 flex-col bg-surface text-text">
+    <div className="site-page-shell relative flex min-h-0 flex-1 flex-col bg-surface text-text">
       <div className="site-top-chrome shrink-0">
         <SiteHeader
           scrollContainerRef={scrollMainRef}

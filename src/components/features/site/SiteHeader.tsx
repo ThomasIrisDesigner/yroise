@@ -90,7 +90,7 @@ function HeaderNavIconButton({
       onClick={onClick}
       className={cn(
         'site-header-icon-btn box-border h-10 w-10 shrink-0 rounded-full border-[2.5px] border-solid text-text transition-colors duration-150',
-        active ? 'border-text' : 'border-transparent'
+        active ? 'border-text' : 'border-transparent hover:border-text'
       )}
     >
       {children}

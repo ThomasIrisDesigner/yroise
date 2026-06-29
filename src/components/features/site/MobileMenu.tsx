@@ -35,33 +35,35 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
 
   return (
     <div
-      className="fixed inset-0 z-[60] overflow-y-auto overscroll-y-contain bg-text text-on-dark scrollbar-none [-webkit-overflow-scrolling:touch]"
+      className="absolute inset-0 z-[60] overflow-y-auto overscroll-y-contain bg-ocean-900 text-on-dark scrollbar-none [-webkit-overflow-scrolling:touch]"
       role="dialog"
       aria-modal="true"
       aria-label="Menu principal"
     >
-      <div className="flex min-h-dvh flex-col">
-        <div className="flex-1">
-          {/* NAV — 72px, padding 16px, bouton fermer 40px */}
-          <div className="flex h-[4.5rem] items-center justify-end px-section">
-            <button
-              type="button"
-              aria-label="Fermer le menu"
-              onClick={onClose}
-              className="flex size-10 shrink-0 items-center justify-center rounded-full border-2 border-on-dark"
-            >
-              <img
-                src="/images/Icon_fermer.svg"
-                alt=""
-                aria-hidden
-                className="size-6"
-                draggable={false}
-              />
-            </button>
-          </div>
+      <div className="flex min-h-full flex-col">
+        {/* NAV — 72px, padding 16px, bouton fermer 40px */}
+        <div className="flex h-[4.5rem] shrink-0 items-center justify-end px-section">
+          <button
+            type="button"
+            aria-label="Fermer le menu"
+            onClick={onClose}
+            className="flex size-10 shrink-0 items-center justify-center rounded-full border-2 border-on-dark"
+          >
+            <img
+              src="/images/Icon_fermer.svg"
+              alt=""
+              aria-hidden
+              className="size-6"
+              draggable={false}
+            />
+          </button>
+        </div>
 
-          {/* MENU — padding 24px, gap 32px entre rubriques */}
-          <nav className="flex flex-col gap-8 px-6" aria-label="Navigation principale">
+        {/* MENU — grow pousse les langues en bas si contenu court */}
+        <nav
+          className="flex grow flex-col gap-8 px-6"
+          aria-label="Navigation principale"
+        >
           <Link
             to="/histoires"
             onClick={onClose}
@@ -132,11 +134,10 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           >
             Jeunesse
           </Link>
-          </nav>
-        </div>
+        </nav>
 
-        {/* Langues — en bas si contenu court, poussé si contenu long */}
-        <footer className="mt-auto shrink-0 bg-text px-6 pt-4 pb-[max(2rem,env(safe-area-inset-bottom))]">
+        {/* Langues — 40px du bas si contenu court ; sous le contenu si scroll */}
+        <footer className="shrink-0 bg-ocean-900 px-6 pt-4 pb-[max(2.5rem,env(safe-area-inset-bottom))]">
           <div className="flex items-center justify-center gap-6">
             <button
               type="button"
