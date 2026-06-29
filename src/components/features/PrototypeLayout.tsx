@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { LogOut, Monitor, Smartphone } from 'lucide-react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import { MOBILE_MOCKUP_H, MOBILE_MOCKUP_W } from '@/config/wireframe-mobile'
 import {
@@ -9,6 +9,7 @@ import {
   PROTOTYPE_CHROME_EXTRAS_ENABLED,
 } from '@/config/project'
 import { logout } from '@/lib/auth'
+import { resetPageScroll } from '@/lib/resetPageScroll'
 import { cn } from '@/lib/utils'
 import { useMediaQuery } from '@/lib/useMediaQuery'
 
@@ -108,6 +109,7 @@ function PrototypeChromeBar({
 }
 
 export function PrototypeLayout({ children }: { children: React.ReactNode }) {
+  const location = useLocation()
   const isDesktop = useMediaQuery('(min-width: 768px)')
   const [mode, setMode] = React.useState<ViewMode>(
     PROJECT_TYPE === 'desktop' ? 'desktop' : 'mobile'
@@ -142,6 +144,10 @@ export function PrototypeLayout({ children }: { children: React.ReactNode }) {
     window.addEventListener('resize', recomputeScale)
     return () => window.removeEventListener('resize', recomputeScale)
   }, [])
+
+  React.useLayoutEffect(() => {
+    resetPageScroll()
+  }, [location.pathname])
 
   return (
     <div className="fixed inset-0 overflow-hidden bg-text text-surface">

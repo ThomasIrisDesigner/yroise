@@ -11,6 +11,7 @@ import {
   resolveSiteFrisePlacement,
   resolveSiteHeaderTone,
 } from '@/config/site-header'
+import { resetPageScroll } from '@/lib/resetPageScroll'
 
 interface SitePageShellProps {
   children: React.ReactNode
@@ -38,10 +39,7 @@ export function SitePageShell({
   const showChromeFrise = frisePlacement === 'chrome'
 
   const scrollPageToTop = React.useCallback(() => {
-    scrollMainRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
-    document
-      .querySelector<HTMLElement>('.site-outer-scroll')
-      ?.scrollTo({ top: 0, behavior: 'smooth' })
+    resetPageScroll()
   }, [])
 
   const goHome = React.useCallback(() => {
