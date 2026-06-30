@@ -14,6 +14,9 @@ export const cardTitleClass = `card-title mb-2 ${typography.cardTitleEditorial}`
 export const cardTitleLinkClass =
   'text-text transition-colors duration-150 hover:text-glaz-700 before:absolute before:inset-0 before:content-[""]'
 
+export const cardTitleLinkOnDarkClass =
+  'text-on-dark transition-colors duration-150 hover:text-glaz-300 before:absolute before:inset-0 before:content-[""]'
+
 export const cardExcerptClass = `card-excerpt ${typography.cardExcerpt} line-clamp-2`
 
 export const cardMetaClass =
@@ -27,11 +30,14 @@ export const cardImageClass = 'card-image'
 
 export const cardImageListClass = 'card-image card-image--list'
 
-export const cardBodyListClass = 'card-body flex flex-1 flex-col gap-2 py-4'
+export const cardBodyListClass = 'card-body flex flex-1 flex-col gap-2 pt-4'
 
-export const cardExcerptListClass = `card-excerpt font-outfit text-sm font-normal leading-[1.55] text-text line-clamp-4`
+export const cardExcerptListClass = `card-excerpt ${typography.cardExcerpt} line-clamp-4`
 
 export const cardCtaListWrapClass = 'card-cta-wrap pt-2'
+
+/** Liste Histoires / Collections — 32px haut et bas → 64px entre CTA et image suivante */
+export const listCardStackClass = 'py-8'
 
 export const collectionCardClass =
   'card-collection collection-item relative flex w-[140px] shrink-0 snap-start flex-col items-center'

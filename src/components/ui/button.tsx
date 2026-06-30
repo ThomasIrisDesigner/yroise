@@ -11,6 +11,7 @@ function triangleColor(
   disabled: boolean
 ) {
   if (disabled) return 'rgb(var(--color-border))'
+  if (variant === 'secondary' && inverted) return 'rgb(var(--color-text-on-dark))'
   if (variant === 'primary' && inverted) return 'rgb(var(--glaz-700))'
   if (variant === 'primary') return 'rgb(var(--glaz-500))'
   return 'rgb(var(--color-text))'
@@ -42,6 +43,12 @@ const buttonVariants = cva(
         inverted: true,
         class:
           'bg-background text-text hover:bg-background/90 hover:text-text',
+      },
+      {
+        variant: 'secondary',
+        inverted: true,
+        class:
+          'border-on-dark text-on-dark hover:border-on-dark group-hover:border-on-dark',
       },
     ],
     defaultVariants: {

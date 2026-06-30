@@ -14,7 +14,7 @@ function motifCount(containerWidth: number) {
   return Math.ceil(containerWidth / PATTERN_WIDTH) + 1
 }
 
-/** Frise décorative vagues — transition Jeunesse (aurore-100) → Footer (ocean-900) */
+/** Frise décorative vagues — transition vers le footer (ocean-900), sans fond fixe */
 export function FriseVagues() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [count, setCount] = useState(() => motifCount(390))
@@ -32,7 +32,7 @@ export function FriseVagues() {
   }, [])
 
   return (
-    <div ref={containerRef} className="h-8 w-full shrink-0 bg-aurore-100" aria-hidden>
+    <div ref={containerRef} className="frise-vagues" aria-hidden>
       <svg
         width="100%"
         height={UNIT_HEIGHT}

@@ -9,8 +9,10 @@ import {
   cardExcerptListClass,
   cardImageClass,
   cardImageListClass,
+  listCardStackClass,
   cardTitleClass,
   cardTitleLinkClass,
+  cardTitleLinkOnDarkClass,
   editorialCardClass,
   editorialCardSliderClass,
 } from '@/components/ui/card-shared'
@@ -26,8 +28,8 @@ export interface HistoireCardProps {
   sliderItem?: boolean
   /** Carousel home (défaut) ou page liste Histoires */
   layout?: 'slider' | 'list'
-  /** Premier billet de liste — extrait en 16px */
-  featuredExcerpt?: boolean
+  /** Premier billet mis en avant — fond sombre, texte blanc */
+  featured?: boolean
   className?: string
 }
 
@@ -39,17 +41,20 @@ export function HistoireCard({
   imageAlt,
   sliderItem = false,
   layout = 'slider',
-  featuredExcerpt = false,
+  featured = false,
   className,
 }: HistoireCardProps) {
   const isList = layout === 'list'
+  const isFeaturedList = isList && featured
 
   return (
     <article
       className={cn(
-        editorialCardClass,
+        !isFeaturedList && editorialCardClass,
+        isFeaturedList &&
+          'card group relative mx-auto flex w-full max-w-[310px] flex-col overflow-hidden bg-transparent',
         sliderItem && editorialCardSliderClass,
-        isList && 'mx-auto w-full max-w-[310px] pt-4',
+        isList && !isFeaturedList && cn('mx-auto w-full max-w-[310px]', listCardStackClass),
         className
       )}
     >
@@ -69,8 +74,11 @@ export function HistoireCard({
         />
       )}
       <div className={isList ? cardBodyListClass : cardBodyClass}>
-        <h3 className={cn(cardTitleClass, isList && 'mb-0')}>
-          <Link to={to} className={cardTitleLinkClass}>
+        <h3 className={cn(cardTitleClass, isList && 'mb-0', isFeaturedList && 'text-on-dark')}>
+          <Link
+            to={to}
+            className={isFeaturedList ? cardTitleLinkOnDarkClass : cardTitleLinkClass}
+          >
             <span className="line-clamp-2">{titre}</span>
           </Link>
         </h3>
@@ -78,9 +86,7 @@ export function HistoireCard({
           <p
             className={
               isList
-                ? featuredExcerpt
-                  ? cn(cardExcerptClass, 'line-clamp-4')
-                  : cardExcerptListClass
+                ? cn(cardExcerptListClass, isFeaturedList && 'text-on-dark')
                 : cardExcerptClass
             }
           >
@@ -91,6 +97,7 @@ export function HistoireCard({
           <Button
             variant="secondary"
             size="sm"
+            inverted={isFeaturedList}
             className="pointer-events-none"
             tabIndex={-1}
             aria-hidden

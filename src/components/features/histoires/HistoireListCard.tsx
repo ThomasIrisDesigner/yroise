@@ -4,17 +4,17 @@ import { LOREM } from '@/data/placeholders'
 
 interface HistoireListCardProps {
   histoire: HistoireBillet
-  featuredExcerpt?: boolean
+  featured?: boolean
 }
 
 export function HistoireListCard({
   histoire,
-  featuredExcerpt = false,
+  featured = false,
 }: HistoireListCardProps) {
   return (
     <HistoireCard
       layout="list"
-      featuredExcerpt={featuredExcerpt}
+      featured={featured}
       to={`/histoires/${histoire.slug}`}
       titre={histoire.titre}
       extrait={histoire.accroche ?? LOREM.line}

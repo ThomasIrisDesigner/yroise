@@ -57,6 +57,10 @@
   /* Gouttière horizontale des sections éditoriales (multiple de 8) */
   --space-section-x: 16px;
 
+  /* Fin de page — espace minimum avant frise + footer */
+  --site-page-end-gap: 40px;
+  --frise-height: 32px;
+
   /* Hublot carousel — ombre interne (blur 20, noir 80 %) */
   --shadow-hublot-inset: inset 0 0 20px 0 rgb(0 0 0 / 0.8);
 }
@@ -96,6 +100,17 @@ body {
 }
 
 /* Header site — défile avec le contenu ; barre compacte épinglée au scroll vers le haut */
+.site-page-main > :last-child {
+  padding-bottom: calc(var(--site-page-end-gap) + var(--frise-height)) !important;
+}
+
+.frise-vagues {
+  height: var(--frise-height);
+  margin-top: calc(-1 * var(--frise-height));
+  width: 100%;
+  flex-shrink: 0;
+}
+
 .site-top-chrome {
   position: relative;
   z-index: 50;

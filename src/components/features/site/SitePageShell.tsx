@@ -3,8 +3,10 @@ import { useLocation, useNavigate } from 'react-router-dom'
 
 import { MobileMenu } from '@/components/features/site/MobileMenu'
 import { SearchPanel } from '@/components/features/site/SearchPanel'
+import { SiteFooter } from '@/components/features/site/SiteFooter'
 import { SiteHeader } from '@/components/features/site/SiteHeader'
 import { FriseHaut } from '@/components/ui/frise-haut'
+import { FriseVagues } from '@/components/ui/frise-vagues'
 import type { SiteHeaderTone } from '@/config/site-header'
 import { SITE_HEADER_TONE_CLASSES, resolveSiteHeaderTone } from '@/config/site-header'
 import { resetPageScroll } from '@/lib/resetPageScroll'
@@ -13,16 +15,12 @@ import { cn } from '@/lib/utils'
 
 interface SitePageShellProps {
   children: React.ReactNode
-  showFooter?: boolean
-  footer?: React.ReactNode
   /** Surcharge le ton header ; par défaut déduit de la route */
   headerTone?: SiteHeaderTone
 }
 
 export function SitePageShell({
   children,
-  showFooter = false,
-  footer,
   headerTone,
 }: SitePageShellProps) {
   const [menuOpen, setMenuOpen] = React.useState(false)
@@ -98,8 +96,11 @@ export function SitePageShell({
           </div>
         </div>
 
-        {children}
-        {showFooter && footer}
+        <div className="site-page-main">{children}</div>
+        <div className="site-page-bottom shrink-0">
+          <FriseVagues />
+          <SiteFooter />
+        </div>
       </div>
 
       <div

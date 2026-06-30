@@ -12,7 +12,7 @@ export function HistoiresCarousel() {
   const counter = `${String(activeIndex + 1).padStart(2, '0')} – ${String(HISTOIRES_RECENTES.length).padStart(2, '0')}`
 
   return (
-    <section className="section-histoires border-t border-border bg-background pt-10 pb-10">
+    <section className="section-histoires bg-background pt-10 pb-10">
       <div className="flex flex-col items-center gap-0 px-section">
         <h2 className={typography.sectionLabel}>Histoires</h2>
         <p className="mt-1 font-outfit text-[14px] font-normal leading-[1.55] text-text">
