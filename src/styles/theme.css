@@ -61,6 +61,7 @@
   --site-page-end-gap: 40px;
   --frise-height: 32px;
 
+
   /* Hublot carousel — ombre interne (blur 20, noir 80 %) */
   --shadow-hublot-inset: inset 0 0 20px 0 rgb(0 0 0 / 0.8);
 }
@@ -109,6 +110,39 @@ body {
   margin-top: calc(-1 * var(--frise-height));
   width: 100%;
   flex-shrink: 0;
+}
+
+/* Carte immersive — header site + carte 100 % de l'espace restant */
+.site-page-shell--immersive {
+  height: 100%;
+}
+
+.site-scroll-main--immersive {
+  overflow: hidden;
+}
+
+.site-page-shell--immersive .site-page-main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+}
+
+.site-page-shell--immersive .site-page-main > :last-child {
+  padding-bottom: 0 !important;
+}
+
+.carte-map-embed--immersive {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.carte-map-frame {
+  flex: 1 1 0;
 }
 
 .site-top-chrome {

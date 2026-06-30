@@ -17,11 +17,14 @@ interface SitePageShellProps {
   children: React.ReactNode
   /** Surcharge le ton header ; par défaut déduit de la route */
   headerTone?: SiteHeaderTone
+  /** Carte plein écran — pas de footer ni scroll page */
+  immersive?: boolean
 }
 
 export function SitePageShell({
   children,
   headerTone,
+  immersive = false,
 }: SitePageShellProps) {
   const [menuOpen, setMenuOpen] = React.useState(false)
   const [searchOpen, setSearchOpen] = React.useState(false)
@@ -78,10 +81,18 @@ export function SitePageShell({
   }
 
   return (
-    <div className="site-page-shell relative flex min-h-0 flex-1 flex-col bg-surface text-text">
+    <div
+      className={cn(
+        'site-page-shell relative flex min-h-0 flex-1 flex-col bg-surface text-text',
+        immersive && 'site-page-shell--immersive'
+      )}
+    >
       <div
         ref={scrollMainRef}
-        className="site-scroll-main flex min-h-0 flex-1 flex-col"
+        className={cn(
+          'site-scroll-main flex min-h-0 flex-1 flex-col',
+          immersive && 'site-scroll-main--immersive'
+        )}
       >
         <div
           ref={flowChromeRef}
@@ -97,10 +108,12 @@ export function SitePageShell({
         </div>
 
         <div className="site-page-main">{children}</div>
-        <div className="site-page-bottom shrink-0">
-          <FriseVagues />
-          <SiteFooter />
-        </div>
+        {!immersive ? (
+          <div className="site-page-bottom shrink-0">
+            <FriseVagues />
+            <SiteFooter />
+          </div>
+        ) : null}
       </div>
 
       <div
