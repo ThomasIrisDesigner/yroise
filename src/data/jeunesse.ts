@@ -9,6 +9,8 @@ export interface JeunesseActivite {
   description: string
   /** Méta courte affichée sur la card (âge · durée ou niveau · durée). */
   meta: string
+  imageSrc?: string
+  imageAlt?: string
 }
 
 export { CONTENT_TYPE_LABELS as JEUNESSE_TYPE_LABELS } from '@/data/contentTypes'

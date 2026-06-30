@@ -80,7 +80,7 @@ export const HISTOIRES_COLLECTION_EN_MER: HistoireBillet[] = [
 ]
 
 export const HISTOIRE_DETAIL_DEFAULT = {
-  auteur: 'Carole Le Natur, bibliothécaire — Médiathèques de Brest',
+  auteur: 'Carole, bibliothécaire',
   corps: LOREM.paragraph,
   sources: [
     { label: "Journal de bord de l'Océan Liberty, 1947", href: '#' },
@@ -89,14 +89,14 @@ export const HISTOIRE_DETAIL_DEFAULT = {
   ],
   rebonds: [
     {
-      slug: 'brest-ville-fortifiee',
-      type: 'curiosite' as const,
-      titre: 'Brest ville fortifiée — plans du XVIIe siècle',
+      slug: 'marcel-bories-plaques',
+      type: 'exposition' as const,
+      titre: 'Marcel Boriès, 1428 plaques de verre sur Brest',
     },
     {
-      slug: 'cable-transatlantique',
+      slug: 'dictionnaire-coetanlem',
       type: 'curiosite' as const,
-      titre: 'Le câble transatlantique Brest — Cape Cod',
+      titre: 'Le Dictionnaire de Coëtanlem',
     },
   ],
 }

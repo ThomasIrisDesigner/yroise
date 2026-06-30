@@ -1,34 +1,83 @@
-import { Button } from '@/components/ui/button'
+import * as React from 'react'
+
 import { cn } from '@/lib/utils'
-import { typography } from '@/styles/typography'
+
+import { gmbMediaAspectClass } from './gmb-shared'
+import { GmbFigureLegend } from './GmbFigureLegend'
 
 interface GmbVideoEmbedProps {
   title: string
   href: string
+  embedSrc?: string
+  posterSrc?: string
+  caption?: string
+  meta?: string
+  linkLabel?: string
 }
 
-/** Embed vidéo YouTube — ratio 16:9, placeholder wireframe (hors lecteur réel). */
-export function GmbVideoEmbed({ title, href }: GmbVideoEmbedProps) {
+/** Embed vidéo — vignette cliquable, lecteur inline (Vimeo / YouTube). */
+export function GmbVideoEmbed({
+  title,
+  href,
+  embedSrc,
+  posterSrc,
+  caption,
+  meta,
+  linkLabel,
+}: GmbVideoEmbedProps) {
+  const [playing, setPlaying] = React.useState(false)
+  const legendCaption = caption ?? title
+  const playerSrc = embedSrc ?? href
+
   return (
-    <figure>
-      <div className="relative w-full overflow-hidden rounded-md bg-ocean-900">
-        <div className="pt-[56.25%]" aria-hidden />
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-section">
-          <div
-            className="flex h-7 w-11 items-center justify-center rounded-md bg-danger"
-            aria-hidden
+    <figure className="flex flex-col gap-2">
+      <div
+        className={cn(
+          gmbMediaAspectClass,
+          'overflow-hidden rounded border-2 border-text'
+        )}
+      >
+        {playing && playerSrc ? (
+          <iframe
+            src={`${playerSrc}${playerSrc.includes('?') ? '&' : '?'}autoplay=1`}
+            title={title}
+            className="h-full w-full border-0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowFullScreen
+          />
+        ) : (
+          <button
+            type="button"
+            onClick={() => setPlaying(true)}
+            className="relative h-full w-full cursor-pointer"
+            aria-label={`Lire la vidéo : ${title}`}
           >
-            <span className="ml-0.5 h-0 w-0 border-y-[6px] border-l-[10px] border-y-transparent border-l-surface" />
-          </div>
-          <p className={cn('text-center', typography.meta, 'text-white/60')}>{title}</p>
-        </div>
+            {posterSrc ? (
+              <img
+                src={posterSrc}
+                alt=""
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center bg-ocean-900" />
+            )}
+            <span className="absolute inset-0 flex items-center justify-center">
+              <span
+                className="flex h-7 w-11 items-center justify-center rounded-md bg-danger"
+                aria-hidden
+              >
+                <span className="ml-0.5 h-0 w-0 border-y-[6px] border-l-[10px] border-y-transparent border-l-surface" />
+              </span>
+            </span>
+          </button>
+        )}
       </div>
-      <figcaption className={`mt-2 flex flex-wrap items-center gap-2 ${typography.editorialCaption}`}>
-        <span>{title}</span>
-        <Button asChild variant="ghost" size="sm" className="not-italic">
-          <a href={href}>Voir sur YouTube</a>
-        </Button>
-      </figcaption>
+      <GmbFigureLegend
+        caption={legendCaption}
+        meta={meta}
+        linkLabel={linkLabel}
+        linkHref={linkLabel ? href : undefined}
+      />
     </figure>
   )
 }

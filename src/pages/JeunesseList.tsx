@@ -1,24 +1,34 @@
 import { Button } from '@/components/ui/button'
 import { JeunesseListCard } from '@/components/features/jeunesse/JeunesseListCard'
+import { SectionListHeader } from '@/components/features/site/SectionListHeader'
 import { SitePageShell } from '@/components/features/site/SitePageShell'
-import { JEUNESSE_INTRO, JEUNESSE_LIST } from '@/data/jeunesse'
-import { typography } from '@/styles/typography'
+import { JEUNESSE_LIST } from '@/data/jeunesse'
 
 export function JeunesseList() {
   return (
     <SitePageShell>
-      <div className="section-jeunesse px-section pt-4 pb-10">
-        <h1 className={typography.pageTitle}>Jeunesse</h1>
-        <p className={`mt-2 ${typography.pageSubtitle}`}>{JEUNESSE_INTRO}</p>
-        <ul className="mt-6 flex flex-col gap-4">
+      <div className="section-jeunesse flex flex-col bg-aurore-100 pb-8">
+        <SectionListHeader title="Jeunesse" layout="centered" />
+
+        <ul className="flex flex-col items-center gap-14 px-10 pt-0 pb-10">
           {JEUNESSE_LIST.map((activite) => (
-            <li key={activite.slug}>
+            <li key={activite.slug} className="w-full">
               <JeunesseListCard activite={activite} />
             </li>
           ))}
         </ul>
-        <div className="mt-8 flex justify-center">
-          <Button variant="secondary">Voir plus</Button>
+
+        <div className="flex justify-center px-section">
+          <Button variant="secondary" size="sm" showTriangle={false}>
+            Voir plus de jeux
+            <img
+              src="/images/Icon_plus.svg"
+              alt=""
+              aria-hidden
+              className="h-4 w-4 shrink-0"
+              draggable={false}
+            />
+          </Button>
         </div>
       </div>
     </SitePageShell>

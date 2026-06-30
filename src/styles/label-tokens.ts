@@ -44,7 +44,7 @@ export const TYPE_LABEL_BASE_SPECS = [
 export const TYPE_LABEL_SECTION_COLORS = [
   {
     section: 'fond blanc',
-    spec: '#71717a — Histoires : CURIOSITÉ · EXPOSITION · Jeunesse : JEU · SÉQUENCE',
+    spec: '#71717a — Histoires : CURIOSITÉ · EXPOSITION · Jeunesse : JEU · ATELIER',
   },
   {
     section: 'histoires',
@@ -52,6 +52,6 @@ export const TYPE_LABEL_SECTION_COLORS = [
   },
   {
     section: 'jeunesse',
-    spec: 'fond #FAD7D7 · texte #802828 · JEU · SÉQUENCE',
+    spec: 'fond #FAD7D7 · texte #802828 · JEU · ATELIER',
   },
 ] as const

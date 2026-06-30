@@ -1,30 +1,48 @@
+import { typography } from '@/styles/typography'
+
+import { gmbMediaAspectClass } from './gmb-shared'
+import { GmbFigureLegend } from './GmbFigureLegend'
+
 interface GmbImagePairProps {
   leftLabel: string
   rightLabel: string
   caption: string
+  meta?: string
+  linkLabel?: string
+  linkHref?: string
 }
 
-/** Double image Drupal — 2 colonnes + légende partagée (wireframe GMB). */
-export function GmbImagePair({ leftLabel, rightLabel, caption }: GmbImagePairProps) {
+/** Double image Drupal — 2 colonnes + légende partagée. */
+export function GmbImagePair({
+  leftLabel,
+  rightLabel,
+  caption,
+  meta,
+  linkLabel,
+  linkHref,
+}: GmbImagePairProps) {
   return (
-    <figure>
+    <figure className="flex flex-col gap-2">
       <div className="flex gap-3">
         <div
-          className="flex h-28 flex-1 items-center justify-center rounded-md bg-surface"
+          className={`${gmbMediaAspectClass} flex flex-1 items-center justify-center bg-surface`}
           aria-hidden
         >
-          <span className="text-xs italic text-text/40">{leftLabel}</span>
+          <span className={typography.editorialCaption}>{leftLabel}</span>
         </div>
         <div
-          className="flex h-28 flex-1 items-center justify-center rounded-md bg-surface"
+          className={`${gmbMediaAspectClass} flex flex-1 items-center justify-center bg-surface`}
           aria-hidden
         >
-          <span className="text-xs italic text-text/40">{rightLabel}</span>
+          <span className={typography.editorialCaption}>{rightLabel}</span>
         </div>
       </div>
-      <figcaption className="mt-2 text-sm italic leading-snug text-text/60">
-        {caption}
-      </figcaption>
+      <GmbFigureLegend
+        caption={caption}
+        meta={meta}
+        linkLabel={linkLabel}
+        linkHref={linkHref}
+      />
     </figure>
   )
 }

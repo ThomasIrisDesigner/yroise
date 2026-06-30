@@ -8,11 +8,13 @@ interface JeunesseListCardProps {
 export function JeunesseListCard({ activite }: JeunesseListCardProps) {
   return (
     <JeunesseCard
+      layout="list"
       to={`/jeunesse/${activite.slug}`}
       titre={activite.titre}
       type={activite.type}
       meta={activite.meta}
-      className="w-full"
+      imageSrc={activite.imageSrc}
+      imageAlt={activite.imageAlt}
     />
   )
 }

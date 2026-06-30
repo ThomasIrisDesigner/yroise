@@ -17,6 +17,12 @@ const meta = `${ui} text-[13px] font-normal leading-snug text-muted`
 const cardExcerpt = `${ui} text-base font-normal leading-6 tracking-[0.1px] text-text`
 const editorialCaption = `${ui} text-sm font-normal leading-[1.4] tracking-[0.1px] text-muted`
 const uiXs = `${ui} text-[11px] font-normal leading-tight text-muted`
+/** Rubrique article (HISTOIRES) — 11px bold uppercase, accent Glaz. */
+const articleRubrique = `${ui} text-[11px] font-bold uppercase tracking-[3px] text-glaz-700`
+/** Byline article — auteur sous le chapeau. */
+const articleByline = `${ui} text-[11px] font-medium uppercase tracking-[0.1px] text-text`
+/** Titres de section compacts — sources, rebonds (14px, tracking 1px). */
+const sectionTitleSm = `${ui} text-sm font-semibold uppercase tracking-[1px]`
 /** Liens UI — couleur selon le contexte (fond clair ou sombre). */
 const uiLink = `${ui} text-[13px] font-normal leading-snug`
 
@@ -38,13 +44,16 @@ export const typography = {
   cardExcerpt,
   editorialCaption,
   uiXs,
+  articleRubrique,
+  articleByline,
+  sectionTitleSm,
   uiLink,
   logo,
   editorialBody,
   editorialMuted,
 
-  /** Espace vertical entre paragraphes éditoriaux (30px). */
-  editorialBodyStack: 'flex flex-col gap-[30px]',
+  /** Espace vertical entre blocs éditoriaux (24px). */
+  editorialBodyStack: 'flex flex-col gap-6',
 
   /** @deprecated Alias — préférer titleXl */
   pageTitle: titleXl,

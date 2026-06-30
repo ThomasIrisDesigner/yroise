@@ -145,6 +145,13 @@ body {
   flex: 1 1 0;
 }
 
+/* Plein écran mobile — contournement iOS (API fullscreen iframe indisponible) */
+.carte-map-embed--mobile-fullscreen {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 10000 !important;
+}
+
 .site-top-chrome {
   position: relative;
   z-index: 50;

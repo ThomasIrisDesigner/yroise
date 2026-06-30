@@ -7,5 +7,5 @@ export const CONTENT_TYPE_LABELS: Record<ContentType, string> = {
   curiosite: 'Curiosité',
   exposition: 'Exposition',
   jeu: 'Jeu',
-  sequence: 'Séquence',
+  sequence: 'Atelier',
 }

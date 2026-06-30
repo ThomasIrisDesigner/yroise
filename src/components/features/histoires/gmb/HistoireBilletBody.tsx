@@ -1,4 +1,5 @@
 import type { HistoireContentBlock } from '@/types/histoireContent'
+import { cn } from '@/lib/utils'
 import { typography } from '@/styles/typography'
 
 import { GmbEditorialQuote } from './GmbEditorialQuote'
@@ -12,13 +13,44 @@ interface HistoireBilletBodyProps {
 }
 
 export function HistoireBilletBody({ blocks }: HistoireBilletBodyProps) {
+  let headingCount = 0
+
   return (
     <div className={typography.editorialBodyStack}>
       {blocks.map((block, i) => {
         switch (block.type) {
-          case 'paragraph':
+          case 'heading': {
+            const isFirst = headingCount === 0
+            headingCount += 1
             return (
-              <p key={i} className={typography.body}>
+              <h2
+                key={i}
+                className={cn(
+                  typography.titleL,
+                  'font-bold leading-7',
+                  !isFirst && 'pt-6'
+                )}
+              >
+                {block.text}
+              </h2>
+            )
+          }
+          case 'paragraph':
+            if (block.segments?.length) {
+              return (
+                <p key={i} className={typography.editorialBody}>
+                  {block.segments.map((segment, j) =>
+                    segment.italic ? (
+                      <em key={j}>{segment.text}</em>
+                    ) : (
+                      <span key={j}>{segment.text}</span>
+                    )
+                  )}
+                </p>
+              )
+            }
+            return (
+              <p key={i} className={typography.editorialBody}>
                 {block.text}
               </p>
             )
@@ -27,7 +59,9 @@ export function HistoireBilletBody({ blocks }: HistoireBilletBodyProps) {
               <GmbEditorialQuote
                 key={i}
                 quote={block.quote}
-                attribution={block.attribution}
+                meta={block.meta}
+                linkLabel={block.linkLabel}
+                linkHref={block.linkHref}
               />
             )
           case 'image':
@@ -36,8 +70,10 @@ export function HistoireBilletBody({ blocks }: HistoireBilletBodyProps) {
                 key={i}
                 placeholder={block.placeholder}
                 caption={block.caption}
+                meta={block.meta}
                 linkLabel={block.linkLabel}
                 linkHref={block.linkHref}
+                imageSrc={block.imageSrc}
               />
             )
           case 'imageDouble':
@@ -47,6 +83,9 @@ export function HistoireBilletBody({ blocks }: HistoireBilletBodyProps) {
                 leftLabel={block.leftLabel}
                 rightLabel={block.rightLabel}
                 caption={block.caption}
+                meta={block.meta}
+                linkLabel={block.linkLabel}
+                linkHref={block.linkHref}
               />
             )
           case 'carousel':
@@ -55,12 +94,23 @@ export function HistoireBilletBody({ blocks }: HistoireBilletBodyProps) {
                 key={i}
                 slides={block.slides}
                 caption={block.caption}
+                meta={block.meta}
+                linkLabel={block.linkLabel}
+                linkHref={block.linkHref}
                 initialIndex={block.initialIndex}
               />
             )
           case 'youtube':
             return (
-              <GmbVideoEmbed key={i} title={block.title} href={block.href} />
+              <GmbVideoEmbed
+                key={i}
+                title={block.title}
+                href={block.href}
+                embedSrc={block.embedSrc}
+                posterSrc={block.posterSrc}
+                caption={block.caption}
+                meta={block.meta}
+              />
             )
           default:
             return null

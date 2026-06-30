@@ -1,31 +1,34 @@
+import { GmbFigureLegend } from '@/components/features/histoires/gmb/GmbFigureLegend'
+import { gmbMediaAspectClass } from '@/components/features/histoires/gmb/gmb-shared'
 import { typography } from '@/styles/typography'
 
-import { gmbMediaAspectClass } from './gmb-shared'
-import { GmbFigureLegend } from './GmbFigureLegend'
-
-interface GmbImageFigureProps {
+interface HistoireArticleHeroProps {
+  imageSrc?: string
   placeholder: string
   caption: string
   meta?: string
   linkLabel?: string
   linkHref?: string
-  imageSrc?: string
 }
 
-/** Image inline pleine largeur + légende GMB. */
-export function GmbImageFigure({
+/** Image bandeau article — ratio 310/174 + légende GMB. */
+export function HistoireArticleHero({
+  imageSrc,
   placeholder,
   caption,
   meta,
   linkLabel,
-  linkHref = '#',
-  imageSrc,
-}: GmbImageFigureProps) {
+  linkHref,
+}: HistoireArticleHeroProps) {
   return (
     <figure className="flex flex-col gap-2">
       <div className={gmbMediaAspectClass}>
         {imageSrc ? (
-          <img src={imageSrc} alt={caption} className="h-full w-full object-cover" />
+          <img
+            src={imageSrc}
+            alt={caption}
+            className="h-full w-full object-cover"
+          />
         ) : (
           <div
             className="flex h-full w-full items-center justify-center bg-surface"
@@ -37,6 +40,7 @@ export function GmbImageFigure({
         )}
       </div>
       <GmbFigureLegend
+        className="px-section"
         caption={caption}
         meta={meta}
         linkLabel={linkLabel}
