@@ -36,9 +36,9 @@ export function JeunesseDetail() {
         />
 
         <JeunesseArticleBody presentation={content.presentation} />
-
-        <JeunesseReferencesSection sources={content.sources} />
       </div>
+
+      <JeunesseReferencesSection sources={content.sources} />
     </SitePageShell>
   )
 }

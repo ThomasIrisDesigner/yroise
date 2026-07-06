@@ -27,7 +27,7 @@ export function HistoireDetail() {
 
   return (
     <SitePageShell>
-      <div className="section-histoires">
+      <div className="section-histoires bg-background">
         <HistoireArticleHeader
           titre={histoire.titre}
           chapeau={content.chapeau}
