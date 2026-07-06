@@ -8,7 +8,7 @@ const editorial = 'font-editorial'
 /** Tokens Outfit — display & UI */
 const titleXl = `${ui} text-[28px] font-bold leading-tight tracking-[0.1px] text-text`
 /** H1 billet article (Histoires, Jeunesse…) — 36px / lh 1.275. */
-const articleTitle = `${ui} text-[36px] font-bold leading-[1.275] tracking-[0.1px] text-text`
+const articleTitle = `${ui} text-[36px] font-semibold leading-[1.275] tracking-[0.1px] text-text`
 const titleL = `${ui} text-[20px] font-semibold leading-snug text-text`
 const titleM = `${ui} text-base font-semibold leading-[1.3] tracking-[0.1px] text-text`
 const titleMCard = `${titleM} line-clamp-3`
