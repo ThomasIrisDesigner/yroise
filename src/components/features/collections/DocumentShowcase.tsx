@@ -2,6 +2,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import * as React from 'react'
 
 import type { FeaturedDocument } from '@/data/collectionDetails'
+import { COLLECTION_EXAMPLE_IMAGE } from '@/data/collections'
 import { typography } from '@/styles/typography'
 
 interface DocumentShowcaseProps {
@@ -25,12 +26,12 @@ export function DocumentShowcase({ documents }: DocumentShowcaseProps) {
 
   return (
     <div className="overflow-hidden rounded-md border border-border">
-      <div
-        className="flex h-40 w-full items-center justify-center bg-surface"
-        role="img"
-        aria-label={doc.titre}
-      >
-        <span className="text-sm italic text-text/40">Document pleine largeur</span>
+      <div className="relative h-40 w-full overflow-hidden">
+        <img
+          src={COLLECTION_EXAMPLE_IMAGE}
+          alt={doc.titre}
+          className="h-full w-full object-cover"
+        />
       </div>
       <div className="bg-surface p-4">
         <p className={typography.cardTitle}>{doc.titre}</p>

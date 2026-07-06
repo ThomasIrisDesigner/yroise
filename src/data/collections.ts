@@ -1,3 +1,6 @@
+/** Illustration d'exemple — wireframe collections (hublot, en-tête, carrousels). */
+export const COLLECTION_EXAMPLE_IMAGE = '/images/voilier-brest.png'
+
 export interface Collection {
   slug: string
   name: string
@@ -16,7 +19,7 @@ export const COLLECTIONS: Collection[] = [
     accroche:
       "Revivez le quotidien d'une frégate-école. Embarquez pour l'Irlande, l'Inde ou d'autres destinations.",
     documentCount: 234,
-    hublotImageSrc: '/images/Collection_En-mer_Hubot.jpg',
+    hublotImageSrc: COLLECTION_EXAMPLE_IMAGE,
   },
   {
     slug: 'brest-et-environs',
@@ -24,7 +27,7 @@ export const COLLECTIONS: Collection[] = [
     shortLabel: 'Brest',
     accroche: 'Un aperçu de Brest à travers les siècles.',
     documentCount: 412,
-    hublotImageSrc: '/images/Collection_Brest-et-ses-environs_Hublot.jpg',
+    hublotImageSrc: COLLECTION_EXAMPLE_IMAGE,
   },
   {
     slug: 'en-images',
@@ -33,7 +36,7 @@ export const COLLECTIONS: Collection[] = [
     accroche:
       'Cartes postales, plaques de verre, cartes : la pointe bretonne se dévoile en images.',
     documentCount: 189,
-    hublotImageSrc: '/images/Collection_En-Images_Hublot.jpg',
+    hublotImageSrc: COLLECTION_EXAMPLE_IMAGE,
   },
   {
     slug: 'finistere-monde-artistique',
@@ -41,6 +44,7 @@ export const COLLECTIONS: Collection[] = [
     shortLabel: 'Finistère',
     accroche: 'Artistes et créations autour de la pointe bretonne',
     documentCount: 156,
+    hublotImageSrc: COLLECTION_EXAMPLE_IMAGE,
   },
   {
     slug: 'breton-brezhoneg',
@@ -48,6 +52,7 @@ export const COLLECTIONS: Collection[] = [
     shortLabel: 'Breton',
     accroche: 'Langue, littérature et culture bretonnes',
     documentCount: 98,
+    hublotImageSrc: COLLECTION_EXAMPLE_IMAGE,
   },
   {
     slug: 'livres-anciens',
@@ -55,6 +60,7 @@ export const COLLECTIONS: Collection[] = [
     shortLabel: 'Livres',
     accroche: 'Manuscrits et imprimés rares du fonds patrimonial',
     documentCount: 267,
+    hublotImageSrc: COLLECTION_EXAMPLE_IMAGE,
   },
   {
     slug: 'presse-ancienne',
@@ -62,6 +68,7 @@ export const COLLECTIONS: Collection[] = [
     shortLabel: 'Presse',
     accroche: 'Journaux et périodiques finistériens',
     documentCount: 321,
+    hublotImageSrc: COLLECTION_EXAMPLE_IMAGE,
   },
   {
     slug: 'sciences-et-techniques',
@@ -69,5 +76,6 @@ export const COLLECTIONS: Collection[] = [
     shortLabel: 'Sciences',
     accroche: 'Ingénierie, médecine et savoirs des XVIIIe–XXe siècles',
     documentCount: 143,
+    hublotImageSrc: COLLECTION_EXAMPLE_IMAGE,
   },
 ]

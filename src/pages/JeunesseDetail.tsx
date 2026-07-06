@@ -34,7 +34,7 @@ export function JeunesseDetail() {
         </div>
 
         <TypeLabel type={activite.type} className="mt-3" />
-        <h1 className={`mt-3 ${typography.pageTitle}`}>{activite.titre}</h1>
+        <h1 className={`mt-3 ${typography.articleTitle}`}>{activite.titre}</h1>
         <p className={`mt-3 ${typography.bodyMuted}`}>{detail.intro}</p>
 
         {isJeu ? (

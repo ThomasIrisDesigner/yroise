@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
 import { cardExcerptListClass, cardTitleLinkClass, listCardStackClass } from '@/components/ui/card-shared'
-import type { Collection } from '@/data/collections'
+import { COLLECTION_EXAMPLE_IMAGE, type Collection } from '@/data/collections'
 
 interface CollectionListCardProps {
   collection: Collection
@@ -16,7 +16,7 @@ export function CollectionListCard({ collection }: CollectionListCardProps) {
     <article className={`group relative flex flex-col items-center gap-6 ${listCardStackClass}`}>
       <div className="hublot-frame relative size-[224px] shrink-0 overflow-hidden rounded-full border-[9px] border-text bg-surface">
         <img
-          src={collection.hublotImageSrc ?? '/images/voilier-brest.png'}
+          src={collection.hublotImageSrc ?? COLLECTION_EXAMPLE_IMAGE}
           alt=""
           className="block h-full w-full object-cover"
           draggable={false}

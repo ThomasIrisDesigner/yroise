@@ -2,9 +2,9 @@ import { Navigate, useParams } from 'react-router-dom'
 
 import { DocumentShowcase } from '@/components/features/collections/DocumentShowcase'
 import { HistoiresAssociees } from '@/components/features/collections/HistoiresAssociees'
-import { SectionBackLink } from '@/components/features/site/SectionBackLink'
+import { SectionRubriqueLink } from '@/components/features/site/SectionRubriqueLink'
 import { SitePageShell } from '@/components/features/site/SitePageShell'
-import { COLLECTIONS } from '@/data/collections'
+import { COLLECTIONS, COLLECTION_EXAMPLE_IMAGE } from '@/data/collections'
 import {
   getCollectionDetail,
   getDefaultCollectionDetail,
@@ -24,28 +24,30 @@ export function CollectionDetail() {
 
   return (
     <SitePageShell>
-      <div className="px-section pt-4">
-        <SectionBackLink to="/collections">← Toutes les collections</SectionBackLink>
-      </div>
+      <div className="section-collections">
+        <header className="px-section pt-4">
+          <SectionRubriqueLink to="/collections">Collections</SectionRubriqueLink>
+        </header>
 
-      <section className="relative">
-        <div
-          className="flex h-40 w-full items-center justify-center bg-surface"
-          aria-hidden
-        >
-          <span className="text-sm italic text-text/40">Image de collection</span>
-        </div>
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-text/85 to-transparent px-section pb-4 pt-12">
-          <h1 className="text-[26px] font-extrabold leading-tight tracking-tight text-surface">
-            {collection.name}
-          </h1>
-          {collection.documentCount != null ? (
-            <p className="mt-1 text-sm text-surface/80">{collection.documentCount} documents</p>
-          ) : null}
-        </div>
-      </section>
+        <section className="relative">
+          <div className="relative h-40 w-full overflow-hidden" aria-hidden>
+            <img
+              src={COLLECTION_EXAMPLE_IMAGE}
+              alt=""
+              className="h-full w-full object-cover"
+            />
+          </div>
+          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-text/85 to-transparent px-section pb-4 pt-12">
+            <h1 className="text-[26px] font-extrabold leading-tight tracking-tight text-surface">
+              {collection.name}
+            </h1>
+            {collection.documentCount != null ? (
+              <p className="mt-1 text-sm text-surface/80">{collection.documentCount} documents</p>
+            ) : null}
+          </div>
+        </section>
 
-      <div className="px-section pt-4 pb-10">
+        <div className="px-section pt-4 pb-10">
         <p className={typography.editorialBody}>{detail.intro}</p>
 
         <section className="mt-7">
@@ -61,7 +63,8 @@ export function CollectionDetail() {
           </a>
         </Button>
 
-        <HistoiresAssociees billets={detail.histoiresAssociees} />
+          <HistoiresAssociees billets={detail.histoiresAssociees} />
+        </div>
       </div>
     </SitePageShell>
   )
