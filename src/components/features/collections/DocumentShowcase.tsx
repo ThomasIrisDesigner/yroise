@@ -1,12 +1,12 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import * as React from 'react'
 
-import type { FeaturedDocument } from '@/data/collectionDetails'
+import type { CollectionApercuItem } from '@/types/collectionContent'
 import { COLLECTION_EXAMPLE_IMAGE } from '@/data/collections'
 import { typography } from '@/styles/typography'
 
 interface DocumentShowcaseProps {
-  documents: FeaturedDocument[]
+  documents: CollectionApercuItem[]
 }
 
 export function DocumentShowcase({ documents }: DocumentShowcaseProps) {
@@ -29,13 +29,15 @@ export function DocumentShowcase({ documents }: DocumentShowcaseProps) {
       <div className="relative h-40 w-full overflow-hidden">
         <img
           src={COLLECTION_EXAMPLE_IMAGE}
-          alt={doc.titre}
+          alt={doc.caption}
           className="h-full w-full object-cover"
         />
       </div>
       <div className="bg-surface p-4">
-        <p className={typography.cardTitle}>{doc.titre}</p>
-        <p className="mt-1 text-sm text-text/60">{doc.fonds}</p>
+        <p className={typography.cardTitle}>{doc.caption}</p>
+        {doc.meta ? (
+          <p className="mt-1 text-sm text-text/60">{doc.meta}</p>
+        ) : null}
         {total > 1 ? (
           <div className="mt-4 flex items-center justify-between">
             <div className="flex items-center gap-1.5">

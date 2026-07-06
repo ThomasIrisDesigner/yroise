@@ -56,7 +56,7 @@ export function JeunesseCard({
   const isFeaturedList = isList && featured
   const ctaLabel = JEUNESSE_CTA_LABELS[type]
   const listCardClass =
-    'card group relative mx-auto flex w-full max-w-[310px] flex-col overflow-hidden bg-transparent'
+    'card group relative mx-auto flex w-full max-w-[310px] flex-col overflow-hidden bg-background'
 
   const imageNode = imageSrc ? (
     <img
@@ -96,7 +96,7 @@ export function JeunesseCard({
             type={type}
             className={cn(
               'mb-0',
-              isFeaturedList ? 'text-aurore-300' : 'text-aurore-900'
+              isFeaturedList ? 'text-aurore-300' : 'text-aurore-700'
             )}
           />
         ) : null}

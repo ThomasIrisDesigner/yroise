@@ -1,17 +1,13 @@
 import { Navigate, useParams } from 'react-router-dom'
 
-import { DocumentShowcase } from '@/components/features/collections/DocumentShowcase'
-import { HistoiresAssociees } from '@/components/features/collections/HistoiresAssociees'
-import { SectionRubriqueLink } from '@/components/features/site/SectionRubriqueLink'
+import { CollectionArticleHeader } from '@/components/features/collections/CollectionArticleHeader'
+import { CollectionDetailBody } from '@/components/features/collections/CollectionDetailBody'
+import { HistoireArticleHero } from '@/components/features/histoires/HistoireArticleHero'
 import { SitePageShell } from '@/components/features/site/SitePageShell'
+import { getCollectionDetail } from '@/data/collectionDetails'
 import { COLLECTIONS, COLLECTION_EXAMPLE_IMAGE } from '@/data/collections'
-import {
-  getCollectionDetail,
-  getDefaultCollectionDetail,
-} from '@/data/collectionDetails'
-import { Button } from '@/components/ui/button'
-import { typography } from '@/styles/typography'
 
+/** Page collection — maquette Figma 115:516 (ex. En mer). */
 export function CollectionDetail() {
   const { slug } = useParams<{ slug: string }>()
   const collection = COLLECTIONS.find((c) => c.slug === slug)
@@ -20,51 +16,31 @@ export function CollectionDetail() {
     return <Navigate to="/collections" replace />
   }
 
-  const detail = getCollectionDetail(collection.slug) ?? getDefaultCollectionDetail()
+  const content = getCollectionDetail(collection.slug)
 
   return (
     <SitePageShell>
-      <div className="section-collections">
-        <header className="px-section pt-4">
-          <SectionRubriqueLink to="/collections">Collections</SectionRubriqueLink>
-        </header>
+      <div className="section-collections pb-10">
+        <CollectionArticleHeader
+          titre={collection.name}
+          chapeau={content.chapeau}
+          documentCount={collection.documentCount}
+          gallicaHref={content.gallicaHref}
+        />
 
-        <section className="relative">
-          <div className="relative h-40 w-full overflow-hidden" aria-hidden>
-            <img
-              src={COLLECTION_EXAMPLE_IMAGE}
-              alt=""
-              className="h-full w-full object-cover"
-            />
-          </div>
-          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-text/85 to-transparent px-section pb-4 pt-12">
-            <h1 className="text-[26px] font-extrabold leading-tight tracking-tight text-surface">
-              {collection.name}
-            </h1>
-            {collection.documentCount != null ? (
-              <p className="mt-1 text-sm text-surface/80">{collection.documentCount} documents</p>
-            ) : null}
-          </div>
-        </section>
+        <HistoireArticleHero
+          imageSrc={COLLECTION_EXAMPLE_IMAGE}
+          placeholder="Image de collection"
+          caption={content.heroCaption}
+          meta={content.heroMeta}
+          linkLabel={content.heroLinkLabel}
+          linkHref={content.heroLinkHref}
+        />
 
-        <div className="px-section pt-4 pb-10">
-        <p className={typography.editorialBody}>{detail.intro}</p>
-
-        <section className="mt-7">
-          <h2 className={typography.sectionLabel}>Quelques documents</h2>
-          <div className="mt-4">
-            <DocumentShowcase documents={detail.featuredDocuments} />
-          </div>
-        </section>
-
-        <Button asChild variant="primary" className="mt-6 w-full justify-center">
-          <a href="#" aria-label={`${detail.gallicaLabel} sur Gallica (externe)`}>
-            {detail.gallicaLabel}
-          </a>
-        </Button>
-
-          <HistoiresAssociees billets={detail.histoiresAssociees} />
-        </div>
+        <CollectionDetailBody
+          content={content}
+          documentCount={collection.documentCount}
+        />
       </div>
     </SitePageShell>
   )

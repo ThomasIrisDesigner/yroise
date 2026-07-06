@@ -1,44 +1,42 @@
-import type { HistoireBillet } from '@/data/histoires'
-import { HISTOIRES_COLLECTION_EN_MER } from '@/data/histoires'
+import type { CollectionDetailContent } from '@/types/collectionContent'
+import { COLLECTION_EXAMPLE_IMAGE } from '@/data/collections'
 import { LOREM } from '@/data/placeholders'
 
-export interface FeaturedDocument {
-  titre: string
-  fonds: string
+const APERCU_ITEM = {
+  caption: 'Titre',
+  meta: 'Type — origine',
+  linkLabel: 'Voir le document',
+  linkHref: '#',
+  imageSrc: COLLECTION_EXAMPLE_IMAGE,
+} as const
+
+const EN_MER_CONTENT: CollectionDetailContent = {
+  chapeau:
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus.',
+  heroCaption: 'Légende',
+  heroMeta: 'Photographie, Archives Marines',
+  heroLinkLabel: 'Voir le document',
+  heroLinkHref: '#',
+  presentationBody: LOREM.paragraph,
+  apercuItems: [APERCU_ITEM, APERCU_ITEM, APERCU_ITEM],
+  gallicaHref: '#',
 }
 
-export interface CollectionDetailContent {
-  intro: string
-  featuredDocuments: FeaturedDocument[]
-  gallicaLabel: string
-  histoiresAssociees: HistoireBillet[]
+const DEFAULT_CONTENT: CollectionDetailContent = {
+  chapeau: LOREM.line,
+  heroCaption: 'Légende',
+  heroMeta: 'Archives',
+  heroLinkLabel: 'Voir le document',
+  heroLinkHref: '#',
+  presentationBody: LOREM.paragraph,
+  apercuItems: [APERCU_ITEM],
+  gallicaHref: '#',
 }
 
-const FEATURED_DOCS: FeaturedDocument[] = [
-  { titre: LOREM.short, fonds: LOREM.line },
-  { titre: LOREM.short, fonds: LOREM.line },
-  { titre: LOREM.short, fonds: LOREM.line },
-]
-
-export const COLLECTION_DETAILS: Record<string, CollectionDetailContent> = {
-  'en-mer': {
-    intro: LOREM.paragraph,
-    featuredDocuments: FEATURED_DOCS,
-    gallicaLabel: 'Voir tous les documents',
-    histoiresAssociees: HISTOIRES_COLLECTION_EN_MER,
-  },
+const BY_SLUG: Record<string, CollectionDetailContent> = {
+  'en-mer': EN_MER_CONTENT,
 }
 
-export function getCollectionDetail(slug: string): CollectionDetailContent | null {
-  if (COLLECTION_DETAILS[slug]) return COLLECTION_DETAILS[slug]
-  return null
-}
-
-export function getDefaultCollectionDetail(): CollectionDetailContent {
-  return {
-    intro: LOREM.paragraph,
-    featuredDocuments: [FEATURED_DOCS[0]],
-    gallicaLabel: 'Voir tous les documents',
-    histoiresAssociees: [],
-  }
+export function getCollectionDetail(slug: string): CollectionDetailContent {
+  return BY_SLUG[slug] ?? DEFAULT_CONTENT
 }

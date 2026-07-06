@@ -68,29 +68,38 @@ export function CollectionsCarousel() {
           <NavArrow direction="left" active={current > 0} />
         </button>
 
-        {/* Hublot — 198×198 total, ouverture intérieure 180×180 (bordure 9px) */}
-        <div className="hublot-frame relative size-[198px] shrink-0 overflow-hidden rounded-full border-[9px] border-text bg-surface">
-          {COLLECTIONS.map((col, i) =>
-            col.hublotImageSrc ? (
-              <img
-                key={col.slug}
-                src={col.hublotImageSrc}
-                alt={col.name}
-                className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500"
-                style={{ opacity: i === current ? 1 : 0 }}
-                aria-hidden={i !== current}
-                draggable={false}
-              />
-            ) : (
-              <div
-                key={col.slug}
-                className="absolute inset-0 bg-surface transition-opacity duration-500"
-                style={{ opacity: i === current ? 1 : 0 }}
-                aria-hidden={i !== current}
-              />
-            )
-          )}
-        </div>
+        <Link
+          to={`/collections/${collection.slug}`}
+          className="group flex shrink-0 flex-col items-center gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-glaz-700/30"
+          aria-label={`Collection ${collection.name}`}
+        >
+          <div className="hublot-frame relative size-[198px] shrink-0 overflow-hidden rounded-full border-[9px] border-text bg-surface transition-colors duration-150 group-hover:border-glaz-700">
+            {COLLECTIONS.map((col, i) =>
+              col.hublotImageSrc ? (
+                <img
+                  key={col.slug}
+                  src={col.hublotImageSrc}
+                  alt=""
+                  className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500"
+                  style={{ opacity: i === current ? 1 : 0 }}
+                  aria-hidden={i !== current}
+                  draggable={false}
+                />
+              ) : (
+                <div
+                  key={col.slug}
+                  className="absolute inset-0 bg-surface transition-opacity duration-500"
+                  style={{ opacity: i === current ? 1 : 0 }}
+                  aria-hidden={i !== current}
+                />
+              )
+            )}
+          </div>
+
+          <p className="font-outfit text-[22px] font-semibold text-text transition-colors duration-150 group-hover:text-glaz-700">
+            {collection.name}
+          </p>
+        </Link>
 
         <button
           onClick={next}
@@ -99,11 +108,6 @@ export function CollectionsCarousel() {
         >
           <NavArrow direction="right" active={current < total - 1} />
         </button>
-      </div>
-
-      {/* Label collection — transition via opacity */}
-      <div className="mt-4 px-section text-center">
-        <p className="font-outfit text-[22px] font-semibold text-text">{collection.name}</p>
       </div>
 
       {/* CTA */}

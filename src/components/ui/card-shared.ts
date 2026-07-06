@@ -30,10 +30,9 @@ export const cardImageClass = 'card-image'
 
 export const cardImageListClass = 'card-image card-image--list'
 
-export const jeunesseListImageFrameClass =
-  'overflow-hidden rounded border-[2.5px] border-solid border-aurore-700'
+export const jeunesseListImageFrameClass = 'overflow-hidden'
 
-export const cardBodyListClass = 'card-body flex flex-1 flex-col gap-2 pt-4'
+export const cardBodyListClass = 'card-body flex flex-1 flex-col gap-2 py-4'
 
 export const cardExcerptListClass = `card-excerpt ${typography.cardExcerpt} line-clamp-4`
 

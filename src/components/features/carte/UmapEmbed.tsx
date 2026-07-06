@@ -11,11 +11,65 @@ interface UmapEmbedProps {
   immersive?: boolean
 }
 
+/** Attend des dimensions non nulles avant de charger l’iframe (Leaflet/uMap sinon reste blanc). */
+function useSizedContainer(ref: React.RefObject<HTMLElement | null>, enabled: boolean) {
+  const [sized, setSized] = React.useState(false)
+
+  React.useLayoutEffect(() => {
+    if (!enabled) {
+      setSized(true)
+      return
+    }
+
+    const el = ref.current
+    if (!el) return
+
+    const update = () => {
+      setSized(el.clientWidth > 0 && el.clientHeight > 0)
+    }
+
+    update()
+    const observer = new ResizeObserver(update)
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [enabled, ref])
+
+  return sized
+}
+
+/** Charge l’iframe une fois le conteneur dimensionné (évite écran blanc Leaflet/uMap). */
+function useDeferredIframeSrc(ready: boolean) {
+  const [src, setSrc] = React.useState<string | undefined>(undefined)
+
+  React.useEffect(() => {
+    if (!ready) {
+      setSrc(undefined)
+      return
+    }
+
+    let cancelled = false
+    const frameId = window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        if (!cancelled) setSrc(CARTE_UMAP_EMBED_SRC)
+      })
+    })
+
+    return () => {
+      cancelled = true
+      window.cancelAnimationFrame(frameId)
+    }
+  }, [ready])
+
+  return src
+}
+
 /** Carte interactive uMap — iframe sous le header site */
 export function UmapEmbed({ className, immersive = false }: UmapEmbedProps) {
   const isMobile = useMediaQuery('(max-width: 767px)')
   const [mobileFullscreen, setMobileFullscreen] = React.useState(false)
   const frameRef = React.useRef<HTMLDivElement>(null)
+  const frameSized = useSizedContainer(frameRef, immersive)
+  const iframeSrc = useDeferredIframeSrc(immersive ? frameSized : true)
 
   const toggleMobileFullscreen = React.useCallback(async () => {
     if (mobileFullscreen) {
@@ -61,17 +115,16 @@ export function UmapEmbed({ className, immersive = false }: UmapEmbedProps) {
     }
   }, [mobileFullscreen])
 
-  const iframe = (
+  const iframe = iframeSrc ? (
     <iframe
       title="Carte interactive YROISE — uMap"
-      src={CARTE_UMAP_EMBED_SRC}
+      src={iframeSrc}
       className="block h-full min-h-0 w-full border-0"
       allowFullScreen
       allow="fullscreen; geolocation"
-      loading="lazy"
       referrerPolicy="no-referrer-when-downgrade"
     />
-  )
+  ) : null
 
   return (
     <div

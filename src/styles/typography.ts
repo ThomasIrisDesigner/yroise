@@ -13,7 +13,7 @@ const titleL = `${ui} text-[20px] font-semibold leading-snug text-text`
 const titleM = `${ui} text-base font-semibold leading-[1.3] tracking-[0.1px] text-text`
 const titleMCard = `${titleM} line-clamp-3`
 const cardTitleEditorial = `${ui} text-[1.375rem] font-semibold leading-[1.875rem] tracking-[0.1px] text-text`
-const chapeau = `${ui} text-lg font-normal leading-[1.4] tracking-[0.1px] text-text`
+const chapeau = `${ui} text-lg font-normal leading-[1.5] tracking-[0.1px] text-text`
 const label = `${ui} text-base font-semibold uppercase tracking-[2px] text-text`
 const meta = `${ui} text-[13px] font-normal leading-snug text-muted`
 const cardExcerpt = `${ui} text-base font-normal leading-6 tracking-[0.1px] text-text`
@@ -168,7 +168,7 @@ const uiSpecs: CatalogSpec[] = [
     sizePx: 18,
     weight: 400,
     color: '#010101',
-    lineHeight: '1.4',
+    lineHeight: '1.5',
     letterSpacing: '0.1px',
     contextNote:
       "Utilisé uniquement dans les pages article, entre le H1 et le bloc auteur/date. Pas d'italic — distingué du titre par le poids (400 vs 700) et la taille.",

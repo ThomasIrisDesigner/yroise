@@ -13,7 +13,9 @@ import { HistoiresList } from '@/pages/HistoiresList'
 import { JeunesseDetail } from '@/pages/JeunesseDetail'
 import { JeunesseList } from '@/pages/JeunesseList'
 import { Home } from '@/pages/Home'
+import { InstitutionalPage } from '@/pages/InstitutionalPage'
 import { Login } from '@/pages/Login'
+import { INSTITUTIONAL_PAGE_SLUGS } from '@/data/institutionalPages'
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
   const location = useLocation()
@@ -133,6 +135,20 @@ export function App() {
           </RequireAuth>
         }
       />
+
+      {INSTITUTIONAL_PAGE_SLUGS.map((slug) => (
+        <Route
+          key={slug}
+          path={`/${slug}`}
+          element={
+            <RequireAuth>
+              <PrototypeLayout>
+                <InstitutionalPage pageSlug={slug} />
+              </PrototypeLayout>
+            </RequireAuth>
+          }
+        />
+      ))}
 
       <Route
         path="/design-system"

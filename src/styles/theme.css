@@ -97,7 +97,7 @@ body {
 }
 
 .section-jeunesse .type-label {
-  color: rgb(var(--aurore-900));
+  color: rgb(var(--aurore-700));
 }
 
 /* Header site — défile avec le contenu ; barre compacte épinglée au scroll vers le haut */

@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils'
 import { typography } from '@/styles/typography'
 
 type SectionListHeaderLayout = 'editorial' | 'centered'
-type SectionListHeaderTone = 'histoires' | 'collections'
+type SectionListHeaderTone = 'histoires' | 'collections' | 'jeunesse'
 
 const toneClasses: Record<
   SectionListHeaderTone,
@@ -23,6 +23,12 @@ const toneClasses: Record<
     text: 'text-glaz-900',
     title: 'text-glaz-900',
     breadcrumb: 'text-glaz-900 hover:text-glaz-900/80',
+  },
+  jeunesse: {
+    surface: 'bg-aurore-100',
+    text: 'text-text',
+    title: 'text-text',
+    breadcrumb: 'text-text hover:text-text/80',
   },
 }
 
@@ -47,10 +53,14 @@ export function SectionListHeader({
   className,
 }: SectionListHeaderProps) {
   if (layout === 'centered') {
+    const colors = toneClasses[tone]
+
     return (
       <header
         className={cn(
-          'flex flex-col items-center gap-4 bg-transparent pt-12 px-10 pb-10',
+          'flex flex-col items-center gap-4',
+          tone === 'jeunesse' ? 'p-10' : 'bg-transparent pt-12 px-10 pb-10',
+          tone === 'jeunesse' && colors.surface,
           className
         )}
       >
@@ -62,7 +72,9 @@ export function SectionListHeader({
         >
           {title}
         </h1>
-        <SectionTitleOrnament />
+        <SectionTitleOrnament
+          className={tone === 'jeunesse' ? 'text-aurore-700' : undefined}
+        />
       </header>
     )
   }

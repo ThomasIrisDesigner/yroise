@@ -7,10 +7,10 @@ import { JEUNESSE_LIST } from '@/data/jeunesse'
 export function JeunesseList() {
   return (
     <SitePageShell>
-      <div className="section-jeunesse flex flex-col bg-aurore-100 pb-8">
-        <SectionListHeader title="Jeunesse" layout="centered" />
+      <div className="section-jeunesse flex flex-col bg-background pb-8">
+        <SectionListHeader title="Jeunesse" layout="centered" tone="jeunesse" />
 
-        <ul className="flex flex-col items-center gap-14 px-10 pt-0 pb-10">
+        <ul className="flex flex-col items-center gap-8 bg-background p-10 pb-0">
           {JEUNESSE_LIST.map((activite) => (
             <li key={activite.slug} className="w-full">
               <JeunesseListCard activite={activite} />
@@ -18,7 +18,7 @@ export function JeunesseList() {
           ))}
         </ul>
 
-        <div className="flex justify-center px-section">
+        <div className="mt-8 flex justify-center px-section">
           <Button variant="secondary" size="sm" showTriangle={false}>
             Voir plus de jeux
             <img
