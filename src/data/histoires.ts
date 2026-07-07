@@ -64,6 +64,9 @@ export const HISTOIRES_LIST: HistoireBillet[] = [
 
 export const HISTOIRES_RECENTES = HISTOIRES_LIST.slice(0, 3)
 
+/** Carrousel home — 4 cartes desktop, scroll mobile. */
+export const HISTOIRES_HOME_CAROUSEL = HISTOIRES_LIST.slice(0, 4)
+
 export const HISTOIRES_COLLECTION_EN_MER: HistoireBillet[] = [
   {
     slug: 'dumont-durville-1837',

@@ -2,6 +2,9 @@ import * as React from 'react'
 import { Link } from 'react-router-dom'
 
 import { SITE_LOGO } from '@/config/assets'
+import { PageContainer } from '@/components/features/site/PageContainer'
+import { SiteHeaderDesktopNav } from '@/components/features/site/SiteHeaderDesktopNav'
+import { SiteHeaderLangSwitcher } from '@/components/features/site/SiteHeaderLangSwitcher'
 import type { SiteHeaderTone } from '@/config/site-header'
 import { SITE_HEADER_TONE_CLASSES } from '@/config/site-header'
 import { cn } from '@/lib/utils'
@@ -54,7 +57,7 @@ function HeaderLogoLink({
 function HeaderSearchIcon() {
   return (
     <img
-      src="/images/Icon_recherche.svg"
+      src="/images/Icon_search.svg"
       alt=""
       aria-hidden
       className="h-6 w-6"
@@ -118,49 +121,74 @@ export function SiteHeader({
   return (
     <header
       className={cn(
-        'site-header box-border flex shrink-0 items-center border-b px-section',
+        'site-header page-full-bleed box-border flex shrink-0 items-center border-b',
         tone !== 'default' ? 'border-transparent' : 'border-border',
         toneClasses.header,
         compact ? 'h-14' : 'h-[72px]',
         className
       )}
     >
-      <div className="flex w-full items-center justify-between gap-4">
-        {compact ? (
-          <HeaderLogoLink
-            onGoHome={onGoHome}
-            className="flex h-10 shrink-0 items-center hover:opacity-80"
-            width={SITE_LOGO.widthCollapsedPx}
-            logoClassName="site-header-logo block w-24"
-          />
-        ) : (
-          <div className="flex min-w-0 flex-col gap-1.5">
+      <PageContainer
+        variant="header"
+        className={cn(
+          'site-header-inner relative flex h-full items-center',
+          compact ? 'h-14' : 'h-[72px]'
+        )}
+      >
+        <div className="flex w-full items-center justify-between gap-4">
+          {compact ? (
             <HeaderLogoLink
               onGoHome={onGoHome}
-              className="shrink-0 hover:opacity-80"
-              width={SITE_LOGO.widthExpandedPx}
-              logoClassName="site-header-logo block w-[120px]"
+              className="flex h-10 shrink-0 items-center hover:opacity-80"
+              width={SITE_LOGO.widthCollapsedPx}
+              logoClassName="site-header-logo block w-24"
             />
+          ) : (
+            <div className="flex min-w-0 flex-col gap-1.5">
+              <HeaderLogoLink
+                onGoHome={onGoHome}
+                className="shrink-0 hover:opacity-80"
+                width={SITE_LOGO.widthExpandedPx}
+                logoClassName="site-header-logo block w-[120px]"
+              />
 
-            <div className="site-header-tagline max-h-3.5 overflow-hidden font-outfit text-[11px] font-normal leading-none text-muted opacity-100">
-              Bibliothèque numérique patrimoniale de Brest
+              <div className="site-header-tagline max-h-3.5 overflow-hidden font-outfit text-[11px] font-normal leading-none text-muted opacity-100">
+                Bibliothèque numérique patrimoniale de Brest
+              </div>
+            </div>
+          )}
+
+          {!compact ? <SiteHeaderDesktopNav /> : null}
+
+          <div className="site-header-actions ml-auto flex shrink-0 items-center gap-4">
+            <div className="prototype-mobile-only flex items-center gap-2">
+              <HeaderNavIconButton
+                label="Ouvrir la recherche"
+                onClick={onOpenSearch}
+                active={searchOpen}
+              >
+                <HeaderSearchIcon />
+              </HeaderNavIconButton>
+              <HeaderNavIconButton label="Ouvrir le menu" onClick={onOpenMenu} active={menuOpen}>
+                <HeaderMenuIcon />
+              </HeaderNavIconButton>
+            </div>
+
+            <div className="prototype-desktop-only items-center gap-4">
+              <button
+                type="button"
+                onClick={onOpenSearch}
+                aria-expanded={searchOpen}
+                className="site-header-search-pill flex h-10 items-center gap-2 rounded-full border-[2.5px] border-solid border-text px-3 font-outfit text-sm font-medium text-text transition-colors hover:border-glaz-700"
+              >
+                <HeaderSearchIcon />
+                Rechercher
+              </button>
+              <SiteHeaderLangSwitcher />
             </div>
           </div>
-        )}
-
-        <div className="flex shrink-0 items-center gap-2">
-          <HeaderNavIconButton
-            label="Ouvrir la recherche"
-            onClick={onOpenSearch}
-            active={searchOpen}
-          >
-            <HeaderSearchIcon />
-          </HeaderNavIconButton>
-          <HeaderNavIconButton label="Ouvrir le menu" onClick={onOpenMenu} active={menuOpen}>
-            <HeaderMenuIcon />
-          </HeaderNavIconButton>
         </div>
-      </div>
+      </PageContainer>
     </header>
   )
 }

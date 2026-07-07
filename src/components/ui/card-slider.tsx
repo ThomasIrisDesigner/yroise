@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import { getSnapActiveIndex } from '@/lib/carouselScroll'
 import { useHorizontalSwipeScroll } from '@/lib/useHorizontalSwipeScroll'
 import { cn } from '@/lib/utils'
 
@@ -8,36 +9,31 @@ interface CardSliderProps {
   className?: string
   'aria-label'?: string
   onActiveIndexChange?: (index: number) => void
-}
-
-function getSnapActiveIndex(container: HTMLElement): number {
-  const items = container.querySelectorAll<HTMLElement>('.card-slider-item')
-  if (!items.length) return 0
-
-  const scrollLeft = container.scrollLeft
-  let closest = 0
-  let minDistance = Number.POSITIVE_INFINITY
-
-  items.forEach((item, index) => {
-    const distance = Math.abs(item.offsetLeft - scrollLeft)
-    if (distance < minDistance) {
-      minDistance = distance
-      closest = index
-    }
-  })
-
-  return closest
+  /** Ref du conteneur scrollable (`.slider`) pour navigation externe. */
+  sliderRef?: React.Ref<HTMLDivElement>
 }
 
 /** Slider horizontal Yroise — gap 24px · pl 16px · snap · scrollbar masquée. */
+function mergeRefs<T>(...refs: Array<React.Ref<T> | undefined>) {
+  return (node: T | null) => {
+    refs.forEach((ref) => {
+      if (!ref) return
+      if (typeof ref === 'function') ref(node)
+      else (ref as React.MutableRefObject<T | null>).current = node
+    })
+  }
+}
+
 export function CardSlider({
   children,
   className,
   'aria-label': ariaLabel,
   onActiveIndexChange,
+  sliderRef,
 }: CardSliderProps) {
   const { ref, handlers } = useHorizontalSwipeScroll<HTMLDivElement>()
   const activeIndexRef = React.useRef(0)
+  const setContainerRef = mergeRefs(ref, sliderRef)
 
   React.useEffect(() => {
     const container = ref.current
@@ -62,7 +58,7 @@ export function CardSlider({
 
   return (
     <div
-      ref={ref}
+      ref={setContainerRef}
       role="region"
       aria-label={ariaLabel}
       tabIndex={0}

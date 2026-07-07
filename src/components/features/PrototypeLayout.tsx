@@ -148,7 +148,10 @@ export function PrototypeLayout({ children }: { children: React.ReactNode }) {
   }, [location.pathname])
 
   return (
-    <div className="fixed inset-0 overflow-hidden bg-text text-surface">
+    <div
+      className="fixed inset-0 overflow-hidden bg-text text-surface"
+      data-prototype-view={effectiveMode === 'desktop' ? 'desktop' : 'mobile'}
+    >
       {effectiveMode === 'mobile' ? (
         <div className="mx-auto flex h-full w-full flex-col">
           {chromeBar}

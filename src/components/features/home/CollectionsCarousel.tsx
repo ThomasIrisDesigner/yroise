@@ -1,8 +1,12 @@
 import { useCallback, useState } from 'react'
 import { Link } from 'react-router-dom'
 
+import { HomeCarouselNav } from '@/components/features/home/HomeCarouselNav'
+import { PageContainer } from '@/components/features/site/PageContainer'
 import { Button } from '@/components/ui/button'
+import { CardSlider } from '@/components/ui/card-slider'
 import { COLLECTIONS } from '@/data/collections'
+import { useCarouselScrollControl } from '@/lib/useCarouselScrollControl'
 import { useSwipeNavigation } from '@/lib/useSwipeNavigation'
 import { typography } from '@/styles/typography'
 
@@ -25,9 +29,45 @@ function NavArrow({ direction, active }: { direction: 'left' | 'right'; active: 
   )
 }
 
+function CollectionDesktopCard({
+  slug,
+  name,
+  imageSrc,
+}: {
+  slug: string
+  name: string
+  imageSrc?: string
+}) {
+  return (
+    <Link
+      to={`/collections/${slug}`}
+      className="home-collection-card card-slider-item group flex w-[310px] shrink-0 flex-col items-center gap-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-glaz-700/30"
+      aria-label={`Collection ${name}`}
+    >
+      <div className="hublot-frame home-collection-hublot relative size-[280px] shrink-0 overflow-hidden rounded-full border-[9px] border-text bg-surface transition-colors duration-150 group-hover:border-glaz-700">
+        {imageSrc ? (
+          <img
+            src={imageSrc}
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover"
+            aria-hidden
+            draggable={false}
+          />
+        ) : (
+          <div className="absolute inset-0 bg-surface" aria-hidden />
+        )}
+      </div>
+      <p className="w-full text-center font-outfit text-xl font-semibold text-text transition-colors duration-150 group-hover:text-glaz-700">
+        {name}
+      </p>
+    </Link>
+  )
+}
+
 export function CollectionsCarousel() {
   const [current, setCurrent] = useState(0)
   const total = COLLECTIONS.length
+  const desktopCarousel = useCarouselScrollControl(Math.min(4, total))
 
   const prev = useCallback(
     () => setCurrent((c) => (c - 1 + total) % total),
@@ -40,82 +80,107 @@ export function CollectionsCarousel() {
   const collection = COLLECTIONS[current]!
 
   return (
-    <section className="bg-glaz-100 pt-10 pb-10">
-      {/* En-tête centré */}
-      <div className="flex flex-col items-center gap-0 px-section">
-        <h2 className={typography.homeSectionLabel}>Collections</h2>
-        <p className="mt-1 font-outfit text-[14px] font-normal leading-[1.55] text-text">
-          {counter}
-        </p>
-      </div>
-
-      {/* Hublot + navigation — swipe horizontal sur la zone (hors boutons) */}
-      <div
-        className="mt-4 flex touch-pan-y items-center justify-center gap-8 px-section"
-        onPointerDown={(e) => {
-          if ((e.target as HTMLElement).closest('button')) return
-          swipeHandlers.onPointerDown(e)
-        }}
-        onPointerUp={swipeHandlers.onPointerUp}
-        onPointerCancel={swipeHandlers.onPointerCancel}
-      >
-        <button
-          onClick={prev}
-          aria-label="Collection précédente"
-          className="flex h-12 w-12 items-center justify-center"
-          disabled={false}
-        >
-          <NavArrow direction="left" active={current > 0} />
-        </button>
-
-        <Link
-          to={`/collections/${collection.slug}`}
-          className="group flex shrink-0 flex-col items-center gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-glaz-700/30"
-          aria-label={`Collection ${collection.name}`}
-        >
-          <div className="hublot-frame relative size-[198px] shrink-0 overflow-hidden rounded-full border-[9px] border-text bg-surface transition-colors duration-150 group-hover:border-glaz-700">
-            {COLLECTIONS.map((col, i) =>
-              col.hublotImageSrc ? (
-                <img
-                  key={col.slug}
-                  src={col.hublotImageSrc}
-                  alt=""
-                  className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500"
-                  style={{ opacity: i === current ? 1 : 0 }}
-                  aria-hidden={i !== current}
-                  draggable={false}
-                />
-              ) : (
-                <div
-                  key={col.slug}
-                  className="absolute inset-0 bg-surface transition-opacity duration-500"
-                  style={{ opacity: i === current ? 1 : 0 }}
-                  aria-hidden={i !== current}
-                />
-              )
-            )}
-          </div>
-
-          <p className="font-outfit text-[22px] font-semibold text-text transition-colors duration-150 group-hover:text-glaz-700">
-            {collection.name}
+    <section className="home-collections-section page-full-bleed bg-glaz-100 pt-10 pb-10">
+      <PageContainer className="home-collections-inner">
+        <div className="home-section-header home-section-header--carousel flex flex-col items-center gap-0">
+          <h2 className={typography.homeSectionLabel}>Collections</h2>
+          <p className="prototype-mobile-only mt-1 font-outfit text-[14px] font-normal leading-[1.55] text-text">
+            {counter}
           </p>
-        </Link>
+          <HomeCarouselNav
+            className="prototype-desktop-only"
+            counter={desktopCarousel.counter}
+            onPrev={desktopCarousel.prev}
+            onNext={desktopCarousel.next}
+            canPrev={desktopCarousel.canPrev}
+            canNext={desktopCarousel.canNext}
+          />
+        </div>
 
-        <button
-          onClick={next}
-          aria-label="Collection suivante"
-          className="flex h-12 w-12 items-center justify-center"
+        <div
+          className="prototype-mobile-only mt-4 flex touch-pan-y items-center justify-center gap-8"
+          onPointerDown={(e) => {
+            if ((e.target as HTMLElement).closest('button')) return
+            swipeHandlers.onPointerDown(e)
+          }}
+          onPointerUp={swipeHandlers.onPointerUp}
+          onPointerCancel={swipeHandlers.onPointerCancel}
         >
-          <NavArrow direction="right" active={current < total - 1} />
-        </button>
+          <button
+            onClick={prev}
+            aria-label="Collection précédente"
+            className="flex h-12 w-12 items-center justify-center"
+          >
+            <NavArrow direction="left" active={current > 0} />
+          </button>
+
+          <Link
+            to={`/collections/${collection.slug}`}
+            className="group flex shrink-0 flex-col items-center gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-glaz-700/30"
+            aria-label={`Collection ${collection.name}`}
+          >
+            <div className="hublot-frame relative size-[198px] shrink-0 overflow-hidden rounded-full border-[9px] border-text bg-surface transition-colors duration-150 group-hover:border-glaz-700">
+              {COLLECTIONS.map((col, i) =>
+                col.hublotImageSrc ? (
+                  <img
+                    key={col.slug}
+                    src={col.hublotImageSrc}
+                    alt=""
+                    className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500"
+                    style={{ opacity: i === current ? 1 : 0 }}
+                    aria-hidden={i !== current}
+                    draggable={false}
+                  />
+                ) : (
+                  <div
+                    key={col.slug}
+                    className="absolute inset-0 bg-surface transition-opacity duration-500"
+                    style={{ opacity: i === current ? 1 : 0 }}
+                    aria-hidden={i !== current}
+                  />
+                )
+              )}
+            </div>
+
+            <p className="font-outfit text-[22px] font-semibold text-text transition-colors duration-150 group-hover:text-glaz-700">
+              {collection.name}
+            </p>
+          </Link>
+
+          <button
+            onClick={next}
+            aria-label="Collection suivante"
+            className="flex h-12 w-12 items-center justify-center"
+          >
+            <NavArrow direction="right" active={current < total - 1} />
+          </button>
+        </div>
+      </PageContainer>
+
+      <div className="home-collections-desktop-track prototype-desktop-only mt-4">
+        <CardSlider
+          aria-label="Collections"
+          sliderRef={desktopCarousel.sliderRef}
+          onActiveIndexChange={desktopCarousel.onActiveIndexChange}
+        >
+          {COLLECTIONS.slice(0, 4).map((col) => (
+            <CollectionDesktopCard
+              key={col.slug}
+              slug={col.slug}
+              name={col.name}
+              imageSrc={col.hublotImageSrc}
+            />
+          ))}
+        </CardSlider>
       </div>
 
-      {/* CTA */}
-      <div className="mt-8 flex justify-center px-section">
-        <Button asChild variant="primary">
-          <Link to="/collections">Découvrir toutes les collections</Link>
-        </Button>
-      </div>
+      <PageContainer>
+        <div className="home-section-cta home-section-cta--centered mt-8 flex justify-center">
+          <Button asChild variant="primary">
+            <Link to="/collections">Découvrir toutes les collections</Link>
+          </Button>
+        </div>
+      </PageContainer>
     </section>
   )
 }

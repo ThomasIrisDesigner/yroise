@@ -9,7 +9,7 @@ export const SECTION_LABEL_EXAMPLES = [
 export const SECTION_LABEL_SPECS = [
   { token: 'token', value: 'label (alias sectionLabel)' },
   { token: 'font-family', value: 'Outfit' },
-  { token: 'font-size', value: '24px (home) · 16px (listes)' },
+  { token: 'font-size', value: '24px (rubriques) · 22px (La trouvaille) · 16px (listes)' },
   { token: 'font-weight', value: '600' },
   { token: 'letter-spacing', value: '2px' },
   { token: 'text-transform', value: 'uppercase' },

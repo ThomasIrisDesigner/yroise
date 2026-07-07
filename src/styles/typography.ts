@@ -17,6 +17,8 @@ const chapeau = `${ui} text-lg font-normal leading-[1.5] tracking-[0.1px] text-t
 const label = `${ui} text-base font-semibold uppercase tracking-[2px] text-text`
 /** Titres de rubrique home — HISTOIRES, COLLECTIONS… (24px). */
 const homeSectionLabel = `${ui} text-[24px] font-semibold uppercase tracking-[2px] leading-tight text-text`
+/** Sous-titre home hors menu — La trouvaille (22px). */
+const homeSectionAsideLabel = `${ui} text-[22px] font-semibold uppercase tracking-[2px] leading-tight text-text`
 const meta = `${ui} text-[13px] font-normal leading-snug text-muted`
 const cardExcerpt = `${ui} text-base font-normal leading-6 tracking-[0.1px] text-text`
 const editorialCaption = `${ui} text-sm font-normal leading-[1.4] tracking-[0.1px] text-muted`
@@ -46,6 +48,7 @@ export const typography = {
   chapeau,
   label,
   homeSectionLabel,
+  homeSectionAsideLabel,
   meta,
   cardExcerpt,
   editorialCaption,
