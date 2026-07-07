@@ -54,7 +54,7 @@ export function SiteFooter() {
 
         <div className="flex flex-col items-center gap-4 px-4">
           <p className={cn(typography.meta, 'w-full text-center text-on-dark')}>
-            Nous suivre
+            Suivre la médiathèque de Brest
           </p>
           <div className="flex items-center gap-8">
             {FOOTER_SOCIAL_LINKS.map((social) => (

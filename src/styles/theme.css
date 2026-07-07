@@ -115,18 +115,21 @@ body {
 /* Carte immersive — header site + carte 100 % de l'espace restant */
 .site-page-shell--immersive {
   height: 100%;
+  min-height: 0;
 }
 
 .site-scroll-main--immersive {
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
+  min-height: 0;
 }
 
 .site-page-shell--immersive .site-page-main {
   display: flex;
-  flex: 1;
+  flex: 1 1 0;
   flex-direction: column;
   min-height: 0;
-  height: 100%;
 }
 
 .site-page-shell--immersive .site-page-main > :last-child {
@@ -136,13 +139,24 @@ body {
 .carte-map-embed--immersive {
   box-sizing: border-box;
   display: flex;
-  flex: 1;
+  flex: 1 1 0;
   flex-direction: column;
   min-height: 0;
+  width: 100%;
 }
 
 .carte-map-frame {
   flex: 1 1 0;
+  min-height: 0;
+  width: 100%;
+  position: relative;
+}
+
+/* Hauteur minimale garantie — Leaflet/uMap ne s'initialise pas à height:0 (iOS Safari) */
+@supports (height: 100dvh) {
+  .carte-map-embed--immersive .carte-map-frame {
+    min-height: calc(100dvh - 7.5rem);
+  }
 }
 
 /* Plein écran mobile — contournement iOS (API fullscreen iframe indisponible) */

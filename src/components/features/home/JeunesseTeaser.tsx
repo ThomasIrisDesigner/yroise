@@ -16,14 +16,12 @@ export function JeunesseTeaser() {
       </div>
 
       <p className={`mt-7 text-center ${typography.cardExcerpt}`}>
-        Jeux et ateliers
-        <br />
-        pour découvrir le patrimoine.
+        Jeux et ateliers pour explorer le patrimoine.
       </p>
 
       <div className="mt-8 flex justify-center">
         <Button asChild variant="primary">
-          <Link to="/jeunesse">Jouer</Link>
+          <Link to="/jeunesse">Découvrir</Link>
         </Button>
       </div>
     </section>

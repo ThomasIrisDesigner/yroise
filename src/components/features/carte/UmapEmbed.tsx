@@ -13,7 +13,7 @@ interface UmapEmbedProps {
 
 /** Attend des dimensions non nulles avant de charger l’iframe (Leaflet/uMap sinon reste blanc). */
 function useSizedContainer(ref: React.RefObject<HTMLElement | null>, enabled: boolean) {
-  const [sized, setSized] = React.useState(false)
+  const [sized, setSized] = React.useState(!enabled)
 
   React.useLayoutEffect(() => {
     if (!enabled) {
@@ -24,14 +24,48 @@ function useSizedContainer(ref: React.RefObject<HTMLElement | null>, enabled: bo
     const el = ref.current
     if (!el) return
 
+    let rafId = 0
+    let cancelled = false
+
     const update = () => {
-      setSized(el.clientWidth > 0 && el.clientHeight > 0)
+      if (cancelled) return
+      if (el.clientWidth > 0 && el.clientHeight > 0) {
+        setSized(true)
+      }
     }
 
     update()
+
     const observer = new ResizeObserver(update)
     observer.observe(el)
-    return () => observer.disconnect()
+
+    const onViewportChange = () => update()
+    window.addEventListener('resize', onViewportChange)
+    window.visualViewport?.addEventListener('resize', onViewportChange)
+
+    // iOS Safari — le flex layout peut se résoudre après plusieurs frames
+    let attempts = 0
+    const retry = () => {
+      update()
+      attempts += 1
+      if (!cancelled && attempts < 30 && el.clientHeight === 0) {
+        rafId = window.requestAnimationFrame(retry)
+      }
+    }
+    rafId = window.requestAnimationFrame(retry)
+
+    const fallbackId = window.setTimeout(() => {
+      if (!cancelled) setSized(true)
+    }, 1000)
+
+    return () => {
+      cancelled = true
+      observer.disconnect()
+      window.removeEventListener('resize', onViewportChange)
+      window.visualViewport?.removeEventListener('resize', onViewportChange)
+      window.cancelAnimationFrame(rafId)
+      window.clearTimeout(fallbackId)
+    }
   }, [enabled, ref])
 
   return sized
@@ -154,7 +188,7 @@ export function UmapEmbed({ className, immersive = false }: UmapEmbedProps) {
       {immersive ? (
         <div
           ref={frameRef}
-          className="carte-map-frame min-h-0 flex-1"
+          className="carte-map-frame min-h-0 w-full flex-1"
         >
           {iframe}
         </div>
