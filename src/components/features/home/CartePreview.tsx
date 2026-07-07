@@ -8,7 +8,7 @@ export function CartePreview() {
   return (
     <section className="bg-background px-section py-10">
       <div className="bg-sable-200 px-section py-10">
-        <p className={`${typography.sectionLabel} text-center`}>La carte interactive</p>
+        <p className={`${typography.homeSectionLabel} text-center`}>Carte interactive</p>
 
         <img
           src={HOME_CARTE.imageSrc}

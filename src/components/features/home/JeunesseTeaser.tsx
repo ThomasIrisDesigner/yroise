@@ -7,7 +7,7 @@ import { typography } from '@/styles/typography'
 export function JeunesseTeaser() {
   return (
     <section className="bg-aurore-100 px-section pt-10 pb-10">
-      <p className={`${typography.sectionLabel} text-center`}>Jeunesse</p>
+      <p className={`${typography.homeSectionLabel} text-center`}>Jeunesse</p>
 
       <div className="mt-6 flex justify-center">
         <div className="h-[86px] w-[100px]">

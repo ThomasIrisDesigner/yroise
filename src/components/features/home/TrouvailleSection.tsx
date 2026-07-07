@@ -7,7 +7,7 @@ import { typography } from '@/styles/typography'
 export function TrouvailleSection() {
   return (
     <section className="bg-sable-200 px-section pt-8 pb-10">
-      <p className="text-center font-outfit text-sm font-semibold uppercase tracking-[1px] text-text">
+      <p className={`${typography.homeSectionLabel} text-center`}>
         La trouvaille
       </p>
 
