@@ -1,43 +1,57 @@
 /**
  * Système typographique YROISE — Outfit (UI) + Source Serif 4 (éditorial).
- * Mobile-first ; pas de tailles desktop dans cette passe.
+ * Mobile-first ; tailles responsive sur les titres article (md+).
  */
 const ui = 'font-outfit'
 const editorial = 'font-editorial'
 
 /** Tokens Outfit — display & UI */
 const titleXl = `${ui} text-[28px] font-bold leading-tight tracking-[0.1px] text-text`
-/** H1 billet article (Histoires, Jeunesse…) — 36px / lh 1.275. */
-const articleTitle = `${ui} text-[36px] font-semibold leading-[1.275] tracking-[0.1px] text-text`
+/** H1 billet article — 2rem mobile · 2.5rem desktop · lh 1.2. */
+const articleTitle = `${ui} text-[2rem] font-semibold leading-[1.2] tracking-[0.1px] text-text md:text-[2.5rem]`
 const titleL = `${ui} text-[20px] font-semibold leading-snug text-text`
-const titleM = `${ui} text-base font-semibold leading-[1.3] tracking-[0.1px] text-text`
+/** Intertitre corps d'article — 1.5rem · lh 1.5 · ls 0.5px. */
+const articleHeading = `${ui} text-2xl font-bold leading-[1.5] tracking-[0.5px] text-text`
+const titleM = `${ui} text-base font-medium leading-[1.3] tracking-[0.1px] text-text`
 const titleMCard = `${titleM} line-clamp-3`
-const cardTitleEditorial = `${ui} text-[1.375rem] font-semibold leading-[1.875rem] tracking-[0.1px] text-text`
-const chapeau = `${ui} text-lg font-normal leading-[1.5] tracking-[0.1px] text-text`
+const cardTitleEditorial = `${ui} text-[1.375rem] font-medium leading-[1.875rem] tracking-[0.1px] text-text`
+/** Chapô article — 1.1875rem · lh 1.4 · ls 0.1px. */
+const chapeau = `${ui} text-[1.1875rem] font-normal leading-[1.4] tracking-[0.1px] text-text`
 const label = `${ui} text-base font-semibold uppercase tracking-[2px] text-text`
 /** Titres de rubrique home — HISTOIRES, COLLECTIONS… (24px). */
 const homeSectionLabel = `${ui} text-[24px] font-semibold uppercase tracking-[2px] leading-tight text-text`
-/** Sous-titre home hors menu — La trouvaille (22px). */
+/** Sous-titre home hors menu — legacy aside (22px). Préférer trouvailleLabel pour La trouvaille. */
 const homeSectionAsideLabel = `${ui} text-[22px] font-semibold uppercase tracking-[2px] leading-tight text-text`
+/** Rubrique La trouvaille — label (16px semibold, tracking 0.32px). */
+const trouvailleLabel = `${ui} text-base font-semibold leading-[1.4] tracking-[0.32px] text-text`
+/** Accroche La trouvaille — sous le label (16px regular, lh 1.55). */
+const trouvailleChapeau = `${ui} text-base font-normal leading-[1.55] text-text`
 const meta = `${ui} text-[13px] font-normal leading-snug text-muted`
 const cardExcerpt = `${ui} text-base font-normal leading-6 tracking-[0.1px] text-text`
-const editorialCaption = `${ui} text-sm font-normal leading-[1.4] tracking-[0.1px] text-muted`
+/** Légende-titre figure — 0.875rem · lh 1.5 · ls 0.1px. */
+const editorialCaption = `${ui} text-sm font-normal leading-[1.5] tracking-[0.1px] text-muted`
 const uiXs = `${ui} text-[11px] font-normal leading-tight text-muted`
-/** Rubrique article (HISTOIRES) — 11px bold uppercase, accent Glaz. */
-const articleRubrique = `${ui} text-[11px] font-bold uppercase tracking-[3px] text-glaz-700`
-/** Byline article — auteur sous le chapeau. */
-const articleByline = `${ui} text-[11px] font-medium uppercase tracking-[0.1px] text-text`
+/** Fil d'Ariane rubrique article — 0.75rem · lh 1.4 · ls 3px. */
+const articleRubrique = `${ui} text-xs font-bold uppercase tracking-[3px] leading-[1.4] text-glaz-700`
+/** Meta article en capitales — auteur, légende type (0.75rem · lh 1.5 · ls 2px). */
+const articleMetaCaps = `${ui} text-xs font-normal uppercase tracking-[2px] leading-[1.5] text-text`
+/** Byline article — alias sémantique de articleMetaCaps. */
+const articleByline = articleMetaCaps
 /** Titres de section compacts — sources, rebonds (14px, tracking 1px). */
 const sectionTitleSm = `${ui} text-sm font-semibold uppercase tracking-[1px]`
+/** Titre section rebonds — 1.1875rem · md 1.5rem · lg 2rem. */
+const sectionTitleRebond = `${ui} text-[1.1875rem] font-semibold uppercase tracking-[1px] md:text-2xl lg:text-[2rem]`
 /** Liens UI — couleur selon le contexte (fond clair ou sombre). */
 const uiLink = `${ui} text-[13px] font-normal leading-snug`
 
 /** Logo texte (header si pas SVG) — hors catalogue DS. */
 const logo = `${ui} text-base font-bold text-text`
 
-/** Tokens Source Serif 4 — corps d'article uniquement */
-const editorialBody = `${editorial} text-lg font-normal leading-[1.65] tracking-[0.1px] text-text`
-const editorialMuted = `${editorial} text-lg font-normal leading-[1.65] text-text/70`
+/** Tokens Source Serif 4 — corps d'article */
+const editorialBody = `${editorial} text-[1.1875rem] font-normal leading-[1.6] text-text`
+const editorialMuted = `${editorial} text-[1.1875rem] font-normal leading-[1.6] text-text/70`
+/** Citation éditoriale — 1.25rem · lh 1.6 · semibold italic. */
+const editorialQuote = `${editorial} text-xl font-semibold italic leading-[1.6] text-text`
 
 export const typography = {
   titleXl,
@@ -49,17 +63,23 @@ export const typography = {
   label,
   homeSectionLabel,
   homeSectionAsideLabel,
+  trouvailleLabel,
+  trouvailleChapeau,
   meta,
   cardExcerpt,
   editorialCaption,
   uiXs,
   articleRubrique,
   articleByline,
+  articleMetaCaps,
+  articleHeading,
   sectionTitleSm,
+  sectionTitleRebond,
   uiLink,
   logo,
   editorialBody,
   editorialMuted,
+  editorialQuote,
 
   /** Espace vertical entre blocs éditoriaux (24px). */
   editorialBodyStack: 'flex flex-col gap-6',
@@ -148,7 +168,7 @@ const uiSpecs: CatalogSpec[] = [
     label: 'Titres de cards et listes',
     fontFamily: TYPOGRAPHY_FONT_UI,
     sizePx: 16,
-    weight: 600,
+    weight: 500,
     color: '#010101',
     lineHeight: '1.3',
     letterSpacing: '0.1px',
@@ -160,7 +180,7 @@ const uiSpecs: CatalogSpec[] = [
     label: 'Titre card éditoriale',
     fontFamily: TYPOGRAPHY_FONT_UI,
     sizePx: 22,
-    weight: 600,
+    weight: 500,
     color: '#010101',
     lineHeight: '1.875rem (leading-[1.875rem])',
     letterSpacing: '0.1px',
@@ -171,13 +191,13 @@ const uiSpecs: CatalogSpec[] = [
     usage: 'Intro article, entre le H1 et le bloc auteur/date',
     label: 'Chapeau article (sous H1)',
     fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 18,
+    sizePx: 19,
     weight: 400,
     color: '#010101',
-    lineHeight: '1.5',
+    lineHeight: '1.4',
     letterSpacing: '0.1px',
     contextNote:
-      "Utilisé uniquement dans les pages article, entre le H1 et le bloc auteur/date. Pas d'italic — distingué du titre par le poids (400 vs 700) et la taille.",
+      "Utilisé uniquement dans les pages article, entre le H1 et le bloc auteur/date. Pas d'italic — distingué du titre par le poids (400 vs 600) et la taille.",
   },
   {
     usage: 'Labels de section (HISTOIRES, COLLECTIONS…)',
@@ -213,16 +233,16 @@ const uiSpecs: CatalogSpec[] = [
     contextNote: 'Troncature à 2 lignes (line-clamp-2) sur les cards du carousel.',
   },
   {
-    usage: "Légendes sous les images, fil d'Ariane des pages liste",
-    label: "Légendes photos, crédits · fil d'Ariane",
+    usage: "Légende-titre sous les figures d'article",
+    label: 'Légende-titre figure',
     fontFamily: TYPOGRAPHY_FONT_UI,
     sizePx: 14,
     weight: 400,
-    color: '#71717a',
-    lineHeight: '1.4',
+    color: '#010101',
+    lineHeight: '1.5',
     letterSpacing: '0.1px',
     contextNote:
-      'Couleur par défaut text-muted. Sur en-tête de page liste (fond tonal), appliquer la couleur rubrique — voir SectionListHeader.',
+      "Couleur text sur les légendes GMB. Fil d'Ariane pages liste : appliquer la couleur rubrique — voir SectionListHeader.",
   },
   {
     usage: 'Sous-titre institutionnel dans le header',
@@ -251,20 +271,20 @@ const editorialSpecs: CatalogSpec[] = [
     usage: 'Corps de texte long — articles uniquement',
     label: 'Corps de texte article',
     fontFamily: TYPOGRAPHY_FONT_EDITORIAL,
-    sizePx: 18,
+    sizePx: 19,
     weight: 400,
     color: '#010101',
-    lineHeight: '1.65',
-    letterSpacing: '0.1px',
+    lineHeight: '1.6',
+    letterSpacing: 'normal',
   },
   {
     usage: 'Corps atténué — notes, contexte secondaire',
     label: 'Corps atténué',
     fontFamily: TYPOGRAPHY_FONT_EDITORIAL,
-    sizePx: 18,
+    sizePx: 19,
     weight: 400,
     color: '#010101 à 70 %',
-    lineHeight: '1.65',
+    lineHeight: '1.6',
     letterSpacing: 'normal',
   },
 ]

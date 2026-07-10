@@ -10,25 +10,6 @@ import { useCarouselScrollControl } from '@/lib/useCarouselScrollControl'
 import { useSwipeNavigation } from '@/lib/useSwipeNavigation'
 import { typography } from '@/styles/typography'
 
-function NavArrow({ direction, active }: { direction: 'left' | 'right'; active: boolean }) {
-  return (
-    <svg
-      width="20"
-      height="24"
-      viewBox="0 0 20 24"
-      aria-hidden
-      style={{ opacity: active ? 1 : 0.25 }}
-      className="shrink-0"
-    >
-      {direction === 'right' ? (
-        <polygon points="0,0 0,24 20,12" fill="rgb(var(--glaz-700))" />
-      ) : (
-        <polygon points="20,0 20,24 0,12" fill="rgb(var(--glaz-700))" />
-      )}
-    </svg>
-  )
-}
-
 function CollectionDesktopCard({
   slug,
   name,
@@ -76,19 +57,24 @@ export function CollectionsCarousel() {
   const next = useCallback(() => setCurrent((c) => (c + 1) % total), [total])
   const swipeHandlers = useSwipeNavigation(prev, next)
 
-  const counter = `${String(current + 1).padStart(2, '0')} – ${String(total).padStart(2, '0')}`
+  const counter = `${String(current + 1).padStart(2, '0')} - ${String(total).padStart(2, '0')}`
   const collection = COLLECTIONS[current]!
 
   return (
-    <section className="home-collections-section page-full-bleed bg-glaz-100 pt-10 pb-10">
+    <section className="home-collections-section page-full-bleed bg-glaz-100">
       <PageContainer className="home-collections-inner">
         <div className="home-section-header home-section-header--carousel flex flex-col items-center gap-0">
           <h2 className={typography.homeSectionLabel}>Collections</h2>
-          <p className="prototype-mobile-only mt-1 font-outfit text-[14px] font-normal leading-[1.55] text-text">
-            {counter}
-          </p>
           <HomeCarouselNav
-            className="prototype-desktop-only"
+            className="home-carousel-nav--section-header prototype-mobile-only mt-1 w-full justify-center"
+            counter={counter}
+            onPrev={prev}
+            onNext={next}
+            canPrev={current > 0}
+            canNext={current < total - 1}
+          />
+          <HomeCarouselNav
+            className="home-carousel-nav--section-header prototype-desktop-only"
             counter={desktopCarousel.counter}
             onPrev={desktopCarousel.prev}
             onNext={desktopCarousel.next}
@@ -98,7 +84,7 @@ export function CollectionsCarousel() {
         </div>
 
         <div
-          className="prototype-mobile-only mt-4 flex touch-pan-y items-center justify-center gap-8"
+          className="prototype-mobile-only mt-4 flex touch-pan-y items-center justify-center"
           onPointerDown={(e) => {
             if ((e.target as HTMLElement).closest('button')) return
             swipeHandlers.onPointerDown(e)
@@ -106,14 +92,6 @@ export function CollectionsCarousel() {
           onPointerUp={swipeHandlers.onPointerUp}
           onPointerCancel={swipeHandlers.onPointerCancel}
         >
-          <button
-            onClick={prev}
-            aria-label="Collection précédente"
-            className="flex h-12 w-12 items-center justify-center"
-          >
-            <NavArrow direction="left" active={current > 0} />
-          </button>
-
           <Link
             to={`/collections/${collection.slug}`}
             className="group flex shrink-0 flex-col items-center gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-glaz-700/30"
@@ -146,14 +124,6 @@ export function CollectionsCarousel() {
               {collection.name}
             </p>
           </Link>
-
-          <button
-            onClick={next}
-            aria-label="Collection suivante"
-            className="flex h-12 w-12 items-center justify-center"
-          >
-            <NavArrow direction="right" active={current < total - 1} />
-          </button>
         </div>
       </PageContainer>
 
@@ -175,10 +145,13 @@ export function CollectionsCarousel() {
       </div>
 
       <PageContainer>
-        <div className="home-section-cta home-section-cta--centered mt-8 flex justify-center">
-          <Button asChild variant="primary">
-            <Link to="/collections">Découvrir toutes les collections</Link>
-          </Button>
+        <div className="home-section-cta-block">
+          <hr className="home-section-cta-separator" aria-hidden />
+          <div className="home-section-cta home-section-cta--centered flex justify-center">
+            <Button asChild variant="primary">
+              <Link to="/collections">Découvrir toutes les collections</Link>
+            </Button>
+          </div>
         </div>
       </PageContainer>
     </section>

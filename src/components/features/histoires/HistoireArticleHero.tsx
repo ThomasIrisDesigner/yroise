@@ -1,5 +1,6 @@
 import { GmbFigureLegend } from '@/components/features/histoires/gmb/GmbFigureLegend'
 import { gmbMediaAspectClass } from '@/components/features/histoires/gmb/gmb-shared'
+import { cn } from '@/lib/utils'
 import { typography } from '@/styles/typography'
 
 interface HistoireArticleHeroProps {
@@ -21,8 +22,8 @@ export function HistoireArticleHero({
   linkHref,
 }: HistoireArticleHeroProps) {
   return (
-    <figure className="flex flex-col gap-2">
-      <div className={gmbMediaAspectClass}>
+    <figure className="article-page-hero flex flex-col">
+      <div className={cn(gmbMediaAspectClass, 'article-hero-media')}>
         {imageSrc ? (
           <img
             src={imageSrc}
@@ -40,7 +41,9 @@ export function HistoireArticleHero({
         )}
       </div>
       <GmbFigureLegend
-        className="px-section"
+        className="article-page-content-wrap py-4"
+        columnWrap
+        innerClassName="article-hero-caption"
         caption={caption}
         meta={meta}
         linkLabel={linkLabel}

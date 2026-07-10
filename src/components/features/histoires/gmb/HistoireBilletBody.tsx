@@ -25,11 +25,7 @@ export function HistoireBilletBody({ blocks }: HistoireBilletBodyProps) {
             return (
               <h2
                 key={i}
-                className={cn(
-                  typography.titleL,
-                  'font-bold leading-7',
-                  !isFirst && 'pt-6'
-                )}
+                className={cn(typography.articleHeading, !isFirst && 'pt-6')}
               >
                 {block.text}
               </h2>

@@ -1,3 +1,5 @@
+import { gmbMediaAspectClass } from '@/components/features/histoires/gmb/gmb-shared'
+import { cn } from '@/lib/utils'
 import { typography } from '@/styles/typography'
 
 interface JeunesseArticleHeroProps {
@@ -6,25 +8,30 @@ interface JeunesseArticleHeroProps {
   placeholder?: string
 }
 
-/** Image hero jeu / atelier — bordure aurore, coins arrondis (Figma 117:1217). */
+/** Image hero jeu / atelier — pleine largeur, bordure aurore (Figma 117:1217). */
 export function JeunesseArticleHero({
   imageSrc,
   imageAlt = '',
   placeholder = 'Image',
 }: JeunesseArticleHeroProps) {
   return (
-    <figure className="px-section">
-      <div className="overflow-hidden rounded-lg border-4 border-aurore-700">
+    <figure className="article-page-hero flex flex-col">
+      <div
+        className={cn(
+          gmbMediaAspectClass,
+          'article-hero-media overflow-hidden rounded-lg border-4 border-aurore-700'
+        )}
+      >
         {imageSrc ? (
           <img
             src={imageSrc}
             alt={imageAlt}
-            className="h-[358px] w-full object-cover"
+            className="h-full w-full object-cover"
             draggable={false}
           />
         ) : (
           <div
-            className="flex h-[358px] w-full items-center justify-center bg-surface"
+            className="flex h-full w-full items-center justify-center bg-surface"
             role="img"
             aria-label={placeholder}
           >

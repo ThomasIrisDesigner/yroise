@@ -13,17 +13,16 @@ interface HistoireRebondCardProps {
 export function HistoireRebondCard({ histoire }: HistoireRebondCardProps) {
   return (
     <article className="flex flex-col gap-8">
-      <div className="relative h-[174px] w-full overflow-hidden">
-        {histoire.imageSrc ? (
-          <img
-            src={histoire.imageSrc}
-            alt=""
-            className="h-full w-full object-cover"
-          />
-        ) : (
-          <div className="h-full w-full bg-surface/10" aria-hidden />
-        )}
-      </div>
+      {histoire.imageSrc ? (
+        <img
+          src={histoire.imageSrc}
+          alt=""
+          className="card-image"
+          draggable={false}
+        />
+      ) : (
+        <div className="card-image bg-surface/10" aria-hidden />
+      )}
 
       <div className="flex flex-col gap-4">
         <h3 className={cn(typography.cardTitleEditorial, 'text-on-dark leading-[1.4]')}>

@@ -9,7 +9,7 @@ interface CollectionArticleHeaderProps {
   gallicaHref: string
 }
 
-/** En-tête collection — fond glaz-100, fil d'Ariane, H1, chapeau, CTA Gallica. */
+/** En-tête collection — même grille que billet article, fond glaz sur le wrap parent. */
 export function CollectionArticleHeader({
   titre,
   chapeau,
@@ -22,18 +22,18 @@ export function CollectionArticleHeader({
       : 'Voir les documents'
 
   return (
-    <header className="bg-glaz-100 px-section pt-4 pb-10">
-      <div className="flex flex-col gap-4">
+    <header className="article-page-header">
+      <div className="article-page-header-meta">
         <SectionRubriqueLink to="/collections">Collections</SectionRubriqueLink>
         <h1 className={typography.articleTitle}>{titre}</h1>
-        <p className={typography.chapeau}>{chapeau}</p>
-        <div className="pt-6">
-          <Button asChild variant="primary" size="sm">
-            <a href={gallicaHref} aria-label={`${ctaLabel} sur Gallica (externe)`}>
-              {ctaLabel}
-            </a>
-          </Button>
+        <div className="article-page-header-chapeau">
+          <p className={typography.chapeau}>{chapeau}</p>
         </div>
+        <Button asChild variant="primary" size="sm" className="self-start">
+          <a href={gallicaHref} aria-label={`${ctaLabel} sur Gallica (externe)`}>
+            {ctaLabel}
+          </a>
+        </Button>
       </div>
     </header>
   )

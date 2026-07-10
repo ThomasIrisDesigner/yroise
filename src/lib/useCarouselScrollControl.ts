@@ -58,6 +58,6 @@ export function useCarouselScrollControl(itemCount: number) {
     next,
     canPrev: activeIndex > 0,
     canNext: activeIndex < itemCount - 1,
-    counter: `${String(activeIndex + 1).padStart(2, '0')} – ${String(itemCount).padStart(2, '0')}`,
+    counter: `${String(activeIndex + 1).padStart(2, '0')} - ${String(itemCount).padStart(2, '0')}`,
   }
 }

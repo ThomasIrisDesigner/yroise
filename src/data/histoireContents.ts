@@ -135,17 +135,33 @@ const OCEAN_LIBERTY_CONTENT: HistoireBilletContent = {
     {
       slug: 'marcel-bories-plaques',
       type: 'exposition',
-      titre: 'Marcel Boriès, 1428 plaques de verre sur Brest',
+      titre: 'Lorem ipsum dolor sit amet, consectetur adipiscing',
       accroche:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
       imageSrc: '/images/voilier-brest.png',
     },
     {
       slug: 'dictionnaire-coetanlem',
       type: 'curiosite',
-      titre: 'Le Dictionnaire de Coëtanlem',
+      titre: 'Ut enim ad minim veniam, quis nostrud',
       accroche:
-        'Publié en 1835, ce dictionnaire breton-français reste une référence pour comprendre la langue et la culture bretonnes au XIXe siècle.',
+        'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.',
+      imageSrc: '/images/voilier-brest.png',
+    },
+    {
+      slug: 'brest-ville-fortifiee',
+      type: 'curiosite',
+      titre: 'Sed ut perspiciatis unde omnis iste natus',
+      accroche:
+        'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.',
+      imageSrc: '/images/voilier-brest.png',
+    },
+    {
+      slug: 'chantiers-navals-xix',
+      type: 'exposition',
+      titre: 'Neque porro quisquam est qui dolorem ipsum',
+      accroche:
+        'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias.',
       imageSrc: '/images/voilier-brest.png',
     },
   ],

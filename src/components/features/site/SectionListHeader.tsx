@@ -73,7 +73,13 @@ export function SectionListHeader({
           {title}
         </h1>
         <SectionTitleOrnament
-          className={tone === 'jeunesse' ? 'text-aurore-700' : undefined}
+          className={
+            tone === 'jeunesse'
+              ? 'text-aurore-700'
+              : tone === 'collections'
+                ? 'text-glaz-700'
+                : undefined
+          }
         />
       </header>
     )

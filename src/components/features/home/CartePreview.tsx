@@ -7,7 +7,7 @@ import { typography } from '@/styles/typography'
 
 export function CartePreview() {
   return (
-    <section className="home-carte-section page-full-bleed bg-sable-200 py-10">
+    <section className="home-carte-section page-full-bleed py-10">
       <PageContainer className="home-carte-container">
         <p className={`home-carte-label ${typography.homeSectionLabel} text-center`}>
           Carte interactive

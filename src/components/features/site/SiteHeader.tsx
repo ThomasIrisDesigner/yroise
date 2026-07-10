@@ -135,16 +135,16 @@ export function SiteHeader({
           compact ? 'h-14' : 'h-[72px]'
         )}
       >
-        <div className="flex w-full items-center justify-between gap-4">
+        <div className="site-header-bar flex w-full items-center justify-between gap-4">
           {compact ? (
             <HeaderLogoLink
               onGoHome={onGoHome}
-              className="flex h-10 shrink-0 items-center hover:opacity-80"
+              className="site-header-brand flex h-10 shrink-0 items-center hover:opacity-80"
               width={SITE_LOGO.widthCollapsedPx}
               logoClassName="site-header-logo block w-24"
             />
           ) : (
-            <div className="flex min-w-0 flex-col gap-1.5">
+            <div className="site-header-brand flex min-w-0 flex-col gap-1.5">
               <HeaderLogoLink
                 onGoHome={onGoHome}
                 className="shrink-0 hover:opacity-80"
@@ -158,9 +158,9 @@ export function SiteHeader({
             </div>
           )}
 
-          {!compact ? <SiteHeaderDesktopNav /> : null}
+          <SiteHeaderDesktopNav />
 
-          <div className="site-header-actions ml-auto flex shrink-0 items-center gap-4">
+          <div className="site-header-actions flex shrink-0 items-center gap-4">
             <div className="prototype-mobile-only flex items-center gap-2">
               <HeaderNavIconButton
                 label="Ouvrir la recherche"
@@ -178,11 +178,12 @@ export function SiteHeader({
               <button
                 type="button"
                 onClick={onOpenSearch}
+                aria-label="Rechercher"
                 aria-expanded={searchOpen}
-                className="site-header-search-pill flex h-10 items-center gap-2 rounded-full border-[2.5px] border-solid border-text px-3 font-outfit text-sm font-medium text-text transition-colors hover:border-glaz-700"
+                className="site-header-search-pill box-border flex h-10 shrink-0 items-center gap-2 rounded-full border-[1.5px] border-solid border-text px-3 font-outfit text-base font-medium tracking-[1px] text-text transition-colors hover:border-glaz-700"
               >
                 <HeaderSearchIcon />
-                Rechercher
+                <span className="site-header-search-label">Rechercher</span>
               </button>
               <SiteHeaderLangSwitcher />
             </div>

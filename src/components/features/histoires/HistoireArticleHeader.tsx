@@ -1,3 +1,4 @@
+import { ArticleByline } from '@/components/features/site/ArticleByline'
 import { SectionRubriqueLink } from '@/components/features/site/SectionRubriqueLink'
 import { typography } from '@/styles/typography'
 
@@ -16,17 +17,19 @@ export function HistoireArticleHeader({
   const chapeauParagraphs = Array.isArray(chapeau) ? chapeau : [chapeau]
 
   return (
-    <header className="flex flex-col gap-4 px-section pt-4">
-      <SectionRubriqueLink to="/histoires">Histoires</SectionRubriqueLink>
-      <h1 className={typography.articleTitle}>{titre}</h1>
-      <div className="flex flex-col">
-        {chapeauParagraphs.map((paragraph, i) => (
-          <p key={i} className={typography.chapeau}>
-            {paragraph}
-          </p>
-        ))}
+    <header className="article-page-header">
+      <div className="article-page-header-meta">
+        <SectionRubriqueLink to="/histoires">Histoires</SectionRubriqueLink>
+        <h1 className={typography.articleTitle}>{titre}</h1>
+        <div className="article-page-header-chapeau">
+          {chapeauParagraphs.map((paragraph, i) => (
+            <p key={i} className={typography.chapeau}>
+              {paragraph}
+            </p>
+          ))}
+        </div>
+        <ArticleByline auteur={auteur} />
       </div>
-      <p className={typography.articleByline}>Par {auteur}</p>
     </header>
   )
 }

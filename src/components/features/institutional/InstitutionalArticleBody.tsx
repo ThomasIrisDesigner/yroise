@@ -17,7 +17,7 @@ export function InstitutionalArticleBody({
       <div className={typography.editorialBodyStack}>
         {sections.map((section) => (
           <Fragment key={section.heading}>
-            <h2 className={cn(typography.titleL, 'pt-6 font-bold leading-7')}>
+            <h2 className={cn(typography.articleHeading, 'pt-6')}>
               {section.heading}
             </h2>
             {section.paragraphs.map((paragraph, i) => (

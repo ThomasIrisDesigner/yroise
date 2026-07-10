@@ -6,7 +6,7 @@ export function HomeHero() {
       <img
         src="/images/voilier-brest.png"
         alt={HOME_HERO.imageAlt}
-        className="home-hero-image block h-48 w-full object-cover"
+        className="home-hero-image block h-48 w-full object-cover object-bottom"
         draggable={false}
       />
     </section>

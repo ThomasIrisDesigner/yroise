@@ -7,7 +7,7 @@ import { SitePageShell } from '@/components/features/site/SitePageShell'
 import { getCollectionDetail } from '@/data/collectionDetails'
 import { COLLECTIONS, COLLECTION_EXAMPLE_IMAGE } from '@/data/collections'
 
-/** Page collection — maquette Figma 115:516 (ex. En mer). */
+/** Page collection — même grille responsive que billet article (Figma 115:516). */
 export function CollectionDetail() {
   const { slug } = useParams<{ slug: string }>()
   const collection = COLLECTIONS.find((c) => c.slug === slug)
@@ -20,27 +20,33 @@ export function CollectionDetail() {
 
   return (
     <SitePageShell>
-      <div className="section-collections pb-10">
-        <CollectionArticleHeader
-          titre={collection.name}
-          chapeau={content.chapeau}
-          documentCount={collection.documentCount}
-          gallicaHref={content.gallicaHref}
-        />
+      <div className="collection-article-page section-collections bg-background">
+        <div className="article-page-header-wrap bg-glaz-100 collection-article-header-wrap">
+          <CollectionArticleHeader
+            titre={collection.name}
+            chapeau={content.chapeau}
+            documentCount={collection.documentCount}
+            gallicaHref={content.gallicaHref}
+          />
+        </div>
 
-        <HistoireArticleHero
-          imageSrc={COLLECTION_EXAMPLE_IMAGE}
-          placeholder="Image de collection"
-          caption={content.heroCaption}
-          meta={content.heroMeta}
-          linkLabel={content.heroLinkLabel}
-          linkHref={content.heroLinkHref}
-        />
+        <div className="article-page-hero-wrap collection-article-hero-wrap">
+          <HistoireArticleHero
+            imageSrc={COLLECTION_EXAMPLE_IMAGE}
+            placeholder="Image de collection"
+            caption={content.heroCaption}
+            meta={content.heroMeta}
+            linkLabel={content.heroLinkLabel}
+            linkHref={content.heroLinkHref}
+          />
+        </div>
 
-        <CollectionDetailBody
-          content={content}
-          documentCount={collection.documentCount}
-        />
+        <div className="article-page-content-wrap">
+          <CollectionDetailBody
+            content={content}
+            documentCount={collection.documentCount}
+          />
+        </div>
       </div>
     </SitePageShell>
   )

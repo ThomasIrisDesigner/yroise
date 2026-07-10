@@ -38,6 +38,7 @@ export const BUTTON_VARIANT_COLOR_SPECS = [
 ] as const
 
 export const BUTTON_EXTRA_SPECS = [
-  'inverted (fond sombre) → fond #FFFFFF · texte #010101 · triangle #2D7D8A',
+  'inverted secondary → bordure blanche rgba(20 %) → blanc 100 % au survol',
+  'inverted primary → fond #FFFFFF · texte #010101 · triangle #2D7D8A',
   'disabled → opacity 0.45 · triangle #D9D9D9',
 ] as const

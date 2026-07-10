@@ -1,18 +1,17 @@
 import { Navigate, useParams } from 'react-router-dom'
 
+import { ArticleContentColumn } from '@/components/features/site/ArticleContentColumn'
 import { HistoireArticleHeader } from '@/components/features/histoires/HistoireArticleHeader'
 import { HistoireArticleHero } from '@/components/features/histoires/HistoireArticleHero'
 import { HistoireBilletBody } from '@/components/features/histoires/gmb/HistoireBilletBody'
-import { HistoireRebondCard } from '@/components/features/histoires/HistoireRebondCard'
 import { HistoireReferencesSection } from '@/components/features/histoires/HistoireReferencesSection'
+import { HistoireRelatedCarousel } from '@/components/features/histoires/HistoireRelatedCarousel'
 import { SitePageShell } from '@/components/features/site/SitePageShell'
 import { getHistoireContent } from '@/data/histoireContents'
 import { getHistoireBySlug } from '@/data/histoires'
-import { cn } from '@/lib/utils'
-import { typography } from '@/styles/typography'
 
 /**
- * Billet Histoire — modèle GMB (maquette Figma 102:738).
+ * Billet Histoire — modèle GMB (maquette Figma 102:738 / desktop 131:12163).
  * Ordre : en-tête → hero → corps → sources → rebonds.
  */
 export function HistoireDetail() {
@@ -27,14 +26,16 @@ export function HistoireDetail() {
 
   return (
     <SitePageShell>
-      <div className="section-histoires bg-background">
-        <HistoireArticleHeader
-          titre={histoire.titre}
-          chapeau={content.chapeau}
-          auteur={content.auteur}
-        />
+      <div className="histoire-article-page section-histoires bg-background">
+        <div className="article-page-header-wrap">
+          <HistoireArticleHeader
+            titre={histoire.titre}
+            chapeau={content.chapeau}
+            auteur={content.auteur}
+          />
+        </div>
 
-        <div className="mt-4">
+        <div className="article-page-hero-wrap mt-4">
           <HistoireArticleHero
             imageSrc={content.heroImageSrc ?? histoire.imageSrc}
             placeholder={content.heroPlaceholder}
@@ -45,24 +46,15 @@ export function HistoireDetail() {
           />
         </div>
 
-        <article className="px-section py-6">
-          <HistoireBilletBody blocks={content.blocks} />
-        </article>
+        <div className="article-page-content-wrap">
+          <ArticleContentColumn as="article" className="article-page-body py-6">
+            <HistoireBilletBody blocks={content.blocks} />
+          </ArticleContentColumn>
+        </div>
 
         <HistoireReferencesSection sources={content.sources} />
 
-        <section className="bg-text px-section py-10">
-          <h2 className={cn(typography.sectionTitleSm, 'text-on-dark')}>
-            Nos autres histoires
-          </h2>
-          <ul className="mt-8 flex flex-col gap-8">
-            {content.rebonds.map((item) => (
-              <li key={item.slug}>
-                <HistoireRebondCard histoire={item} />
-              </li>
-            ))}
-          </ul>
-        </section>
+        <HistoireRelatedCarousel items={content.rebonds} />
       </div>
     </SitePageShell>
   )

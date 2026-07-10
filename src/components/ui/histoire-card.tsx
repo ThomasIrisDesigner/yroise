@@ -3,18 +3,24 @@ import { Link } from 'react-router-dom'
 import {
   cardBodyClass,
   cardBodyListClass,
+  cardBodyOnDarkClass,
+  cardCtaFeaturedListWrapClass,
   cardCtaListWrapClass,
+  cardCtaOnDarkWrapClass,
   cardCtaWrapClass,
   cardExcerptClass,
   cardExcerptListClass,
+  cardExcerptOnDarkClass,
   cardImageClass,
   cardImageListClass,
-  listCardStackClass,
+  editorialCardClass,
+  editorialCardOnDarkClass,
+  editorialCardSliderClass,
   cardTitleClass,
   cardTitleLinkClass,
   cardTitleLinkOnDarkClass,
-  editorialCardClass,
-  editorialCardSliderClass,
+  cardTitleOnDarkClass,
+  listCardStackClass,
 } from '@/components/ui/card-shared'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -30,6 +36,8 @@ export interface HistoireCardProps {
   layout?: 'slider' | 'list'
   /** Premier billet mis en avant — fond sombre, texte blanc */
   featured?: boolean
+  /** Carousel sur fond sombre (article — Vous aimerez aussi) */
+  onDark?: boolean
   className?: string
 }
 
@@ -42,17 +50,22 @@ export function HistoireCard({
   sliderItem = false,
   layout = 'slider',
   featured = false,
+  onDark = false,
   className,
 }: HistoireCardProps) {
   const isList = layout === 'list'
   const isFeaturedList = isList && featured
+  const isOnDark = onDark || isFeaturedList
+  const isOnDarkSlider = onDark && !isList
 
   return (
     <article
       className={cn(
-        !isFeaturedList && editorialCardClass,
+        isOnDarkSlider && editorialCardOnDarkClass,
+        !isOnDarkSlider && !isFeaturedList && editorialCardClass,
         isFeaturedList &&
-          'card group relative mx-auto flex w-full max-w-[310px] flex-col overflow-hidden bg-transparent',
+          'histoire-list-card histoire-list-card--featured card group relative mx-auto flex w-full max-w-[310px] flex-col overflow-hidden bg-transparent',
+        !isFeaturedList && isList && 'histoire-list-card',
         sliderItem && editorialCardSliderClass,
         isList && !isFeaturedList && cn('mx-auto w-full max-w-[310px]', listCardStackClass),
         className
@@ -73,11 +86,25 @@ export function HistoireCard({
           aria-hidden={!imageAlt}
         />
       )}
-      <div className={isList ? cardBodyListClass : cardBodyClass}>
-        <h3 className={cn(cardTitleClass, isList && 'mb-0', isFeaturedList && 'text-on-dark')}>
+      <div
+        className={
+          isOnDarkSlider
+            ? cardBodyOnDarkClass
+            : isList
+              ? cardBodyListClass
+              : cardBodyClass
+        }
+      >
+        <h3
+          className={cn(
+            isOnDarkSlider ? cardTitleOnDarkClass : cardTitleClass,
+            isList && !isOnDarkSlider && 'mb-0',
+            isFeaturedList && 'text-on-dark'
+          )}
+        >
           <Link
             to={to}
-            className={isFeaturedList ? cardTitleLinkOnDarkClass : cardTitleLinkClass}
+            className={isOnDark ? cardTitleLinkOnDarkClass : cardTitleLinkClass}
           >
             <span className="line-clamp-2">{titre}</span>
           </Link>
@@ -85,20 +112,35 @@ export function HistoireCard({
         {extrait ? (
           <p
             className={
-              isList
-                ? cn(cardExcerptListClass, isFeaturedList && 'text-on-dark')
-                : cardExcerptClass
+              isOnDarkSlider
+                ? cardExcerptOnDarkClass
+                : isList
+                  ? cn(cardExcerptListClass, isFeaturedList && 'text-on-dark')
+                  : cardExcerptClass
             }
           >
             {extrait}
           </p>
         ) : null}
-        <div className={isList ? cardCtaListWrapClass : cardCtaWrapClass}>
+        <div
+          className={
+            isOnDarkSlider
+              ? cardCtaOnDarkWrapClass
+              : isFeaturedList
+                ? cardCtaFeaturedListWrapClass
+                : isList
+                  ? cardCtaListWrapClass
+                  : cardCtaWrapClass
+          }
+        >
           <Button
             variant="secondary"
-            size="sm"
-            inverted={isFeaturedList}
-            className="pointer-events-none"
+            size={isOnDarkSlider ? 'default' : 'sm'}
+            inverted={isOnDark}
+            className={cn(
+              'pointer-events-none',
+              isOnDarkSlider && 'histoire-related-card-cta'
+            )}
             tabIndex={-1}
             aria-hidden
           >

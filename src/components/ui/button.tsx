@@ -48,7 +48,7 @@ const buttonVariants = cva(
         variant: 'secondary',
         inverted: true,
         class:
-          'border-on-dark text-on-dark hover:border-on-dark group-hover:border-on-dark',
+          'border-on-dark/20 text-on-dark hover:border-on-dark group-hover:border-on-dark',
       },
     ],
     defaultVariants: {

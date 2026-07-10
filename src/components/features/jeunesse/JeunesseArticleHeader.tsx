@@ -6,21 +6,25 @@ interface JeunesseArticleHeaderProps {
   chapeau: string
 }
 
-/** En-tête page jeu / atelier — rubrique Jeunesse, H1, chapeau (Figma 117:1217). */
+/** En-tête page jeu / atelier — même grille que billet article (Figma 117:1217). */
 export function JeunesseArticleHeader({
   titre,
   chapeau,
 }: JeunesseArticleHeaderProps) {
   return (
-    <header className="flex flex-col gap-4 px-section pt-4 pb-10">
-      <SectionRubriqueLink
-        to="/jeunesse"
-        className="text-aurore-700 hover:text-aurore-700/80"
-      >
-        Jeunesse
-      </SectionRubriqueLink>
-      <h1 className={typography.articleTitle}>{titre}</h1>
-      <p className={typography.chapeau}>{chapeau}</p>
+    <header className="article-page-header">
+      <div className="article-page-header-meta">
+        <SectionRubriqueLink
+          to="/jeunesse"
+          className="text-aurore-700 hover:text-aurore-700/80"
+        >
+          Jeunesse
+        </SectionRubriqueLink>
+        <h1 className={typography.articleTitle}>{titre}</h1>
+        <div className="article-page-header-chapeau">
+          <p className={typography.chapeau}>{chapeau}</p>
+        </div>
+      </div>
     </header>
   )
 }

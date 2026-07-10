@@ -21,11 +21,9 @@ export function GmbEditorialQuote({
 
   return (
     <figure className="border-l border-glaz-700 bg-surface py-4 pl-[17px] pr-4">
-      <blockquote className={cn(typography.editorialBody, 'font-semibold italic')}>
-        {quote}
-      </blockquote>
+      <blockquote className={typography.editorialQuote}>{quote}</blockquote>
       {hasMetaRow ? (
-        <p className={cn(typography.uiXs, 'mt-2 uppercase tracking-[0.1px] text-text')}>
+        <p className={cn(typography.articleMetaCaps, 'mt-2')}>
           {meta}
           {meta && linkLabel ? ', ' : null}
           {linkLabel ? (

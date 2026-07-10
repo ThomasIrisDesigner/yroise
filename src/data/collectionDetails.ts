@@ -1,14 +1,46 @@
 import type { CollectionDetailContent } from '@/types/collectionContent'
+import type { HistoireContentBlock } from '@/types/histoireContent'
 import { COLLECTION_EXAMPLE_IMAGE } from '@/data/collections'
 import { LOREM } from '@/data/placeholders'
 
-const APERCU_ITEM = {
-  caption: 'Titre',
-  meta: 'Type — origine',
-  linkLabel: 'Voir le document',
-  linkHref: '#',
-  imageSrc: COLLECTION_EXAMPLE_IMAGE,
-} as const
+const APERCU_ITEMS: HistoireContentBlock[] = [
+  {
+    type: 'image',
+    placeholder: 'Titre',
+    caption: 'Titre',
+    meta: 'Type — origine',
+    linkLabel: 'Voir le document',
+    linkHref: '#',
+    imageSrc: COLLECTION_EXAMPLE_IMAGE,
+  },
+  {
+    type: 'image',
+    placeholder: 'Titre',
+    caption: 'Titre',
+    meta: 'Type — origine',
+    linkLabel: 'Voir le document',
+    linkHref: '#',
+    imageSrc: COLLECTION_EXAMPLE_IMAGE,
+  },
+  {
+    type: 'image',
+    placeholder: 'Titre',
+    caption: 'Titre',
+    meta: 'Type — origine',
+    linkLabel: 'Voir le document',
+    linkHref: '#',
+    imageSrc: COLLECTION_EXAMPLE_IMAGE,
+  },
+]
+
+function collectionBlocks(apercuCount: number): HistoireContentBlock[] {
+  return [
+    { type: 'heading', text: 'Présentation' },
+    { type: 'paragraph', text: LOREM.paragraph },
+    { type: 'heading', text: 'Aperçu' },
+    ...APERCU_ITEMS.slice(0, apercuCount),
+  ]
+}
 
 const EN_MER_CONTENT: CollectionDetailContent = {
   chapeau:
@@ -17,8 +49,7 @@ const EN_MER_CONTENT: CollectionDetailContent = {
   heroMeta: 'Photographie, Archives Marines',
   heroLinkLabel: 'Voir le document',
   heroLinkHref: '#',
-  presentationBody: LOREM.paragraph,
-  apercuItems: [APERCU_ITEM, APERCU_ITEM, APERCU_ITEM],
+  blocks: collectionBlocks(3),
   gallicaHref: '#',
 }
 
@@ -28,8 +59,7 @@ const DEFAULT_CONTENT: CollectionDetailContent = {
   heroMeta: 'Archives',
   heroLinkLabel: 'Voir le document',
   heroLinkHref: '#',
-  presentationBody: LOREM.paragraph,
-  apercuItems: [APERCU_ITEM],
+  blocks: collectionBlocks(1),
   gallicaHref: '#',
 }
 

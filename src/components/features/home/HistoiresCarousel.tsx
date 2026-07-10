@@ -11,18 +11,14 @@ import { typography } from '@/styles/typography'
 
 export function HistoiresCarousel() {
   const carousel = useCarouselScrollControl(HISTOIRES_HOME_CAROUSEL.length)
-  const mobileCounter = `${String(carousel.activeIndex + 1).padStart(2, '0')} – ${String(HISTOIRES_HOME_CAROUSEL.length).padStart(2, '0')}`
 
   return (
-    <section className="home-histoires-section section-histoires home-carousel-section bg-background pt-10 pb-10">
+    <section className="home-histoires-section section-histoires home-carousel-section bg-background">
       <PageContainer className="home-histoires-inner">
         <div className="home-section-header home-section-header--carousel flex flex-col items-center gap-0">
           <h2 className={typography.homeSectionLabel}>Histoires</h2>
-          <p className="prototype-mobile-only mt-1 font-outfit text-[14px] font-normal leading-[1.55] text-text">
-            {mobileCounter}
-          </p>
           <HomeCarouselNav
-            className="prototype-desktop-only"
+            className="home-carousel-nav--section-header mt-1 w-full justify-center"
             counter={carousel.counter}
             onPrev={carousel.prev}
             onNext={carousel.next}
@@ -53,10 +49,13 @@ export function HistoiresCarousel() {
       </div>
 
       <PageContainer>
-        <div className="home-section-cta home-section-cta--centered mt-8 flex justify-center">
-          <Button asChild variant="primary">
-            <Link to="/histoires">Toutes nos histoires</Link>
-          </Button>
+        <div className="home-section-cta-block">
+          <hr className="home-section-cta-separator" aria-hidden />
+          <div className="home-section-cta home-section-cta--centered flex justify-center">
+            <Button asChild variant="primary">
+              <Link to="/histoires">Toutes nos histoires</Link>
+            </Button>
+          </div>
         </div>
       </PageContainer>
     </section>

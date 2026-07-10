@@ -29,7 +29,7 @@ export function SiteFooter() {
             alt="YROISE"
             width={120}
             height={24}
-            className="site-footer-logo block h-6 w-[120px]"
+            className="site-footer-logo mx-auto block h-6 w-[120px]"
             draggable={false}
           />
 
@@ -38,11 +38,11 @@ export function SiteFooter() {
               {FOOTER_INTRO}
             </p>
 
-            <div className="site-footer-stats-row flex gap-4 px-4">
+            <div className="site-footer-stats-row px-4">
               {FOOTER_STATS.map((stat) => (
                 <div
                   key={stat.label}
-                  className="flex min-w-0 flex-1 flex-col items-center gap-1 text-center"
+                  className="site-footer-stat flex flex-col items-center gap-1 text-center"
                 >
                   <p className="font-outfit text-xl font-bold leading-normal text-on-dark">
                     {stat.value}
@@ -58,7 +58,7 @@ export function SiteFooter() {
               <p className={cn(typography.meta, 'w-full text-center text-on-dark')}>
                 Suivre la médiathèque de Brest
               </p>
-              <div className="flex items-center gap-8">
+              <div className="site-footer-social-icons flex items-center gap-8">
                 {FOOTER_SOCIAL_LINKS.map((social) => (
                   <a
                     key={social.label}

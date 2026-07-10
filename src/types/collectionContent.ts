@@ -1,12 +1,6 @@
-/** Contenu éditorial page collection — maquette Figma 115:516. */
+import type { HistoireContentBlock } from '@/types/histoireContent'
 
-export interface CollectionApercuItem {
-  caption: string
-  meta?: string
-  linkLabel?: string
-  linkHref?: string
-  imageSrc?: string
-}
+/** Contenu éditorial page collection — maquette Figma 115:516. */
 
 export interface CollectionDetailContent {
   chapeau: string
@@ -14,7 +8,6 @@ export interface CollectionDetailContent {
   heroMeta?: string
   heroLinkLabel?: string
   heroLinkHref?: string
-  presentationBody: string
-  apercuItems: CollectionApercuItem[]
+  blocks: HistoireContentBlock[]
   gallicaHref: string
 }

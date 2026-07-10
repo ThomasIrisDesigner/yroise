@@ -3,8 +3,8 @@ export const FOOTER_INTRO =
 
 export const FOOTER_STATS = [
   { value: '12,534', label: 'Documents' },
-  { value: '847', label: 'Nouvelles acquisitions' },
-  { value: '8', label: 'Collections thématiques' },
+  { value: '8', label: 'Collections' },
+  { value: '847', label: 'Acquisitions' },
 ] as const
 
 export const FOOTER_SOCIAL_LINKS = [
@@ -23,7 +23,7 @@ export const FOOTER_ANNEX_LINKS = [
 export const FOOTER_PARTNER_LOGOS = [
   {
     label: 'Ville de Brest',
-    src: '/images/logo_brest.svg',
+    src: '/images/logo_brest_couleur.svg',
     className: 'h-[39px] w-[133px]',
   },
   {

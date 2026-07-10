@@ -24,13 +24,15 @@ export function JeunesseTeaser() {
             <p className={`home-jeunesse-title prototype-desktop-only ${typography.homeSectionLabel}`}>
               Jeunesse
             </p>
-            <p className={`home-jeunesse-text text-center ${typography.cardExcerpt}`}>
-              Jeux et ateliers pour explorer le patrimoine.
-            </p>
-            <div className="home-jeunesse-cta mt-8 flex justify-center">
-              <Button asChild variant="primary">
-                <Link to="/jeunesse">Découvrir</Link>
-              </Button>
+            <div className="home-jeunesse-description">
+              <p className={`home-jeunesse-text text-center ${typography.cardExcerpt}`}>
+                Jeux et ateliers pour explorer le patrimoine.
+              </p>
+              <div className="home-jeunesse-cta mt-8 flex justify-center">
+                <Button asChild variant="primary">
+                  <Link to="/jeunesse">Découvrir</Link>
+                </Button>
+              </div>
             </div>
           </div>
         </div>

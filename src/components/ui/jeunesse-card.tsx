@@ -56,7 +56,7 @@ export function JeunesseCard({
   const isFeaturedList = isList && featured
   const ctaLabel = JEUNESSE_CTA_LABELS[type]
   const listCardClass =
-    'card group relative mx-auto flex w-full max-w-[310px] flex-col overflow-hidden bg-background'
+    'jeunesse-list-card card group relative mx-auto flex w-full max-w-[310px] flex-col overflow-hidden bg-background'
 
   const imageNode = imageSrc ? (
     <img

@@ -8,24 +8,33 @@ interface GmbFigureLegendProps {
   meta?: string
   linkLabel?: string
   linkHref?: string
+  /** Classes sur le figcaption (gouttières page article, etc.) */
   className?: string
+  /** Classes sur le bloc borduré interne */
+  innerClassName?: string
+  /** Colonne 792px entre gouttières et bloc borduré (légende hero) */
+  columnWrap?: boolean
 }
 
-/** Légende GMB — bordure gauche, crédit + lien document. */
-export function GmbFigureLegend({
+function LegendContent({
   caption,
   meta,
   linkLabel,
-  linkHref = '#',
-  className,
-}: GmbFigureLegendProps) {
+  linkHref,
+  innerClassName,
+}: Pick<
+  GmbFigureLegendProps,
+  'caption' | 'meta' | 'linkLabel' | 'linkHref' | 'innerClassName'
+>) {
   const hasMetaRow = meta || linkLabel
 
   return (
-    <figcaption className={cn(gmbLegendBorderClass, 'flex flex-col gap-1', className)}>
+    <div
+      className={cn(gmbLegendBorderClass, 'flex flex-col gap-2', innerClassName)}
+    >
       <p className={cn(typography.editorialCaption, 'text-text')}>{caption}</p>
       {hasMetaRow ? (
-        <p className={cn(typography.uiXs, 'uppercase tracking-[0.1px] text-text')}>
+        <p className={typography.articleMetaCaps}>
           {meta}
           {meta && linkLabel ? ' · ' : null}
           {linkLabel ? (
@@ -35,6 +44,41 @@ export function GmbFigureLegend({
           ) : null}
         </p>
       ) : null}
+    </div>
+  )
+}
+
+/** Légende GMB — bordure gauche, crédit + lien document. */
+export function GmbFigureLegend({
+  caption,
+  meta,
+  linkLabel,
+  linkHref = '#',
+  className,
+  innerClassName,
+  columnWrap = false,
+}: GmbFigureLegendProps) {
+  return (
+    <figcaption className={className}>
+      {columnWrap ? (
+        <div className="article-content-column">
+          <LegendContent
+            caption={caption}
+            meta={meta}
+            linkLabel={linkLabel}
+            linkHref={linkHref}
+            innerClassName={innerClassName}
+          />
+        </div>
+      ) : (
+        <LegendContent
+          caption={caption}
+          meta={meta}
+          linkLabel={linkLabel}
+          linkHref={linkHref}
+          innerClassName={innerClassName}
+        />
+      )}
     </figcaption>
   )
 }

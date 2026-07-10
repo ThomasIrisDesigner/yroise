@@ -1,12 +1,16 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import * as React from 'react'
 
-import type { CollectionApercuItem } from '@/types/collectionContent'
 import { COLLECTION_EXAMPLE_IMAGE } from '@/data/collections'
 import { typography } from '@/styles/typography'
 
+interface ShowcaseDocument {
+  caption: string
+  meta?: string
+}
+
 interface DocumentShowcaseProps {
-  documents: CollectionApercuItem[]
+  documents: ShowcaseDocument[]
 }
 
 export function DocumentShowcase({ documents }: DocumentShowcaseProps) {

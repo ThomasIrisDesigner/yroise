@@ -26,7 +26,7 @@ export const HISTOIRES_LIST: HistoireBillet[] = [
     titre: "L'explosion de l'Océan Liberty le 28 juillet 1947",
     accroche:
       "Un navire américain explose en rade de Brest, causant l'une des pires catastrophes maritimes de l'après-guerre. L'histoire oubliée d'un drame qui a marqué la ville en pleine reconstruction.",
-    imageSrc: '/images/voilier-brest.png',
+    imageSrc: '/images/histoire_Hero_Ocean-liberty.png',
   },
   {
     slug: 'marcel-bories-plaques',
@@ -58,7 +58,43 @@ export const HISTOIRES_LIST: HistoireBillet[] = [
     slug: 'dumont-durville-1837',
     type: 'curiosite',
     titre: "L'expédition de Dumont d'Urville, 1837",
-    accroche: LOREM.line,
+    accroche: LOREM.paragraphLong,
+  },
+  {
+    slug: 'chantiers-navals-xix',
+    type: 'exposition',
+    titre: 'Lorem ipsum dolor sit amet',
+    accroche: LOREM.paragraphLong,
+  },
+  {
+    slug: 'cartes-postales-brest',
+    type: 'curiosite',
+    titre: 'Consectetur adipiscing elit',
+    accroche: LOREM.paragraphLong,
+  },
+  {
+    slug: 'fonds-photographique-armee',
+    type: 'curiosite',
+    titre: 'Sed do eiusmod tempor incididunt',
+    accroche: LOREM.paragraphLong,
+  },
+  {
+    slug: 'ateliers-gravure-port',
+    type: 'exposition',
+    titre: 'Ut enim ad minim veniam',
+    accroche: LOREM.paragraphLong,
+  },
+  {
+    slug: 'memoires-officiers-brest',
+    type: 'curiosite',
+    titre: 'Duis aute irure dolor in reprehenderit',
+    accroche: LOREM.paragraphLong,
+  },
+  {
+    slug: 'reconstruction-apres-guerre',
+    type: 'exposition',
+    titre: 'Excepteur sint occaecat cupidatat',
+    accroche: LOREM.paragraphLong,
   },
 ]
 
