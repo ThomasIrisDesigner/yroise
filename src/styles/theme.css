@@ -596,18 +596,17 @@ body {
 
 /* Search panel — desktop ≥768px (vue prototype plein écran) */
 @media (min-width: 768px) {
-  [data-prototype-view='desktop'] .search-panel-toolbar,
+  [data-prototype-view='desktop'] .search-panel-toolbar {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    padding-inline: var(--page-padding-x-lg);
+  }
+
   [data-prototype-view='desktop'] .search-panel-body {
     width: 100%;
     max-width: var(--search-panel-max-width);
     margin-inline: auto;
-  }
-
-  [data-prototype-view='desktop'] .search-panel-toolbar {
-    padding-inline: var(--footer-padding-x);
-  }
-
-  [data-prototype-view='desktop'] .search-panel-body {
     gap: 3rem;
     padding-inline: var(--footer-padding-x);
     padding-bottom: 3rem;
