@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { LogOut, Monitor, Smartphone } from 'lucide-react'
+import { FolderTree, LogOut, Monitor, Smartphone } from 'lucide-react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import { MOBILE_MOCKUP_H, MOBILE_MOCKUP_W } from '@/config/wireframe-mobile'
@@ -17,11 +17,14 @@ type ViewMode = 'mobile' | 'desktop'
 
 const CHROME_BAR_H = 32
 const MOBILE_PADDING = 32
+const PROTOTYPE_CHROME_STORAGE_KEY = 'prototype-chrome-visible'
+const PROTOTYPE_CHROME_TOGGLE_EVENT = 'prototype-chrome-toggle'
 
-function computeMobileScale() {
+function computeMobileScale(chromeBarVisible: boolean) {
   if (typeof window === 'undefined') return 1
+  const chromeBarHeight = chromeBarVisible ? CHROME_BAR_H : 0
   const scale = Math.min(
-    (window.innerHeight - CHROME_BAR_H - MOBILE_PADDING * 2) / MOBILE_MOCKUP_H,
+    (window.innerHeight - chromeBarHeight - MOBILE_PADDING * 2) / MOBILE_MOCKUP_H,
     (window.innerWidth - MOBILE_PADDING) / MOBILE_MOCKUP_W,
     1
   )
@@ -82,6 +85,15 @@ function PrototypeChromeBar({
               </div>
 
               <Link
+                to="/arborescence"
+                aria-label="Arborescence"
+                title="Arborescence"
+                className="inline-flex h-7 w-7 items-center justify-center rounded-md text-surface/70 transition-colors hover:bg-surface/10 hover:text-surface"
+              >
+                <FolderTree className="h-4 w-4" />
+              </Link>
+
+              <Link
                 to="/design-system"
                 className="text-xs text-surface/70 hover:text-surface"
               >
@@ -111,10 +123,11 @@ function PrototypeChromeBar({
 export function PrototypeLayout({ children }: { children: React.ReactNode }) {
   const location = useLocation()
   const isDesktop = useMediaQuery('(min-width: 768px)')
+  const [chromeBarVisible, setChromeBarVisible] = React.useState(false)
   const [mode, setMode] = React.useState<ViewMode>(
-    PROJECT_TYPE === 'desktop' ? 'desktop' : 'mobile'
+    PROJECT_TYPE === 'mobile' ? 'mobile' : 'desktop'
   )
-  const [mobileScale, setMobileScale] = React.useState(computeMobileScale)
+  const [mobileScale, setMobileScale] = React.useState(() => computeMobileScale(false))
 
   const allowSwitch = PROJECT_TYPE === 'responsive'
   const effectiveMode: ViewMode = isDesktop
@@ -134,14 +147,32 @@ export function PrototypeLayout({ children }: { children: React.ReactNode }) {
   )
 
   React.useEffect(() => {
+    const savedValue = window.localStorage.getItem(PROTOTYPE_CHROME_STORAGE_KEY)
+    if (savedValue === 'true') {
+      setChromeBarVisible(true)
+    }
+
+    function onToggleChromeBar() {
+      setChromeBarVisible((current) => {
+        const next = !current
+        window.localStorage.setItem(PROTOTYPE_CHROME_STORAGE_KEY, String(next))
+        return next
+      })
+    }
+
+    window.addEventListener(PROTOTYPE_CHROME_TOGGLE_EVENT, onToggleChromeBar)
+    return () => window.removeEventListener(PROTOTYPE_CHROME_TOGGLE_EVENT, onToggleChromeBar)
+  }, [])
+
+  React.useEffect(() => {
     function recomputeScale() {
-      setMobileScale(computeMobileScale())
+      setMobileScale(computeMobileScale(chromeBarVisible))
     }
 
     recomputeScale()
     window.addEventListener('resize', recomputeScale)
     return () => window.removeEventListener('resize', recomputeScale)
-  }, [])
+  }, [chromeBarVisible])
 
   React.useLayoutEffect(() => {
     resetPageScroll()
@@ -154,7 +185,7 @@ export function PrototypeLayout({ children }: { children: React.ReactNode }) {
     >
       {effectiveMode === 'mobile' ? (
         <div className="mx-auto flex h-full w-full flex-col">
-          {chromeBar}
+          {chromeBarVisible ? chromeBar : null}
 
           <div className="flex min-h-0 flex-1 items-center justify-center px-4 py-8 text-on-dark">
             <div
@@ -183,7 +214,7 @@ export function PrototypeLayout({ children }: { children: React.ReactNode }) {
         </div>
       ) : (
         <div className="flex h-full w-full flex-col overflow-hidden bg-background text-text">
-          {chromeBar}
+          {chromeBarVisible ? chromeBar : null}
           <div className="flex h-0 min-h-0 min-h-dvh flex-1 flex-col overflow-hidden">
             {children}
           </div>

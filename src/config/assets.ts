@@ -1,9 +1,9 @@
 export const SITE_LOGO = {
   src: '/brand/yroise-logo.svg',
   alt: 'YROISE',
-  /** Largeur logo header — état initial (scroll 0). */
+  /** Largeur logo header — état initial (scroll 0) / desktop ≥1024. Sync: --header-logo-width-expanded */
   widthExpandedPx: 120,
-  /** Largeur logo header — après scroll. */
+  /** Largeur logo header — après scroll + responsive <1024. Sync: --header-logo-width-collapsed */
   widthCollapsedPx: 96,
 } as const
 

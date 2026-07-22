@@ -21,7 +21,7 @@ export function SiteHeaderLangSwitcher({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        'site-header-lang flex h-10 items-center gap-2 rounded-full border-[1.5px] border-solid border-border px-4',
+        'site-header-lang flex h-10 items-center gap-2',
         className
       )}
       role="group"

@@ -39,6 +39,7 @@ export default {
         sable: {
           900: rgb('sable-900'),
           700: rgb('sable-700'),
+          400: rgb('sable-400'),
           300: rgb('sable-300'),
           200: rgb('sable-200'),
           100: rgb('sable-100'),

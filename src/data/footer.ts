@@ -28,7 +28,7 @@ export const FOOTER_PARTNER_LOGOS = [
   },
   {
     label: 'Bibliothèque nationale de France',
-    src: '/images/logo_bnf.svg',
-    className: 'h-[32px] w-[133px]',
+    src: '/images/Logo_Bnf-gallica.png',
+    className: 'h-[40px] w-auto',
   },
 ] as const

@@ -11,9 +11,10 @@ export const SITE_HEADER_TONE_CLASSES: Record<
     header: 'bg-background',
     friseFill: 'text',
   },
+  /** Liste Histoires — frise blanche sur bandeau page noir */
   histoires: {
-    header: 'bg-sable-100',
-    friseFill: 'sable-900',
+    header: 'bg-background',
+    friseFill: 'on-dark',
   },
   collections: {
     header: 'bg-glaz-100',
@@ -21,7 +22,8 @@ export const SITE_HEADER_TONE_CLASSES: Record<
   },
 }
 
-/** Header blanc + frise noire sur toutes les pages éditoriales (comportement home). */
-export function resolveSiteHeaderTone(_pathname: string): SiteHeaderTone {
+/** Header blanc + frise noire par défaut ; liste Histoires → frise blanche. */
+export function resolveSiteHeaderTone(pathname: string): SiteHeaderTone {
+  if (pathname === '/histoires') return 'histoires'
   return 'default'
 }

@@ -8,8 +8,10 @@ const UNIT_PATH =
 
 const FRISE_FILL = {
   text: 'rgb(var(--color-text))',
+  'on-dark': 'rgb(var(--color-text-on-dark))',
   'sable-900': 'rgb(var(--sable-900))',
   'glaz-900': 'rgb(var(--glaz-900))',
+  'glaz-100': 'rgb(var(--glaz-100))',
 } as const
 
 export type FriseHautFill = keyof typeof FRISE_FILL

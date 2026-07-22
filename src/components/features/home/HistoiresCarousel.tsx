@@ -50,7 +50,6 @@ export function HistoiresCarousel() {
 
       <PageContainer>
         <div className="home-section-cta-block">
-          <hr className="home-section-cta-separator" aria-hidden />
           <div className="home-section-cta home-section-cta--centered flex justify-center">
             <Button asChild variant="primary">
               <Link to="/histoires">Toutes nos histoires</Link>

@@ -31,14 +31,9 @@ export const BUTTON_VARIANT_COLOR_SPECS = [
     variant: 'secondary',
     spec: 'transparent · #010101 texte · rgba(1,1,1,0.2)→#010101 border',
   },
-  {
-    variant: 'ghost',
-    spec: 'transparent · #010101 texte · underline hover',
-  },
 ] as const
 
 export const BUTTON_EXTRA_SPECS = [
   'inverted secondary → bordure blanche rgba(20 %) → blanc 100 % au survol',
-  'inverted primary → fond #FFFFFF · texte #010101 · triangle #2D7D8A',
   'disabled → opacity 0.45 · triangle #D9D9D9',
 ] as const

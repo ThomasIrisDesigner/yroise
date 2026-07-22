@@ -15,7 +15,7 @@ export function JeunesseTeaser() {
           </p>
 
           <div className="home-jeunesse-icon mt-6 flex justify-center">
-            <div className="h-[86px] w-[100px]">
+            <div className="aspect-[242/260] w-[100px]">
               <JeunesseIllustration className="h-full w-full" />
             </div>
           </div>

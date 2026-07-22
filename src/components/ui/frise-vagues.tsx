@@ -1,5 +1,7 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 
+import { cn } from '@/lib/utils'
+
 const UNIT_WIDTH = 24
 const UNIT_HEIGHT = 16
 /** Figma — padding négatif entre motifs pour jointure sans espace */
@@ -14,8 +16,17 @@ function motifCount(containerWidth: number) {
   return Math.ceil(containerWidth / PATTERN_WIDTH) + 1
 }
 
-/** Frise décorative vagues — transition vers le footer (ocean-900), sans fond fixe */
-export function FriseVagues() {
+/** Frise décorative vagues — transition (footer ocean-900, ou fill custom). */
+export function FriseVagues({
+  fill = 'rgb(var(--ocean-900))',
+  className,
+  embed = false,
+}: {
+  fill?: string
+  className?: string
+  /** Intégrée en bas de section (sans décalage footer). */
+  embed?: boolean
+} = {}) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [count, setCount] = useState(() => motifCount(390))
 
@@ -32,18 +43,18 @@ export function FriseVagues() {
   }, [])
 
   return (
-    <div ref={containerRef} className="frise-vagues" aria-hidden>
+    <div ref={containerRef} className={cn('frise-vagues', className)} aria-hidden>
       <svg
         width="100%"
         height={UNIT_HEIGHT}
-        className="block translate-y-4"
+        className={cn('block', !embed && 'translate-y-4')}
         overflow="visible"
       >
         {Array.from({ length: count }, (_, i) => (
           <path
             key={i}
             d={UNIT_PATH}
-            fill="rgb(var(--ocean-900))"
+            fill={fill}
             transform={`translate(${i * PATTERN_WIDTH}, 0)`}
           />
         ))}

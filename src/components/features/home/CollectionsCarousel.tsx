@@ -5,6 +5,7 @@ import { HomeCarouselNav } from '@/components/features/home/HomeCarouselNav'
 import { PageContainer } from '@/components/features/site/PageContainer'
 import { Button } from '@/components/ui/button'
 import { CardSlider } from '@/components/ui/card-slider'
+import { FriseHaut } from '@/components/ui/frise-haut'
 import { COLLECTIONS } from '@/data/collections'
 import { useCarouselScrollControl } from '@/lib/useCarouselScrollControl'
 import { useSwipeNavigation } from '@/lib/useSwipeNavigation'
@@ -61,7 +62,15 @@ export function CollectionsCarousel() {
   const collection = COLLECTIONS[current]!
 
   return (
-    <section className="home-collections-section page-full-bleed bg-glaz-100">
+    <section className="home-collections-section page-full-bleed relative bg-glaz-100">
+      {/* Frise haut — dents vers le haut, glaz-100 sur fond blanc de la section précédente */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 z-10 -translate-y-full"
+        aria-hidden
+      >
+        <FriseHaut fill="glaz-100" className="rotate-180" />
+      </div>
+
       <PageContainer className="home-collections-inner">
         <div className="home-section-header home-section-header--carousel flex flex-col items-center gap-0">
           <h2 className={typography.homeSectionLabel}>Collections</h2>
@@ -146,7 +155,6 @@ export function CollectionsCarousel() {
 
       <PageContainer>
         <div className="home-section-cta-block">
-          <hr className="home-section-cta-separator" aria-hidden />
           <div className="home-section-cta home-section-cta--centered flex justify-center">
             <Button asChild variant="primary">
               <Link to="/collections">Découvrir toutes les collections</Link>
@@ -154,6 +162,14 @@ export function CollectionsCarousel() {
           </div>
         </div>
       </PageContainer>
+
+      {/* Frise bas — dents vers le bas, glaz-100 sur fond blanc de la section suivante */}
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-10 translate-y-full"
+        aria-hidden
+      >
+        <FriseHaut fill="glaz-100" />
+      </div>
     </section>
   )
 }

@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { Link } from 'react-router-dom'
 
 import { PageContainer } from '@/components/features/site/PageContainer'
@@ -11,6 +12,9 @@ import {
 import { cn } from '@/lib/utils'
 import { typography } from '@/styles/typography'
 
+const PROTOTYPE_CHROME_STORAGE_KEY = 'prototype-chrome-visible'
+const PROTOTYPE_CHROME_TOGGLE_EVENT = 'prototype-chrome-toggle'
+
 function FooterDotSeparator() {
   return (
     <div className="site-footer-separator flex w-full items-center justify-center" aria-hidden>
@@ -20,6 +24,29 @@ function FooterDotSeparator() {
 }
 
 export function SiteFooter() {
+  const [chromeBarVisible, setChromeBarVisible] = React.useState(false)
+
+  React.useEffect(() => {
+    const savedValue = window.localStorage.getItem(PROTOTYPE_CHROME_STORAGE_KEY)
+    setChromeBarVisible(savedValue === 'true')
+
+    function onStorage(event: StorageEvent) {
+      if (event.key === PROTOTYPE_CHROME_STORAGE_KEY) {
+        setChromeBarVisible(event.newValue === 'true')
+      }
+    }
+
+    window.addEventListener('storage', onStorage)
+    return () => window.removeEventListener('storage', onStorage)
+  }, [])
+
+  function togglePrototypeChrome() {
+    const next = !chromeBarVisible
+    window.localStorage.setItem(PROTOTYPE_CHROME_STORAGE_KEY, String(next))
+    setChromeBarVisible(next)
+    window.dispatchEvent(new Event(PROTOTYPE_CHROME_TOGGLE_EVENT))
+  }
+
   return (
     <footer className="site-footer text-on-dark">
       <div className="site-footer-main bg-ocean-900 px-section py-10">
@@ -103,6 +130,18 @@ export function SiteFooter() {
                   {link.label}
                 </Link>
               ))}
+              <button
+                type="button"
+                onClick={togglePrototypeChrome}
+                className={cn(
+                  typography.uiLink,
+                  'text-on-dark/50 transition-colors hover:text-on-dark/80'
+                )}
+              >
+                {chromeBarVisible
+                  ? 'Masquer la barre du prototype'
+                  : 'Afficher la barre du prototype'}
+              </button>
             </nav>
           </div>
         </PageContainer>

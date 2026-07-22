@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 import { COLLECTIONS } from '@/data/collections'
+import { NavCollectionsTriangle } from '@/components/ui/nav-collections-triangle'
 import { getActiveNavSection } from '@/lib/navActive'
 import { cn } from '@/lib/utils'
 
@@ -10,13 +11,13 @@ interface MobileMenuProps {
   onClose: () => void
 }
 
-/** Figma menu — titres principaux : 22px / 3px, sous-entrées : 20px / 1px */
+/** Figma menu mobile <520 — titres : 19px / 3px, sous-entrées : 18px / 1px */
 const menuMainClass =
-  'font-outfit text-[1.1875rem] font-bold leading-normal tracking-[0.1875rem] text-on-dark uppercase'
+  'mobile-menu-link font-outfit text-[1.1875rem] font-bold leading-normal tracking-[0.1875rem] text-on-dark uppercase'
 const menuSubLeadClass =
-  'font-outfit text-[1.125rem] font-medium leading-normal tracking-[0.0625rem] text-on-dark'
+  'mobile-menu-sub-lead font-outfit text-[1.125rem] font-medium leading-normal tracking-[0.0625rem] text-on-dark'
 const menuSubClass =
-  'font-outfit text-[1.125rem] font-normal leading-normal tracking-[0.0625rem] text-on-dark'
+  'mobile-menu-sub font-outfit text-[1.125rem] font-normal leading-normal tracking-[0.0625rem] text-on-dark'
 
 export function MobileMenu({ open, onClose }: MobileMenuProps) {
   const { pathname } = useLocation()
@@ -35,19 +36,22 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
 
   return (
     <div
-      className="absolute inset-0 z-[60] overflow-y-auto overscroll-y-contain bg-ocean-900 text-on-dark scrollbar-none [-webkit-overflow-scrolling:touch]"
+      className={cn(
+        'mobile-menu absolute inset-0 z-[60] overflow-y-auto overscroll-y-contain bg-ocean-900 text-on-dark scrollbar-none [-webkit-overflow-scrolling:touch]',
+        collectionsOpen && 'mobile-menu--collections-open'
+      )}
       role="dialog"
       aria-modal="true"
       aria-label="Menu principal"
     >
-      <div className="flex min-h-full flex-col">
+      <div className="mobile-menu-inner flex min-h-full flex-col">
         {/* NAV — 72px, padding 16px, bouton fermer 40px */}
-        <div className="flex h-[4.5rem] shrink-0 items-center justify-end px-section">
+        <div className="mobile-menu-topbar flex h-[4.5rem] shrink-0 items-center justify-end px-section">
           <button
             type="button"
             aria-label="Fermer le menu"
             onClick={onClose}
-            className="flex size-10 shrink-0 items-center justify-center rounded-full border-2 border-on-dark"
+            className="flex size-10 shrink-0 items-center justify-center"
           >
             <img
               src="/images/Icon_fermer.svg"
@@ -61,7 +65,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
 
         {/* MENU — grow pousse les langues en bas si contenu court */}
         <nav
-          className="flex grow flex-col gap-8 px-6"
+          className="mobile-menu-nav flex grow flex-col items-center gap-8 px-6 pt-6"
           aria-label="Navigation principale"
         >
           <Link
@@ -73,32 +77,35 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
             Histoires
           </Link>
 
-          <div className="w-full">
+          <div className="mobile-menu-collections flex w-full flex-col items-center">
             <button
               type="button"
-              onClick={() => setCollectionsOpen((v) => !v)}
+              onClick={(e) => {
+                const scroller = e.currentTarget.closest('.mobile-menu')
+                const scrollTop = scroller instanceof HTMLElement ? scroller.scrollTop : 0
+                setCollectionsOpen((v) => !v)
+                requestAnimationFrame(() => {
+                  if (scroller instanceof HTMLElement) {
+                    scroller.scrollTop = scrollTop
+                  }
+                })
+              }}
               aria-expanded={collectionsOpen}
-              className={cn(menuMainClass, 'flex w-full items-center justify-between gap-4')}
+              className={cn(
+                menuMainClass,
+                'mobile-menu-collections-trigger flex w-auto items-center gap-1'
+              )}
             >
               <span>Collections</span>
-              <img
-                src="/images/Icon_chevron.svg"
-                alt=""
-                aria-hidden
-                className={cn(
-                  'size-6 shrink-0 transition-transform duration-200',
-                  collectionsOpen ? '-rotate-90' : 'rotate-90'
-                )}
-                draggable={false}
-              />
+              <NavCollectionsTriangle open={collectionsOpen} className="text-on-dark" />
             </button>
 
             {collectionsOpen ? (
-              <div className="flex flex-col gap-4 px-2 pt-6">
+              <div className="mobile-menu-collections-list flex flex-col items-center gap-4 px-2 pt-6">
                 <Link
                   to="/collections"
                   onClick={onClose}
-                  className={menuSubLeadClass}
+                  className={cn(menuSubLeadClass, 'text-center')}
                 >
                   Tout voir
                 </Link>
@@ -107,8 +114,10 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                     key={col.slug}
                     to={`/collections/${col.slug}`}
                     onClick={onClose}
-                    aria-current={pathname === `/collections/${col.slug}` ? 'page' : undefined}
-                    className={menuSubClass}
+                    aria-current={
+                      pathname === `/collections/${col.slug}` ? 'page' : undefined
+                    }
+                    className={cn(menuSubClass, 'text-center')}
                   >
                     {col.name}
                   </Link>
@@ -137,8 +146,8 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
         </nav>
 
         {/* Langues — 40px du bas si contenu court ; sous le contenu si scroll */}
-        <footer className="shrink-0 bg-ocean-900 px-6 pt-4 pb-[max(2.5rem,env(safe-area-inset-bottom))]">
-          <div className="flex items-center justify-center gap-6">
+        <footer className="mobile-menu-footer shrink-0 bg-ocean-900 px-6 pt-4 pb-[max(2.5rem,env(safe-area-inset-bottom))]">
+          <div className="mobile-menu-langs flex items-center justify-center gap-6">
             <button
               type="button"
               aria-pressed

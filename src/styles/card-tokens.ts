@@ -40,19 +40,8 @@ export const CARD_HISTOIRE_LIST_SPECS = [
   { token: 'card-cta spacing (à la une)', value: '24px entre extrait et bouton (gap 8px + pt-4)' },
 ] as const
 
-export const CARD_COLLECTION_SPECS = [
-  { token: 'container', value: 'flex column · align center · width 140px · flex-shrink 0' },
-  { token: 'hublot', value: '120×120px · radius 50% · overflow hidden · object-fit cover' },
-  { token: 'hublot shadow', value: '0 2px 8px rgba(0,0,0,0.08)' },
-  { token: 'hublot hover', value: '0 4px 16px rgba(0,0,0,0.12)' },
-  { token: 'card-title', value: 'Outfit 500 · 13px · lh 1.3 · center · mt 10px' },
-  { token: 'card-title color', value: '#010101 · hover #2D7D8A · transition 0.15s' },
-  { token: 'a11y', value: '.card-title a::before { inset: 0 } sur .card-collection relative' },
-] as const
-
 export const CARD_JEUNESSE_SPECS = [
   { token: 'structure', value: 'identique Card Histoires sans extrait' },
-  { token: 'card-meta', value: 'Outfit 400 · 12px · #71717a · margin-bottom 4px' },
-  { token: 'card-label', value: 'couleur section Jeunesse (aurore-900)' },
+  { token: 'card-label', value: 'TypeLabel · text-aurore-700' },
   { token: 'border / radius', value: 'aucun' },
 ] as const

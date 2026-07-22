@@ -1,12 +1,18 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 
-import { SectionTitleOrnament } from '@/components/ui/section-title-ornament'
+import { TitleH1Triangle } from '@/components/ui/title-h1-triangle'
 import { cn } from '@/lib/utils'
 import { typography } from '@/styles/typography'
 
 type SectionListHeaderLayout = 'editorial' | 'centered'
 type SectionListHeaderTone = 'histoires' | 'collections' | 'jeunesse'
+
+const titleTriangleClass: Record<SectionListHeaderTone, string> = {
+  histoires: 'text-on-dark',
+  collections: 'text-glaz-500',
+  jeunesse: 'text-aurore-700',
+}
 
 const toneClasses: Record<
   SectionListHeaderTone,
@@ -42,7 +48,7 @@ interface SectionListHeaderProps {
   className?: string
 }
 
-/** En-tête de page liste — editorial (fil d'Ariane + chapeau) ou centered (H1 + ornement). */
+/** En-tête de page liste — editorial (fil d'Ariane + chapeau) ou centered (H1 + triangle). */
 export function SectionListHeader({
   title,
   layout = 'editorial',
@@ -54,33 +60,31 @@ export function SectionListHeader({
 }: SectionListHeaderProps) {
   if (layout === 'centered') {
     const colors = toneClasses[tone]
+    const isHistoiresDark = tone === 'histoires'
 
     return (
       <header
         className={cn(
           'flex flex-col items-center gap-4',
-          tone === 'jeunesse' ? 'p-10' : 'bg-transparent pt-12 px-10 pb-10',
+          tone === 'jeunesse' ? 'p-10' : 'pt-12 px-10 pb-10',
           tone === 'jeunesse' && colors.surface,
+          isHistoiresDark && 'bg-text',
+          !isHistoiresDark && tone !== 'jeunesse' && 'bg-transparent',
           className
         )}
       >
-        <h1
-          className={cn(
-            typography.titleXl,
-            'text-center uppercase tracking-[1px] text-text'
-          )}
-        >
-          {title}
-        </h1>
-        <SectionTitleOrnament
-          className={
-            tone === 'jeunesse'
-              ? 'text-aurore-700'
-              : tone === 'collections'
-                ? 'text-glaz-700'
-                : undefined
-          }
-        />
+        <div className="flex items-center justify-center gap-2">
+          <h1
+            className={cn(
+              typography.titleXl,
+              'text-center uppercase tracking-[3px]',
+              isHistoiresDark ? 'text-on-dark' : 'text-text'
+            )}
+          >
+            {title}
+          </h1>
+          <TitleH1Triangle className={titleTriangleClass[tone]} />
+        </div>
       </header>
     )
   }
@@ -107,7 +111,7 @@ export function SectionListHeader({
       <h1
         className={cn(
           typography.titleXl,
-          'uppercase tracking-[1px]',
+          'uppercase tracking-[3px]',
           colors.title
         )}
       >

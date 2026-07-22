@@ -57,7 +57,7 @@ function HeaderLogoLink({
 function HeaderSearchIcon() {
   return (
     <img
-      src="/images/Icon_search.svg"
+      src="/images/Icon_recherche_header.svg"
       alt=""
       aria-hidden
       className="h-6 w-6"
@@ -124,7 +124,7 @@ export function SiteHeader({
         'site-header page-full-bleed box-border flex shrink-0 items-center border-b',
         tone !== 'default' ? 'border-transparent' : 'border-border',
         toneClasses.header,
-        compact ? 'h-14' : 'h-[72px]',
+        compact ? 'h-14' : 'h-[var(--header-height-expanded)]',
         className
       )}
     >
@@ -132,7 +132,7 @@ export function SiteHeader({
         variant="header"
         className={cn(
           'site-header-inner relative flex h-full items-center',
-          compact ? 'h-14' : 'h-[72px]'
+          compact ? 'h-14' : 'h-[var(--header-height-expanded)]'
         )}
       >
         <div className="site-header-bar flex w-full items-center justify-between gap-4">
@@ -141,7 +141,7 @@ export function SiteHeader({
               onGoHome={onGoHome}
               className="site-header-brand flex h-10 shrink-0 items-center hover:opacity-80"
               width={SITE_LOGO.widthCollapsedPx}
-              logoClassName="site-header-logo block w-24"
+              logoClassName="site-header-logo site-header-logo--collapsed block"
             />
           ) : (
             <div className="site-header-brand flex min-w-0 flex-col gap-1.5">
@@ -149,7 +149,7 @@ export function SiteHeader({
                 onGoHome={onGoHome}
                 className="shrink-0 hover:opacity-80"
                 width={SITE_LOGO.widthExpandedPx}
-                logoClassName="site-header-logo block w-[120px]"
+                logoClassName="site-header-logo block"
               />
 
               <div className="site-header-tagline max-h-3.5 overflow-hidden font-outfit text-[11px] font-normal leading-none text-muted opacity-100">
@@ -180,11 +180,14 @@ export function SiteHeader({
                 onClick={onOpenSearch}
                 aria-label="Rechercher"
                 aria-expanded={searchOpen}
-                className="site-header-search-pill box-border flex h-10 shrink-0 items-center gap-2 rounded-full border-[1.5px] border-solid border-text px-3 font-outfit text-base font-medium tracking-[1px] text-text transition-colors hover:border-glaz-700"
+                className="site-header-search-btn flex h-10 w-10 shrink-0 items-center justify-center text-text transition-opacity hover:opacity-80"
               >
                 <HeaderSearchIcon />
-                <span className="site-header-search-label">Rechercher</span>
               </button>
+              <div
+                className="site-header-actions-separator h-6 w-px shrink-0 bg-text/10"
+                aria-hidden
+              />
               <SiteHeaderLangSwitcher />
             </div>
           </div>

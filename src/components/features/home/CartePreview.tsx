@@ -17,7 +17,7 @@ export function CartePreview() {
           <img
             src={HOME_CARTE.imageSrc}
             alt={HOME_CARTE.imageAlt}
-            className="home-carte-image block h-[194px] w-full object-cover"
+            className="home-carte-image block h-auto w-full"
             draggable={false}
           />
 

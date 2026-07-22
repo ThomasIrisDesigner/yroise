@@ -4,6 +4,7 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { AUTH_ENABLED } from '@/config/project'
 import { isAuthenticated } from '@/lib/auth'
 import { PrototypeLayout } from '@/components/features/PrototypeLayout'
+import { Arborescence } from '@/pages/Arborescence'
 import { Carte } from '@/pages/Carte'
 import { CollectionDetail } from '@/pages/CollectionDetail'
 import { CollectionsList } from '@/pages/CollectionsList'
@@ -149,6 +150,15 @@ export function App() {
           }
         />
       ))}
+
+      <Route
+        path="/arborescence"
+        element={
+          <RequireAuth>
+            <Arborescence />
+          </RequireAuth>
+        }
+      />
 
       <Route
         path="/design-system"

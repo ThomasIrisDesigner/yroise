@@ -22,12 +22,12 @@ const label = `${ui} text-base font-semibold uppercase tracking-[2px] text-text`
 const homeSectionLabel = `${ui} text-[24px] font-semibold uppercase tracking-[2px] leading-tight text-text`
 /** Sous-titre home hors menu — legacy aside (22px). Préférer trouvailleLabel pour La trouvaille. */
 const homeSectionAsideLabel = `${ui} text-[22px] font-semibold uppercase tracking-[2px] leading-tight text-text`
-/** Rubrique La trouvaille — label (16px semibold, tracking 0.32px). */
-const trouvailleLabel = `${ui} text-base font-semibold leading-[1.4] tracking-[0.32px] text-text`
-/** Accroche La trouvaille — sous le label (16px regular, lh 1.55). */
-const trouvailleChapeau = `${ui} text-base font-normal leading-[1.55] text-text`
+/** Rubrique La trouvaille — label (20px semibold, tracking 0.4px) — Figma 158:8753. */
+const trouvailleLabel = `${ui} text-[20px] font-semibold leading-[1.4] tracking-[0.4px] text-text`
 const meta = `${ui} text-[13px] font-normal leading-snug text-muted`
 const cardExcerpt = `${ui} text-base font-normal leading-6 tracking-[0.1px] text-text`
+/** Accroche La trouvaille — même style que les extraits de cards. */
+const trouvailleChapeau = cardExcerpt
 /** Légende-titre figure — 0.875rem · lh 1.5 · ls 0.1px. */
 const editorialCaption = `${ui} text-sm font-normal leading-[1.5] tracking-[0.1px] text-muted`
 const uiXs = `${ui} text-[11px] font-normal leading-tight text-muted`

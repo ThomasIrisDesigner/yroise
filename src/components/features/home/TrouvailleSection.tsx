@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 
 import { PageContainer } from '@/components/features/site/PageContainer'
 import { Button } from '@/components/ui/button'
+import { FriseVagues } from '@/components/ui/frise-vagues'
 import { HOME_TROUVAILLE } from '@/data/home'
 import { typography } from '@/styles/typography'
 import { cn } from '@/lib/utils'
@@ -10,7 +11,7 @@ function TrouvailleMedia({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        'home-trouvaille-media overflow-hidden rounded border-[2.5px] border-solid border-text',
+        'home-trouvaille-media overflow-hidden border-solid',
         className
       )}
     >
@@ -41,31 +42,19 @@ function TrouvailleCta({ className }: { className?: string }) {
 
 export function TrouvailleSection() {
   return (
-    <section className="home-trouvaille-section page-full-bleed bg-sable-200 pt-8 pb-10">
-      <PageContainer className="home-trouvaille-container">
-        {/* Mobile — label · image · accroche · CTA */}
-        <div className="home-trouvaille-layout prototype-mobile-only flex flex-col">
-          <p className={`home-trouvaille-label ${typography.trouvailleLabel} text-center uppercase`}>
-            La trouvaille
-          </p>
+    <section className="home-trouvaille-section page-full-bleed bg-sable-200 pt-8">
+      <PageContainer className="home-trouvaille-container pb-10">
+        {/*
+          Mobile (<768) : image au-dessus du texte.
+          ≥768 (vue desktop) : 2 colonnes image | texte — Figma 158:9165.
+        */}
+        <div className="home-trouvaille-layout flex flex-col gap-6">
+          <TrouvailleMedia className="home-trouvaille-media-col min-w-0" />
 
-          <TrouvailleMedia className="mt-4" />
-
-          <p className={`home-trouvaille-copy mt-6 ${typography.trouvailleChapeau}`}>
-            {HOME_TROUVAILLE.chapeau}
-          </p>
-
-          <TrouvailleCta className="mt-8 justify-center" />
-        </div>
-
-        {/* Desktop — image · texte (Figma intro-content) */}
-        <div className="home-trouvaille-layout home-trouvaille-layout--desktop prototype-desktop-only gap-20">
-          <TrouvailleMedia className="min-w-0 flex-1" />
-
-          <div className="flex min-w-0 flex-1 flex-col gap-6">
+          <div className="home-trouvaille-text-col flex min-w-0 flex-col gap-6">
             <div className="flex flex-col gap-4">
               <p className={`home-trouvaille-label ${typography.trouvailleLabel} uppercase`}>
-                La trouvaille
+                {HOME_TROUVAILLE.label}
               </p>
 
               <p className={`home-trouvaille-copy ${typography.trouvailleChapeau}`}>
@@ -73,10 +62,16 @@ export function TrouvailleSection() {
               </p>
             </div>
 
-            <TrouvailleCta />
+            <TrouvailleCta className="home-trouvaille-cta-wrap" />
           </div>
         </div>
       </PageContainer>
+
+      <FriseVagues
+        embed
+        fill="rgb(var(--color-background))"
+        className="home-trouvaille-frise"
+      />
     </section>
   )
 }

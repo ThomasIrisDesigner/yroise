@@ -9,7 +9,10 @@ export type ColorTokenSection = {
   tokens: ColorTokenEntry[]
 }
 
-/** Catalogue couleurs Yroise — source de vérité pour le design system. */
+/**
+ * Catalogue couleurs Yroise — uniquement les tokens utilisés dans le prototype.
+ * Source de vérité pour la page Design System.
+ */
 export const COLOR_TOKEN_SECTIONS: ColorTokenSection[] = [
   {
     title: 'Texte & surfaces',
@@ -26,7 +29,6 @@ export const COLOR_TOKEN_SECTIONS: ColorTokenSection[] = [
     title: 'Glaz · Bleu-vert breton',
     description: 'Collections + accents',
     tokens: [
-      { name: '--glaz-900', hex: '#19484B' },
       { name: '--glaz-700', hex: '#2D7D8A' },
       { name: '--glaz-500', hex: '#00C8A0' },
       { name: '--glaz-300', hex: '#AAF5C8' },
@@ -35,21 +37,17 @@ export const COLOR_TOKEN_SECTIONS: ColorTokenSection[] = [
   },
   {
     title: 'Sable · Archives & éditorial',
-    description: 'Histoires',
+    description: 'La trouvaille',
     tokens: [
-      { name: '--sable-900', hex: '#7D4B26' },
-      { name: '--sable-700', hex: '#E2A083' },
-      { name: '--sable-300', hex: '#EBC8B9' },
-      { name: '--sable-100', hex: '#FAEDE6' },
+      { name: '--sable-400', hex: '#F4DDA4' },
+      { name: '--sable-200', hex: '#FAF0D7' },
     ],
   },
   {
     title: 'Océan · Footer & accents bleus',
     tokens: [
       { name: '--ocean-900', hex: '#1B2443' },
-      { name: '--ocean-700', hex: '#002DFF' },
       { name: '--ocean-300', hex: '#8CDCFF' },
-      { name: '--ocean-100', hex: '#D7EBFA' },
     ],
   },
   {
@@ -57,16 +55,7 @@ export const COLOR_TOKEN_SECTIONS: ColorTokenSection[] = [
     tokens: [
       { name: '--aurore-900', hex: '#802828' },
       { name: '--aurore-700', hex: '#FF6050' },
-      { name: '--aurore-300', hex: '#F0A5B4' },
       { name: '--aurore-100', hex: '#FAD7D7' },
-    ],
-  },
-  {
-    title: 'États',
-    tokens: [
-      { name: '--color-danger', hex: '#DC2626' },
-      { name: '--color-success', hex: '#16A34A' },
-      { name: '--color-warning', hex: '#F59E0B' },
     ],
   },
 ]

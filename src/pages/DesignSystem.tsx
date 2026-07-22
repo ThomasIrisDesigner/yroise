@@ -1,17 +1,20 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 
-import { ArticleByline } from '@/components/features/site/ArticleByline'
 import { CollectionListCard } from '@/components/features/collections/CollectionListCard'
-import { SectionRubriqueLink } from '@/components/features/site/SectionRubriqueLink'
 import {
   DsTwoColumnBlock,
   type CompactSpecRow,
 } from '@/components/features/design-system/DsTwoColumnBlock'
+import { ArticleByline } from '@/components/features/site/ArticleByline'
+import { SectionRubriqueLink } from '@/components/features/site/SectionRubriqueLink'
 import { Button } from '@/components/ui/button'
 import { CardSlider } from '@/components/ui/card-slider'
+import { FriseHaut } from '@/components/ui/frise-haut'
 import { HistoireCard } from '@/components/ui/histoire-card'
 import { JeunesseCard } from '@/components/ui/jeunesse-card'
+import { SectionTitleOrnament } from '@/components/ui/section-title-ornament'
+import { TitleH1Triangle } from '@/components/ui/title-h1-triangle'
 import { TypeLabel } from '@/components/ui/type-label'
 import { PROJECT_DISPLAY_NAME } from '@/config/project'
 import { COLLECTIONS } from '@/data/collections'
@@ -25,57 +28,197 @@ import {
   COLOR_TOKEN_SECTIONS,
   type ColorTokenEntry,
 } from '@/styles/color-tokens'
-import { TYPE_LABEL_BASE_SPECS } from '@/styles/label-tokens'
 import {
   CARD_HISTOIRE_LIST_SPECS,
   CARD_HISTOIRE_SPECS,
   CARD_JEUNESSE_SPECS,
   CARD_SLIDER_SPECS,
 } from '@/styles/card-tokens'
+import { TYPE_LABEL_BASE_SPECS } from '@/styles/label-tokens'
 import { SECTION_PADDING_SPECS } from '@/styles/spacing-tokens'
-import { typography } from '@/styles/typography'
 import {
+  typography,
+  TYPOGRAPHY_FONT_EDITORIAL,
   TYPOGRAPHY_FONT_FAMILY,
   TYPOGRAPHY_FONT_UI,
   type TypographyStyleSpec,
-  typographyEditorialCatalog,
-  typographyUiCatalog,
 } from '@/styles/typography'
 
-const UNUSED_COLOR_NAMES = new Set([
-  '--sable-700',
-  '--sable-300',
-  '--ocean-700',
-  '--ocean-100',
-  '--color-success',
-  '--color-warning',
-])
+/**
+ * Typographie — organisée par contexte d’usage pour les développeurs.
+ * Source : `typography` dans src/styles/typography.ts (uniquement tokens utilisés).
+ */
+const TYPO_PAGES: TypographyStyleSpec[] = [
+  {
+    key: 'titleXl',
+    token: 'titleXl',
+    usage: 'H1 pages liste (Histoires, Collections, Jeunesse)',
+    label: 'H1 liste',
+    className: typography.titleXl,
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    sizePx: 28,
+    weight: 700,
+    color: '#010101',
+    lineHeight: '1.25',
+    letterSpacing: '0.1px',
+    contextNote:
+      'Sur les pages liste : uppercase + tracking 3px (mobile) / 6px (≥1024). Triangle TitleH1Triangle à droite.',
+  },
+  {
+    key: 'homeSectionLabel',
+    token: 'homeSectionLabel',
+    usage: 'Titres de rubrique home — HISTOIRES, COLLECTIONS, CARTE, JEUNESSE',
+    label: 'Rubrique home',
+    className: typography.homeSectionLabel,
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    sizePx: 24,
+    weight: 600,
+    color: '#010101',
+    lineHeight: '1.25',
+    letterSpacing: '2px',
+  },
+  {
+    key: 'trouvailleLabel',
+    token: 'trouvailleLabel',
+    usage: 'Label « La trouvaille »',
+    label: 'La trouvaille',
+    className: typography.trouvailleLabel,
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    sizePx: 20,
+    weight: 600,
+    color: '#010101',
+    lineHeight: '1.4',
+    letterSpacing: '0.4px',
+  },
+  {
+    key: 'titleL',
+    token: 'titleL',
+    usage: 'Titres de section / accroches (ex. carte home)',
+    label: 'Titre L',
+    className: typography.titleL,
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    sizePx: 20,
+    weight: 600,
+    color: '#010101',
+    lineHeight: '1.375',
+    letterSpacing: 'normal',
+  },
+  {
+    key: 'sectionTitleRebond',
+    token: 'sectionTitleRebond',
+    usage: 'Titre « Nos autres histoires » (fond sombre)',
+    label: 'Titre rebonds',
+    className: typography.sectionTitleRebond,
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    sizePx: 19,
+    weight: 600,
+    color: '#FFFFFF',
+    lineHeight: '1.25',
+    letterSpacing: '1px',
+    contextNote: 'md : 1.5rem · lg : 2rem. Ornement SectionTitleOrnament en glaz-700.',
+  },
+  {
+    key: 'sectionTitleSm',
+    token: 'sectionTitleSm',
+    usage: 'Titres compacts — Sources & références',
+    label: 'Titre compact',
+    className: typography.sectionTitleSm,
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    sizePx: 14,
+    weight: 600,
+    color: 'Contextuelle',
+    lineHeight: '1.25',
+    letterSpacing: '1px',
+  },
+]
 
-const USED_COLOR_SECTIONS = COLOR_TOKEN_SECTIONS.map((section) => ({
-  ...section,
-  tokens: section.tokens.filter((token) => !UNUSED_COLOR_NAMES.has(token.name)),
-})).filter((section) => section.tokens.length > 0)
+const TYPO_UI: TypographyStyleSpec[] = [
+  {
+    key: 'cardTitleEditorial',
+    token: 'cardTitleEditorial',
+    usage: 'Titres cards Histoires / Collections / rebonds',
+    label: 'Titre card',
+    className: typography.cardTitleEditorial,
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    sizePx: 22,
+    weight: 500,
+    color: '#010101',
+    lineHeight: '1.875rem',
+    letterSpacing: '0.1px',
+  },
+  {
+    key: 'cardExcerpt',
+    token: 'cardExcerpt',
+    usage: 'Extraits de cards · accroche La trouvaille (alias trouvailleChapeau)',
+    label: 'Extrait',
+    className: typography.cardExcerpt,
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    sizePx: 16,
+    weight: 400,
+    color: '#010101',
+    lineHeight: '1.5rem',
+    letterSpacing: '0.1px',
+  },
+  {
+    key: 'meta',
+    token: 'meta',
+    usage: 'Métadonnées — footer, search, références',
+    label: 'Meta',
+    className: typography.meta,
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    sizePx: 13,
+    weight: 400,
+    color: '#71717a',
+    lineHeight: '1.375',
+    letterSpacing: 'normal',
+  },
+  {
+    key: 'uiLink',
+    token: 'uiLink',
+    usage: 'Liens footer (couleur via classe contextuelle)',
+    label: 'Lien UI',
+    className: typography.uiLink,
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    sizePx: 13,
+    weight: 400,
+    color: 'Contextuelle',
+    lineHeight: '1.375',
+    letterSpacing: 'normal',
+  },
+  {
+    key: 'uiXs',
+    token: 'uiXs',
+    usage: 'Microcopy — références, légendes secondaires',
+    label: 'UI xs',
+    className: typography.uiXs,
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    sizePx: 11,
+    weight: 400,
+    color: '#71717a',
+    lineHeight: '1.25',
+    letterSpacing: 'normal',
+  },
+  {
+    key: 'editorialCaption',
+    token: 'editorialCaption',
+    usage: 'Légende-titre figures GMB',
+    label: 'Légende-titre',
+    className: typography.editorialCaption,
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    sizePx: 14,
+    weight: 400,
+    color: '#71717a',
+    lineHeight: '1.5',
+    letterSpacing: '0.1px',
+  },
+]
 
-const USED_UI_CATALOG_KEYS = new Set([
-  'titleXl',
-  'titleL',
-  'titleM',
-  'cardTitleEditorial',
-  'label',
-  'meta',
-  'cardExcerpt',
-  'uiXs',
-  'uiLink',
-])
-
-const USED_EDITORIAL_KEYS = new Set(['editorialBody', 'editorialMuted'])
-
-const ARTICLE_TYPOGRAPHY_STYLES: TypographyStyleSpec[] = [
+const TYPO_ARTICLE: TypographyStyleSpec[] = [
   {
     key: 'articleRubrique',
-    token: 'article-rubrique',
-    usage: "Fil d'Ariane rubrique (HISTOIRES, COLLECTIONS…)",
-    label: 'Rubrique article',
+    token: 'articleRubrique',
+    usage: "Fil d'Ariane rubrique (via SectionRubriqueLink)",
+    label: 'Rubrique',
     className: typography.articleRubrique,
     fontFamily: TYPOGRAPHY_FONT_UI,
     sizePx: 12,
@@ -86,8 +229,8 @@ const ARTICLE_TYPOGRAPHY_STYLES: TypographyStyleSpec[] = [
   },
   {
     key: 'articleTitle',
-    token: 'article-title',
-    usage: 'H1 des pages article',
+    token: 'articleTitle',
+    usage: 'H1 pages article',
     label: 'H1 article',
     className: typography.articleTitle,
     fontFamily: TYPOGRAPHY_FONT_UI,
@@ -102,7 +245,7 @@ const ARTICLE_TYPOGRAPHY_STYLES: TypographyStyleSpec[] = [
     key: 'chapeau',
     token: 'chapeau',
     usage: 'Chapô sous le H1',
-    label: 'Chapô article',
+    label: 'Chapô',
     className: typography.chapeau,
     fontFamily: TYPOGRAPHY_FONT_UI,
     sizePx: 19,
@@ -113,9 +256,9 @@ const ARTICLE_TYPOGRAPHY_STYLES: TypographyStyleSpec[] = [
   },
   {
     key: 'articleByline',
-    token: 'article-byline',
-    usage: 'Auteur sous le chapô — prénom en medium',
-    label: 'Byline article',
+    token: 'articleByline',
+    usage: 'Auteur sous le chapô (alias articleMetaCaps)',
+    label: 'Byline',
     className: typography.articleByline,
     fontFamily: TYPOGRAPHY_FONT_UI,
     sizePx: 12,
@@ -123,26 +266,13 @@ const ARTICLE_TYPOGRAPHY_STYLES: TypographyStyleSpec[] = [
     color: '#010101',
     lineHeight: '1.5',
     letterSpacing: '2px',
-    contextNote: 'PAR et rôle en regular · prénom en medium (font-medium).',
-  },
-  {
-    key: 'editorialCaption',
-    token: 'editorial-caption',
-    usage: 'Légende-titre sous les figures GMB',
-    label: 'Légende-titre',
-    className: typography.editorialCaption,
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 14,
-    weight: 400,
-    color: '#010101',
-    lineHeight: '1.5',
-    letterSpacing: '0.1px',
+    contextNote: 'PAR / rôle en regular · prénom en medium.',
   },
   {
     key: 'articleMetaCaps',
-    token: 'article-meta-caps',
-    usage: 'Légende type figure, crédit citation',
-    label: 'Meta capitales',
+    token: 'articleMetaCaps',
+    usage: 'Crédit figure, légende type',
+    label: 'Meta caps',
     className: typography.articleMetaCaps,
     fontFamily: TYPOGRAPHY_FONT_UI,
     sizePx: 12,
@@ -153,7 +283,7 @@ const ARTICLE_TYPOGRAPHY_STYLES: TypographyStyleSpec[] = [
   },
   {
     key: 'articleHeading',
-    token: 'article-heading',
+    token: 'articleHeading',
     usage: "Intertitres dans le corps d'article",
     label: 'Intertitre',
     className: typography.articleHeading,
@@ -166,38 +296,25 @@ const ARTICLE_TYPOGRAPHY_STYLES: TypographyStyleSpec[] = [
   },
   {
     key: 'editorialBody',
-    token: 'editorial-body',
-    usage: 'Corps de texte des billets',
-    label: 'Corps de texte',
+    token: 'editorialBody',
+    usage: 'Corps de texte des billets (Source Serif 4)',
+    label: 'Corps',
     className: typography.editorialBody,
-    fontFamily: 'Source Serif 4',
+    fontFamily: TYPOGRAPHY_FONT_EDITORIAL,
     sizePx: 19,
     weight: 400,
     color: '#010101',
     lineHeight: '1.6',
     letterSpacing: 'normal',
-  },
-  {
-    key: 'sectionTitleRebond',
-    token: 'section-title-rebond',
-    usage: 'Titre section « Nos autres histoires » (fond sombre)',
-    label: 'Titre rebonds',
-    className: typography.sectionTitleRebond,
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 19,
-    weight: 600,
-    color: '#FFFFFF',
-    lineHeight: '1.25',
-    letterSpacing: '1px',
-    contextNote: 'Centré · md (768px) : 1.5rem · lg (1024px) : 2rem.',
+    contextNote: 'Empiler les blocs avec typography.editorialBodyStack (gap 24px).',
   },
   {
     key: 'editorialQuote',
-    token: 'editorial-quote',
+    token: 'editorialQuote',
     usage: 'Citation éditoriale (bloc GMB)',
     label: 'Citation',
     className: typography.editorialQuote,
-    fontFamily: 'Source Serif 4',
+    fontFamily: TYPOGRAPHY_FONT_EDITORIAL,
     sizePx: 20,
     weight: 600,
     color: '#010101',
@@ -207,106 +324,24 @@ const ARTICLE_TYPOGRAPHY_STYLES: TypographyStyleSpec[] = [
   },
 ]
 
-const EXTRA_TYPOGRAPHY_STYLES: TypographyStyleSpec[] = [
-  {
-    key: 'homeSectionLabel',
-    token: 'home-section-label',
-    usage: 'Rubriques home — HISTOIRES, COLLECTIONS, CARTE INTERACTIVE, JEUNESSE',
-    label: 'Label rubrique home',
-    className: typography.homeSectionLabel,
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 24,
-    weight: 600,
-    color: '#010101',
-    lineHeight: '1.25',
-    letterSpacing: '2px',
-  },
-  {
-    key: 'trouvailleLabel',
-    token: 'trouvaille-label',
-    usage: 'Bloc La trouvaille — label de rubrique',
-    label: 'Label La trouvaille',
-    className: typography.trouvailleLabel,
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 16,
-    weight: 600,
-    color: '#010101',
-    lineHeight: '1.4',
-    letterSpacing: '0.32px',
-  },
-  {
-    key: 'trouvailleChapeau',
-    token: 'trouvaille-chapeau',
-    usage: 'Bloc La trouvaille — accroche sous le label',
-    label: 'Accroche La trouvaille',
-    className: typography.trouvailleChapeau,
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 16,
-    weight: 400,
-    color: '#010101',
-    lineHeight: '1.55',
-    letterSpacing: 'normal',
-  },
-  {
-    key: 'sectionTitleSm',
-    token: 'section-title-sm',
-    usage: 'Titres compacts — Sources & références',
-    label: 'Titre de section compact',
-    className: typography.sectionTitleSm,
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 14,
-    weight: 600,
-    color: 'Contextuelle',
-    lineHeight: '1.25',
-    letterSpacing: '1px',
-  },
-]
-
-const USED_TYPOGRAPHY_UI = [
-  ...EXTRA_TYPOGRAPHY_STYLES,
-  ...typographyUiCatalog.filter((style) => USED_UI_CATALOG_KEYS.has(style.key)),
-]
-
-const USED_TYPOGRAPHY_EDITORIAL = typographyEditorialCatalog.filter((style) =>
-  USED_EDITORIAL_KEYS.has(style.key)
-)
-
-const SECTION_LABEL_EXAMPLES = [
-  {
-    label: 'Rubrique home',
-    className: typography.homeSectionLabel,
-    example: 'Histoires',
-  },
-  {
-    label: 'La trouvaille',
-    className: typography.trouvailleLabel,
-    example: 'La trouvaille',
-  },
-  {
-    label: 'H1 page liste',
-    className: typography.titleXl,
-    example: 'Jeunesse',
-  },
-] as const
-
-const SECTION_LABEL_SPECS: CompactSpecRow[] = [
-  { token: 'homeSectionLabel', value: '24px · Outfit 600 · uppercase · ls 2px' },
-  { token: 'trouvailleLabel', value: '16px · Outfit 600 · ls 0.32px' },
-  { token: 'titleXl', value: '28px · Outfit 700 · H1 pages liste' },
-  { token: 'sectionLabel', value: '16px · alias label — Sources, Histoires associées' },
-]
-
-const JEUNESSE_TYPE_LABEL_SPECS: CompactSpecRow[] = [
-  { token: 'types', value: 'JEU · SÉQUENCE (page liste Jeunesse uniquement)' },
-  { token: 'couleur liste', value: 'text-aurore-700' },
-  { token: 'couleur à la une', value: 'text-aurore-300 sur fond aurore-900' },
-]
-
 const CARD_COLLECTION_LIST_SPECS: CompactSpecRow[] = [
   { token: 'hublot', value: '224×224px · radius 50% · border 9px #010101 · hover glaz-700' },
   { token: 'titre', value: 'cardTitleEditorial · centré' },
   { token: 'accroche', value: 'cardExcerpt · line-clamp-4 · centré' },
   { token: 'cta', value: 'Button secondary sm — Explorer' },
+]
+
+const CARD_COLLECTION_HOME_SPECS: CompactSpecRow[] = [
+  { token: 'composant', value: 'CollectionsCarousel (pas CollectionListCard)' },
+  { token: 'hublot mobile', value: '198×198px · border 9px · hover glaz-700' },
+  { token: 'hublot desktop', value: '280×280px · border 9px · hover glaz-700' },
+  { token: 'titre', value: 'Outfit 600 · 22px desktop / 20px mobile · hover glaz-700' },
+  { token: 'frises', value: 'FriseHaut fill glaz-100 au-dessus et en dessous' },
+]
+
+const JEUNESSE_TYPE_LABEL_SPECS: CompactSpecRow[] = [
+  { token: 'types', value: 'JEU · SÉQUENCE (page liste Jeunesse uniquement)' },
+  { token: 'couleur', value: 'text-aurore-700' },
 ]
 
 const BUTTON_SIZE_SPEC_ROWS = BUTTON_SIZE_LINES.map((line) => {
@@ -320,11 +355,18 @@ const BUTTON_VARIANT_SPEC_ROWS: CompactSpecRow[] = BUTTON_VARIANT_COLOR_SPECS.ma
 )
 
 const BUTTON_USAGE_SPEC_ROWS: CompactSpecRow[] = [
-  { token: 'primary', value: 'CTA home, login, collections (default + sm)' },
-  { token: 'secondary', value: 'Cards, pagination listes, La trouvaille (sm)' },
-  { token: 'secondary inverted', value: 'Card rebond sur fond sombre' },
-  { token: 'ghost sm', value: 'Liens Sources (accordion)' },
+  { token: 'primary', value: 'CTA home, collections (default + sm)' },
+  { token: 'secondary', value: 'Cards, La trouvaille, pagination listes (sm)' },
+  { token: 'secondary inverted', value: 'Rebonds / cards sur fond sombre' },
   { token: 'showTriangle={false}', value: 'Boutons « Voir plus » des listes' },
+]
+
+const ORNEMENT_SPECS: CompactSpecRow[] = [
+  { token: 'TitleH1Triangle', value: 'À droite du H1 pages liste · gap 8px' },
+  { token: 'couleurs triangle', value: 'histoires on-dark · collections glaz-500 · jeunesse aurore-700' },
+  { token: 'SectionTitleOrnament', value: 'Sous titre rebonds article · stroke currentColor' },
+  { token: 'FriseHaut', value: 'Dents 10×8 · fills utilisés : text | on-dark | glaz-100' },
+  { token: 'FriseVagues', value: 'Transition Trouvaille → suite · footer ocean' },
 ]
 
 const COLLECTION_LIST_PREVIEW = COLLECTIONS[0]!
@@ -379,9 +421,14 @@ function TypographyTable({ styles }: { styles: TypographyStyleSpec[] }) {
               <td className="px-3 py-3 font-mono text-xs text-text">{style.token}</td>
               <td className="max-w-[240px] px-3 py-3 leading-snug text-text">
                 {style.usage}
+                {style.contextNote ? (
+                  <span className="mt-1 block text-[10px] text-muted">
+                    {style.contextNote}
+                  </span>
+                ) : null}
               </td>
               <td className={`max-w-[200px] px-3 py-3 ${typographyPreviewClassName(style)}`}>
-                Aa — Exemple de texte
+                Aa — Exemple
               </td>
               <td className="px-3 py-3">{style.fontFamily}</td>
               <td className="px-3 py-3">{style.sizePx}px</td>
@@ -396,10 +443,6 @@ function TypographyTable({ styles }: { styles: TypographyStyleSpec[] }) {
     </div>
   )
 }
-
-const titleMContextNote = typographyUiCatalog.find(
-  (style) => style.key === 'titleM'
-)?.contextNote
 
 function Section({
   id,
@@ -433,16 +476,25 @@ export function DesignSystem() {
           <h1 className="text-sm font-semibold text-text">
             Design System — {PROJECT_DISPLAY_NAME}
           </h1>
-          <Link to="/prototype" className="text-sm text-text/70 hover:text-text">
-            Retour au prototype
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link
+              to="/arborescence"
+              className="text-sm text-text/70 hover:text-text"
+            >
+              Arborescence
+            </Link>
+            <Link to="/prototype" className="text-sm text-text/70 hover:text-text">
+              Retour au prototype
+            </Link>
+          </div>
         </div>
       </header>
 
       <div className="mx-auto w-full max-w-6xl px-6 pb-16 pt-24">
-        <p className="mb-10 font-outfit text-sm text-muted">
-          Catalogue des tokens et composants réellement utilisés dans le prototype
-          (hors barre prototype, login et cette page).
+        <p className="mb-10 max-w-2xl font-outfit text-sm leading-relaxed text-muted">
+          Tokens et composants réellement utilisés dans le prototype. Source typo :{' '}
+          <code className="text-text">src/styles/typography.ts</code> · couleurs :{' '}
+          <code className="text-text">theme.css</code>. Hors barre prototype et login.
         </p>
 
         <nav className="mb-10 flex flex-wrap gap-3 text-sm text-text/70">
@@ -452,17 +504,14 @@ export function DesignSystem() {
           <a className="hover:text-text" href="#typographie">
             Typographie
           </a>
-          <a className="hover:text-text" href="#typographie-article">
-            Typo article
-          </a>
-          <a className="hover:text-text" href="#labels-section">
-            Labels de section
+          <a className="hover:text-text" href="#ornements">
+            Ornements
           </a>
           <a className="hover:text-text" href="#boutons">
             Boutons
           </a>
           <a className="hover:text-text" href="#labels">
-            Labels de type
+            Labels
           </a>
           <a className="hover:text-text" href="#cards">
             Cards
@@ -474,8 +523,12 @@ export function DesignSystem() {
 
         <div className="grid gap-14">
           <Section id="couleurs" title="COULEURS">
+            <p className="mb-8 font-outfit text-sm text-muted">
+              Uniquement les tokens utilisés dans le prototype. Catalogue :{' '}
+              <code className="text-text">src/styles/color-tokens.ts</code>.
+            </p>
             <div className="grid gap-10">
-              {USED_COLOR_SECTIONS.map((section) => (
+              {COLOR_TOKEN_SECTIONS.map((section) => (
                 <div key={section.title} className="grid gap-4">
                   <div>
                     <h3 className="font-outfit text-xs font-semibold uppercase tracking-[0.08em] text-text">
@@ -498,97 +551,119 @@ export function DesignSystem() {
           </Section>
 
           <Section id="typographie" title="TYPOGRAPHIE">
-            <p className="mb-6 font-outfit text-sm text-muted">
-              Polices : {TYPOGRAPHY_FONT_FAMILY}.
+            <p className="mb-2 font-outfit text-sm text-muted">
+              Polices : {TYPOGRAPHY_FONT_FAMILY}. Sur fond sombre, appliquer{' '}
+              <code className="text-text">text-on-dark</code> /{' '}
+              <code className="text-text">text-on-dark/80</code> par-dessus le token.
+            </p>
+            <p className="mb-10 font-outfit text-sm text-muted">
+              {TYPOGRAPHY_FONT_EDITORIAL} est réservé au corps et aux citations
+              d&apos;article. Tout le reste est Outfit.
             </p>
 
             <div className="mb-12">
-              <h3 className="mb-4 font-outfit text-xs font-semibold uppercase tracking-[0.08em] text-text">
-                OUTFIT · Display &amp; UI
+              <h3 className="mb-2 font-outfit text-xs font-semibold uppercase tracking-[0.08em] text-text">
+                1 · Pages &amp; sections
               </h3>
-              <TypographyTable styles={USED_TYPOGRAPHY_UI} />
-              <blockquote className="mt-4 border-l-2 border-border pl-4 font-outfit text-sm italic text-muted">
-                Sur fond sombre : appliquer <code className="text-text">text-on-dark</code> ou{' '}
-                <code className="text-text">text-on-dark/80</code> par-dessus le style existant.
-              </blockquote>
-              {titleMContextNote ? (
-                <p className="mt-3 font-outfit text-[11px] leading-snug text-muted">
-                  <span className="font-mono text-text">title-m</span> — {titleMContextNote}
-                </p>
-              ) : null}
+              <p className="mb-4 font-outfit text-sm text-muted">
+                H1 listes, rubriques home, titres de sections.
+              </p>
+              <TypographyTable styles={TYPO_PAGES} />
+            </div>
+
+            <div className="mb-12">
+              <h3 className="mb-2 font-outfit text-xs font-semibold uppercase tracking-[0.08em] text-text">
+                2 · UI &amp; cards
+              </h3>
+              <p className="mb-4 font-outfit text-sm text-muted">
+                Titres de cards, extraits, meta, liens, légendes.
+              </p>
+              <TypographyTable styles={TYPO_UI} />
             </div>
 
             <div>
-              <h3 className="mb-4 font-outfit text-xs font-semibold uppercase tracking-[0.08em] text-text">
-                SOURCE SERIF 4 · Éditorial (hors article)
+              <h3 className="mb-2 font-outfit text-xs font-semibold uppercase tracking-[0.08em] text-text">
+                3 · Pages article
               </h3>
-              <TypographyTable styles={USED_TYPOGRAPHY_EDITORIAL} />
-              <p className="mt-4 font-outfit text-[11px] leading-snug text-muted">
-                Corps atténué (login). Corps et citation article : voir section Typo article.
+              <p className="mb-4 font-outfit text-sm text-muted">
+                Billets Histoires, Collections, Jeunesse, pages institutionnelles.
               </p>
-            </div>
-          </Section>
+              <TypographyTable styles={TYPO_ARTICLE} />
 
-          <Section id="typographie-article" title="TYPOGRAPHIE · PAGES ARTICLE">
-            <p className="mb-6 font-outfit text-sm text-muted">
-              Billets Histoires, pages Collections, Jeunesse, institutionnel — en-tête + corps GMB.
-            </p>
-            <TypographyTable styles={ARTICLE_TYPOGRAPHY_STYLES} />
-            <div className="mt-8 grid gap-6 rounded-lg border border-border bg-surface/30 p-6">
-              <SectionRubriqueLink to="/histoires">Histoires</SectionRubriqueLink>
-              <h1 className={typography.articleTitle}>
-                L&apos;explosion de l&apos;Océan Liberty le 28 juillet 1947
-              </h1>
-              <p className={typography.chapeau}>
-                Brest, été 1947. La ville sort à peine des décombres de la guerre quand une
-                nouvelle catastrophe s&apos;abat sur le port.
-              </p>
-              <ArticleByline auteur="Carole, bibliothécaire" />
-              <div className="border-l border-text pl-[17px]">
-                <p className={`${typography.editorialCaption} text-text`}>
-                  L&apos;Océan Liberty en feu, rade de Brest, 28 juillet 1947.
+              <div className="mt-8 grid gap-6 rounded-lg border border-border bg-surface/30 p-6">
+                <p className="font-outfit text-[11px] font-semibold uppercase tracking-wide text-muted">
+                  Aperçu enchaînement
                 </p>
-                <p className={typography.articleMetaCaps}>
-                  Photographie, Archives Marines · Voir le document
+                <SectionRubriqueLink to="/histoires">Histoires</SectionRubriqueLink>
+                <h1 className={typography.articleTitle}>
+                  L&apos;explosion de l&apos;Océan Liberty le 28 juillet 1947
+                </h1>
+                <p className={typography.chapeau}>
+                  Brest, été 1947. La ville sort à peine des décombres de la guerre quand une
+                  nouvelle catastrophe s&apos;abat sur le port.
                 </p>
+                <ArticleByline auteur="Carole, bibliothécaire" />
+                <div className="border-l border-text pl-[17px]">
+                  <p className={`${typography.editorialCaption} text-text`}>
+                    L&apos;Océan Liberty en feu, rade de Brest, 28 juillet 1947.
+                  </p>
+                  <p className={typography.articleMetaCaps}>
+                    Photographie, Archives Marines · Voir le document
+                  </p>
+                </div>
+                <h2 className={typography.articleHeading}>Un port entre deux guerres</h2>
+                <p className={typography.editorialBody}>
+                  Brest en 1947 ressemble encore à un chantier. Les bombardements de la Seconde
+                  Guerre mondiale ont rasé la quasi-totalité de la ville.
+                </p>
+                <figure className="border-l border-glaz-700 bg-surface py-4 pl-[17px] pr-4">
+                  <blockquote className={typography.editorialQuote}>
+                    « La Catastrophe de Brest »
+                  </blockquote>
+                </figure>
               </div>
-              <h2 className={typography.articleHeading}>Un port entre deux guerres</h2>
-              <p className={typography.editorialBody}>
-                Brest en 1947 ressemble encore à un chantier. Les bombardements de la Seconde
-                Guerre mondiale ont rasé la quasi-totalité de la ville.
-              </p>
-              <figure className="border-l border-glaz-700 bg-surface py-4 pl-[17px] pr-4">
-                <blockquote className={typography.editorialQuote}>
-                  « La Catastrophe de Brest »
-                </blockquote>
-              </figure>
             </div>
-            {ARTICLE_TYPOGRAPHY_STYLES.filter((style) => style.contextNote).map((style) => (
-              <p
-                key={style.key}
-                className="mt-3 font-outfit text-[11px] leading-snug text-muted"
-              >
-                <span className="font-mono text-text">{style.token}</span> — {style.contextNote}
-              </p>
-            ))}
           </Section>
 
-          <Section id="labels-section" title="LABELS DE SECTION">
+          <Section id="ornements" title="ORNEMENTS &amp; FRISES">
             <DsTwoColumnBlock
               preview={
-                <div className="flex flex-col gap-6">
-                  {SECTION_LABEL_EXAMPLES.map((example) => (
-                    <div key={example.label}>
-                      <p className="mb-2 font-outfit text-[11px] font-semibold uppercase tracking-wide text-muted">
-                        {example.label}
-                      </p>
-                      <p className={example.className}>{example.example}</p>
+                <div className="flex flex-col gap-8">
+                  <div>
+                    <p className="mb-2 font-outfit text-[11px] font-semibold uppercase tracking-wide text-muted">
+                      H1 liste + triangle
+                    </p>
+                    <div className="flex items-center gap-2">
+                      <span className={`${typography.titleXl} uppercase tracking-[3px]`}>
+                        Histoires
+                      </span>
+                      <TitleH1Triangle className="text-glaz-500" />
                     </div>
-                  ))}
+                  </div>
+                  <div>
+                    <p className="mb-2 font-outfit text-[11px] font-semibold uppercase tracking-wide text-muted">
+                      Ornement rebonds
+                    </p>
+                    <div className="flex flex-col items-start gap-2">
+                      <span className={`${typography.sectionTitleRebond} text-text`}>
+                        Nos autres histoires
+                      </span>
+                      <SectionTitleOrnament className="text-glaz-700" />
+                    </div>
+                  </div>
+                  <div>
+                    <p className="mb-2 font-outfit text-[11px] font-semibold uppercase tracking-wide text-muted">
+                      FriseHaut
+                    </p>
+                    <FriseHaut fill="glaz-100" />
+                    <div className="mt-2 bg-text py-1">
+                      <FriseHaut fill="on-dark" />
+                    </div>
+                  </div>
                 </div>
               }
-              specs={SECTION_LABEL_SPECS}
-              note="Les pages liste utilisent titleXl + SectionTitleOrnament (tons histoires, collections, jeunesse)."
+              specs={ORNEMENT_SPECS}
+              note="Pages liste : SectionListHeader (centered) + TitleH1Triangle. Rebonds article : SectionTitleOrnament."
             />
           </Section>
 
@@ -602,66 +677,39 @@ export function DesignSystem() {
                     <Button variant="secondary" size="sm">
                       Secondary sm
                     </Button>
-                    <Button variant="ghost" size="sm">
-                      Ghost sm
-                    </Button>
                   </div>
                 }
                 specs={BUTTON_COMMON_SPECS}
               />
               <DsTwoColumnBlock
-                title="Variants"
-                preview={
-                  <div className="flex flex-wrap items-center gap-4">
-                    <Button variant="primary">Primary</Button>
-                    <Button variant="secondary" size="sm">
-                      Secondary
-                    </Button>
-                    <Button variant="ghost" size="sm">
-                      Ghost
-                    </Button>
-                  </div>
-                }
-                specs={BUTTON_VARIANT_SPEC_ROWS}
-              />
-              <DsTwoColumnBlock
-                title="Tailles"
+                title="Variants &amp; tailles"
                 preview={
                   <div className="flex flex-wrap items-center gap-4">
                     <Button variant="primary" size="default">
-                      Default (44px)
+                      Default 44px
                     </Button>
                     <Button variant="primary" size="sm">
-                      Small (36px)
+                      Small 36px
                     </Button>
-                  </div>
-                }
-                specs={BUTTON_SIZE_SPEC_ROWS}
-              />
-              <DsTwoColumnBlock
-                title="Usage dans le prototype"
-                preview={
-                  <div className="flex flex-wrap items-center gap-4">
                     <Button variant="secondary" size="sm" showTriangle={false}>
                       Voir plus
                     </Button>
-                    <div className="-m-4 rounded-lg bg-ocean-900 p-6">
-                      <Button variant="secondary" size="default" inverted>
+                    <div className="rounded-lg bg-ocean-900 p-4">
+                      <Button variant="secondary" inverted>
                         Explorer
                       </Button>
                     </div>
                   </div>
                 }
-                specs={BUTTON_USAGE_SPEC_ROWS}
-                previewClassName="border-0 bg-transparent p-0"
-                note="Survoler les boutons actifs pour prévisualiser les hovers."
+                specs={[...BUTTON_VARIANT_SPEC_ROWS, ...BUTTON_SIZE_SPEC_ROWS, ...BUTTON_USAGE_SPEC_ROWS]}
+                note="Survoler pour prévisualiser les hovers."
               />
             </div>
           </Section>
 
           <Section id="labels" title="LABELS DE TYPE">
             <DsTwoColumnBlock
-              title="Jeunesse — page liste"
+              title="Jeunesse — page liste uniquement"
               preview={
                 <div className="flex flex-wrap gap-x-5 gap-y-3">
                   <TypeLabel type="jeu" className="text-aurore-700" />
@@ -669,14 +717,14 @@ export function DesignSystem() {
                 </div>
               }
               specs={[...TYPE_LABEL_BASE_SPECS, ...JEUNESSE_TYPE_LABEL_SPECS]}
-              note="Affichés uniquement sur les cards Jeunesse en layout liste. Pas de label de type sur les cards Histoires."
+              note="Pas de TypeLabel sur les cards Histoires."
             />
           </Section>
 
           <Section id="cards" title="CARDS">
             <div className="grid gap-10">
               <DsTwoColumnBlock
-                title="Card Histoires — carousel home"
+                title="Histoires — carousel home"
                 preview={
                   <div className="section-histoires">
                     <HistoireCard
@@ -690,7 +738,7 @@ export function DesignSystem() {
                 previewClassName="flex justify-center"
               />
               <DsTwoColumnBlock
-                title="Card Histoires — page liste"
+                title="Histoires — page liste"
                 preview={
                   <div className="section-histoires">
                     <HistoireCard
@@ -705,7 +753,7 @@ export function DesignSystem() {
                 previewClassName="flex justify-center"
               />
               <DsTwoColumnBlock
-                title="Card Collections — page liste"
+                title="Collections — page liste"
                 preview={
                   <div className="flex justify-center">
                     <CollectionListCard collection={COLLECTION_LIST_PREVIEW} />
@@ -714,7 +762,20 @@ export function DesignSystem() {
                 specs={CARD_COLLECTION_LIST_SPECS}
               />
               <DsTwoColumnBlock
-                title="Card Jeunesse — page liste"
+                title="Collections — carousel home (hublots)"
+                preview={
+                  <div className="flex justify-center py-2">
+                    <div className="flex flex-col items-center gap-3">
+                      <div className="size-[140px] overflow-hidden rounded-full border-[9px] border-text bg-surface" />
+                      <p className="font-outfit text-xl font-semibold text-text">En mer</p>
+                    </div>
+                  </div>
+                }
+                specs={CARD_COLLECTION_HOME_SPECS}
+                note="Implémentation dans CollectionsCarousel — distincte de CollectionListCard."
+              />
+              <DsTwoColumnBlock
+                title="Jeunesse — page liste"
                 preview={
                   <div className="section-jeunesse">
                     <JeunesseCard
@@ -751,7 +812,6 @@ export function DesignSystem() {
                 }
                 specs={CARD_SLIDER_SPECS}
                 previewClassName="overflow-hidden border-0 bg-transparent p-0"
-                note="Collections home : carousel desktop custom (hublots), pas CollectionHublotCard."
               />
             </div>
           </Section>
