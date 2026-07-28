@@ -5,6 +5,7 @@
  *
  * CONVENTIONS
  * - Tailles de texte : toujours en `rem` (1rem = 16px). Jamais de px.
+ * - Interlettrage : en px (valeurs Figma). Interlignage : sans unité.
  * - Espacements, bordures, rayons : en px, sur la grille de 8.
  * - Couleurs : jamais en dur — uniquement via les variables `:root` ci-dessous,
  *   consommées par `rgb(var(--token))` ou par les classes Tailwind générées
@@ -966,10 +967,9 @@ body {
   [data-prototype-view='desktop'] .search-panel-resource-card:hover {
     background: rgb(var(--color-text-on-dark) / 0.1);
   }
-}
 
-/* Page article — layout desktop dès 768px (vue prototype plein écran) */
-@media (min-width: 768px) {
+  /* --- Page article — layout desktop dès 768px --- */
+
   [data-prototype-view='desktop'] .article-page-content-wrap {
     padding-inline: var(--page-padding-x-lg);
   }

@@ -37,7 +37,7 @@ const EXTERNAL_RESOURCES = [
 
 /** Figma menu — titres principaux : 22px / 3px */
 const menuMainClass =
-  'font-outfit text-[1.375rem] font-bold leading-normal tracking-[0.1875rem] text-on-dark uppercase'
+  'font-outfit text-[1.375rem] font-bold leading-normal tracking-[3px] text-on-dark uppercase'
 
 const searchLinkClass =
   'font-outfit text-base font-normal leading-[1.3] tracking-[0.1px] text-on-dark'

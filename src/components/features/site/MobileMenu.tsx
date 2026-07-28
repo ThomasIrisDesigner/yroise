@@ -13,11 +13,11 @@ interface MobileMenuProps {
 
 /** Figma menu mobile <520 — titres : 19px / 3px, sous-entrées : 18px / 1px */
 const menuMainClass =
-  'mobile-menu-link font-outfit text-[1.1875rem] font-bold leading-normal tracking-[0.1875rem] text-on-dark uppercase'
+  'mobile-menu-link font-outfit text-[1.1875rem] font-bold leading-normal tracking-[3px] text-on-dark uppercase'
 const menuSubLeadClass =
-  'mobile-menu-sub-lead font-outfit text-[1.125rem] font-medium leading-normal tracking-[0.0625rem] text-on-dark'
+  'mobile-menu-sub-lead font-outfit text-[1.125rem] font-medium leading-normal tracking-[1px] text-on-dark'
 const menuSubClass =
-  'mobile-menu-sub font-outfit text-[1.125rem] font-normal leading-normal tracking-[0.0625rem] text-on-dark'
+  'mobile-menu-sub font-outfit text-[1.125rem] font-normal leading-normal tracking-[1px] text-on-dark'
 
 export function MobileMenu({ open, onClose }: MobileMenuProps) {
   const { pathname } = useLocation()
@@ -151,14 +151,14 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
             <button
               type="button"
               aria-pressed
-              className="flex size-10 items-center justify-center rounded-full border-[3px] border-on-dark bg-on-dark font-outfit text-[1.25rem] font-medium tracking-[0.0625rem] text-text"
+              className="flex size-10 items-center justify-center rounded-full border-[3px] border-on-dark bg-on-dark font-outfit text-[1.25rem] font-medium tracking-[1px] text-text"
             >
               FR
             </button>
             <button
               type="button"
               aria-pressed={false}
-              className="flex size-10 items-center justify-center rounded-full border-[3px] border-on-dark font-outfit text-[1.25rem] font-medium tracking-[0.0625rem] text-on-dark"
+              className="flex size-10 items-center justify-center rounded-full border-[3px] border-on-dark font-outfit text-[1.25rem] font-medium tracking-[1px] text-on-dark"
             >
               BR
             </button>

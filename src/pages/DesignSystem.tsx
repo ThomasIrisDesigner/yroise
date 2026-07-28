@@ -77,6 +77,8 @@ const SOURCE_FILE_SPECS: CompactSpecRow[] = [
 
 const CONVENTION_SPECS: CompactSpecRow[] = [
   { token: 'Tailles de texte', value: 'toujours en rem (1rem = 16px), jamais en px' },
+  { token: 'Interlettrage', value: 'en px, comme dans Figma — tracking-[3px], tracking-[0.22px]…' },
+  { token: 'Interlignage', value: 'sans unité (leading-[1.4]) ou échelle Tailwind (leading-snug)' },
   { token: 'Espacements', value: 'en px, sur la grille de 8 (8 · 16 · 24 · 32 · 40…)' },
   { token: 'Couleurs', value: 'jamais en dur — via un token, jamais de #hex dans un composant' },
   { token: 'Typographie', value: 'className={typography.<token>} — pas de classe typo ad hoc' },
@@ -103,7 +105,7 @@ const CARD_COLLECTION_HOME_SPECS: CompactSpecRow[] = [
   { token: 'composant', value: 'CollectionsCarousel (pas CollectionListCard)' },
   { token: 'hublot mobile', value: '198×198px · border 9px · hover glaz-700' },
   { token: 'hublot desktop', value: '280×280px · border 9px · hover glaz-700' },
-  { token: 'titre', value: 'Outfit 600 · 1.375rem desktop / 1.25rem mobile · hover glaz-700' },
+  { token: 'titre', value: 'Outfit 600 · 1.375rem mobile / 1.25rem desktop · hover glaz-700' },
   { token: 'frises', value: 'FriseHaut fill glaz-100 au-dessus et en dessous' },
 ]
 
@@ -232,7 +234,7 @@ function Section({
   children: React.ReactNode
 }) {
   return (
-    <section id={id} className="scroll-mt-20">
+    <section id={id} className="min-w-0 scroll-mt-20">
       <h2 className="text-lg font-semibold tracking-tight text-text">{title}</h2>
       <div className="mt-3 border-t border-border" />
       <div className="mt-6">{children}</div>
