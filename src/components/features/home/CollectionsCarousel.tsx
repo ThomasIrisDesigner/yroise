@@ -129,7 +129,7 @@ export function CollectionsCarousel() {
               )}
             </div>
 
-            <p className="font-outfit text-[22px] font-semibold text-text transition-colors duration-150 group-hover:text-glaz-700">
+            <p className="font-outfit text-[1.375rem] font-semibold text-text transition-colors duration-150 group-hover:text-glaz-700">
               {collection.name}
             </p>
           </Link>

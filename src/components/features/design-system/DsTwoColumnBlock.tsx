@@ -10,7 +10,7 @@ export type CompactSpecRow = {
 export function CompactSpecsTable({ rows }: { rows: readonly CompactSpecRow[] }) {
   return (
     <div className="rounded-lg border border-border p-4">
-      <dl className="grid gap-1.5 font-outfit text-[11px]">
+      <dl className="grid gap-1.5 font-outfit text-[0.6875rem]">
         {rows.map((row) => (
           <div
             key={row.token}
@@ -25,21 +25,10 @@ export function CompactSpecsTable({ rows }: { rows: readonly CompactSpecRow[] })
   )
 }
 
-function isCompactSpecRows(value: unknown): value is readonly CompactSpecRow[] {
-  return (
-    Array.isArray(value) &&
-    (value.length === 0 ||
-      (typeof value[0] === 'object' &&
-        value[0] !== null &&
-        'token' in value[0] &&
-        'value' in value[0]))
-  )
-}
-
 interface DsTwoColumnBlockProps {
   title?: string
   preview: React.ReactNode
-  specs: readonly CompactSpecRow[] | React.ReactNode
+  specs: readonly CompactSpecRow[]
   note?: string
   previewClassName?: string
 }
@@ -69,9 +58,9 @@ export function DsTwoColumnBlock({
           {preview}
         </div>
         <div className="min-w-0">
-          {isCompactSpecRows(specs) ? <CompactSpecsTable rows={specs} /> : specs}
+          <CompactSpecsTable rows={specs} />
           {note ? (
-            <p className="mt-2 font-outfit text-[11px] leading-snug text-muted">{note}</p>
+            <p className="mt-2 font-outfit text-[0.6875rem] leading-snug text-muted">{note}</p>
           ) : null}
         </div>
       </div>

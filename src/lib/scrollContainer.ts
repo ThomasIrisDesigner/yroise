@@ -4,7 +4,7 @@ function isScrollableOverflow(overflowY: string) {
   return overflowY === 'auto' || overflowY === 'scroll' || overflowY === 'overlay'
 }
 
-export function getScrollParent(element: HTMLElement): HTMLElement | Window {
+function getScrollParent(element: HTMLElement): HTMLElement | Window {
   let parent = element.parentElement
 
   while (parent) {

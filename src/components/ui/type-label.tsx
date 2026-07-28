@@ -11,7 +11,7 @@ export function TypeLabel({ type, className }: TypeLabelProps) {
   return (
     <p
       className={cn(
-        'type-label font-outfit text-[11px] font-bold uppercase leading-none tracking-[3px] text-muted',
+        'type-label font-outfit text-[0.6875rem] font-bold uppercase leading-none tracking-[3px] text-muted',
         className
       )}
     >

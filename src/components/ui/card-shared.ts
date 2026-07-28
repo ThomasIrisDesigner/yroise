@@ -57,15 +57,3 @@ export const cardCtaFeaturedListWrapClass = 'card-cta-wrap pt-4'
 
 /** Liste Histoires / Collections — 32px haut et bas → 64px entre CTA et image suivante */
 export const listCardStackClass = 'py-8'
-
-export const collectionCardClass =
-  'card-collection collection-item relative flex w-[140px] shrink-0 snap-start flex-col items-center'
-
-export const hublotClass =
-  'hublot h-[120px] w-[120px] overflow-hidden rounded-full bg-surface shadow-[0_2px_8px_rgb(0_0_0/0.08)] transition-shadow duration-150 hover:shadow-[0_4px_16px_rgb(0_0_0/0.12)]'
-
-export const collectionTitleClass =
-  'card-title mt-2.5 w-full text-center font-outfit text-[13px] font-medium leading-[1.3]'
-
-export const collectionTitleLinkClass =
-  'text-text transition-colors duration-150 hover:text-glaz-700 before:absolute before:inset-0 before:content-[""]'

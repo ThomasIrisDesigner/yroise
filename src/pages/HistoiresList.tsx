@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-import { Button } from '@/components/ui/button'
 import { HistoireListCard } from '@/components/features/histoires/HistoireListCard'
+import { ListLoadMore } from '@/components/features/site/ListLoadMore'
 import { PageContainer } from '@/components/features/site/PageContainer'
 import { SectionListHeader } from '@/components/features/site/SectionListHeader'
 import { SitePageShell } from '@/components/features/site/SitePageShell'
@@ -20,7 +20,7 @@ export function HistoiresList() {
       <div className="histoires-list-page flex flex-col bg-background">
         <SectionListHeader
           title="Histoires"
-          layout="centered"
+          tone="histoires"
           className="histoires-list-header"
         />
 
@@ -42,31 +42,13 @@ export function HistoiresList() {
           </ul>
 
           {hasMore ? (
-            <div className="histoires-list-more-block">
-              <hr className="histoires-list-more-separator" aria-hidden />
-              <div className="histoires-list-more flex justify-center">
-                <Button
-                  type="button"
-                  variant="secondary"
-                  size="sm"
-                  showTriangle={false}
-                  onClick={() =>
-                    setVisibleCount((count) =>
-                      Math.min(count + GRID_PAGE_SIZE, rest.length)
-                    )
-                  }
-                >
-                  Voir plus d'histoires
-                  <img
-                    src="/images/Icon_plus.svg"
-                    alt=""
-                    aria-hidden
-                    className="h-4 w-4 shrink-0"
-                    draggable={false}
-                  />
-                </Button>
-              </div>
-            </div>
+            <ListLoadMore
+              className="histoires-list-more-block"
+              label="Voir plus d'histoires"
+              onClick={() =>
+                setVisibleCount((count) => Math.min(count + GRID_PAGE_SIZE, rest.length))
+              }
+            />
           ) : null}
         </PageContainer>
       </div>

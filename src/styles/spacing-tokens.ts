@@ -1,15 +1,15 @@
-/** Gouttière horizontale standard des sections éditoriales (16px · multiple de 8). */
-export const SECTION_PADDING_X = '16px' as const
-
-export const SECTION_PADDING_X_TOKEN = '--space-section-x' as const
-
-/** Classe Tailwind — `px-section` · `pl-section` · `mr-section`… */
-export const SECTION_PADDING_X_CLASS = 'px-section' as const
-
+/**
+ * Espacement — documentation affichée sur /design-system.
+ * Grille de base 8px. La gouttière des sections éditoriales est pilotée par
+ * `--space-section-x` (theme.css), exposée en Tailwind via `px-section`.
+ */
 export const SECTION_PADDING_SPECS = [
-  { token: SECTION_PADDING_X_TOKEN, value: SECTION_PADDING_X },
-  { token: 'classe Tailwind', value: SECTION_PADDING_X_CLASS },
-  { token: 'usage', value: 'contenu éditorial · headers · footers · sliders (pl + scroll-padding)' },
+  { token: '--space-section-x', value: '16px (72px ≥1024px via --page-padding-x-lg)' },
+  { token: 'classe Tailwind', value: 'px-section · pl-section · mr-section…' },
+  {
+    token: 'usage',
+    value: 'contenu éditorial · headers · footers · sliders (pl + scroll-padding)',
+  },
   {
     token: 'exceptions',
     value: 'hero image pleine largeur · overlays plein écran · page design system',

@@ -29,7 +29,7 @@ export function JeunesseReferencesSection({
                   i === sources.length - 1 && 'border-b-0 pb-0'
                 )}
               >
-                <p className={cn(typography.meta, 'leading-[22px] text-text')}>
+                <p className={cn(typography.meta, 'leading-[1.375rem] text-text')}>
                   {source.prefix ? (
                     <>
                       {source.prefix}

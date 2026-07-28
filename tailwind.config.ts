@@ -16,39 +16,34 @@ export default {
       letterSpacing: {
         button: 'var(--button-letter-spacing)',
       },
+      /**
+       * Palette : uniquement les nuances employées dans les maquettes validées.
+       * Les valeurs vivent dans `src/styles/theme.css` (:root) — ne jamais
+       * écrire une couleur en dur ici ni dans un composant.
+       */
       colors: {
         text: rgb('color-text'),
-        'text-muted': rgb('color-text-muted'),
+        muted: rgb('color-text-muted'),
         surface: rgb('color-surface'),
         border: rgb('color-border'),
         'list-separator': rgb('color-list-separator'),
         background: rgb('color-background'),
         'on-dark': rgb('color-text-on-dark'),
-        muted: rgb('color-text-muted'),
         /** Texte principal (#010101) — boutons, fonds sombres neutres */
         primary: rgb('color-text'),
-        /** Accent Glaz primaire */
-        secondary: rgb('glaz-700'),
         glaz: {
-          900: rgb('glaz-900'),
           700: rgb('glaz-700'),
           500: rgb('glaz-500'),
           300: rgb('glaz-300'),
           100: rgb('glaz-100'),
         },
         sable: {
-          900: rgb('sable-900'),
-          700: rgb('sable-700'),
           400: rgb('sable-400'),
-          300: rgb('sable-300'),
           200: rgb('sable-200'),
-          100: rgb('sable-100'),
         },
         ocean: {
           900: rgb('ocean-900'),
-          700: rgb('ocean-700'),
           300: rgb('ocean-300'),
-          100: rgb('ocean-100'),
         },
         aurore: {
           900: rgb('aurore-900'),
@@ -57,8 +52,6 @@ export default {
           100: rgb('aurore-100'),
         },
         danger: rgb('color-danger'),
-        success: rgb('color-success'),
-        warning: rgb('color-warning'),
       },
     },
   },

@@ -1,5 +1,37 @@
 @import "tailwindcss";
 
+/* =========================================================================
+ * YROISE — feuille de styles globale
+ *
+ * CONVENTIONS
+ * - Tailles de texte : toujours en `rem` (1rem = 16px). Jamais de px.
+ * - Espacements, bordures, rayons : en px, sur la grille de 8.
+ * - Couleurs : jamais en dur — uniquement via les variables `:root` ci-dessous,
+ *   consommées par `rgb(var(--token))` ou par les classes Tailwind générées
+ *   dans `tailwind.config.ts`.
+ * - Ce fichier ne contient que ce que Tailwind ne peut pas exprimer :
+ *   variables, layouts responsive complexes, sélecteurs contextuels.
+ *   Tout le reste se fait en classes utilitaires dans les composants.
+ *
+ * RESPONSIVE — points de rupture, du plus petit au plus grand
+ * - base            : mobile (mobile-first, aucune media query)
+ * - ≥ 480px         : cards des pages liste — largeur fluide jusqu'à 30rem
+ * - ≥ 520px         : menu mobile en version tablette (titres 2rem, gap 64px)
+ * - ≥ 768px         : tablette — 2 colonnes, sections éditoriales sur 2 colonnes
+ * - ≥ 1024px        : desktop — 3 colonnes, header étendu, grille 1280px
+ * - ≥ 1281px        : ajustement fin de la hauteur du header
+ * Les règles desktop sont préfixées par `[data-prototype-view='desktop']` :
+ * c'est le mode d'affichage du prototype (plein écran vs mockup mobile),
+ * pas une contrainte du site final.
+ *
+ * SOMMAIRE
+ *   1. Variables (:root)          5. Pages liste
+ *   2. Base & utilitaires         6. Sections home
+ *   3. Carte immersive            7. Grille & pages article
+ *   4. Header & navigation        8. Footer
+ *                                 9. Media queries (768 / 1024)
+ * ========================================================================= */
+
 /*
  * Tailwind v4 wrappe hover: / group-hover: dans @media (hover: hover).
  * Firefox (Mac, trackpad / hybrid) peut échouer ce media query → pas de survol
@@ -20,25 +52,18 @@
   --color-text-on-dark: 255 255 255;
 
   /* Glaz · Bleu-vert breton (Collections + accents) */
-  --glaz-900: 25 72 75;
   --glaz-700: 45 125 138;
   --glaz-500: 0 200 160;
   --glaz-300: 170 245 200;
   --glaz-100: 220 237 230;
 
-  /* Sable · Archives & éditorial (Histoires) */
-  --sable-900: 125 75 38;
-  --sable-700: 226 160 131;
+  /* Sable · Archives & éditorial (La trouvaille) */
   --sable-400: 244 221 164;
-  --sable-300: 235 200 185;
   --sable-200: 250 240 215;
-  --sable-100: 250 237 230;
 
   /* Océan · Footer & accents bleus */
   --ocean-900: 27 36 67;
-  --ocean-700: 0 45 255;
   --ocean-300: 140 220 255;
-  --ocean-100: 215 235 250;
 
   /* Aurore · Jeunesse */
   --aurore-900: 128 40 40;
@@ -48,14 +73,11 @@
 
   /* Boutons */
   --color-button-primary-hover: 51 51 51;
-  --button-font-size: 14px;
-  --button-font-weight: 500;
+  --button-font-size: 0.875rem;
   --button-letter-spacing: 0.03em;
 
-  /* États */
+  /* État d'erreur — message login, badge lecture vidéo */
   --color-danger: 220 38 38;
-  --color-success: 22 163 74;
-  --color-warning: 245 158 11;
 
   --font-ui: "Outfit", ui-sans-serif, system-ui, sans-serif;
   --font-editorial: "Source Serif 4", ui-serif, Georgia, serif;
@@ -70,9 +92,6 @@
   --page-max-width: 1280px;
   --page-padding-x-lg: 72px;
   --page-padding-x-header: 24px;
-
-  /* Navigation header desktop — étapes responsive */
-  --breakpoint-header-nav-compact: 1240px;
 
   /* Logo header — tailles mobile (mockup) : expanded 120 / collapsed 96 */
   --header-logo-width-expanded: 120px;
@@ -93,8 +112,6 @@
   --article-content-max-width: 792px;
   --search-panel-max-width: 792px;
   --article-hero-max-width: 1600px;
-  --breakpoint-article-md: 768px;
-
 
   /* Hublot carousel — ombre interne (blur 20, noir 80 %) */
   --shadow-hublot-inset: inset 0 0 20px 0 rgb(0 0 0 / 0.8);
@@ -128,15 +145,6 @@ body {
   display: none;
   width: 0;
   height: 0;
-}
-
-/* Labels de type — couleur tonale selon la section parente */
-.section-histoires .type-label {
-  color: rgb(var(--sable-900));
-}
-
-.section-jeunesse .type-label {
-  color: rgb(var(--aurore-700));
 }
 
 /* Header site — défile avec le contenu ; barre compacte épinglée au scroll vers le haut */
@@ -370,7 +378,7 @@ body {
   }
 
   [data-prototype-view='desktop'] .mobile-menu-link {
-    font-size: 32px;
+    font-size: 2rem;
     letter-spacing: 3px;
   }
 
@@ -381,13 +389,13 @@ body {
   }
 
   [data-prototype-view='desktop'] .mobile-menu-sub-lead {
-    font-size: 19px;
+    font-size: 1.1875rem;
     font-weight: 700;
     letter-spacing: 1px;
   }
 
   [data-prototype-view='desktop'] .mobile-menu-sub {
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 500;
     letter-spacing: 1px;
   }
@@ -417,14 +425,34 @@ body {
   background: rgb(var(--color-surface));
 }
 
-/* Page liste Histoires — mobile (colonne) */
-.histoires-list-grid {
+/*
+ * PAGES LISTE (Histoires · Collections · Jeunesse) — base mobile.
+ * Mobile : une colonne · 768px : deux colonnes · 1024px : trois colonnes.
+ * Les règles communes aux trois rubriques sont groupées ; seuls les écarts
+ * (gouttières, troncatures) sont déclarés par rubrique.
+ */
+.histoires-list-grid,
+.collections-list-grid,
+.jeunesse-list-grid {
   list-style: none;
   margin: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 8px 40px 40px;
+  padding: 40px;
+}
+
+.histoires-list-grid {
+  /* La une occupe déjà l'espace haut : gouttière réduite sous le bandeau noir. */
+  padding-top: 8px;
+}
+
+.collections-list-grid {
+  padding-top: 0;
+}
+
+.jeunesse-list-grid {
+  gap: 32px;
 }
 
 .histoires-list-page:not(:has(.histoires-list-featured)) .histoires-list-grid {
@@ -435,19 +463,24 @@ body {
   padding: 40px;
 }
 
-.histoires-list-main.page-container {
+/* Les grilles gèrent elles-mêmes leur gouttière (40px), pas le PageContainer. */
+.histoires-list-main.page-container,
+.collections-list-main.page-container,
+.jeunesse-list-main.page-container {
   padding-inline: 0;
 }
 
-.histoires-list-more-block {
+/* Pied de liste — séparateur + bouton « Voir plus » (composant ListLoadMore) */
+.histoires-list-more-block,
+.collections-list-more-block,
+.jeunesse-list-more-block {
   display: flex;
   flex-direction: column;
   gap: 32px;
-  padding-top: 32px;
-  padding-bottom: 32px;
+  padding-block: 32px;
 }
 
-.histoires-list-more-separator {
+.list-more-separator {
   width: 100%;
   height: 1px;
   border: 0;
@@ -456,81 +489,12 @@ body {
   background-color: rgb(var(--color-list-separator) / 0.1);
 }
 
-.histoires-list-grid .card-excerpt {
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
-}
-
-/* Page liste Collections — mobile (colonne) */
-.collections-list-grid {
-  list-style: none;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 40px 40px;
-}
-
-.collections-list-main.page-container {
-  padding-inline: 0;
-}
-
-.collections-list-more-block {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  padding-top: 32px;
-  padding-bottom: 32px;
-}
-
-.collections-list-more-separator {
-  width: 100%;
-  height: 1px;
-  border: 0;
-  margin: 0;
-  padding: 0;
-  background-color: rgb(var(--color-list-separator) / 0.1);
-}
-
+.histoires-list-grid .card-excerpt,
 .collections-list-grid .collection-list-card-excerpt {
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
-}
-
-/* Page liste Jeunesse — mobile (colonne) */
-.jeunesse-list-grid {
-  list-style: none;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 32px;
-  padding: 40px;
-}
-
-.jeunesse-list-main.page-container {
-  padding-inline: 0;
-}
-
-.jeunesse-list-more-block {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  padding-top: 32px;
-  padding-bottom: 32px;
-}
-
-.jeunesse-list-more-separator {
-  width: 100%;
-  height: 1px;
-  border: 0;
-  margin: 0;
-  padding: 0;
-  background-color: rgb(var(--color-list-separator) / 0.1);
 }
 
 /* Slider horizontal — aligné sur la gouttière section, débordement peek à droite */
@@ -539,8 +503,7 @@ body {
   scroll-padding-left: var(--space-section-x);
 }
 
-.slider .card:last-child,
-.slider .collection-item:last-child {
+.slider .card:last-child {
   margin-right: var(--space-section-x);
 }
 
@@ -700,6 +663,21 @@ body {
 
 .site-footer-stat {
   min-width: 0;
+}
+
+/*
+ * Grands mobiles & petites tablettes (480–767px) — zone intermédiaire.
+ * Les cards des pages liste sont calées sur 310px (largeur utile d'un mobile
+ * 390px). Sans cette règle elles resteraient figées jusqu'à 768px et
+ * laisseraient d'énormes marges vides. On les laisse grandir jusqu'à 30rem,
+ * limite de confort de lecture pour les extraits (~65 signes).
+ */
+@media (min-width: 480px) and (max-width: 767px) {
+  [data-prototype-view='desktop'] .histoire-list-card,
+  [data-prototype-view='desktop'] .collection-list-card,
+  [data-prototype-view='desktop'] .jeunesse-list-card {
+    max-width: 30rem;
+  }
 }
 
 /* Search panel — desktop ≥768px (vue prototype plein écran) */
@@ -1280,21 +1258,75 @@ body {
     gap: 64px;
   }
 
-  /* Pages liste — H1 desktop ≥1024 */
+  /*
+   * PAGES LISTE ≥1024 — Figma 130:8405 (Histoires) · 130:10340 (Collections).
+   * Trois colonnes, en-tête et pied communs aux trois rubriques.
+   */
+  [data-prototype-view='desktop'] .histoires-list-header,
+  [data-prototype-view='desktop'] .collections-list-header,
+  [data-prototype-view='desktop'] .jeunesse-list-header {
+    gap: 16px;
+    padding: 64px 40px 40px;
+  }
+
   [data-prototype-view='desktop'] .histoires-list-header h1,
   [data-prototype-view='desktop'] .collections-list-header h1,
   [data-prototype-view='desktop'] .jeunesse-list-header h1 {
-    font-size: 40px;
+    font-size: 2.5rem;
     letter-spacing: 6px;
   }
 
-  /* Page liste Histoires — desktop ≥1024 (Figma 130:8405) */
-  [data-prototype-view='desktop'] .histoires-list-header {
-    gap: 16px;
-    padding: 40px;
-    padding-top: 64px;
+  [data-prototype-view='desktop'] .histoires-list-grid,
+  [data-prototype-view='desktop'] .collections-list-grid,
+  [data-prototype-view='desktop'] .jeunesse-list-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px 64px;
+    padding-block: 56px 0;
   }
 
+  /* Cards Collections : hublot + CTA → interligne vertical plus généreux. */
+  [data-prototype-view='desktop'] .collections-list-grid {
+    row-gap: 72px;
+  }
+
+  [data-prototype-view='desktop'] .histoires-list-more-block,
+  [data-prototype-view='desktop'] .collections-list-more-block,
+  [data-prototype-view='desktop'] .jeunesse-list-more-block {
+    padding-bottom: 56px;
+  }
+
+  /* Titres et extraits de cards en grille — échelle desktop */
+  [data-prototype-view='desktop'] .histoires-list-grid .card-title,
+  [data-prototype-view='desktop'] .jeunesse-list-grid .card-title,
+  [data-prototype-view='desktop'] .histoire-list-card--featured .card-title {
+    font-size: 1.375rem;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0.22px;
+  }
+
+  [data-prototype-view='desktop'] .collections-list-grid .collection-list-card-title {
+    font-size: 1.375rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  [data-prototype-view='desktop'] .histoires-list-grid .card-excerpt,
+  [data-prototype-view='desktop'] .collections-list-grid .collection-list-card-excerpt {
+    font-size: 0.875rem;
+    line-height: 1.55;
+    -webkit-line-clamp: 4;
+  }
+
+  /* CTA de card — hauteur uniforme 40px sur les trois rubriques */
+  [data-prototype-view='desktop'] .histoires-list-grid .card-cta-wrap .inline-flex,
+  [data-prototype-view='desktop'] .jeunesse-list-grid .card-cta-wrap .inline-flex,
+  [data-prototype-view='desktop'] .histoire-list-card--featured .card-cta-wrap .inline-flex,
+  [data-prototype-view='desktop'] .collection-list-card-cta .inline-flex {
+    height: 40px;
+  }
+
+  /* La une Histoires — deux colonnes larges */
   [data-prototype-view='desktop'] .histoires-list-featured-inner {
     padding-block: 56px;
     padding-inline: 120px;
@@ -1306,110 +1338,11 @@ body {
 
   [data-prototype-view='desktop'] .histoire-list-card--featured .card-title {
     margin-bottom: 0;
-    font-size: 22px;
-    font-weight: 600;
-    line-height: 1.4;
-    letter-spacing: 0.22px;
   }
 
   [data-prototype-view='desktop'] .histoire-list-card--featured .card-excerpt {
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 1.55;
-  }
-
-  [data-prototype-view='desktop'] .histoires-list-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 40px 64px;
-    padding-block: 56px 0;
-  }
-
-  [data-prototype-view='desktop'] .histoires-list-grid .card-title {
-    font-size: 22px;
-    font-weight: 600;
-    line-height: 1.4;
-    letter-spacing: 0.22px;
-  }
-
-  [data-prototype-view='desktop'] .histoires-list-grid .card-excerpt {
-    font-size: 14px;
-    line-height: 1.55;
-    -webkit-line-clamp: 4;
-  }
-
-  [data-prototype-view='desktop'] .histoires-list-more-block {
-    padding-top: 32px;
-    padding-bottom: 56px;
-  }
-
-  [data-prototype-view='desktop'] .histoires-list-grid .card-cta-wrap .inline-flex {
-    height: 40px;
-  }
-
-  [data-prototype-view='desktop'] .histoire-list-card--featured .card-cta-wrap .inline-flex {
-    height: 40px;
-  }
-
-  /* Page liste Collections — desktop ≥1024 (Figma 130:10340) */
-  [data-prototype-view='desktop'] .collections-list-header {
-    gap: 16px;
-    padding: 40px;
-    padding-top: 64px;
-  }
-
-  [data-prototype-view='desktop'] .collections-list-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 72px 64px;
-    padding-block: 56px 0;
-  }
-
-  [data-prototype-view='desktop'] .collections-list-grid .collection-list-card-title {
-    font-size: 22px;
-    font-weight: 600;
-    line-height: 1.3;
-  }
-
-  [data-prototype-view='desktop'] .collections-list-grid .collection-list-card-excerpt {
-    font-size: 14px;
-    line-height: 1.55;
-    -webkit-line-clamp: 4;
-  }
-
-  [data-prototype-view='desktop'] .collections-list-more-block {
-    padding-top: 32px;
-    padding-bottom: 56px;
-  }
-
-  [data-prototype-view='desktop'] .collection-list-card-cta .inline-flex {
-    height: 40px;
-  }
-
-  /* Page liste Jeunesse — desktop ≥1024 */
-  [data-prototype-view='desktop'] .jeunesse-list-header {
-    gap: 16px;
-    padding: 40px;
-    padding-top: 64px;
-  }
-
-  [data-prototype-view='desktop'] .jeunesse-list-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 40px 64px;
-    padding-block: 56px 0;
-  }
-
-  [data-prototype-view='desktop'] .jeunesse-list-grid .card-title {
-    font-size: 22px;
-    font-weight: 600;
-    line-height: 1.4;
-    letter-spacing: 0.22px;
-  }
-
-  [data-prototype-view='desktop'] .jeunesse-list-more-block {
-    padding-top: 32px;
-    padding-bottom: 56px;
-  }
-
-  [data-prototype-view='desktop'] .jeunesse-list-grid .card-cta-wrap .inline-flex {
-    height: 40px;
   }
 
   [data-prototype-view='desktop'] .histoire-related-header-inner.home-section-header--carousel {

@@ -32,7 +32,7 @@ function TrouvailleCta({ className }: { className?: string }) {
         asChild
         variant="secondary"
         showTriangle
-        className="home-trouvaille-cta-btn h-10 gap-2 px-4 py-2 text-[13px] font-normal tracking-[0.65px]"
+        className="home-trouvaille-cta-btn h-10 gap-2 px-4 py-2 text-[0.8125rem] font-normal tracking-[0.65px]"
       >
         <Link to="#">{HOME_TROUVAILLE.ctaLabel}</Link>
       </Button>
@@ -57,7 +57,7 @@ export function TrouvailleSection() {
                 {HOME_TROUVAILLE.label}
               </p>
 
-              <p className={`home-trouvaille-copy ${typography.trouvailleChapeau}`}>
+              <p className={`home-trouvaille-copy ${typography.cardExcerpt}`}>
                 {HOME_TROUVAILLE.chapeau}
               </p>
             </div>

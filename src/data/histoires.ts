@@ -1,6 +1,7 @@
+import type { HistoireContentType } from '@/data/contentTypes'
 import { LOREM } from '@/data/placeholders'
 
-export type HistoireType = 'curiosite' | 'exposition'
+export type HistoireType = HistoireContentType
 
 export interface HistoireBillet {
   slug: string
@@ -11,13 +12,6 @@ export interface HistoireBillet {
   fonds?: string
   imageSrc?: string
 }
-
-export { CONTENT_TYPE_LABELS as HISTOIRE_TYPE_LABELS } from '@/data/contentTypes'
-
-export const HISTOIRES_LIST_INTRO = {
-  chapeau:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.',
-} as const
 
 export const HISTOIRES_LIST: HistoireBillet[] = [
   {
@@ -98,25 +92,8 @@ export const HISTOIRES_LIST: HistoireBillet[] = [
   },
 ]
 
-export const HISTOIRES_RECENTES = HISTOIRES_LIST.slice(0, 3)
-
 /** Carrousel home — 4 cartes desktop, scroll mobile. */
 export const HISTOIRES_HOME_CAROUSEL = HISTOIRES_LIST.slice(0, 4)
-
-export const HISTOIRES_COLLECTION_EN_MER: HistoireBillet[] = [
-  {
-    slug: 'dumont-durville-1837',
-    type: 'curiosite',
-    titre: "L'expédition de Dumont d'Urville",
-    accroche: '1837 — trois ans en mer depuis Brest',
-  },
-  {
-    slug: 'cartographie-marine-xviii',
-    type: 'curiosite',
-    titre: 'La grande cartographie marine du XVIIIe',
-    accroche: 'Quand les ingénieurs dessinaient la mer',
-  },
-]
 
 export const HISTOIRE_DETAIL_DEFAULT = {
   auteur: 'Carole, bibliothécaire',

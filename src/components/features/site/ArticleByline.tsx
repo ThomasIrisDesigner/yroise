@@ -11,7 +11,7 @@ export function ArticleByline({ auteur }: ArticleBylineProps) {
   const role = commaIdx >= 0 ? auteur.slice(commaIdx + 1).trim() : null
 
   return (
-    <p className={typography.articleByline}>
+    <p className={typography.articleMetaCaps}>
       Par <span className="font-semibold">{name}</span>
       {role ? (
         <>

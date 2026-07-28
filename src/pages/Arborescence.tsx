@@ -53,9 +53,9 @@ function LevelBadge({ level }: { level: NavTreeItem['level'] }) {
   return (
     <span
       className={cn(
-        'inline-flex shrink-0 rounded px-1.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wide',
+        'inline-flex shrink-0 rounded px-1.5 py-0.5 font-mono text-[0.625rem] font-medium uppercase tracking-wide',
         level === 'page'
-          ? 'bg-glaz-100 text-glaz-900'
+          ? 'bg-glaz-100 text-glaz-700'
           : 'bg-surface text-muted'
       )}
     >
@@ -95,10 +95,10 @@ function TreeItem({ item }: { item: NavTreeItem }) {
         {item.label}
       </span>
       {item.slug ? (
-        <code className="font-mono text-[11px] text-muted">{item.slug}</code>
+        <code className="font-mono text-[0.6875rem] text-muted">{item.slug}</code>
       ) : null}
       {item.external ? (
-        <span className="inline-flex items-center gap-1 font-outfit text-[11px] text-muted">
+        <span className="inline-flex items-center gap-1 font-outfit text-[0.6875rem] text-muted">
           <ExternalLink className="size-3" aria-hidden />
           hors scope / externe
         </span>
@@ -106,14 +106,14 @@ function TreeItem({ item }: { item: NavTreeItem }) {
       {href && prototyped ? (
         <Link
           to={href}
-          className="font-outfit text-[11px] font-medium text-glaz-700 hover:underline"
+          className="font-outfit text-[0.6875rem] font-medium text-glaz-700 hover:underline"
         >
           Ouvrir
           {href !== item.slug ? ' (ex.)' : ''}
         </Link>
       ) : null}
       {href && !prototyped ? (
-        <span className="font-outfit text-[11px] text-muted">non branché</span>
+        <span className="font-outfit text-[0.6875rem] text-muted">non branché</span>
       ) : null}
     </li>
   )
@@ -160,7 +160,7 @@ export function Arborescence() {
           (visionneuse Gallica) hors scope.
         </p>
 
-        <div className="mb-10 flex flex-wrap gap-4 rounded-lg border border-border bg-surface/50 px-4 py-3 font-outfit text-[12px] text-muted">
+        <div className="mb-10 flex flex-wrap gap-4 rounded-lg border border-border bg-surface/50 px-4 py-3 font-outfit text-[0.75rem] text-muted">
           <span className="inline-flex items-center gap-1.5">
             <LevelBadge level="page" /> page dédiée (nav)
           </span>
@@ -270,18 +270,18 @@ export function Arborescence() {
                     <span className="min-w-0 flex-1 font-outfit text-sm text-text">
                       {link.label}
                     </span>
-                    <code className="font-mono text-[11px] text-muted">
+                    <code className="font-mono text-[0.6875rem] text-muted">
                       {link.slug}
                     </code>
                     {prototyped ? (
                       <Link
                         to={link.slug}
-                        className="font-outfit text-[11px] font-medium text-glaz-700 hover:underline"
+                        className="font-outfit text-[0.6875rem] font-medium text-glaz-700 hover:underline"
                       >
                         Ouvrir
                       </Link>
                     ) : (
-                      <span className="font-outfit text-[11px] text-muted">
+                      <span className="font-outfit text-[0.6875rem] text-muted">
                         non branché
                       </span>
                     )}
@@ -313,7 +313,7 @@ export function Arborescence() {
                       {step.screens.join(' · ')}
                     </p>
                   </div>
-                  <span className="font-mono text-[10px] uppercase text-muted">
+                  <span className="font-mono text-[0.625rem] uppercase text-muted">
                     {step.status}
                   </span>
                 </li>

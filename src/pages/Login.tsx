@@ -7,7 +7,6 @@ import { Input } from '@/components/ui/input'
 import { LOGIN_ILLUSTRATION } from '@/config/assets'
 import { PROJECT_DISPLAY_NAME } from '@/config/project'
 import { loginWithPassword } from '@/lib/auth'
-import { typography } from '@/styles/typography'
 
 export function Login() {
   const navigate = useNavigate()
@@ -45,9 +44,13 @@ export function Login() {
 
             <div className="w-full md:w-[360px]">
               <CardHeader className="p-0">
-                <p className={typography.projectKicker}>{PROJECT_DISPLAY_NAME}</p>
-                <h1 className={typography.titleXl}>Accès sécurisé</h1>
-                <p className={typography.pageSubtitle}>
+                <p className="font-outfit text-base font-semibold uppercase tracking-[2px] text-text">
+                  {PROJECT_DISPLAY_NAME}
+                </p>
+                <h1 className="font-outfit text-[1.75rem] font-bold leading-tight text-text">
+                  Accès sécurisé
+                </h1>
+                <p className="font-editorial text-[1.1875rem] leading-[1.6] text-text/70">
                   Entrez le mot de passe pour accéder au projet.
                 </p>
               </CardHeader>
@@ -55,7 +58,9 @@ export function Login() {
               <CardContent className="p-0 pt-7">
                 <form onSubmit={onSubmit} className="grid gap-7">
                   <div className="grid gap-2">
-                    <p className={typography.titleM}>Mot de passe</p>
+                    <p className="font-outfit text-base font-medium leading-[1.3] text-text">
+                      Mot de passe
+                    </p>
                     <Input
                       autoFocus
                       type="password"

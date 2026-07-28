@@ -118,7 +118,3 @@ export const FOOTER_LINKS = [
   { label: 'Accessibilité', slug: '/accessibilite' },
   { label: 'Mentions légales · Cookies', slug: '/mentions-legales' },
 ] as const
-
-export const COLLECTION_SLUGS = NAV_SECTIONS.find((s) => s.id === 'collections')!.items
-  .filter((i) => i.level === 'sub')
-  .map((i) => ({ label: i.label, slug: i.slug! }))

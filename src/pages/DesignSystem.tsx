@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { CollectionListCard } from '@/components/features/collections/CollectionListCard'
 import {
+  CompactSpecsTable,
   DsTwoColumnBlock,
   type CompactSpecRow,
 } from '@/components/features/design-system/DsTwoColumnBlock'
@@ -21,8 +22,8 @@ import { COLLECTIONS } from '@/data/collections'
 import { resetPageScroll } from '@/lib/resetPageScroll'
 import {
   BUTTON_COMMON_SPECS,
-  BUTTON_SIZE_LINES,
-  BUTTON_VARIANT_COLOR_SPECS,
+  BUTTON_SIZE_SPECS,
+  BUTTON_VARIANT_SPECS,
 } from '@/styles/button-tokens'
 import {
   COLOR_TOKEN_SECTIONS,
@@ -38,290 +39,57 @@ import { TYPE_LABEL_BASE_SPECS } from '@/styles/label-tokens'
 import { SECTION_PADDING_SPECS } from '@/styles/spacing-tokens'
 import {
   typography,
+  typographyTokensByGroup,
   TYPOGRAPHY_FONT_EDITORIAL,
   TYPOGRAPHY_FONT_FAMILY,
-  TYPOGRAPHY_FONT_UI,
-  type TypographyStyleSpec,
 } from '@/styles/typography'
 
 /**
- * Typographie — organisée par contexte d’usage pour les développeurs.
- * Source : `typography` dans src/styles/typography.ts (uniquement tokens utilisés).
+ * Typographie — dérivée de TYPOGRAPHY_TOKENS (src/styles/typography.ts).
+ * Aucune valeur n'est ressaisie ici : la doc suit automatiquement le code.
  */
-const TYPO_PAGES: TypographyStyleSpec[] = [
-  {
-    key: 'titleXl',
-    token: 'titleXl',
-    usage: 'H1 pages liste (Histoires, Collections, Jeunesse)',
-    label: 'H1 liste',
-    className: typography.titleXl,
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 28,
-    weight: 700,
-    color: '#010101',
-    lineHeight: '1.25',
-    letterSpacing: '0.1px',
-    contextNote:
-      'Sur les pages liste : uppercase + tracking 3px (mobile) / 6px (≥1024). Triangle TitleH1Triangle à droite.',
-  },
-  {
-    key: 'homeSectionLabel',
-    token: 'homeSectionLabel',
-    usage: 'Titres de rubrique home — HISTOIRES, COLLECTIONS, CARTE, JEUNESSE',
-    label: 'Rubrique home',
-    className: typography.homeSectionLabel,
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 24,
-    weight: 600,
-    color: '#010101',
-    lineHeight: '1.25',
-    letterSpacing: '2px',
-  },
-  {
-    key: 'trouvailleLabel',
-    token: 'trouvailleLabel',
-    usage: 'Label « La trouvaille »',
-    label: 'La trouvaille',
-    className: typography.trouvailleLabel,
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 20,
-    weight: 600,
-    color: '#010101',
-    lineHeight: '1.4',
-    letterSpacing: '0.4px',
-  },
-  {
-    key: 'titleL',
-    token: 'titleL',
-    usage: 'Titres de section / accroches (ex. carte home)',
-    label: 'Titre L',
-    className: typography.titleL,
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 20,
-    weight: 600,
-    color: '#010101',
-    lineHeight: '1.375',
-    letterSpacing: 'normal',
-  },
-  {
-    key: 'sectionTitleRebond',
-    token: 'sectionTitleRebond',
-    usage: 'Titre « Nos autres histoires » (fond sombre)',
-    label: 'Titre rebonds',
-    className: typography.sectionTitleRebond,
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 19,
-    weight: 600,
-    color: '#FFFFFF',
-    lineHeight: '1.25',
-    letterSpacing: '1px',
-    contextNote: 'md : 1.5rem · lg : 2rem. Ornement SectionTitleOrnament en glaz-700.',
-  },
-  {
-    key: 'sectionTitleSm',
-    token: 'sectionTitleSm',
-    usage: 'Titres compacts — Sources & références',
-    label: 'Titre compact',
-    className: typography.sectionTitleSm,
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 14,
-    weight: 600,
-    color: 'Contextuelle',
-    lineHeight: '1.25',
-    letterSpacing: '1px',
-  },
+const TYPO_PAGES = typographyTokensByGroup('pages')
+const TYPO_UI = typographyTokensByGroup('ui')
+const TYPO_ARTICLE = typographyTokensByGroup('article')
+
+type TypographyRow = (typeof TYPO_PAGES)[number]
+
+/** Sommaire — l'ordre de ce tableau pilote la navigation et les ancres. */
+const DS_SECTIONS = [
+  { id: 'conventions', nav: 'Conventions' },
+  { id: 'couleurs', nav: 'Couleurs' },
+  { id: 'typographie', nav: 'Typographie' },
+  { id: 'ornements', nav: 'Ornements' },
+  { id: 'boutons', nav: 'Boutons' },
+  { id: 'labels', nav: 'Labels' },
+  { id: 'cards', nav: 'Cards' },
+  { id: 'espacement', nav: 'Espacement' },
+] as const
+
+const SOURCE_FILE_SPECS: CompactSpecRow[] = [
+  { token: 'Couleurs', value: 'src/styles/theme.css (:root) + tailwind.config.ts' },
+  { token: 'Typographie', value: 'src/styles/typography.ts — TYPOGRAPHY_TOKENS' },
+  { token: 'Layout & responsive', value: 'src/styles/theme.css' },
+  { token: 'Composants UI', value: 'src/components/ui/' },
+  { token: 'Composants métier', value: 'src/components/features/' },
+  { token: 'Contenus de démo', value: 'src/data/' },
 ]
 
-const TYPO_UI: TypographyStyleSpec[] = [
-  {
-    key: 'cardTitleEditorial',
-    token: 'cardTitleEditorial',
-    usage: 'Titres cards Histoires / Collections / rebonds',
-    label: 'Titre card',
-    className: typography.cardTitleEditorial,
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 22,
-    weight: 500,
-    color: '#010101',
-    lineHeight: '1.875rem',
-    letterSpacing: '0.1px',
-  },
-  {
-    key: 'cardExcerpt',
-    token: 'cardExcerpt',
-    usage: 'Extraits de cards · accroche La trouvaille (alias trouvailleChapeau)',
-    label: 'Extrait',
-    className: typography.cardExcerpt,
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 16,
-    weight: 400,
-    color: '#010101',
-    lineHeight: '1.5rem',
-    letterSpacing: '0.1px',
-  },
-  {
-    key: 'meta',
-    token: 'meta',
-    usage: 'Métadonnées — footer, search, références',
-    label: 'Meta',
-    className: typography.meta,
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 13,
-    weight: 400,
-    color: '#71717a',
-    lineHeight: '1.375',
-    letterSpacing: 'normal',
-  },
-  {
-    key: 'uiLink',
-    token: 'uiLink',
-    usage: 'Liens footer (couleur via classe contextuelle)',
-    label: 'Lien UI',
-    className: typography.uiLink,
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 13,
-    weight: 400,
-    color: 'Contextuelle',
-    lineHeight: '1.375',
-    letterSpacing: 'normal',
-  },
-  {
-    key: 'uiXs',
-    token: 'uiXs',
-    usage: 'Microcopy — références, légendes secondaires',
-    label: 'UI xs',
-    className: typography.uiXs,
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 11,
-    weight: 400,
-    color: '#71717a',
-    lineHeight: '1.25',
-    letterSpacing: 'normal',
-  },
-  {
-    key: 'editorialCaption',
-    token: 'editorialCaption',
-    usage: 'Légende-titre figures GMB',
-    label: 'Légende-titre',
-    className: typography.editorialCaption,
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 14,
-    weight: 400,
-    color: '#71717a',
-    lineHeight: '1.5',
-    letterSpacing: '0.1px',
-  },
+const CONVENTION_SPECS: CompactSpecRow[] = [
+  { token: 'Tailles de texte', value: 'toujours en rem (1rem = 16px), jamais en px' },
+  { token: 'Espacements', value: 'en px, sur la grille de 8 (8 · 16 · 24 · 32 · 40…)' },
+  { token: 'Couleurs', value: 'jamais en dur — via un token, jamais de #hex dans un composant' },
+  { token: 'Typographie', value: 'className={typography.<token>} — pas de classe typo ad hoc' },
+  { token: 'Priorité', value: 'classes Tailwind ; theme.css réservé aux layouts complexes' },
 ]
 
-const TYPO_ARTICLE: TypographyStyleSpec[] = [
-  {
-    key: 'articleRubrique',
-    token: 'articleRubrique',
-    usage: "Fil d'Ariane rubrique (via SectionRubriqueLink)",
-    label: 'Rubrique',
-    className: typography.articleRubrique,
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 12,
-    weight: 700,
-    color: '#2D7D8A',
-    lineHeight: '1.4',
-    letterSpacing: '3px',
-  },
-  {
-    key: 'articleTitle',
-    token: 'articleTitle',
-    usage: 'H1 pages article',
-    label: 'H1 article',
-    className: typography.articleTitle,
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 32,
-    weight: 600,
-    color: '#010101',
-    lineHeight: '1.2',
-    letterSpacing: '0.1px',
-    contextNote: 'Desktop (≥768px) : 2.5rem (40px).',
-  },
-  {
-    key: 'chapeau',
-    token: 'chapeau',
-    usage: 'Chapô sous le H1',
-    label: 'Chapô',
-    className: typography.chapeau,
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 19,
-    weight: 400,
-    color: '#010101',
-    lineHeight: '1.4',
-    letterSpacing: '0.1px',
-  },
-  {
-    key: 'articleByline',
-    token: 'articleByline',
-    usage: 'Auteur sous le chapô (alias articleMetaCaps)',
-    label: 'Byline',
-    className: typography.articleByline,
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 12,
-    weight: 400,
-    color: '#010101',
-    lineHeight: '1.5',
-    letterSpacing: '2px',
-    contextNote: 'PAR / rôle en regular · prénom en medium.',
-  },
-  {
-    key: 'articleMetaCaps',
-    token: 'articleMetaCaps',
-    usage: 'Crédit figure, légende type',
-    label: 'Meta caps',
-    className: typography.articleMetaCaps,
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 12,
-    weight: 400,
-    color: '#010101',
-    lineHeight: '1.5',
-    letterSpacing: '2px',
-  },
-  {
-    key: 'articleHeading',
-    token: 'articleHeading',
-    usage: "Intertitres dans le corps d'article",
-    label: 'Intertitre',
-    className: typography.articleHeading,
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 24,
-    weight: 700,
-    color: '#010101',
-    lineHeight: '1.5',
-    letterSpacing: '0.5px',
-  },
-  {
-    key: 'editorialBody',
-    token: 'editorialBody',
-    usage: 'Corps de texte des billets (Source Serif 4)',
-    label: 'Corps',
-    className: typography.editorialBody,
-    fontFamily: TYPOGRAPHY_FONT_EDITORIAL,
-    sizePx: 19,
-    weight: 400,
-    color: '#010101',
-    lineHeight: '1.6',
-    letterSpacing: 'normal',
-    contextNote: 'Empiler les blocs avec typography.editorialBodyStack (gap 24px).',
-  },
-  {
-    key: 'editorialQuote',
-    token: 'editorialQuote',
-    usage: 'Citation éditoriale (bloc GMB)',
-    label: 'Citation',
-    className: typography.editorialQuote,
-    fontFamily: TYPOGRAPHY_FONT_EDITORIAL,
-    sizePx: 20,
-    weight: 600,
-    color: '#010101',
-    lineHeight: '1.6',
-    letterSpacing: 'normal',
-    contextNote: 'Semibold italic.',
-  },
+const BREAKPOINT_SPECS: CompactSpecRow[] = [
+  { token: 'base', value: 'Mobile — une colonne, gouttières 16px (contenu) / 40px (listes)' },
+  { token: '≥ 480px', value: 'Cards des pages liste jusqu’à 30rem au lieu de 310px' },
+  { token: '≥ 520px', value: 'Menu mobile en version tablette — titres 2rem, gap 64px' },
+  { token: '≥ 768px', value: 'Deux colonnes · sections home sur deux colonnes · grille article' },
+  { token: '≥ 1024px', value: 'Trois colonnes · header étendu · conteneur 1280px, marges 72px' },
+  { token: '≥ 1281px', value: 'Header étendu à 80px de haut' },
 ]
 
 const CARD_COLLECTION_LIST_SPECS: CompactSpecRow[] = [
@@ -335,30 +103,13 @@ const CARD_COLLECTION_HOME_SPECS: CompactSpecRow[] = [
   { token: 'composant', value: 'CollectionsCarousel (pas CollectionListCard)' },
   { token: 'hublot mobile', value: '198×198px · border 9px · hover glaz-700' },
   { token: 'hublot desktop', value: '280×280px · border 9px · hover glaz-700' },
-  { token: 'titre', value: 'Outfit 600 · 22px desktop / 20px mobile · hover glaz-700' },
+  { token: 'titre', value: 'Outfit 600 · 1.375rem desktop / 1.25rem mobile · hover glaz-700' },
   { token: 'frises', value: 'FriseHaut fill glaz-100 au-dessus et en dessous' },
 ]
 
 const JEUNESSE_TYPE_LABEL_SPECS: CompactSpecRow[] = [
-  { token: 'types', value: 'JEU · SÉQUENCE (page liste Jeunesse uniquement)' },
+  { token: 'types', value: 'JEU · ATELIER (page liste Jeunesse uniquement)' },
   { token: 'couleur', value: 'text-aurore-700' },
-]
-
-const BUTTON_SIZE_SPEC_ROWS = BUTTON_SIZE_LINES.map((line) => {
-  const sep = line.indexOf(' → ')
-  if (sep === -1) return { token: 'note', value: line }
-  return { token: line.slice(0, sep), value: line.slice(sep + 3) }
-})
-
-const BUTTON_VARIANT_SPEC_ROWS: CompactSpecRow[] = BUTTON_VARIANT_COLOR_SPECS.map(
-  ({ variant, spec }) => ({ token: variant, value: spec })
-)
-
-const BUTTON_USAGE_SPEC_ROWS: CompactSpecRow[] = [
-  { token: 'primary', value: 'CTA home, collections (default + sm)' },
-  { token: 'secondary', value: 'Cards, La trouvaille, pagination listes (sm)' },
-  { token: 'secondary inverted', value: 'Rebonds / cards sur fond sombre' },
-  { token: 'showTriangle={false}', value: 'Boutons « Voir plus » des listes' },
 ]
 
 const ORNEMENT_SPECS: CompactSpecRow[] = [
@@ -371,36 +122,42 @@ const ORNEMENT_SPECS: CompactSpecRow[] = [
 
 const COLLECTION_LIST_PREVIEW = COLLECTIONS[0]!
 
-function ColorSwatch({ name, hex }: ColorTokenEntry) {
+function ColorSwatch({ name, hex, usage }: ColorTokenEntry) {
   return (
-    <div className="rounded-xl border border-border bg-background p-3">
+    <div className="flex flex-col rounded-xl border border-border bg-background p-3">
       <div
         className="h-16 w-full rounded-md border border-border"
         style={{ backgroundColor: hex }}
         aria-hidden
       />
-      <p className="mt-2 font-mono text-[11px] font-semibold leading-tight text-text">
+      <p className="mt-2 font-mono text-[0.6875rem] font-semibold leading-tight text-text">
         {name}
       </p>
-      <p className="font-mono text-[11px] text-muted">{hex}</p>
+      <p className="font-mono text-[0.6875rem] text-muted">{hex}</p>
+      {usage ? (
+        <p className="mt-1.5 font-outfit text-[0.6875rem] leading-snug text-muted">{usage}</p>
+      ) : null}
     </div>
   )
 }
 
-function typographyPreviewClassName(style: TypographyStyleSpec) {
-  return style.key === 'uiLink' ? `${style.className} text-text` : style.className
+/** Le token uiLink n'embarque pas de couleur : on en force une pour l'aperçu. */
+function typographyPreviewClassName(row: TypographyRow) {
+  return row.name === 'uiLink' ? `${row.className} text-text` : row.className
 }
 
-function compactLineHeight(value: string) {
-  return value.split(' ')[0] ?? value
+/** « 1.75rem » → « 1.75rem · 28px » — les deux repères utiles au dev. */
+function formatSize(size: string) {
+  const rem = Number.parseFloat(size)
+  return Number.isNaN(rem) ? size : `${size} · ${Math.round(rem * 16)}px`
 }
 
-function TypographyTable({ styles }: { styles: TypographyStyleSpec[] }) {
+function TypographyTable({ rows }: { rows: TypographyRow[] }) {
   return (
     <div className="overflow-x-auto rounded-lg border border-border">
       <table className="w-full min-w-[980px] border-collapse text-left">
         <thead>
-          <tr className="border-b border-border bg-surface/40 font-outfit text-[11px] font-semibold uppercase tracking-wide text-muted">
+          <tr className="border-b border-border bg-surface/40 font-outfit text-[0.6875rem] font-semibold uppercase tracking-wide text-muted">
             <th className="px-3 py-2.5">Token</th>
             <th className="min-w-[200px] px-3 py-2.5">Usage</th>
             <th className="px-3 py-2.5">Exemple</th>
@@ -412,34 +169,55 @@ function TypographyTable({ styles }: { styles: TypographyStyleSpec[] }) {
             <th className="px-3 py-2.5">Couleur</th>
           </tr>
         </thead>
-        <tbody className="font-outfit text-[11px] text-muted">
-          {styles.map((style) => (
+        <tbody className="font-outfit text-[0.6875rem] text-muted">
+          {rows.map((row) => (
             <tr
-              key={style.key}
+              key={row.name}
               className="border-b border-border align-top last:border-b-0"
             >
-              <td className="px-3 py-3 font-mono text-xs text-text">{style.token}</td>
+              <td className="px-3 py-3 font-mono text-xs text-text">{row.name}</td>
               <td className="max-w-[240px] px-3 py-3 leading-snug text-text">
-                {style.usage}
-                {style.contextNote ? (
-                  <span className="mt-1 block text-[10px] text-muted">
-                    {style.contextNote}
-                  </span>
+                {row.usage}
+                {row.note ? (
+                  <span className="mt-1 block text-[0.625rem] text-muted">{row.note}</span>
                 ) : null}
               </td>
-              <td className={`max-w-[200px] px-3 py-3 ${typographyPreviewClassName(style)}`}>
+              <td className={`max-w-[200px] px-3 py-3 ${typographyPreviewClassName(row)}`}>
                 Aa — Exemple
               </td>
-              <td className="px-3 py-3">{style.fontFamily}</td>
-              <td className="px-3 py-3">{style.sizePx}px</td>
-              <td className="px-3 py-3">{style.weight}</td>
-              <td className="px-3 py-3">{style.letterSpacing}</td>
-              <td className="px-3 py-3">{compactLineHeight(style.lineHeight)}</td>
-              <td className="px-3 py-3">{style.color}</td>
+              <td className="px-3 py-3">{row.fontFamily}</td>
+              <td className="whitespace-nowrap px-3 py-3">{formatSize(row.size)}</td>
+              <td className="px-3 py-3">{row.weight}</td>
+              <td className="px-3 py-3">{row.letterSpacing}</td>
+              <td className="px-3 py-3">{row.lineHeight}</td>
+              <td className="px-3 py-3">{row.color}</td>
             </tr>
           ))}
         </tbody>
       </table>
+    </div>
+  )
+}
+
+/** Bloc de specs autonome, sans colonne d'aperçu — section Conventions. */
+function SpecCard({
+  title,
+  rows,
+  note,
+}: {
+  title: string
+  rows: readonly CompactSpecRow[]
+  note?: string
+}) {
+  return (
+    <div>
+      <h3 className="mb-3 font-outfit text-xs font-semibold uppercase tracking-[0.08em] text-text">
+        {title}
+      </h3>
+      <CompactSpecsTable rows={rows} />
+      {note ? (
+        <p className="mt-2 font-outfit text-[0.6875rem] leading-snug text-muted">{note}</p>
+      ) : null}
     </div>
   )
 }
@@ -455,9 +233,7 @@ function Section({
 }) {
   return (
     <section id={id} className="scroll-mt-20">
-      <div className="flex items-end justify-between gap-4">
-        <h2 className="text-lg font-semibold tracking-tight text-text">{title}</h2>
-      </div>
+      <h2 className="text-lg font-semibold tracking-tight text-text">{title}</h2>
       <div className="mt-3 border-t border-border" />
       <div className="mt-6">{children}</div>
     </section>
@@ -492,36 +268,34 @@ export function DesignSystem() {
 
       <div className="mx-auto w-full max-w-6xl px-6 pb-16 pt-24">
         <p className="mb-10 max-w-2xl font-outfit text-sm leading-relaxed text-muted">
-          Tokens et composants réellement utilisés dans le prototype. Source typo :{' '}
-          <code className="text-text">src/styles/typography.ts</code> · couleurs :{' '}
-          <code className="text-text">theme.css</code>. Hors barre prototype et login.
+          Tokens et composants réellement utilisés dans le prototype. Un élément
+          absent de cette page n&apos;est pas dans les maquettes validées. La barre
+          du prototype et la page de connexion sont hors périmètre.
         </p>
 
         <nav className="mb-10 flex flex-wrap gap-3 text-sm text-text/70">
-          <a className="hover:text-text" href="#couleurs">
-            Couleurs
-          </a>
-          <a className="hover:text-text" href="#typographie">
-            Typographie
-          </a>
-          <a className="hover:text-text" href="#ornements">
-            Ornements
-          </a>
-          <a className="hover:text-text" href="#boutons">
-            Boutons
-          </a>
-          <a className="hover:text-text" href="#labels">
-            Labels
-          </a>
-          <a className="hover:text-text" href="#cards">
-            Cards
-          </a>
-          <a className="hover:text-text" href="#espacement">
-            Espacement
-          </a>
+          {DS_SECTIONS.map((section) => (
+            <a key={section.id} className="hover:text-text" href={`#${section.id}`}>
+              {section.nav}
+            </a>
+          ))}
         </nav>
 
         <div className="grid gap-14">
+          <Section id="conventions" title="CONVENTIONS">
+            <div className="grid gap-6 md:grid-cols-2">
+              <SpecCard title="Où vivent les tokens" rows={SOURCE_FILE_SPECS} />
+              <SpecCard title="Règles d’écriture" rows={CONVENTION_SPECS} />
+            </div>
+            <div className="mt-6">
+              <SpecCard
+                title="Points de rupture"
+                rows={BREAKPOINT_SPECS}
+                note="Conception mobile-first : aucune media query pour le mobile, les paliers viennent enrichir. Dans le prototype, les règles desktop sont préfixées par [data-prototype-view='desktop'] pour ne pas s’appliquer au mockup mobile — ce préfixe disparaît à l’intégration."
+              />
+            </div>
+          </Section>
+
           <Section id="couleurs" title="COULEURS">
             <p className="mb-8 font-outfit text-sm text-muted">
               Uniquement les tokens utilisés dans le prototype. Catalogue :{' '}
@@ -568,7 +342,7 @@ export function DesignSystem() {
               <p className="mb-4 font-outfit text-sm text-muted">
                 H1 listes, rubriques home, titres de sections.
               </p>
-              <TypographyTable styles={TYPO_PAGES} />
+              <TypographyTable rows={TYPO_PAGES} />
             </div>
 
             <div className="mb-12">
@@ -578,7 +352,7 @@ export function DesignSystem() {
               <p className="mb-4 font-outfit text-sm text-muted">
                 Titres de cards, extraits, meta, liens, légendes.
               </p>
-              <TypographyTable styles={TYPO_UI} />
+              <TypographyTable rows={TYPO_UI} />
             </div>
 
             <div>
@@ -588,10 +362,10 @@ export function DesignSystem() {
               <p className="mb-4 font-outfit text-sm text-muted">
                 Billets Histoires, Collections, Jeunesse, pages institutionnelles.
               </p>
-              <TypographyTable styles={TYPO_ARTICLE} />
+              <TypographyTable rows={TYPO_ARTICLE} />
 
               <div className="mt-8 grid gap-6 rounded-lg border border-border bg-surface/30 p-6">
-                <p className="font-outfit text-[11px] font-semibold uppercase tracking-wide text-muted">
+                <p className="font-outfit text-[0.6875rem] font-semibold uppercase tracking-wide text-muted">
                   Aperçu enchaînement
                 </p>
                 <SectionRubriqueLink to="/histoires">Histoires</SectionRubriqueLink>
@@ -630,7 +404,7 @@ export function DesignSystem() {
               preview={
                 <div className="flex flex-col gap-8">
                   <div>
-                    <p className="mb-2 font-outfit text-[11px] font-semibold uppercase tracking-wide text-muted">
+                    <p className="mb-2 font-outfit text-[0.6875rem] font-semibold uppercase tracking-wide text-muted">
                       H1 liste + triangle
                     </p>
                     <div className="flex items-center gap-2">
@@ -641,7 +415,7 @@ export function DesignSystem() {
                     </div>
                   </div>
                   <div>
-                    <p className="mb-2 font-outfit text-[11px] font-semibold uppercase tracking-wide text-muted">
+                    <p className="mb-2 font-outfit text-[0.6875rem] font-semibold uppercase tracking-wide text-muted">
                       Ornement rebonds
                     </p>
                     <div className="flex flex-col items-start gap-2">
@@ -652,7 +426,7 @@ export function DesignSystem() {
                     </div>
                   </div>
                   <div>
-                    <p className="mb-2 font-outfit text-[11px] font-semibold uppercase tracking-wide text-muted">
+                    <p className="mb-2 font-outfit text-[0.6875rem] font-semibold uppercase tracking-wide text-muted">
                       FriseHaut
                     </p>
                     <FriseHaut fill="glaz-100" />
@@ -663,7 +437,7 @@ export function DesignSystem() {
                 </div>
               }
               specs={ORNEMENT_SPECS}
-              note="Pages liste : SectionListHeader (centered) + TitleH1Triangle. Rebonds article : SectionTitleOrnament."
+              note="Pages liste : SectionListHeader + TitleH1Triangle. Rebonds article : SectionTitleOrnament."
             />
           </Section>
 
@@ -682,15 +456,10 @@ export function DesignSystem() {
                 specs={BUTTON_COMMON_SPECS}
               />
               <DsTwoColumnBlock
-                title="Variants &amp; tailles"
+                title="Variants"
                 preview={
                   <div className="flex flex-wrap items-center gap-4">
-                    <Button variant="primary" size="default">
-                      Default 44px
-                    </Button>
-                    <Button variant="primary" size="sm">
-                      Small 36px
-                    </Button>
+                    <Button variant="primary">Primary</Button>
                     <Button variant="secondary" size="sm" showTriangle={false}>
                       Voir plus
                     </Button>
@@ -701,8 +470,22 @@ export function DesignSystem() {
                     </div>
                   </div>
                 }
-                specs={[...BUTTON_VARIANT_SPEC_ROWS, ...BUTTON_SIZE_SPEC_ROWS, ...BUTTON_USAGE_SPEC_ROWS]}
+                specs={BUTTON_VARIANT_SPECS}
                 note="Survoler pour prévisualiser les hovers."
+              />
+              <DsTwoColumnBlock
+                title="Tailles"
+                preview={
+                  <div className="flex flex-wrap items-center gap-4">
+                    <Button variant="primary" size="default">
+                      Default 44px
+                    </Button>
+                    <Button variant="primary" size="sm">
+                      Small 36px
+                    </Button>
+                  </div>
+                }
+                specs={BUTTON_SIZE_SPECS}
               />
             </div>
           </Section>

@@ -6,11 +6,10 @@ const UNIT_HEIGHT = 8
 const UNIT_PATH =
   'M9.88776 1.51026L4.94742 7.55515L0 1.5361L0 -9.53674e-07L9.88776 -7.86406e-07V1.51026Z'
 
+/** Couleurs de dents disponibles — ajouter une entrée pour en proposer une autre. */
 const FRISE_FILL = {
   text: 'rgb(var(--color-text))',
   'on-dark': 'rgb(var(--color-text-on-dark))',
-  'sable-900': 'rgb(var(--sable-900))',
-  'glaz-900': 'rgb(var(--glaz-900))',
   'glaz-100': 'rgb(var(--glaz-100))',
 } as const
 

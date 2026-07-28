@@ -1,7 +1,10 @@
 import type { FriseHautFill } from '@/components/ui/frise-haut'
 
-/** Fond du header site — réservé pour évolutions DA par rubrique */
-export type SiteHeaderTone = 'default' | 'histoires' | 'collections'
+/**
+ * Ton du header site — la frise doit contraster avec le haut de la page.
+ * Ajouter un ton ici puis le renvoyer depuis `resolveSiteHeaderTone`.
+ */
+export type SiteHeaderTone = 'default' | 'histoires'
 
 export const SITE_HEADER_TONE_CLASSES: Record<
   SiteHeaderTone,
@@ -11,14 +14,10 @@ export const SITE_HEADER_TONE_CLASSES: Record<
     header: 'bg-background',
     friseFill: 'text',
   },
-  /** Liste Histoires — frise blanche sur bandeau page noir */
+  /** Liste Histoires — frise blanche, le bandeau de page en dessous est noir */
   histoires: {
     header: 'bg-background',
     friseFill: 'on-dark',
-  },
-  collections: {
-    header: 'bg-glaz-100',
-    friseFill: 'glaz-900',
   },
 }
 

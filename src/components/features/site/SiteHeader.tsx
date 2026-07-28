@@ -152,7 +152,7 @@ export function SiteHeader({
                 logoClassName="site-header-logo block"
               />
 
-              <div className="site-header-tagline max-h-3.5 overflow-hidden font-outfit text-[11px] font-normal leading-none text-muted opacity-100">
+              <div className="site-header-tagline max-h-3.5 overflow-hidden font-outfit text-[0.6875rem] font-normal leading-none text-muted opacity-100">
                 Bibliothèque numérique patrimoniale de Brest
               </div>
             </div>

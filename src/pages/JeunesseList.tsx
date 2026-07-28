@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-import { Button } from '@/components/ui/button'
 import { JeunesseListCard } from '@/components/features/jeunesse/JeunesseListCard'
+import { ListLoadMore } from '@/components/features/site/ListLoadMore'
 import { PageContainer } from '@/components/features/site/PageContainer'
 import { SectionListHeader } from '@/components/features/site/SectionListHeader'
 import { SitePageShell } from '@/components/features/site/SitePageShell'
@@ -19,7 +19,6 @@ export function JeunesseList() {
       <div className="jeunesse-list-page section-jeunesse flex flex-col bg-background">
         <SectionListHeader
           title="Jeunesse"
-          layout="centered"
           tone="jeunesse"
           className="jeunesse-list-header"
         />
@@ -34,31 +33,15 @@ export function JeunesseList() {
           </ul>
 
           {hasMore ? (
-            <div className="jeunesse-list-more-block">
-              <hr className="jeunesse-list-more-separator" aria-hidden />
-              <div className="jeunesse-list-more flex justify-center">
-                <Button
-                  type="button"
-                  variant="secondary"
-                  size="sm"
-                  showTriangle={false}
-                  onClick={() =>
-                    setVisibleCount((count) =>
-                      Math.min(count + GRID_PAGE_SIZE, JEUNESSE_LIST.length)
-                    )
-                  }
-                >
-                  Voir plus de jeux
-                  <img
-                    src="/images/Icon_plus.svg"
-                    alt=""
-                    aria-hidden
-                    className="h-4 w-4 shrink-0"
-                    draggable={false}
-                  />
-                </Button>
-              </div>
-            </div>
+            <ListLoadMore
+              className="jeunesse-list-more-block"
+              label="Voir plus de jeux"
+              onClick={() =>
+                setVisibleCount((count) =>
+                  Math.min(count + GRID_PAGE_SIZE, JEUNESSE_LIST.length)
+                )
+              }
+            />
           ) : null}
         </PageContainer>
       </div>

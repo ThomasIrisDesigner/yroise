@@ -1,125 +1,67 @@
-import type { ReactNode } from 'react'
-import { Link } from 'react-router-dom'
-
 import { TitleH1Triangle } from '@/components/ui/title-h1-triangle'
 import { cn } from '@/lib/utils'
 import { typography } from '@/styles/typography'
 
-type SectionListHeaderLayout = 'editorial' | 'centered'
-type SectionListHeaderTone = 'histoires' | 'collections' | 'jeunesse'
+/** Rubrique de la page liste — pilote le fond et la couleur du triangle. */
+export type SectionListTone = 'histoires' | 'collections' | 'jeunesse'
 
-const titleTriangleClass: Record<SectionListHeaderTone, string> = {
-  histoires: 'text-on-dark',
-  collections: 'text-glaz-500',
-  jeunesse: 'text-aurore-700',
-}
-
-const toneClasses: Record<
-  SectionListHeaderTone,
-  { surface: string; text: string; title: string; breadcrumb: string }
+const toneStyles: Record<
+  SectionListTone,
+  { header: string; title: string; triangle: string }
 > = {
+  // Histoires : bandeau noir pleine largeur, titre et triangle en blanc.
   histoires: {
-    surface: 'bg-sable-100',
-    text: 'text-sable-900',
-    title: 'text-sable-900',
-    breadcrumb: 'text-sable-900 hover:text-sable-900/80',
+    header: 'pt-12 px-10 pb-10 bg-text',
+    title: 'text-on-dark',
+    triangle: 'text-on-dark',
   },
+  // Collections : le fond glaz-100 est porté par la page, le header est transparent.
   collections: {
-    surface: 'bg-glaz-100',
-    text: 'text-glaz-900',
-    title: 'text-glaz-900',
-    breadcrumb: 'text-glaz-900 hover:text-glaz-900/80',
+    header: 'pt-12 px-10 pb-10 bg-transparent',
+    title: 'text-text',
+    triangle: 'text-glaz-500',
   },
   jeunesse: {
-    surface: 'bg-aurore-100',
-    text: 'text-text',
+    header: 'p-10 bg-aurore-100',
     title: 'text-text',
-    breadcrumb: 'text-text hover:text-text/80',
+    triangle: 'text-aurore-700',
   },
 }
 
 interface SectionListHeaderProps {
   title: string
-  layout?: SectionListHeaderLayout
-  breadcrumbTo?: string
-  breadcrumbLabel?: string
-  chapeau?: ReactNode
-  tone?: SectionListHeaderTone
+  tone?: SectionListTone
   className?: string
 }
 
-/** En-tête de page liste — editorial (fil d'Ariane + chapeau) ou centered (H1 + triangle). */
+/**
+ * En-tête des pages liste (Histoires, Collections, Jeunesse) :
+ * H1 centré en capitales suivi du triangle de rubrique.
+ * Tailles et paddings desktop : voir « Pages liste » dans theme.css.
+ */
 export function SectionListHeader({
   title,
-  layout = 'editorial',
-  breadcrumbTo,
-  breadcrumbLabel,
-  chapeau,
   tone = 'histoires',
   className,
 }: SectionListHeaderProps) {
-  if (layout === 'centered') {
-    const colors = toneClasses[tone]
-    const isHistoiresDark = tone === 'histoires'
-
-    return (
-      <header
-        className={cn(
-          'flex flex-col items-center gap-4',
-          tone === 'jeunesse' ? 'p-10' : 'pt-12 px-10 pb-10',
-          tone === 'jeunesse' && colors.surface,
-          isHistoiresDark && 'bg-text',
-          !isHistoiresDark && tone !== 'jeunesse' && 'bg-transparent',
-          className
-        )}
-      >
-        <div className="flex items-center justify-center gap-2">
-          <h1
-            className={cn(
-              typography.titleXl,
-              'text-center uppercase tracking-[3px]',
-              isHistoiresDark ? 'text-on-dark' : 'text-text'
-            )}
-          >
-            {title}
-          </h1>
-          <TitleH1Triangle className={titleTriangleClass[tone]} />
-        </div>
-      </header>
-    )
-  }
-
-  const colors = toneClasses[tone]
+  const styles = toneStyles[tone]
 
   return (
     <header
-      className={cn(
-        'flex flex-col gap-4 p-10',
-        colors.surface,
-        colors.text,
-        className
-      )}
+      className={cn('flex flex-col items-center gap-4', styles.header, className)}
     >
-      {breadcrumbTo && breadcrumbLabel ? (
-        <Link
-          to={breadcrumbTo}
-          className={cn(typography.editorialCaption, colors.breadcrumb)}
+      <div className="flex items-center justify-center gap-2">
+        <h1
+          className={cn(
+            typography.titleXl,
+            'text-center uppercase tracking-[3px]',
+            styles.title
+          )}
         >
-          {breadcrumbLabel}
-        </Link>
-      ) : null}
-      <h1
-        className={cn(
-          typography.titleXl,
-          'uppercase tracking-[3px]',
-          colors.title
-        )}
-      >
-        {title}
-      </h1>
-      {chapeau ? (
-        <p className={cn(typography.chapeau, colors.text)}>{chapeau}</p>
-      ) : null}
+          {title}
+        </h1>
+        <TitleH1Triangle className={styles.triangle} />
+      </div>
     </header>
   )
 }

@@ -17,10 +17,10 @@ export const CARD_HISTOIRE_SPECS = [
   { token: 'border / radius', value: 'aucun' },
   { token: '.card-image', value: 'width 100% · aspect-ratio 16/9 · object-fit cover · display block · full bleed' },
   { token: 'card-body', value: 'padding 16px 0 · flex column · flex 1' },
-  { token: 'card-title', value: 'Outfit 500 · 22px (1.375rem) · lh 1.875rem · ls 0.1px · line-clamp 2' },
+  { token: 'card-title', value: 'Outfit 500 · 1.375rem · lh 1.875rem · ls 0.1px · line-clamp 2' },
   { token: 'card-title color', value: '#010101 · hover #2D7D8A · transition 0.15s' },
   { token: 'card-title margin', value: 'margin-bottom 8px' },
-  { token: 'card-excerpt', value: 'Outfit 400 · 16px (1rem) · lh 1.5rem · ls 0.1px · #010101 · line-clamp 2' },
+  { token: 'card-excerpt', value: 'Outfit 400 · 1rem · lh 1.5rem · ls 0.1px · #010101 · line-clamp 2' },
   { token: 'card-cta spacing', value: '24px entre extrait et bouton (pt-6 sur .card-cta-wrap)' },
   {
     token: 'card-cta',
@@ -31,11 +31,11 @@ export const CARD_HISTOIRE_SPECS = [
 ] as const
 
 export const CARD_HISTOIRE_LIST_SPECS = [
-  { token: 'container', value: 'max-width 310px · centré · bg #fff' },
+  { token: 'container', value: 'max-width 310px · 30rem entre 480 et 767px · centré · bg #fff' },
   { token: '.card-image--list', value: 'identique .card-image · aspect-ratio 16/9 · object-fit cover' },
   { token: 'card-body', value: 'padding 16px 0 · gap 8px' },
-  { token: 'card-excerpt (liste)', value: 'Outfit 400 · 14px desktop / 16px mobile · lh 1.55 · line-clamp 4' },
-  { token: 'card-excerpt (1er billet)', value: 'Outfit 400 · 16px · card-excerpt · line-clamp 4' },
+  { token: 'card-excerpt (liste)', value: 'Outfit 400 · 0.875rem desktop / 1rem mobile · lh 1.55 · line-clamp 4' },
+  { token: 'card-excerpt (1er billet)', value: 'Outfit 400 · 1rem · card-excerpt · line-clamp 4' },
   { token: 'card-cta spacing', value: '8px entre extrait et bouton (pt-2)' },
   { token: 'card-cta spacing (à la une)', value: '24px entre extrait et bouton (gap 8px + pt-4)' },
 ] as const

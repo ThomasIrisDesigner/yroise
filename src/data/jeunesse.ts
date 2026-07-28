@@ -1,6 +1,7 @@
+import type { JeunesseContentType } from '@/data/contentTypes'
 import { LOREM } from '@/data/placeholders'
 
-export type JeunesseType = 'jeu' | 'sequence'
+export type JeunesseType = JeunesseContentType
 
 export interface JeunesseActivite {
   slug: string
@@ -12,11 +13,6 @@ export interface JeunesseActivite {
   imageSrc?: string
   imageAlt?: string
 }
-
-export { CONTENT_TYPE_LABELS as JEUNESSE_TYPE_LABELS } from '@/data/contentTypes'
-
-export const JEUNESSE_INTRO =
-  'Jeux et ateliers pour découvrir le patrimoine de Brest.'
 
 export const JEUNESSE_LIST: JeunesseActivite[] = [
   {
@@ -105,37 +101,6 @@ export const JEUNESSE_LIST: JeunesseActivite[] = [
   },
 ]
 
-export interface JeunesseDetailMeta {
-  intro: string
-  niveau: string
-  duree: string
-  documentSource: string
-  documentGallicaHref: string
-}
-
-export const JEUNESSE_DETAILS: Record<string, JeunesseDetailMeta> = {
-  'puzzle-rade-brest': {
-    intro:
-      'Reconstitue la carte de la rade à partir de fragments d’une carte du XVIIIe siècle. Un jeu proposé par les bibliothécaires de Brest.',
-    niveau: 'Cycle 3 (CM1–6e)',
-    duree: '10–15 minutes',
-    documentSource: 'Carte de la rade, 1776 — Fonds En mer',
-    documentGallicaHref: '#',
-  },
-}
-
 export function getJeunesseBySlug(slug: string): JeunesseActivite | undefined {
   return JEUNESSE_LIST.find((a) => a.slug === slug)
-}
-
-export function getJeunesseDetail(slug: string): JeunesseDetailMeta {
-  return (
-    JEUNESSE_DETAILS[slug] ?? {
-      intro: LOREM.paragraph,
-      niveau: LOREM.line,
-      duree: LOREM.line,
-      documentSource: LOREM.short,
-      documentGallicaHref: '#',
-    }
-  )
 }

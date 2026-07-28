@@ -132,7 +132,10 @@ export function JeunesseCard({
           </div>
         ) : (
           <div className={cardLabelWrapClass}>
-            <TypeLabel type={type} className="text-[10px] tracking-[3px]" />
+            <TypeLabel
+              type={type}
+              className="text-[0.625rem] tracking-[3px] text-aurore-700"
+            />
           </div>
         )}
       </div>

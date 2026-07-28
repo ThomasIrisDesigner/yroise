@@ -1,347 +1,348 @@
 /**
  * Système typographique YROISE — Outfit (UI) + Source Serif 4 (éditorial).
- * Mobile-first ; tailles responsive sur les titres article (md+).
+ *
+ * CONVENTION D'UNITÉS
+ * - Tailles de texte : toujours en `rem` (base 1rem = 16px), jamais en px.
+ *   Les échelles Tailwind (text-sm, text-xl, text-2xl…) sont déjà en rem.
+ *   Pour une valeur hors échelle : `text-[1.1875rem]`.
+ * - Interlettrage : en px (valeurs issues des maquettes Figma).
+ * - Interlignage : ratio sans unité (leading-[1.4]) ou échelle Tailwind.
+ *
+ * SOURCE DE VÉRITÉ UNIQUE
+ * La table `TYPOGRAPHY_TOKENS` ci-dessous alimente à la fois :
+ * - `typography.<token>` → les classes à utiliser dans les composants ;
+ * - la page /design-system → la documentation affichée aux développeurs.
+ * Modifier un token ici met à jour le code ET la doc, sans risque de dérive.
  */
-const ui = 'font-outfit'
-const editorial = 'font-editorial'
-
-/** Tokens Outfit — display & UI */
-const titleXl = `${ui} text-[28px] font-bold leading-tight tracking-[0.1px] text-text`
-/** H1 billet article — 2rem mobile · 2.5rem desktop · lh 1.2. */
-const articleTitle = `${ui} text-[2rem] font-semibold leading-[1.2] tracking-[0.1px] text-text md:text-[2.5rem]`
-const titleL = `${ui} text-[20px] font-semibold leading-snug text-text`
-/** Intertitre corps d'article — 1.5rem · lh 1.5 · ls 0.5px. */
-const articleHeading = `${ui} text-2xl font-bold leading-[1.5] tracking-[0.5px] text-text`
-const titleM = `${ui} text-base font-medium leading-[1.3] tracking-[0.1px] text-text`
-const titleMCard = `${titleM} line-clamp-3`
-const cardTitleEditorial = `${ui} text-[1.375rem] font-medium leading-[1.875rem] tracking-[0.1px] text-text`
-/** Chapô article — 1.1875rem · lh 1.4 · ls 0.1px. */
-const chapeau = `${ui} text-[1.1875rem] font-normal leading-[1.4] tracking-[0.1px] text-text`
-const label = `${ui} text-base font-semibold uppercase tracking-[2px] text-text`
-/** Titres de rubrique home — HISTOIRES, COLLECTIONS… (24px). */
-const homeSectionLabel = `${ui} text-[24px] font-semibold uppercase tracking-[2px] leading-tight text-text`
-/** Sous-titre home hors menu — legacy aside (22px). Préférer trouvailleLabel pour La trouvaille. */
-const homeSectionAsideLabel = `${ui} text-[22px] font-semibold uppercase tracking-[2px] leading-tight text-text`
-/** Rubrique La trouvaille — label (20px semibold, tracking 0.4px) — Figma 158:8753. */
-const trouvailleLabel = `${ui} text-[20px] font-semibold leading-[1.4] tracking-[0.4px] text-text`
-const meta = `${ui} text-[13px] font-normal leading-snug text-muted`
-const cardExcerpt = `${ui} text-base font-normal leading-6 tracking-[0.1px] text-text`
-/** Accroche La trouvaille — même style que les extraits de cards. */
-const trouvailleChapeau = cardExcerpt
-/** Légende-titre figure — 0.875rem · lh 1.5 · ls 0.1px. */
-const editorialCaption = `${ui} text-sm font-normal leading-[1.5] tracking-[0.1px] text-muted`
-const uiXs = `${ui} text-[11px] font-normal leading-tight text-muted`
-/** Fil d'Ariane rubrique article — 0.75rem · lh 1.4 · ls 3px. */
-const articleRubrique = `${ui} text-xs font-bold uppercase tracking-[3px] leading-[1.4] text-glaz-700`
-/** Meta article en capitales — auteur, légende type (0.75rem · lh 1.5 · ls 2px). */
-const articleMetaCaps = `${ui} text-xs font-normal uppercase tracking-[2px] leading-[1.5] text-text`
-/** Byline article — alias sémantique de articleMetaCaps. */
-const articleByline = articleMetaCaps
-/** Titres de section compacts — sources, rebonds (14px, tracking 1px). */
-const sectionTitleSm = `${ui} text-sm font-semibold uppercase tracking-[1px]`
-/** Titre section rebonds — 1.1875rem · md 1.5rem · lg 2rem. */
-const sectionTitleRebond = `${ui} text-[1.1875rem] font-semibold uppercase tracking-[1px] md:text-2xl lg:text-[2rem]`
-/** Liens UI — couleur selon le contexte (fond clair ou sombre). */
-const uiLink = `${ui} text-[13px] font-normal leading-snug`
-
-/** Logo texte (header si pas SVG) — hors catalogue DS. */
-const logo = `${ui} text-base font-bold text-text`
-
-/** Tokens Source Serif 4 — corps d'article */
-const editorialBody = `${editorial} text-[1.1875rem] font-normal leading-[1.6] text-text`
-const editorialMuted = `${editorial} text-[1.1875rem] font-normal leading-[1.6] text-text/70`
-/** Citation éditoriale — 1.25rem · lh 1.6 · semibold italic. */
-const editorialQuote = `${editorial} text-xl font-semibold italic leading-[1.6] text-text`
-
-export const typography = {
-  titleXl,
-  articleTitle,
-  titleL,
-  titleM,
-  cardTitleEditorial,
-  chapeau,
-  label,
-  homeSectionLabel,
-  homeSectionAsideLabel,
-  trouvailleLabel,
-  trouvailleChapeau,
-  meta,
-  cardExcerpt,
-  editorialCaption,
-  uiXs,
-  articleRubrique,
-  articleByline,
-  articleMetaCaps,
-  articleHeading,
-  sectionTitleSm,
-  sectionTitleRebond,
-  uiLink,
-  logo,
-  editorialBody,
-  editorialMuted,
-  editorialQuote,
-
-  /** Espace vertical entre blocs éditoriaux (24px). */
-  editorialBodyStack: 'flex flex-col gap-6',
-
-  /** @deprecated Alias — préférer titleXl */
-  pageTitle: titleXl,
-  /** @deprecated Alias — préférer titleL */
-  h2: titleL,
-  display: titleXl,
-  /** @deprecated Alias — préférer label */
-  sectionLabel: label,
-  projectKicker: label,
-  histoireType: label,
-  /** @deprecated Alias — préférer editorialMuted */
-  pageSubtitle: editorialMuted,
-  editorialLead: titleL,
-  body: editorialBody,
-  bodyMuted: editorialMuted,
-  /** @deprecated Alias — préférer chapeau (articles) ou titleL + text-white (hero) */
-  editorialIntro: chapeau,
-  /** @deprecated Alias — préférer titleL + text-white */
-  heroQuote: titleL,
-  /** @deprecated Alias — préférer meta + text-white/60 */
-  heroAttribution: meta,
-  cardTitle: titleMCard,
-  carouselTitle: cardTitleEditorial,
-  carouselMeta: meta,
-  carouselCollectionLabel: meta,
-  cardMeta: meta,
-  institutionalSubtitle: uiXs,
-  headerLogo: logo,
-  /** @deprecated Alias — préférer uiLink */
-  footer: uiLink,
-} as const
 
 export const TYPOGRAPHY_FONT_UI = 'Outfit'
 export const TYPOGRAPHY_FONT_EDITORIAL = 'Source Serif 4'
 export const TYPOGRAPHY_FONT_FAMILY = `${TYPOGRAPHY_FONT_UI} + ${TYPOGRAPHY_FONT_EDITORIAL}`
 
-/** Note affichée sous le groupe Source Serif 4 dans le design system. */
-export const TYPOGRAPHY_EDITORIAL_SECTION_NOTE =
-  'Source Serif 4 est réservé exclusivement au corps de texte des articles. Tous les autres éléments textuels utilisent Outfit.'
+const ui = 'font-outfit'
+const editorial = 'font-editorial'
 
-export type TypographyStyleSpec = {
-  key: keyof typeof typography
-  token: string
-  /** Description courte — colonne Usage du design system. */
-  usage: string
+const COLOR_TEXT = '#010101'
+const COLOR_MUTED = '#71717a'
+const COLOR_CONTEXTUAL = 'Contextuelle'
+
+/** Regroupement des tokens dans le design system. */
+export type TypographyGroup = 'pages' | 'ui' | 'article'
+
+export interface TypographyToken {
+  group: TypographyGroup
+  /** Libellé court affiché dans le design system. */
   label: string
+  /** Où ce token est utilisé dans le site. */
+  usage: string
+  /** Classes Tailwind à appliquer. */
   className: string
   fontFamily: string
-  sizePx: number
-  weight: number | string
+  /** Taille de base (mobile), en rem. */
+  size: string
+  weight: number
   color: string
   lineHeight: string
   letterSpacing: string
-  /** Note affichée sous la fiche token (design system). */
-  contextNote?: string
+  /** Précision affichée sous la ligne du design system. */
+  note?: string
 }
 
-type CatalogSpec = Omit<TypographyStyleSpec, 'key' | 'token' | 'className'>
+/**
+ * Catalogue des tokens réellement utilisés dans le prototype.
+ * Ajouter un token ici uniquement s'il est employé dans une maquette validée.
+ */
+export const TYPOGRAPHY_TOKENS = {
+  /* ---------------------------------------------------------------- Pages */
 
-const uiSpecs: CatalogSpec[] = [
-  {
-    usage: 'H1 des pages intérieures',
-    label: 'H1 pages',
+  titleXl: {
+    group: 'pages',
+    label: 'H1 liste',
+    usage: 'H1 pages liste (Histoires, Collections, Jeunesse)',
+    className: `${ui} text-[1.75rem] font-bold leading-tight tracking-[0.1px] text-text`,
     fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 28,
+    size: '1.75rem',
     weight: 700,
-    color: '#010101',
-    lineHeight: '1.25 (leading-tight)',
+    color: COLOR_TEXT,
+    lineHeight: '1.25',
     letterSpacing: '0.1px',
+    note: 'Pages liste : uppercase + tracking 3px (mobile) / 2.5rem + tracking 6px (≥1024px). Triangle TitleH1Triangle à droite.',
   },
-  {
-    usage: 'Accroches éditoriales, H2 de section',
-    label: 'Accroches éditoriales, H2',
+
+  homeSectionLabel: {
+    group: 'pages',
+    label: 'Rubrique home',
+    usage: 'Titres de rubrique home — HISTOIRES, COLLECTIONS, CARTE, JEUNESSE',
+    className: `${ui} text-2xl font-semibold uppercase tracking-[2px] leading-tight text-text`,
     fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 20,
+    size: '1.5rem',
     weight: 600,
-    color: '#010101',
-    lineHeight: '1.375 (leading-snug)',
-    letterSpacing: 'normal',
-  },
-  {
-    usage: 'Titres de cards et de listes',
-    label: 'Titres de cards et listes',
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 16,
-    weight: 500,
-    color: '#010101',
-    lineHeight: '1.3',
-    letterSpacing: '0.1px',
-    contextNote:
-      'Listes et cards compactes. Troncature à 3 lignes (line-clamp-3). Alias cardTitle.',
-  },
-  {
-    usage: 'Titres des cards Histoires et Jeunesse (carousel home)',
-    label: 'Titre card éditoriale',
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 22,
-    weight: 500,
-    color: '#010101',
-    lineHeight: '1.875rem (leading-[1.875rem])',
-    letterSpacing: '0.1px',
-    contextNote:
-      'Troncature à 2 lignes (line-clamp-2) dans le carousel. Alias carouselTitle.',
-  },
-  {
-    usage: 'Intro article, entre le H1 et le bloc auteur/date',
-    label: 'Chapeau article (sous H1)',
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 19,
-    weight: 400,
-    color: '#010101',
-    lineHeight: '1.4',
-    letterSpacing: '0.1px',
-    contextNote:
-      "Utilisé uniquement dans les pages article, entre le H1 et le bloc auteur/date. Pas d'italic — distingué du titre par le poids (400 vs 600) et la taille.",
-  },
-  {
-    usage: 'Labels de section (HISTOIRES, COLLECTIONS…)',
-    label: 'Labels de section',
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 16,
-    weight: 600,
-    color: '#010101',
+    color: COLOR_TEXT,
     lineHeight: '1.25',
     letterSpacing: '2px',
-    contextNote:
-      'Titres de rubrique sur la home et les pages liste. Voir section DS « Labels de section ».',
   },
-  {
-    usage: 'Dates, crédits, métadonnées',
-    label: 'Dates, métadonnées, métas de cards',
+
+  trouvailleLabel: {
+    group: 'pages',
+    label: 'La trouvaille',
+    usage: 'Label « La trouvaille » (home)',
+    className: `${ui} text-xl font-semibold leading-[1.4] tracking-[0.4px] text-text`,
     fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 13,
-    weight: 400,
-    color: '#71717a',
-    lineHeight: '1.375 (leading-snug)',
+    size: '1.25rem',
+    weight: 600,
+    color: COLOR_TEXT,
+    lineHeight: '1.4',
+    letterSpacing: '0.4px',
+  },
+
+  titleL: {
+    group: 'pages',
+    label: 'Titre L',
+    usage: 'Titres de section et accroches (ex. bloc carte home)',
+    className: `${ui} text-xl font-semibold leading-snug text-text`,
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    size: '1.25rem',
+    weight: 600,
+    color: COLOR_TEXT,
+    lineHeight: '1.375',
     letterSpacing: 'normal',
   },
-  {
-    usage: 'Texte sous le titre des cards Histoires',
-    label: 'Extrait card Histoires',
+
+  sectionTitleRebond: {
+    group: 'pages',
+    label: 'Titre rebonds',
+    usage: 'Titre « Nos autres histoires » (fond sombre)',
+    className: `${ui} text-[1.1875rem] font-semibold uppercase tracking-[1px] md:text-2xl lg:text-[2rem]`,
     fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 16,
-    weight: 400,
-    color: '#010101',
-    lineHeight: '1.5rem (leading-6)',
-    letterSpacing: '0.1px',
-    contextNote: 'Troncature à 2 lignes (line-clamp-2) sur les cards du carousel.',
+    size: '1.1875rem',
+    weight: 600,
+    color: COLOR_CONTEXTUAL,
+    lineHeight: '1.25',
+    letterSpacing: '1px',
+    note: '≥768px : 1.5rem · ≥1024px : 2rem. Ornement SectionTitleOrnament en glaz-700 en dessous.',
   },
-  {
-    usage: "Légende-titre sous les figures d'article",
-    label: 'Légende-titre figure',
+
+  sectionTitleSm: {
+    group: 'pages',
+    label: 'Titre compact',
+    usage: 'Titres de section compacts — Sources & références',
+    className: `${ui} text-sm font-semibold uppercase tracking-[1px]`,
     fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 14,
+    size: '0.875rem',
+    weight: 600,
+    color: COLOR_CONTEXTUAL,
+    lineHeight: '1.25',
+    letterSpacing: '1px',
+  },
+
+  /* ------------------------------------------------------------- UI/cards */
+
+  cardTitleEditorial: {
+    group: 'ui',
+    label: 'Titre card',
+    usage: 'Titres des cards Histoires, Collections et rebonds',
+    className: `${ui} text-[1.375rem] font-medium leading-[1.875rem] tracking-[0.1px] text-text`,
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    size: '1.375rem',
+    weight: 500,
+    color: COLOR_TEXT,
+    lineHeight: '1.875rem',
+    letterSpacing: '0.1px',
+    note: 'Troncature à 2 lignes (line-clamp-2) dans les carousels.',
+  },
+
+  cardExcerpt: {
+    group: 'ui',
+    label: 'Extrait',
+    usage: 'Extraits de cards et accroche de La trouvaille',
+    className: `${ui} text-base font-normal leading-6 tracking-[0.1px] text-text`,
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    size: '1rem',
     weight: 400,
-    color: '#010101',
+    color: COLOR_TEXT,
+    lineHeight: '1.5rem',
+    letterSpacing: '0.1px',
+    note: 'Troncature à 2 lignes en carousel, 4 lignes en page liste.',
+  },
+
+  meta: {
+    group: 'ui',
+    label: 'Meta',
+    usage: 'Métadonnées — footer, recherche, références',
+    className: `${ui} text-[0.8125rem] font-normal leading-snug text-muted`,
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    size: '0.8125rem',
+    weight: 400,
+    color: COLOR_MUTED,
+    lineHeight: '1.375',
+    letterSpacing: 'normal',
+  },
+
+  uiLink: {
+    group: 'ui',
+    label: 'Lien UI',
+    usage: 'Liens de navigation du footer',
+    className: `${ui} text-[0.8125rem] font-normal leading-snug`,
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    size: '0.8125rem',
+    weight: 400,
+    color: COLOR_CONTEXTUAL,
+    lineHeight: '1.375',
+    letterSpacing: 'normal',
+    note: 'Sans classe de couleur : ajouter text-on-dark sur fond sombre.',
+  },
+
+  uiXs: {
+    group: 'ui',
+    label: 'UI xs',
+    usage: 'Microcopy — références, légendes secondaires',
+    className: `${ui} text-[0.6875rem] font-normal leading-tight text-muted`,
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    size: '0.6875rem',
+    weight: 400,
+    color: COLOR_MUTED,
+    lineHeight: '1.25',
+    letterSpacing: 'normal',
+  },
+
+  editorialCaption: {
+    group: 'ui',
+    label: 'Légende-titre',
+    usage: 'Légende-titre sous les figures GMB',
+    className: `${ui} text-sm font-normal leading-[1.5] tracking-[0.1px] text-muted`,
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    size: '0.875rem',
+    weight: 400,
+    color: COLOR_MUTED,
     lineHeight: '1.5',
     letterSpacing: '0.1px',
-    contextNote:
-      "Couleur text sur les légendes GMB. Fil d'Ariane pages liste : appliquer la couleur rubrique — voir SectionListHeader.",
   },
-  {
-    usage: 'Sous-titre institutionnel dans le header',
-    label: 'Sous-titre institutionnel header',
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 11,
-    weight: 400,
-    color: '#71717a',
-    lineHeight: '1.25 (leading-tight)',
-    letterSpacing: 'normal',
-  },
-  {
-    usage: 'Liens navigation (footer, panneaux, ressources)',
-    label: 'Liens navigation (footer, etc.)',
-    fontFamily: TYPOGRAPHY_FONT_UI,
-    sizePx: 13,
-    weight: 400,
-    color: 'Contextuelle',
-    lineHeight: '1.375 (leading-snug)',
-    letterSpacing: 'normal',
-  },
-]
 
-const editorialSpecs: CatalogSpec[] = [
-  {
-    usage: 'Corps de texte long — articles uniquement',
-    label: 'Corps de texte article',
-    fontFamily: TYPOGRAPHY_FONT_EDITORIAL,
-    sizePx: 19,
+  /* -------------------------------------------------------- Pages article */
+
+  articleRubrique: {
+    group: 'article',
+    label: 'Rubrique',
+    usage: "Fil d'Ariane rubrique (composant SectionRubriqueLink)",
+    className: `${ui} text-xs font-bold uppercase tracking-[3px] leading-[1.4] text-glaz-700`,
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    size: '0.75rem',
+    weight: 700,
+    color: '#2D7D8A',
+    lineHeight: '1.4',
+    letterSpacing: '3px',
+  },
+
+  articleTitle: {
+    group: 'article',
+    label: 'H1 article',
+    usage: 'H1 des pages article (billet, exposition, collection, jeu)',
+    className: `${ui} text-[2rem] font-semibold leading-[1.2] tracking-[0.1px] text-text md:text-[2.5rem]`,
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    size: '2rem',
+    weight: 600,
+    color: COLOR_TEXT,
+    lineHeight: '1.2',
+    letterSpacing: '0.1px',
+    note: '≥768px : 2.5rem.',
+  },
+
+  chapeau: {
+    group: 'article',
+    label: 'Chapô',
+    usage: 'Chapô entre le H1 et le bloc auteur/date',
+    className: `${ui} text-[1.1875rem] font-normal leading-[1.4] tracking-[0.1px] text-text`,
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    size: '1.1875rem',
     weight: 400,
-    color: '#010101',
+    color: COLOR_TEXT,
+    lineHeight: '1.4',
+    letterSpacing: '0.1px',
+    note: "Pas d'italique — distingué du titre par la graisse (400 vs 600).",
+  },
+
+  articleMetaCaps: {
+    group: 'article',
+    label: 'Meta caps',
+    usage: 'Byline auteur, crédit figure, légende type',
+    className: `${ui} text-xs font-normal uppercase tracking-[2px] leading-[1.5] text-text`,
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    size: '0.75rem',
+    weight: 400,
+    color: COLOR_TEXT,
+    lineHeight: '1.5',
+    letterSpacing: '2px',
+    note: 'Byline : « PAR » et le rôle en regular, le prénom en medium.',
+  },
+
+  articleHeading: {
+    group: 'article',
+    label: 'Intertitre',
+    usage: "Intertitres dans le corps d'article",
+    className: `${ui} text-2xl font-bold leading-[1.5] tracking-[0.5px] text-text`,
+    fontFamily: TYPOGRAPHY_FONT_UI,
+    size: '1.5rem',
+    weight: 700,
+    color: COLOR_TEXT,
+    lineHeight: '1.5',
+    letterSpacing: '0.5px',
+  },
+
+  editorialBody: {
+    group: 'article',
+    label: 'Corps',
+    usage: 'Corps de texte des billets — seul usage de Source Serif 4',
+    className: `${editorial} text-[1.1875rem] font-normal leading-[1.6] text-text`,
+    fontFamily: TYPOGRAPHY_FONT_EDITORIAL,
+    size: '1.1875rem',
+    weight: 400,
+    color: COLOR_TEXT,
     lineHeight: '1.6',
     letterSpacing: 'normal',
+    note: 'Empiler les blocs avec typography.editorialBodyStack (gap 24px).',
   },
-  {
-    usage: 'Corps atténué — notes, contexte secondaire',
-    label: 'Corps atténué',
+
+  editorialQuote: {
+    group: 'article',
+    label: 'Citation',
+    usage: 'Citation éditoriale (bloc GMB)',
+    className: `${editorial} text-xl font-semibold italic leading-[1.6] text-text`,
     fontFamily: TYPOGRAPHY_FONT_EDITORIAL,
-    sizePx: 19,
-    weight: 400,
-    color: '#010101 à 70 %',
+    size: '1.25rem',
+    weight: 600,
+    color: COLOR_TEXT,
     lineHeight: '1.6',
     letterSpacing: 'normal',
+    note: 'Semibold italique.',
   },
-]
+} as const satisfies Record<string, TypographyToken>
 
-function buildCatalogEntry(
-  key: TypographyStyleSpec['key'],
-  token: string,
-  spec: Omit<TypographyStyleSpec, 'key' | 'token' | 'className'>
-): TypographyStyleSpec {
-  return {
-    ...spec,
-    key,
-    token,
-    className: typography[key],
-  }
+export type TypographyTokenName = keyof typeof TYPOGRAPHY_TOKENS
+
+/** Utilitaires typographiques sans équivalent « token » documenté. */
+const utilities = {
+  /** Espace vertical entre blocs éditoriaux (24px). */
+  editorialBodyStack: 'flex flex-col gap-6',
+} as const
+
+/**
+ * Classes à utiliser dans les composants : `className={typography.cardExcerpt}`.
+ * Dérivé de TYPOGRAPHY_TOKENS — ne pas définir de classes typo ailleurs.
+ */
+export const typography = {
+  ...(Object.fromEntries(
+    Object.entries(TYPOGRAPHY_TOKENS).map(([name, token]) => [name, token.className])
+  ) as { [K in TypographyTokenName]: string }),
+  ...utilities,
 }
 
-/** OUTFIT · Display & UI — ordre du design system */
-export const typographyUiCatalog: TypographyStyleSpec[] = (
-  [
-    ['titleXl', 'title-xl', 0],
-    ['titleL', 'title-l', 1],
-    ['titleM', 'title-m', 2],
-    ['cardTitleEditorial', 'card-title-editorial', 3],
-    ['chapeau', 'chapeau', 4],
-    ['label', 'label', 5],
-    ['meta', 'meta', 6],
-    ['cardExcerpt', 'card-excerpt', 7],
-    ['editorialCaption', 'editorial-caption', 8],
-    ['uiXs', 'ui-xs', 9],
-    ['uiLink', 'ui-link', 10],
-  ] as const
-).map(([key, token, i]) => buildCatalogEntry(key, token, uiSpecs[i]!))
-
-/** SOURCE SERIF 4 · Editorial — ordre du design system */
-export const typographyEditorialCatalog: TypographyStyleSpec[] = (
-  [
-    ['editorialBody', 'editorial-body', 0],
-    ['editorialMuted', 'editorial-muted', 1],
-  ] as const
-).map(([key, token, i]) => buildCatalogEntry(key, token, editorialSpecs[i]!))
-
-/** @deprecated Utiliser typographyUiCatalog + typographyEditorialCatalog */
-export const typographyCatalog = [
-  ...typographyUiCatalog,
-  ...typographyEditorialCatalog,
-]
-
-/** @deprecated Utiliser typographyUiCatalog + typographyEditorialCatalog */
-export const typographyMockupCatalog = typographyCatalog
-
-/** @deprecated Utiliser typographyCatalog */
-export const typeScale = typographyCatalog
-  .filter((s) => ['titleXl', 'editorialBody', 'meta', 'titleL'].includes(s.key))
-  .map((s) => ({
-    label: s.label,
-    className: s.className,
-    sizePx: s.sizePx,
-    weight: typeof s.weight === 'number' ? s.weight : 400,
-  }))
+/** Tokens d'un groupe, dans l'ordre de déclaration — utilisé par /design-system. */
+export function typographyTokensByGroup(
+  group: TypographyGroup
+): Array<TypographyToken & { name: TypographyTokenName }> {
+  return (
+    Object.entries(TYPOGRAPHY_TOKENS) as Array<[TypographyTokenName, TypographyToken]>
+  )
+    .filter(([, token]) => token.group === group)
+    .map(([name, token]) => ({ ...token, name }))
+}
