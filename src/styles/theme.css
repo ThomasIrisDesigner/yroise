@@ -20,7 +20,7 @@
  * - ≥ 520px         : menu mobile en version tablette (titres 2rem, gap 64px)
  * - ≥ 768px         : tablette — 2 colonnes, sections éditoriales sur 2 colonnes
  * - ≥ 1024px        : desktop — 3 colonnes, header étendu, grille 1280px
- * - ≥ 1281px        : ajustement fin de la hauteur du header
+ * - ≥ 1281px        : header à 80px · label « Rechercher » à côté de l'icône
  * Les règles desktop sont préfixées par `[data-prototype-view='desktop']` :
  * c'est le mode d'affichage du prototype (plein écran vs mockup mobile),
  * pas une contrainte du site final.
@@ -1187,10 +1187,19 @@ body {
     padding-inline: var(--page-padding-x-header);
   }
 
-  /* Header expanded — 80px au-delà de 1280px */
+  /* Label recherche — icône seule sous 1281px ; « Rechercher » au-delà (Figma 158:8429) */
+  [data-prototype-view='desktop'] .site-header-search-label {
+    display: none;
+  }
+
+  /* Header expanded — 80px + label « Rechercher » au-delà de 1280px */
   @media (min-width: 1281px) {
     [data-prototype-view='desktop'] {
       --header-height-expanded: 80px;
+    }
+
+    [data-prototype-view='desktop'] .site-header-search-label {
+      display: inline;
     }
   }
 

@@ -180,9 +180,13 @@ export function SiteHeader({
                 onClick={onOpenSearch}
                 aria-label="Rechercher"
                 aria-expanded={searchOpen}
-                className="site-header-search-btn flex h-10 w-10 shrink-0 items-center justify-center text-text transition-opacity hover:opacity-80"
+                className="site-header-search-btn group flex h-10 shrink-0 cursor-pointer items-center gap-2 text-text"
               >
                 <HeaderSearchIcon />
+                {/* Visible ≥1281px — Figma 158:8429 */}
+                <span className="site-header-search-label font-outfit text-base font-normal tracking-[0.32px] text-muted transition-colors duration-150 group-hover:text-text">
+                  Rechercher
+                </span>
               </button>
               <div
                 className="site-header-actions-separator h-6 w-px shrink-0 bg-text/10"

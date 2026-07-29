@@ -91,7 +91,7 @@ const BREAKPOINT_SPECS: CompactSpecRow[] = [
   { token: '≥ 520px', value: 'Menu mobile en version tablette — titres 2rem, gap 64px' },
   { token: '≥ 768px', value: 'Deux colonnes · sections home sur deux colonnes · grille article' },
   { token: '≥ 1024px', value: 'Trois colonnes · header étendu · conteneur 1280px, marges 72px' },
-  { token: '≥ 1281px', value: 'Header étendu à 80px de haut' },
+  { token: '≥ 1281px', value: 'Header à 80px · label « Rechercher » à côté de l’icône' },
 ]
 
 const CARD_COLLECTION_LIST_SPECS: CompactSpecRow[] = [
