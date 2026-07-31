@@ -49,7 +49,7 @@ function CollectionDesktopCard({
 export function CollectionsCarousel() {
   const [current, setCurrent] = useState(0)
   const total = COLLECTIONS.length
-  const desktopCarousel = useCarouselScrollControl(Math.min(4, total))
+  const desktopCarousel = useCarouselScrollControl(total, { mode: 'page' })
 
   const prev = useCallback(
     () => setCurrent((c) => (c - 1 + total) % total),
@@ -89,6 +89,8 @@ export function CollectionsCarousel() {
             onNext={desktopCarousel.next}
             canPrev={desktopCarousel.canPrev}
             canNext={desktopCarousel.canNext}
+            prevLabel="Page précédente"
+            nextLabel="Page suivante"
           />
         </div>
 
@@ -142,7 +144,7 @@ export function CollectionsCarousel() {
           sliderRef={desktopCarousel.sliderRef}
           onActiveIndexChange={desktopCarousel.onActiveIndexChange}
         >
-          {COLLECTIONS.slice(0, 4).map((col) => (
+          {COLLECTIONS.map((col) => (
             <CollectionDesktopCard
               key={col.slug}
               slug={col.slug}

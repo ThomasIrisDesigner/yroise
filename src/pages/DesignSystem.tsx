@@ -89,9 +89,9 @@ const BREAKPOINT_SPECS: CompactSpecRow[] = [
   { token: 'base', value: 'Mobile — une colonne, gouttières 16px (contenu) / 40px (listes)' },
   { token: '≥ 480px', value: 'Cards des pages liste jusqu’à 30rem au lieu de 310px' },
   { token: '≥ 520px', value: 'Menu mobile en version tablette — titres 2rem, gap 64px' },
-  { token: '≥ 768px', value: 'Deux colonnes · sections home sur deux colonnes · grille article' },
-  { token: '≥ 1024px', value: 'Trois colonnes · header étendu · conteneur 1280px, marges 72px' },
-  { token: '≥ 1281px', value: 'Header à 80px · label « Rechercher » à côté de l’icône' },
+  { token: '≥ 768px', value: 'Header 80px · logo 30px · signature 12px' },
+  { token: '≥ 1024px', value: 'Header 96px · logo 32px · signature 13px · nav en flex' },
+  { token: '≥ 1281px', value: 'Label « Rechercher » à côté de l’icône' },
 ]
 
 const CARD_COLLECTION_LIST_SPECS: CompactSpecRow[] = [

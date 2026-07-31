@@ -10,7 +10,9 @@ import { useCarouselScrollControl } from '@/lib/useCarouselScrollControl'
 import { typography } from '@/styles/typography'
 
 export function HistoiresCarousel() {
-  const carousel = useCarouselScrollControl(HISTOIRES_HOME_CAROUSEL.length)
+  const carousel = useCarouselScrollControl(HISTOIRES_HOME_CAROUSEL.length, {
+    mode: 'page',
+  })
 
   return (
     <section className="home-histoires-section section-histoires home-carousel-section bg-background">
@@ -24,6 +26,8 @@ export function HistoiresCarousel() {
             onNext={carousel.next}
             canPrev={carousel.canPrev}
             canNext={carousel.canNext}
+            prevLabel="Page précédente"
+            nextLabel="Page suivante"
           />
         </div>
       </PageContainer>

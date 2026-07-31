@@ -92,8 +92,8 @@ export const HISTOIRES_LIST: HistoireBillet[] = [
   },
 ]
 
-/** Carrousel home — 4 cartes desktop, scroll mobile. */
-export const HISTOIRES_HOME_CAROUSEL = HISTOIRES_LIST.slice(0, 4)
+/** Carrousel home — 6 cartes. */
+export const HISTOIRES_HOME_CAROUSEL = HISTOIRES_LIST.slice(0, 6)
 
 export const HISTOIRE_DETAIL_DEFAULT = {
   auteur: 'Carole, bibliothécaire',

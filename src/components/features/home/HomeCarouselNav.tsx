@@ -33,11 +33,11 @@ function PaginationArrow({
 }
 
 const carouselNavButtonClass =
-  'inline-flex size-10 shrink-0 items-center justify-center rounded-full border-[1.5px] border-solid border-transparent bg-transparent transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-glaz-700/30 disabled:cursor-default disabled:hover:border-transparent'
+  'home-carousel-nav-button inline-flex size-10 shrink-0 items-center justify-center rounded-full border-[1.5px] border-solid border-transparent bg-transparent transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-glaz-700/30 disabled:cursor-default'
 
 const carouselNavButtonToneClass = {
-  light: 'hover:border-text',
-  dark: 'hover:border-on-dark',
+  light: '',
+  dark: 'home-carousel-nav-button--dark',
 } as const
 
 function CarouselNavButton({
@@ -75,6 +75,8 @@ interface HomeCarouselNavProps {
   className?: string
   /** Fond clair (défaut) ou sombre (section article) */
   tone?: 'light' | 'dark'
+  prevLabel?: string
+  nextLabel?: string
 }
 
 export function HomeCarouselNav({
@@ -85,6 +87,8 @@ export function HomeCarouselNav({
   canNext = true,
   className,
   tone = 'light',
+  prevLabel = 'Élément précédent',
+  nextLabel = 'Élément suivant',
 }: HomeCarouselNavProps) {
   const isDark = tone === 'dark'
 
@@ -94,7 +98,7 @@ export function HomeCarouselNav({
         direction="left"
         disabled={!canPrev}
         onClick={onPrev}
-        label="Élément précédent"
+        label={prevLabel}
         tone={tone}
       />
       <p
@@ -109,7 +113,7 @@ export function HomeCarouselNav({
         direction="right"
         disabled={!canNext}
         onClick={onNext}
-        label="Élément suivant"
+        label={nextLabel}
         tone={tone}
       />
     </div>

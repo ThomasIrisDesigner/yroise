@@ -18,9 +18,9 @@
  * - base            : mobile (mobile-first, aucune media query)
  * - ≥ 480px         : cards des pages liste — largeur fluide jusqu'à 30rem
  * - ≥ 520px         : menu mobile en version tablette (titres 2rem, gap 64px)
- * - ≥ 768px         : tablette — 2 colonnes, sections éditoriales sur 2 colonnes
- * - ≥ 1024px        : desktop — 3 colonnes, header étendu, grille 1280px
- * - ≥ 1281px        : header à 80px · label « Rechercher » à côté de l'icône
+ * - ≥ 768px         : tablette — header 80px · logo 30px · signature 12px
+ * - ≥ 1024px        : desktop — header 96px · logo 32px · signature 13px
+ * - ≥ 1281px        : label « Rechercher »
  * Les règles desktop sont préfixées par `[data-prototype-view='desktop']` :
  * c'est le mode d'affichage du prototype (plein écran vs mockup mobile),
  * pas une contrainte du site final.
@@ -94,10 +94,11 @@
   --page-padding-x-lg: 72px;
   --page-padding-x-header: 24px;
 
-  /* Logo header — tailles mobile (mockup) : expanded 120 / collapsed 96 */
+  /* Logo header — tailles mobile (mockup) : expanded 120 / collapsed 96.
+   * Desktop ≥1024 : hauteur 32px, largeur proportionnelle (voir theme.css). */
   --header-logo-width-expanded: 120px;
   --header-logo-width-collapsed: 96px;
-  /* Hauteur header expanded — 80px au-dessus de 1280px (voir media query) */
+  /* Hauteur header expanded — 96px dès 1024px desktop (voir media query) */
   --header-height-expanded: 72px;
 
   /* Fin de page — espace minimum avant frise + footer */
@@ -146,6 +147,19 @@ body {
   display: none;
   width: 0;
   height: 0;
+}
+
+/* Flèches carousel — contour circulaire au survol (pas seulement au focus/clic) */
+.home-carousel-nav-button:hover:not(:disabled) {
+  border-color: rgb(var(--color-text));
+}
+
+.home-carousel-nav-button--dark:hover:not(:disabled) {
+  border-color: rgb(var(--color-text-on-dark));
+}
+
+.home-carousel-nav-button:disabled:hover {
+  border-color: transparent;
 }
 
 /* Header site — défile avec le contenu ; barre compacte épinglée au scroll vers le haut */
@@ -282,7 +296,9 @@ body {
   display: block;
   height: auto;
   width: var(--header-logo-width-expanded);
-  transition: width 0.25s ease;
+  transition:
+    width 0.25s ease,
+    height 0.25s ease;
 }
 
 .site-header-logo--collapsed {
@@ -291,11 +307,42 @@ body {
 
 /*
  * Vue plein écran responsive : sous 1024px le chrome passe en pattern mobile
- * (hamburger) — logo au format mobile collapsed (96px), comme la maquette.
+ * (hamburger). Logo / signature :
+ * - < 768px  : largeur collapsed 96px
+ * - 768–1023 : hauteur 30px · signature 12px · header 80px
+ * - ≥ 1024px : hauteur 32px · signature 13px (bloc @media 1024)
  */
-@media (max-width: 1023px) {
+@media (max-width: 767px) {
   [data-prototype-view='desktop'] .site-header-logo {
     width: var(--header-logo-width-collapsed);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  [data-prototype-view='desktop'] {
+    --header-height-expanded: 80px;
+  }
+
+  [data-prototype-view='desktop'] .site-header-logo {
+    width: auto;
+    height: 30px;
+  }
+
+  [data-prototype-view='desktop'] .site-header-logo--collapsed {
+    width: var(--header-logo-width-collapsed);
+    height: auto;
+  }
+
+  [data-prototype-view='desktop'] .site-header-tagline {
+    max-height: none;
+    overflow: visible;
+    font-size: 0.75rem; /* 12px */
+    letter-spacing: 0.5px;
+    line-height: 1.25;
+  }
+
+  [data-prototype-view='desktop'] .site-header-brand {
+    padding-block: 8px;
   }
 }
 
@@ -411,9 +458,8 @@ body {
 }
 
 .site-header-tagline {
-  transition:
-    max-height 0.25s ease,
-    opacity 0.2s ease;
+  overflow: visible;
+  transition: opacity 0.2s ease;
 }
 
 /* Card éditoriale — image full bleed (Histoires, Jeu/Séquence) */
@@ -687,7 +733,7 @@ body {
   [data-prototype-view='desktop'] .home-trouvaille-layout {
     flex-direction: row;
     align-items: center;
-    gap: 80px;
+    gap: 40px;
   }
 
   [data-prototype-view='desktop'] .home-trouvaille-media-col,
@@ -697,6 +743,31 @@ body {
 
   [data-prototype-view='desktop'] .home-trouvaille-cta-wrap {
     justify-content: flex-start;
+  }
+
+  /* 768–1023 : marges latérales 72px (comme le desktop ≥1024) */
+  @media (max-width: 1023px) {
+    [data-prototype-view='desktop'] .home-trouvaille-container {
+      padding-inline: var(--page-padding-x-lg);
+    }
+  }
+
+  /* ≥1024 : gap image ↔ texte 80px */
+  @media (min-width: 1024px) {
+    [data-prototype-view='desktop'] .home-trouvaille-layout {
+      gap: 80px;
+    }
+  }
+
+  /* ≥1281 : texte ancré à 80px du haut du layout (plus de centrage vertical) */
+  @media (min-width: 1281px) {
+    [data-prototype-view='desktop'] .home-trouvaille-layout {
+      align-items: flex-start;
+    }
+
+    [data-prototype-view='desktop'] .home-trouvaille-text-col {
+      padding-top: 80px;
+    }
   }
 
   /* Carte — 2 colonnes dès 768px, visuel proportionnel (pas de crop) */
@@ -792,7 +863,7 @@ body {
     justify-content: center;
   }
 
-  /* Histoires & Collections — layout desktop dès 768px, gap cards 40px (64px dès 1024) */
+  /* Histoires & Collections — layout desktop dès 768px, gap cards 40px (56px dès 1024) */
   [data-prototype-view='desktop'] .home-histoires-section.page-full-bleed,
   [data-prototype-view='desktop'] .home-collections-section.page-full-bleed {
     margin-inline: calc(50% - 50vw);
@@ -1187,23 +1258,23 @@ body {
     padding-inline: var(--page-padding-x-header);
   }
 
+  /* Header expanded desktop — 96px pour respirer autour du logo 32px + signature */
+  [data-prototype-view='desktop'] {
+    --header-height-expanded: 96px;
+  }
+
   /* Label recherche — icône seule sous 1281px ; « Rechercher » au-delà (Figma 158:8429) */
   [data-prototype-view='desktop'] .site-header-search-label {
     display: none;
   }
 
-  /* Header expanded — 80px + label « Rechercher » au-delà de 1280px */
   @media (min-width: 1281px) {
-    [data-prototype-view='desktop'] {
-      --header-height-expanded: 80px;
-    }
-
     [data-prototype-view='desktop'] .site-header-search-label {
       display: inline;
     }
   }
 
-  /* Header desktop — logo/actions à 24px, nav centrée */
+  /* Header desktop — marque | nav | actions */
   [data-prototype-view='desktop'] .site-header-inner {
     width: 100%;
   }
@@ -1213,21 +1284,26 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 16px;
   }
 
   [data-prototype-view='desktop'] .site-header-brand {
     position: relative;
     z-index: 2;
-    max-width: 259px;
+    flex-shrink: 0;
+    /* 8px au-dessus et en dessous du bloc logo + signature */
+    padding-block: 8px;
+    /* Logo ~163×32 + signature — laisse respirer avant la nav */
+    max-width: 310px;
     background: inherit;
   }
 
   [data-prototype-view='desktop'] .site-header-desktop-nav {
-    position: absolute;
-    left: 50%;
-    top: 50%;
+    position: relative;
     z-index: 3;
-    transform: translate(-50%, -50%);
+    flex: 0 1 auto;
+    justify-content: center;
+    min-width: 0;
   }
 
   /* Panneau Collections — au-dessus de la frise header (z-10) */
@@ -1239,11 +1315,48 @@ body {
     position: relative;
     z-index: 2;
     flex-shrink: 0;
+    margin-left: 0;
     background: inherit;
   }
 
+  /* Signature — 13px dès 1024px.
+   * leading > 1 pour ne pas couper les jambages (p, q, g…). */
   [data-prototype-view='desktop'] .site-header-tagline {
     display: block;
+    max-height: none;
+    overflow: visible;
+    font-size: 0.8125rem; /* 13px */
+    letter-spacing: 0.5px;
+    line-height: 1.25;
+  }
+
+  /* Logo expanded desktop — 32px de haut, largeur proportionnelle (~163px) */
+  [data-prototype-view='desktop'] .site-header-logo {
+    width: auto;
+    height: 32px;
+  }
+
+  [data-prototype-view='desktop'] .site-header-logo--collapsed {
+    width: var(--header-logo-width-collapsed);
+    height: auto;
+  }
+
+  /*
+   * 1024–1280 : la nav (gap 32px + 16px) déborde sur la signature.
+   * Gap 24px + typo 15px pour limiter le chevauchement.
+   */
+  @media (max-width: 1280px) {
+    [data-prototype-view='desktop'] .site-header-desktop-nav {
+      gap: 24px;
+    }
+
+    [data-prototype-view='desktop'] .site-header-desktop-nav > a,
+    [data-prototype-view='desktop'] .site-header-desktop-nav
+      > .site-header-collections-dropdown
+      > button {
+      font-size: 0.9375rem; /* 15px */
+      letter-spacing: 2px;
+    }
   }
 
   /* Hero — 512px */
@@ -1261,10 +1374,29 @@ body {
     padding-bottom: 72px;
   }
 
-  /* Histoires & Collections — gap cards 64px dès 1024 (40px entre 768–1023) */
+  /*
+   * Histoires & Collections ≥1024 — full-bleed :
+   * inset de départ 72px à gauche seulement ; à droite, coupe par la fenêtre.
+   * Au scroll, les cards défilent sur toute la largeur (pas de cadre qui clippe).
+   */
+  [data-prototype-view='desktop'] .home-histoires-section .home-carousel-track,
+  [data-prototype-view='desktop'] .home-collections-section .home-collections-desktop-track {
+    margin-inline: 0;
+    overflow: visible;
+  }
+
   [data-prototype-view='desktop'] .home-carousel-section .slider,
   [data-prototype-view='desktop'] .home-collections-desktop-track .slider {
-    gap: 64px;
+    gap: 56px;
+    padding-left: var(--page-padding-x-lg); /* 72px — position initiale */
+    padding-right: 0;
+    scroll-padding-left: var(--page-padding-x-lg);
+    scroll-padding-right: 0;
+  }
+
+  [data-prototype-view='desktop'] .home-carousel-section .slider::after,
+  [data-prototype-view='desktop'] .home-collections-desktop-track .slider::after {
+    display: none;
   }
 
   /*
