@@ -147,13 +147,13 @@ export function SiteFooter() {
         </PageContainer>
       </div>
 
-      <div className="site-footer-partners flex items-center justify-center gap-8 bg-background px-6 py-10">
+      <div className="site-footer-partners flex flex-wrap items-center justify-center bg-background px-section py-10">
         {FOOTER_PARTNER_LOGOS.map((partner) => (
           <img
             key={partner.label}
             src={partner.src}
             alt={partner.label}
-            className={cn('block shrink-0', partner.className)}
+            className="site-footer-partner-logo"
             draggable={false}
           />
         ))}

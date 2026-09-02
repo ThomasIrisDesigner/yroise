@@ -8,6 +8,7 @@ import { SiteHeaderLangSwitcher } from '@/components/features/site/SiteHeaderLan
 import type { SiteHeaderTone } from '@/config/site-header'
 import { SITE_HEADER_TONE_CLASSES } from '@/config/site-header'
 import { cn } from '@/lib/utils'
+import { typography } from '@/styles/typography'
 
 export type SiteHeaderVariant = 'expanded' | 'compact'
 
@@ -26,11 +27,13 @@ function HeaderLogoLink({
   onGoHome,
   className,
   width,
+  height,
   logoClassName,
 }: {
   onGoHome: () => void
   className?: string
   width: number
+  height?: number
   logoClassName: string
 }) {
   return (
@@ -47,6 +50,7 @@ function HeaderLogoLink({
         src={SITE_LOGO.src}
         alt={SITE_LOGO.alt}
         width={width}
+        height={height}
         className={logoClassName}
         draggable={false}
       />
@@ -60,7 +64,9 @@ function HeaderSearchIcon() {
       src="/images/Icon_recherche_header.svg"
       alt=""
       aria-hidden
-      className="h-6 w-6"
+      width={24}
+      height={24}
+      className="block h-6 w-6"
       draggable={false}
     />
   )
@@ -72,7 +78,9 @@ function HeaderMenuIcon() {
       src="/images/Icon_menu.svg"
       alt=""
       aria-hidden
-      className="h-6 w-6"
+      width={24}
+      height={24}
+      className="block h-6 w-6"
       draggable={false}
     />
   )
@@ -121,8 +129,7 @@ export function SiteHeader({
   return (
     <header
       className={cn(
-        'site-header page-full-bleed box-border flex shrink-0 items-center border-b',
-        tone !== 'default' ? 'border-transparent' : 'border-border',
+        'site-header page-full-bleed box-border flex shrink-0 items-center',
         toneClasses.header,
         compact ? 'h-14' : 'h-[var(--header-height-expanded)]',
         className
@@ -135,7 +142,7 @@ export function SiteHeader({
           compact ? 'h-14' : 'h-[var(--header-height-expanded)]'
         )}
       >
-        <div className="site-header-bar flex w-full items-center justify-between gap-4">
+        <div className="site-header-bar flex w-full items-center justify-between gap-[5px]">
           {compact ? (
             <HeaderLogoLink
               onGoHome={onGoHome}
@@ -144,15 +151,16 @@ export function SiteHeader({
               logoClassName="site-header-logo site-header-logo--collapsed block"
             />
           ) : (
-            <div className="site-header-brand flex min-w-0 flex-col gap-1.5">
+            <div className="site-header-brand flex min-w-0 flex-1 flex-col gap-1.5">
               <HeaderLogoLink
                 onGoHome={onGoHome}
                 className="shrink-0 hover:opacity-80"
                 width={SITE_LOGO.widthExpandedPx}
+                height={SITE_LOGO.heightExpandedPx}
                 logoClassName="site-header-logo block"
               />
 
-              <div className="site-header-tagline font-outfit text-[0.6875rem] font-normal leading-snug text-muted">
+              <div className={cn('site-header-tagline', typography.uiXs)}>
                 Bibliothèque numérique patrimoniale de Brest
               </div>
             </div>

@@ -712,6 +712,32 @@ body {
   min-width: 0;
 }
 
+/* Footer — logos partenaires : retour à la ligne, proportions conservées */
+.site-footer-partners {
+  gap: 24px 32px;
+  overflow: visible;
+}
+
+.site-footer-partner-logo {
+  display: block;
+  flex: 0 1 auto;
+  height: 40px;
+  width: auto;
+  max-width: min(180px, calc((100% - 64px) / 3));
+  object-fit: contain;
+}
+
+@media (max-width: 479px) {
+  .site-footer-partners {
+    gap: 20px 24px;
+  }
+
+  .site-footer-partner-logo {
+    height: 32px;
+    max-width: min(160px, calc((100% - 24px) / 2));
+  }
+}
+
 /*
  * Grands mobiles & petites tablettes (480–767px) — zone intermédiaire.
  * Les cards des pages liste sont calées sur 310px (largeur utile d'un mobile
@@ -1620,5 +1646,10 @@ body {
 
   [data-prototype-view='desktop'] .site-footer-partners {
     padding-block: 40px;
+    gap: 24px 40px;
+  }
+
+  [data-prototype-view='desktop'] .site-footer-partner-logo {
+    max-width: min(200px, calc((100% - 80px) / 3));
   }
 }

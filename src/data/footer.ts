@@ -22,13 +22,15 @@ export const FOOTER_ANNEX_LINKS = [
 
 export const FOOTER_PARTNER_LOGOS = [
   {
+    label: 'Médiathèque de Brest',
+    src: '/images/logo_mediatheque.png',
+  },
+  {
     label: 'Ville de Brest',
     src: '/images/logo_brest_couleur.svg',
-    className: 'h-[39px] w-[133px]',
   },
   {
     label: 'Bibliothèque nationale de France',
     src: '/images/Logo_Bnf-gallica.png',
-    className: 'h-[40px] w-auto',
   },
 ] as const
