@@ -11,7 +11,7 @@ export function InstitutionalArticleHeader({
   titre,
 }: InstitutionalArticleHeaderProps) {
   return (
-    <div className="article-page-content-wrap pt-4">
+    <div className="article-page-content-wrap pt-4 md:pt-6">
       <ArticleContentColumn>
         <div className="flex flex-col gap-4">
           <SectionRubriqueLink to="/prototype">Accueil</SectionRubriqueLink>
