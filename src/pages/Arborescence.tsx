@@ -3,7 +3,6 @@ import { ExternalLink, FolderTree } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 import { PROJECT_DISPLAY_NAME } from '@/config/project'
-import { WIREFRAME_STEPS } from '@/config/wireframe-status'
 import { HISTOIRES_LIST } from '@/data/histoires'
 import { JEUNESSE_LIST } from '@/data/jeunesse'
 import {
@@ -30,7 +29,6 @@ const PROTOTYPED_PREFIXES = [
 
 const EXAMPLE_SLUGS: Record<string, string> = {
   '/histoires/:slug': `/histoires/${HISTOIRES_LIST[0]?.slug ?? 'ocean-liberty-1947'}`,
-  '/histoires/expositions/:slug': `/histoires/${HISTOIRES_LIST.find((h) => h.type === 'exposition')?.slug ?? 'marcel-bories-plaques'}`,
   '/jeunesse/jeux': `/jeunesse/${JEUNESSE_LIST.find((a) => a.type === 'jeu')?.slug ?? 'puzzle-rade-brest'}`,
   '/jeunesse/sequences': `/jeunesse/${JEUNESSE_LIST.find((a) => a.type === 'sequence')?.slug ?? 'vie-brest-xviii'}`,
 }
@@ -50,31 +48,20 @@ function isPrototypedPath(href: string | null): boolean {
 }
 
 function LevelBadge({ level }: { level: NavTreeItem['level'] }) {
+  const label =
+    level === 'page' ? 'page' : level === 'section' ? 'section' : 'sous-page'
+
   return (
     <span
       className={cn(
         'inline-flex shrink-0 rounded px-1.5 py-0.5 font-mono text-[0.625rem] font-medium uppercase tracking-wide',
-        level === 'page'
+        level === 'page' || level === 'section'
           ? 'bg-glaz-100 text-glaz-700'
           : 'bg-surface text-muted'
       )}
     >
-      {level === 'page' ? 'page' : 'sous-page'}
+      {label}
     </span>
-  )
-}
-
-function StatusDot({ status }: { status: 'done' | 'partial' | 'todo' }) {
-  return (
-    <span
-      className={cn(
-        'inline-block size-2 shrink-0 rounded-full',
-        status === 'done' && 'bg-glaz-500',
-        status === 'partial' && 'bg-aurore-700',
-        status === 'todo' && 'bg-border'
-      )}
-      aria-hidden
-    />
   )
 }
 
@@ -100,7 +87,7 @@ function TreeItem({ item }: { item: NavTreeItem }) {
       {item.external ? (
         <span className="inline-flex items-center gap-1 font-outfit text-[0.6875rem] text-muted">
           <ExternalLink className="size-3" aria-hidden />
-          hors scope / externe
+          {item.externalNote ?? 'hors scope / externe'}
         </span>
       ) : null}
       {href && prototyped ? (
@@ -153,16 +140,12 @@ export function Arborescence() {
       </header>
 
       <div className="mx-auto w-full max-w-6xl px-6 pb-16 pt-24">
-        <p className="mb-6 max-w-2xl font-outfit text-sm leading-relaxed text-muted">
-          Structure du site pour les développeurs — source{' '}
-          <code className="text-text">src/data/navigation.ts</code>. Scope
-          prototype : pages éditoriales Drupal uniquement. Consultation document
-          (visionneuse Gallica) hors scope.
-        </p>
-
         <div className="mb-10 flex flex-wrap gap-4 rounded-lg border border-border bg-surface/50 px-4 py-3 font-outfit text-[0.75rem] text-muted">
           <span className="inline-flex items-center gap-1.5">
             <LevelBadge level="page" /> page dédiée (nav)
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <LevelBadge level="section" /> section de page
           </span>
           <span className="inline-flex items-center gap-1.5">
             <LevelBadge level="sub" /> sous-page / contenu
@@ -185,9 +168,6 @@ export function Arborescence() {
           </a>
           <a className="hover:text-text" href="#footer">
             Footer
-          </a>
-          <a className="hover:text-text" href="#wireframes">
-            Wireframes
           </a>
         </nav>
 
@@ -282,42 +262,12 @@ export function Arborescence() {
                       </Link>
                     ) : (
                       <span className="font-outfit text-[0.6875rem] text-muted">
-                        non branché
+                        {'note' in link && link.note ? link.note : 'non branché'}
                       </span>
                     )}
                   </li>
                 )
               })}
-            </ul>
-          </section>
-
-          <section id="wireframes" className="scroll-mt-20">
-            <h2 className="mb-2 font-outfit text-xs font-semibold uppercase tracking-[0.08em] text-text">
-              Suivi wireframes mobile
-            </h2>
-            <p className="mb-6 font-outfit text-sm text-muted">
-              Source <code className="text-text">src/config/wireframe-status.ts</code>
-            </p>
-            <ul className="rounded-lg border border-border bg-background px-4">
-              {WIREFRAME_STEPS.map((step) => (
-                <li
-                  key={step.id}
-                  className="flex flex-wrap items-start gap-x-3 gap-y-1 border-b border-border/60 py-3 last:border-0"
-                >
-                  <StatusDot status={step.status} />
-                  <div className="min-w-0 flex-1">
-                    <p className="font-outfit text-sm font-medium text-text">
-                      {step.label}
-                    </p>
-                    <p className="mt-0.5 font-outfit text-xs text-muted">
-                      {step.screens.join(' · ')}
-                    </p>
-                  </div>
-                  <span className="font-mono text-[0.625rem] uppercase text-muted">
-                    {step.status}
-                  </span>
-                </li>
-              ))}
             </ul>
           </section>
         </div>

@@ -15,7 +15,7 @@ export const WIREFRAME_STEPS: WireframeStep[] = [
   {
     id: 'home',
     label: 'Home mobile',
-    screens: ['Hero', 'La trouvaille', 'Histoires ×3', 'Collections', 'La carte aperçu', 'Bloc Jeunesse', 'Footer'],
+    screens: ['Hero', 'La trouvaille', 'Histoires ×6', 'Collections', 'La carte aperçu', 'Bloc Jeunesse', 'Footer'],
     status: 'done',
   },
   {

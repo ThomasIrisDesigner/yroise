@@ -4,13 +4,15 @@
  * Scope prototype : pages éditoriales Drupal uniquement.
  */
 
-export type NavItemLevel = 'page' | 'sub'
+export type NavItemLevel = 'page' | 'section' | 'sub'
 
 export interface NavTreeItem {
   label: string
   level: NavItemLevel
   slug?: string
   external?: boolean
+  /** Libellé affiché à droite si `external` (défaut : hors scope / externe) */
+  externalNote?: string
 }
 
 export interface NavSection {
@@ -24,7 +26,7 @@ export interface NavSection {
 export const MAIN_NAV_LABELS = [
   'Histoires',
   'Collections',
-  '📍 La carte',
+  'Carte interactive',
   'Jeunesse',
 ] as const
 
@@ -35,12 +37,12 @@ export const NAV_SECTIONS: NavSection[] = [
     note: 'Home éditoriale',
     kind: 'main',
     items: [
-      { label: 'Hero — image forte + accroche', level: 'page', slug: '/prototype' },
-      { label: 'La trouvaille — focus éditorial', level: 'page' },
-      { label: 'Histoires récentes (×3 cards)', level: 'page' },
-      { label: 'Collections — carousel', level: 'page' },
-      { label: '📍 La carte — aperçu OSM', level: 'page' },
-      { label: 'Jeunesse — bloc discret en bas', level: 'sub', slug: '/jeunesse' },
+      { label: 'Hero — image forte + accroche', level: 'section', slug: '/prototype' },
+      { label: 'La trouvaille — focus éditorial (lien vers page interne ou externe)', level: 'section' },
+      { label: 'Histoires récentes (×6 cards)', level: 'section' },
+      { label: 'Collections — carousel', level: 'section' },
+      { label: 'Carte interactive — visuel image', level: 'section' },
+      { label: 'Jeunesse — bloc discret en bas', level: 'section', slug: '/jeunesse' },
     ],
   },
   {
@@ -50,8 +52,7 @@ export const NAV_SECTIONS: NavSection[] = [
     kind: 'main',
     items: [
       { label: 'Page liste — Tous · Expositions', level: 'page', slug: '/histoires' },
-      { label: 'Billet individuel', level: 'sub', slug: '/histoires/:slug' },
-      { label: 'Exposition (format long)', level: 'sub', slug: '/histoires/expositions/:slug' },
+      { label: 'Article', level: 'sub', slug: '/histoires/:slug' },
     ],
   },
   {
@@ -77,12 +78,11 @@ export const NAV_SECTIONS: NavSection[] = [
   },
   {
     id: 'carte',
-    label: '📍 La carte',
+    label: 'Carte interactive',
     note: 'OSM Positron',
     kind: 'main',
     items: [
       { label: 'Carte OSM — épingles cliquables', level: 'page', slug: '/carte' },
-      { label: 'Mini-fiche document → Gallica', level: 'sub', external: true },
     ],
   },
   {
@@ -103,17 +103,30 @@ export const NAV_SECTIONS: NavSection[] = [
     kind: 'utility',
     items: [
       { label: 'Champ de recherche', level: 'page' },
-      { label: 'Recherche avancée →', level: 'sub', external: true },
-      { label: 'Tutoriel de recherche →', level: 'sub', external: true },
-      { label: 'Bretania · Mille Feuilles', level: 'sub', external: true },
+      {
+        label: 'Recherche avancée →',
+        level: 'sub',
+        external: true,
+        externalNote: 'lien vers page Gallica',
+      },
+      {
+        label: 'Tutoriel de recherche →',
+        level: 'sub',
+        external: true,
+        externalNote: 'lien vers page Gallica',
+      },
+      {
+        label: 'Bretania · Mille Feuilles',
+        level: 'sub',
+        external: true,
+        externalNote: 'liens externes direct — nouvel onglet',
+      },
     ],
   },
 ]
 
 export const FOOTER_LINKS = [
-  { label: 'Qui sommes-nous', slug: '/qui-sommes-nous' },
-  { label: 'Informations pratiques', slug: '/informations-pratiques' },
-  { label: 'Nous contacter', slug: '/contact' },
+  { label: 'Nous contacter', slug: '/contact', note: 'lien externe' },
   { label: 'FAQ', slug: '/faq' },
   { label: 'Accessibilité', slug: '/accessibilite' },
   { label: 'Mentions légales · Cookies', slug: '/mentions-legales' },
