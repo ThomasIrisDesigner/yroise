@@ -94,6 +94,23 @@ const BREAKPOINT_SPECS: CompactSpecRow[] = [
   { token: '≥ 1281px', value: 'Label « Rechercher » à côté de l’icône' },
 ]
 
+const CAROUSEL_RESPONSIVE_SPECS: CompactSpecRow[] = [
+  { token: 'Mobile (< 1024px)', value: 'Carrousel pleine largeur · gouttière px-section (16px) des deux côtés' },
+  { token: 'Desktop (≥ 1024px) — départ', value: 'Première card calée à 72px du bord gauche (scroll-padding-left: 72px)' },
+  { token: 'Desktop (≥ 1024px) — droite', value: 'Pas de marge forcée à droite — les cards dépassent jusqu\'au bord de la fenêtre' },
+  { token: 'Navigation', value: 'Par page (pas par card) — une flèche = défilement d\'une page de cards visibles' },
+  { token: 'Composants', value: 'HistoiresCarousel · CollectionsCarousel (src/components/features/home/)' },
+]
+
+const ARTICLE_LAYOUT_SPECS: CompactSpecRow[] = [
+  { token: 'En-tête article (mobile)', value: 'px-section (16px) · padding-top: 16px' },
+  { token: 'En-tête article (desktop)', value: 'padding-inline: 72px · max-width 1128px centré · padding-block: 24px' },
+  { token: 'Corps article (mobile)', value: 'px-section (16px)' },
+  { token: 'Corps article (desktop)', value: 'padding-inline: 72px · colonne max-width 792px centrée' },
+  { token: 'Pages institutionnelles', value: 'Header et corps dans la même colonne 792px (pas 1128px) — pas de chapeau ni d\'image hero' },
+  { token: 'Composant colonne', value: 'ArticleContentColumn (src/components/features/site/) · classe CSS : article-content-column' },
+]
+
 const CARD_COLLECTION_LIST_SPECS: CompactSpecRow[] = [
   { token: 'hublot', value: '224×224px · radius 50% · border 9px #010101 · hover glaz-700' },
   { token: 'titre', value: 'cardTitleEditorial · centré' },
@@ -294,6 +311,18 @@ export function DesignSystem() {
                 title="Points de rupture"
                 rows={BREAKPOINT_SPECS}
                 note="Conception mobile-first : aucune media query pour le mobile, les paliers viennent enrichir. Dans le prototype, les règles desktop sont préfixées par [data-prototype-view='desktop'] pour ne pas s’appliquer au mockup mobile — ce préfixe disparaît à l’intégration."
+              />
+            </div>
+            <div className="mt-6 grid gap-6 md:grid-cols-2">
+              <SpecCard
+                title="Carrousels home — comportement responsive"
+                rows={CAROUSEL_RESPONSIVE_SPECS}
+                note="Le décalage gauche (72px) est obtenu par scroll-padding-left sur le slider et padding-left sur la piste, sans overflow:hidden sur le wrapper — la card de droite sort naturellement du viewport."
+              />
+              <SpecCard
+                title="Layout article & pages institutionnelles"
+                rows={ARTICLE_LAYOUT_SPECS}
+                note="Les deux max-width coexistent dans la même page article (1128px header, 792px corps). À l'intégration, ne pas unifier sans vérifier la maquette — c'est intentionnel."
               />
             </div>
           </Section>
