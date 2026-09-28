@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils'
 
 import { gmbMediaAspectClass } from './gmb-shared'
 import { GmbFigureLegend } from './GmbFigureLegend'
+import { TranscriptionDisclosure } from './TranscriptionDisclosure'
 
 interface GmbVideoEmbedProps {
   title: string
@@ -13,6 +14,7 @@ interface GmbVideoEmbedProps {
   caption?: string
   meta?: string
   linkLabel?: string
+  transcription?: string
 }
 
 /** Embed vidéo — vignette cliquable, lecteur inline (Vimeo / YouTube). */
@@ -24,6 +26,7 @@ export function GmbVideoEmbed({
   caption,
   meta,
   linkLabel,
+  transcription,
 }: GmbVideoEmbedProps) {
   const [playing, setPlaying] = React.useState(false)
   const legendCaption = caption ?? title
@@ -78,6 +81,7 @@ export function GmbVideoEmbed({
         linkLabel={linkLabel}
         linkHref={linkLabel ? href : undefined}
       />
+      {transcription ? <TranscriptionDisclosure text={transcription} /> : null}
     </figure>
   )
 }

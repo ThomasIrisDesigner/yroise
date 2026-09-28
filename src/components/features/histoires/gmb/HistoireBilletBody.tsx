@@ -106,6 +106,7 @@ export function HistoireBilletBody({ blocks }: HistoireBilletBodyProps) {
                 posterSrc={block.posterSrc}
                 caption={block.caption}
                 meta={block.meta}
+                transcription={block.transcription}
               />
             )
           default:

@@ -108,6 +108,8 @@ const OCEAN_LIBERTY_CONTENT: HistoireBilletContent = {
       caption:
         "Cours Dajot, explosion... Film de Jean Banchet-Magon de la Lande, 1947. Format 9,5 mm, noir et blanc, muet, 1'30\".",
       meta: 'Archives filmées, cinémathèque de Bretagne',
+      transcription:
+        "Film muet, noir et blanc, 1 minute 30 secondes. La caméra filme d'abord le Cours Dajot depuis la promenade, avec la rade de Brest visible en contrebas. Une colonne de fumée noire s'élève au loin depuis le port. La vue se rapproche : des flammes sont visibles sur les quais. Des badauds observent depuis la promenade. La fumée s'épaissit, montant en panache dense vers le ciel. Plan final sur la rade depuis les remparts, la fumée envahissant l'horizon.",
     },
   ],
   sources: [

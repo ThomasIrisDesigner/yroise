@@ -51,6 +51,7 @@ export type HistoireContentBlock =
       posterSrc?: string
       caption?: string
       meta?: string
+      transcription?: string
     }
 
 export interface HistoireSource {
