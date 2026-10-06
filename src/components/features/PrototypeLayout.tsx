@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { FolderTree, LogOut, Monitor, Smartphone } from 'lucide-react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { FolderTree, Monitor, Smartphone } from 'lucide-react'
+import { Link, useLocation } from 'react-router-dom'
 
 import { MOBILE_MOCKUP_H, MOBILE_MOCKUP_W } from '@/config/wireframe-mobile'
 import {
@@ -8,7 +8,6 @@ import {
   PROJECT_TYPE,
   PROTOTYPE_CHROME_EXTRAS_ENABLED,
 } from '@/config/project'
-import { logout } from '@/lib/auth'
 import { resetPageScroll } from '@/lib/resetPageScroll'
 import { cn } from '@/lib/utils'
 import { useMediaQuery } from '@/lib/useMediaQuery'
@@ -40,8 +39,6 @@ function PrototypeChromeBar({
   effectiveMode: ViewMode
   onSetMode: (mode: ViewMode) => void
 }) {
-  const navigate = useNavigate()
-
   return (
     <header className="h-8 shrink-0 border-b border-surface/10 bg-text text-surface">
       <div className="mx-auto flex h-8 w-full max-w-7xl items-center justify-between px-4">
@@ -101,19 +98,6 @@ function PrototypeChromeBar({
               </Link>
             </>
           ) : null}
-
-          <a
-            href="/login"
-            aria-label="Déconnexion"
-            onClick={(e) => {
-              e.preventDefault()
-              logout()
-              navigate('/login', { replace: true })
-            }}
-            className="inline-flex h-7 w-7 items-center justify-center rounded-md text-surface/70 transition-colors hover:bg-surface/10 hover:text-surface"
-          >
-            <LogOut className="h-4 w-4" />
-          </a>
         </div>
       </div>
     </header>

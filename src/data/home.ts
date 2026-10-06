@@ -10,7 +10,7 @@ export const HOME_TROUVAILLE = {
   chapeau:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo.',
   ctaLabel: 'Voir le document',
-  imageSrc: "/images/Le_'Magellan'_au_clair_de_[...]_btv1b101065215.jpg",
+  imageSrc: '/images/trouvaille-magellan.jpg',
   imageAlt: "Le Magellan au clair de lune — Brest",
 } as const
 

@@ -10,7 +10,7 @@ export const FOOTER_STATS = [
 export const FOOTER_SOCIAL_LINKS = [
   { label: 'Facebook', href: '#', iconSrc: '/images/Icon_facebook.svg' },
   { label: 'Instagram', href: '#', iconSrc: '/images/Icon_instagram.svg' },
-  { label: 'YouTube', href: '#', iconSrc: '/images/icon_youtube.svg' },
+  { label: 'YouTube', href: '#', iconSrc: '/images/Icon_youtube.svg' },
 ] as const
 
 export const FOOTER_ANNEX_LINKS = [
@@ -31,6 +31,6 @@ export const FOOTER_PARTNER_LOGOS = [
   },
   {
     label: 'Bibliothèque nationale de France',
-    src: '/images/Logo_Bnf-gallica.png',
+    src: '/images/logo_bnf-gallica.png',
   },
 ] as const

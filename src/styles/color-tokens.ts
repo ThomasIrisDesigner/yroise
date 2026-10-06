@@ -73,7 +73,7 @@ export const COLOR_TOKEN_SECTIONS: ColorTokenSection[] = [
       {
         name: '--color-danger',
         hex: '#DC2626',
-        usage: 'Pastille de lecture vidéo, message d’erreur du login',
+        usage: 'Pastille de lecture vidéo',
       },
     ],
   },

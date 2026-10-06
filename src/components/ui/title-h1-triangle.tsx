@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils'
 
-/** Triangle décoratif à droite des H1 pages liste — `public/images/Icon_trianggle_titresH1.svg`. */
+/** Triangle décoratif à droite des H1 pages liste — `public/images/Icon_triangle_titresH1.svg`. */
 export function TitleH1Triangle({ className }: { className?: string }) {
   return (
     <svg

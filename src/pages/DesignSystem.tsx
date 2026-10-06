@@ -289,7 +289,7 @@ export function DesignSystem() {
         <p className="mb-10 max-w-2xl font-outfit text-sm leading-relaxed text-muted">
           Tokens et composants réellement utilisés dans le prototype. Un élément
           absent de cette page n&apos;est pas dans les maquettes validées. La barre
-          du prototype et la page de connexion sont hors périmètre.
+          du prototype est hors périmètre.
         </p>
 
         <nav className="mb-10 flex flex-wrap gap-3 text-sm text-text/70">

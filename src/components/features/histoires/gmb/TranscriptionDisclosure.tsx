@@ -12,7 +12,7 @@ export function TranscriptionDisclosure({ text }: TranscriptionDisclosureProps) 
   return (
     <details className="transcription-disclosure group">
       <summary className="transcription-disclosure-trigger">
-        <span className="transcription-disclosure-label">Retranscription</span>
+        <span className="transcription-disclosure-label">Transcription</span>
         <svg
           className="transcription-disclosure-chevron"
           width="12"

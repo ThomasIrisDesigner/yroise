@@ -12,18 +12,16 @@ pnpm dev
 ## Utilisation pour un nouveau projet
 
 1. Dupliquer ce starter pour un nouveau projet
-2. Modifier `src/config/project.ts` (nom, mot de passe, date de livraison, type)
+2. Modifier `src/config/project.ts` (nom, date de livraison, type)
 3. Modifier `src/styles/theme.css` pour les couleurs du client (tokens)
 4. Remplacer `src/pages/Prototype.tsx` par la vraie interface
-5. (Optionnel) Remplacer l’illustration de login : `public/illustrations/login.png`
 
 ## Routes
 
-- `/login` : public
-- `/prototype` : protégé
-- `/design-system` : protégé (doc pour devs)
+- `/prototype` : accueil du prototype
+- `/design-system` : doc pour les devs
 
-Note : la route `/` n’existe pas. Toute URL inconnue redirige vers `/login` (ou `/prototype` si déjà connecté).
+Note : la route `/` n’existe pas. Toute URL inconnue redirige vers `/prototype`.
 
 ## Types de projet (layout prototype)
 

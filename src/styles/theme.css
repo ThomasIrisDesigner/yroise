@@ -77,7 +77,7 @@
   --button-font-size: 0.875rem;
   --button-letter-spacing: 0.03em;
 
-  /* État d'erreur — message login, badge lecture vidéo */
+  /* État — pastille de lecture vidéo */
   --color-danger: 220 38 38;
 
   --font-ui: "Outfit", ui-sans-serif, system-ui, sans-serif;
